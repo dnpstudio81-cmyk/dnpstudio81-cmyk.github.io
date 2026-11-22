@@ -902,15 +902,16 @@ function dexRender(){if(dexSi<0)dexSi=cur&&hasCard()?cur.p.s:0;const d=dexGet(),
 function dexView(t){const c=mkCard(dexSi,t),has=dexGet().has(c.no);const ab=abil(c);
   $('dexView').innerHTML=`<div class="panel dexv"><img src="${IMG[dexSi]}" alt="" style="${has?'':'filter:grayscale(1);opacity:.5'}"><div><p class="kick">No.${String(c.no).padStart(3,'0')} · ${c.s.k} × ${t}</p><h3>${has?c.name:'아직 만나지 못한 카드'}</h3>${has?`<p>${ab[0][2]} ${ab[1][2]}</p><p>2027 정미년 · ${c.s.yt}</p>`:`<p>이 카드를 가진 친구와 대결하거나, 카드 광장에서 만나면 열려요.</p>`}</div></div>`}
 /* plaza (community) */
-const SUPA={url:'',key:''};
+const SUPA={url:'https://jbybooahbsiihvxenkyz.supabase.co',key:'sb_publishable_BASj3EaH-g28SxsMz9C4oQ_y1mwS8_1'};
+const SH_=(json)=>{const h={apikey:SUPA.key};if(!SUPA.key.startsWith('sb_'))h.Authorization='Bearer '+SUPA.key;if(json){h['Content-Type']='application/json';h.Prefer='return=minimal'}return h};
 const plOnline=()=>!!(SUPA.url&&SUPA.key);
 const BAD=['시발','씨발','ㅅㅂ','ㅆㅂ','병신','ㅂㅅ','좆','개새','지랄','미친놈','미친년','fuck','shit'];
 function cleanMsg(t){const x=t.replace(/\s+/g,' ').trim();if(BAD.some(w=>x.toLowerCase().includes(w)))return[null,'욕설이나 비하 표현은 올릴 수 없어요.'];if(/(https?:|www\.|\.com|\.kr|@)/i.test(x))return[null,'링크나 아이디는 올릴 수 없어요.'];if(/\d{3,4}[-\s.]?\d{3,4}[-\s.]?\d{4}/.test(x)||/\d{6,}/.test(x))return[null,'전화번호 같은 개인정보는 올릴 수 없어요.'];return[x,null]}
-async function plList(){if(plOnline()){const r=await fetch(`${SUPA.url}/rest/v1/cards_public?select=*&order=created_at.desc&limit=60`,{headers:{apikey:SUPA.key,Authorization:'Bearer '+SUPA.key}});if(!r.ok)throw new Error('list');return r.json()}
+async function plList(){if(plOnline()){const r=await fetch(`${SUPA.url}/rest/v1/cards_public?select=*&order=created_at.desc&limit=60`,{headers:SH_(false)});if(!r.ok)throw new Error('list');return r.json()}
   try{return JSON.parse(localStorage.getItem('plaza')||'[]')}catch(e){return window.__pl||[]}}
-async function plAdd(rec){if(plOnline()){const r=await fetch(`${SUPA.url}/rest/v1/cards`,{method:'POST',headers:{apikey:SUPA.key,Authorization:'Bearer '+SUPA.key,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(rec)});if(!r.ok)throw new Error('post');return}
+async function plAdd(rec){if(plOnline()){const r=await fetch(`${SUPA.url}/rest/v1/cards`,{method:'POST',headers:SH_(true),body:JSON.stringify(rec)});if(!r.ok)throw new Error('post');return}
   const L=await plList();L.unshift({...rec,id:Date.now(),created_at:new Date().toISOString()});window.__pl=L.slice(0,60);try{localStorage.setItem('plaza',JSON.stringify(window.__pl))}catch(e){}}
-async function plReport(id){if(plOnline()){await fetch(`${SUPA.url}/rest/v1/reports`,{method:'POST',headers:{apikey:SUPA.key,Authorization:'Bearer '+SUPA.key,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({card_id:id})});return}
+async function plReport(id){if(plOnline()){await fetch(`${SUPA.url}/rest/v1/reports`,{method:'POST',headers:SH_(true),body:JSON.stringify({card_id:id})});return}
   const L=(await plList()).filter(x=>x.id!==id);window.__pl=L;try{localStorage.setItem('plaza',JSON.stringify(L))}catch(e){}}
 function ago(iso){const m=Math.max(0,Math.round((Date.now()-new Date(iso))/60000));return m<1?'방금':m<60?`${m}분 전`:m<1440?`${Math.round(m/60)}시간 전`:`${Math.round(m/1440)}일 전`}
 let plCache=[];
