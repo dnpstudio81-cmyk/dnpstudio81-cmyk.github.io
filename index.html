@@ -37,8 +37,12 @@ input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid 
 .row{margin-top:18px}
 .note{font-size:13px;color:var(--sub);margin:8px 0 0}
 .err{font-size:13px;color:var(--seal);margin:8px 0 0;min-height:1em}
-details.quiz{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
-details.quiz summary{cursor:pointer;font-size:14px;color:var(--sub)}
+details.quiz{margin-top:14px}
+details.quiz summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:center;gap:8px;height:50px;border-radius:12px;background:var(--ink);color:var(--bg);font:500 16px "Noto Sans KR",sans-serif}
+details.quiz summary::-webkit-details-marker{display:none}
+details.quiz summary::after{content:"▾";font-size:14px}
+details.quiz[open] summary::after{content:"▴"}
+details.quiz[open] summary{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
 .q{margin-top:12px}.q p{margin:0 0 6px;font-size:14px}
 .q div{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .q button{min-height:44px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;font:14px "Noto Sans KR",sans-serif;cursor:pointer;padding:6px}
@@ -50,9 +54,9 @@ details.quiz summary{cursor:pointer;font-size:14px;color:var(--sub)}
 .card{--el:#5c6066;width:min(100%,400px);aspect-ratio:9/14;background:var(--el);color:var(--paper);border-radius:20px;padding:22px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
 .card::before{content:"";position:absolute;inset:10px;border:1px solid rgba(247,243,234,.35);border-radius:14px;pointer-events:none}
 .card .no{font-size:13px;opacity:.85;margin-top:8px;letter-spacing:.02em}
-.card .seal{width:clamp(120px,40%,170px);aspect-ratio:1;border-radius:50%;border:2px solid rgba(247,243,234,.8);display:grid;place-items:center;margin:auto 0 0;position:relative}
-.card .seal::after{content:"";position:absolute;inset:9px;border-radius:50%;border:1px solid rgba(247,243,234,.35)}
-.card .seal b{font:700 clamp(56px,18vw,84px)/1 "Gowun Batang",serif}
+.card .seal{width:clamp(150px,56%,220px);aspect-ratio:1;border-radius:50%;border:3px solid rgba(247,243,234,.9);background:var(--paper);margin:auto 0 0;position:relative}
+.card .seal img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.card .seal b{position:absolute;right:-4px;bottom:-4px;width:52px;height:52px;border-radius:50%;background:var(--el);border:2px solid var(--paper);display:grid;place-items:center;font:700 28px/1 "Gowun Batang",serif}
 .card .name{font:700 clamp(21px,5.5vw,26px)/1.3 "Gowun Batang",serif;margin:22px 0 6px;text-wrap:balance}
 .card .sub{font-size:14px;opacity:.85}
 .card .tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:14px 0 auto}
@@ -70,7 +74,7 @@ details.quiz summary{cursor:pointer;font-size:14px;color:var(--sub)}
 h2.sec{font:700 clamp(24px,3.5vw,32px)/1.15 "Gowun Batang",serif;margin:0 0 16px}
 .compat{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start}
 .pair{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:12px}
-.mini{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;color:var(--paper);font:700 34px/1 "Gowun Batang",serif}
+.mini{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;color:var(--paper);font:700 34px/1 "Gowun Batang",serif;background-size:cover;background-position:center;border:3px solid var(--mc,transparent)}
 .score{font:700 clamp(40px,8vw,56px)/1 "Gowun Batang",serif;color:var(--seal);text-align:center}
 .rel{text-align:center;font:700 22px/1.3 "Gowun Batang",serif;margin:8px 0 4px}
 .relsub{text-align:center;color:var(--sub);margin:0 0 12px}
@@ -123,7 +127,7 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     <div class="row">
       <span class="l">나의 성격유형</span>
       <div class="axes" id="axes"></div>
-      <details class="quiz" id="quiz"><summary>유형을 모르겠어요 (4문항으로 고르기)</summary><div id="qs"></div></details>
+      <details class="quiz" id="quiz"><summary>유형을 모르겠어요 · 4문항으로 찾기</summary><div id="qs"></div></details>
     </div>
     <p class="err" id="err" role="alert"></p>
     <button class="btn" type="submit">내 캐릭터 찾기</button>
@@ -134,7 +138,7 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     <span class="tag-sample" id="sample">예시 카드 · 1995년 3월 14일, ISTJ</span>
     <article class="card" id="card" aria-live="polite">
       <div class="no" id="cNo"></div>
-      <div class="seal"><b id="cH"></b></div>
+      <div class="seal"><img id="cImg" alt=""><b id="cH"></b></div>
       <div class="name" id="cName"></div>
       <div class="sub" id="cSub"></div>
       <div class="tags" id="cTags"></div>
@@ -233,6 +237,7 @@ const ST=[
 {h:'壬',k:'임수',e:4,noun:'바다',place:'넓은 바다',kw:['#큰스케일','#자유로움'],m:{NF:'모든 물길을 품는',NT:'깊은 곳을 헤아리는',SJ:'쉬지 않고 흐르는',SP:'파도를 타는'},ess:'큰 강과 바다의 기운이에요. 생각의 폭이 넓고 자유로우며, 무엇이든 품어 흘려보내는 힘이 있습니다.',yt:'인연과 결실의 해',yd:'올해의 기운과 서로 끌리는 합(合)을 이뤄요. 좋은 사람, 좋은 기회가 붙고 노력이 결실로 이어지는 해입니다.'},
 {h:'癸',k:'계수',e:4,noun:'이슬',place:'안개 호수',kw:['#스며드는','#깊은감수성'],m:{NF:'새벽 안개 속',NT:'스며들어 꿰뚫는',SJ:'조용히 적셔 주는',SP:'소나기처럼 쏟아지는'},ess:'비와 이슬의 기운이에요. 조용히 스며들어 주변을 적시고, 남들이 못 보는 감정의 결을 느낍니다.',yt:'기회와 확장의 해',yd:'새로운 무대와 돈의 흐름이 넓어지는 해예요. 기회가 많은 만큼 고르는 눈이 중요합니다.'}];
 const BR='子丑寅卯辰巳午未申酉戌亥';
+const IMG=["img/01_gapmok.webp", "img/02_eulmok.webp", "img/03_byeonghwa.webp", "img/04_jeonghwa.webp", "img/05_muto.webp", "img/06_gito.webp", "img/07_gyeonggeum.webp", "img/08_singeum.webp", "img/09_imsu.webp", "img/10_gyesu.webp"];
 const TY={ENFP:['탐험가','#호기심폭발','새로운 가능성을 보면 먼저 뛰어들어요. 시작하는 힘과 사람을 끌어당기는 에너지가 강합니다.'],INFP:['시인','#마음의결','말보다 마음의 결을 먼저 읽어요. 자기만의 가치가 분명하고 조용히 깊습니다.'],ENFJ:['안내자','#사람을키우는','사람의 가능성을 알아보고 이끌어 줘요. 모두가 함께 가는 길을 만듭니다.'],INFJ:['예언자','#깊은통찰','보이지 않는 흐름을 먼저 알아채요. 조용하지만 한번 정한 뜻은 깊습니다.'],ENTJ:['사령관','#판을짜는','목표를 정하면 길을 만들어 내요. 결단이 빠르고 큰 그림으로 움직입니다.'],INTJ:['설계자','#큰그림','머릿속에 이미 완성된 설계도가 있어요. 혼자서도 멀리 내다보고 준비합니다.'],ENTP:['발명가','#질문하는','당연한 것에 "왜?"를 던져요. 새 아이디어로 판을 흔드는 걸 즐깁니다.'],INTP:['연구자','#끝까지파는','이해될 때까지 파고들어요. 논리의 빈틈을 누구보다 빨리 찾습니다.'],ESTJ:['감독관','#일잘러','흩어진 일을 질서 있게 정리해요. 책임지고 끝을 보는 사람입니다.'],ISTJ:['장인','#말보다결과','약속한 것은 끝까지 해내요. 묵묵하지만 가장 믿을 수 있는 사람입니다.'],ESFJ:['살림꾼','#분위기지기','모두가 편안한지 먼저 살펴요. 사람과 사람을 잇는 따뜻한 중심입니다.'],ISFJ:['수호자','#조용한배려','티 내지 않고 곁을 지켜요. 작은 것까지 기억하는 세심한 사람입니다.'],ESTP:['모험가','#일단해보자','생각보다 몸이 먼저 움직여요. 위기에서 가장 빠르게 반응합니다.'],ISTP:['해결사','#쿨한손재주','문제가 생기면 조용히 고쳐 놓아요. 필요할 때 가장 실용적인 답을 냅니다.'],ESFP:['무대 주인공','#분위기메이커','어디서든 그 자리를 무대로 만들어요. 지금 이 순간을 가장 잘 즐깁니다.'],ISFP:['예술가','#나만의감각','자기만의 감각으로 일상을 물들여요. 부드럽지만 취향은 확고합니다.']};
 const TYK=Object.keys(TY);
 const COMBO=[
@@ -283,7 +288,7 @@ let cur=null;
 function render(str,t,anim){cur=build(str,t);const c=cur,el=EL[c.s.e];
   const card=$('card');card.style.setProperty('--el',el.c);
   $('cNo').textContent=`No. ${String(c.no).padStart(3,'0')} · ${c.s.place}`;
-  $('cH').textContent=c.s.h;$('cName').textContent=c.name;
+  $('cH').textContent=c.s.h;$('cImg').src=IMG[c.p.s];$('cImg').alt=`${c.s.k} ${c.s.noun} 정령`;$('cName').textContent=c.name;
   $('cSub').textContent=`${c.s.k} × ${c.t} · 일주 ${c.s.h}${BR[c.p.b]}`;
   $('cTags').innerHTML=[...c.s.kw,c.r[1]].map(k=>`<span>${k}</span>`).join('');
   $('cYear').textContent=`2027 정미년 · ${c.s.yt}`;
@@ -298,7 +303,7 @@ function render(str,t,anim){cur=build(str,t);const c=cur,el=EL[c.s.e];
   const bs=(si+5)%10,bt=(c.t[0]==='E'?'I':'E')+c.t[1]+c.t[2]+(c.t[3]==='J'?'P':'J');
   const ws=Math.floor(si/2),cs=((ws+3)%5)*2+(si%2),ct=c.t.split('').map((l,i)=>AX[i][0]===l?AX[i][1]:AX[i][0]).join('');
   const pr=[ST[si],ST[bs]].sort((x,y)=>ST.indexOf(x)-ST.indexOf(y));
-  $('match').innerHTML=[[bs,bt,'잘 맞는 캐릭터',`${pr[0].k[0]}${pr[1].k[0]}합(合)으로 서로 끌리는 운명의 짝 기운이에요. 성격유형은 에너지 방향과 생활 리듬이 반대라 서로의 빈 곳을 채워 줍니다.`,true],[cs,ct,'부딪히는 캐릭터',`${ST[cs].k}${(ST[cs].k.charCodeAt(1)-44032)%28?'은':'는'} 내 기운을 강하게 다듬는 상극이고, 성격유형은 네 글자가 모두 반대예요. 부딪히지만 가장 많이 배우는 사이입니다.`,false]].map(([s,t,k,txt,b])=>`<div class="panel mc${b?' best':''}"><div class="mini" style="background:${EL[ST[s].e].c}">${ST[s].h}</div><div><p class="kick">${k}</p><h3>${nm(s,t)}</h3><p>${ST[s].k} × ${t} · ${txt}</p></div></div>`).join('');
+  $('match').innerHTML=[[bs,bt,'잘 맞는 캐릭터',`${pr[0].k[0]}${pr[1].k[0]}합(合)으로 서로 끌리는 운명의 짝 기운이에요. 성격유형은 에너지 방향과 생활 리듬이 반대라 서로의 빈 곳을 채워 줍니다.`,true],[cs,ct,'부딪히는 캐릭터',`${ST[cs].k}${(ST[cs].k.charCodeAt(1)-44032)%28?'은':'는'} 내 기운을 강하게 다듬는 상극이고, 성격유형은 네 글자가 모두 반대예요. 부딪히지만 가장 많이 배우는 사이입니다.`,false]].map(([s,t,k,txt,b])=>`<div class="panel mc${b?' best':''}"><div class="mini" style="background-image:url(${IMG[s]});--mc:${EL[ST[s].e].c}" title="${ST[s].k}"></div><div><p class="kick">${k}</p><h3>${nm(s,t)}</h3><p>${ST[s].k} × ${t} · ${txt}</p></div></div>`).join('');
   $('rYearT').textContent=c.s.yt;$('rYear').textContent=c.s.yd;
   const yg=TG[tenGod(si,3)];
   $('yLoveT').textContent=yg[4];$('yLove').textContent=yg[5];$('yMoneyT').textContent=yg[6];$('yMoney').textContent=yg[7];
@@ -313,7 +318,7 @@ function render(str,t,anim){cur=build(str,t);const c=cur,el=EL[c.s.e];
 
 function compat(){if(!cur)return;const d2=$('d2').value;if(!valid(d2)){$('err2').textContent='친구의 생일을 1900~2026년 사이로 입력하세요.';return}$('err2').textContent='';
   const b=build(d2,$('t2').value),a=cur,ea=a.s.e,eb=b.s.e;
-  $('m1').style.background=EL[ea].c;$('m1').textContent=a.s.h;$('m2').style.background=EL[eb].c;$('m2').textContent=b.s.h;
+  for(const [id,x] of [['m1',a],['m2',b]]){const m=$(id);m.style.backgroundImage=`url(${IMG[x.p.s]})`;m.style.setProperty('--mc',EL[x.s.e].c);m.textContent='';m.title=x.s.k}
   let rel,sub,txt,base;const hap=Math.abs(a.p.s-b.p.s)===5;
   if(hap){const pair=[a.s,b.s].sort((x,y)=>ST.indexOf(x)-ST.indexOf(y));rel='운명의 짝';sub=`${pair[0].k[0]}${pair[1].k[0]}합(合)`;txt='서로 다른 기운이 만나 하나로 묶이는 특별한 조합이에요. 처음 만났는데 오래 안 것 같은 느낌을 주는 사이입니다.';base=92}
   else if(ea===eb){rel=SAME[ea];sub='같은 기운';txt='같은 오행을 가진 거울 같은 사이예요. 말하지 않아도 통하지만, 둘 다 같은 곳에서 고집을 부릴 수 있어요.';base=80}
@@ -333,11 +338,13 @@ async function makeImg(){const c=cur;if(!c)return;try{await document.fonts.load(
   x.fillStyle=EL[c.s.e].c;x.fillRect(0,0,W,H);
   x.strokeStyle='rgba(247,243,234,.4)';x.lineWidth=3;x.beginPath();x.roundRect(50,50,W-100,H-100,40);x.stroke();
   x.fillStyle=P;x.textAlign='center';x.font='400 38px "Noto Sans KR"';x.fillText(`No. ${String(c.no).padStart(3,'0')} · ${c.s.place}`,W/2,200);
-  x.strokeStyle='rgba(247,243,234,.85)';x.lineWidth=5;x.beginPath();x.arc(W/2,640,250,0,Math.PI*2);x.stroke();
-  x.strokeStyle='rgba(247,243,234,.35)';x.lineWidth=2;x.beginPath();x.arc(W/2,640,222,0,Math.PI*2);x.stroke();
-  x.font='700 260px "Gowun Batang"';x.textBaseline='middle';x.fillText(c.s.h,W/2,650);x.textBaseline='alphabetic';
-  x.font='700 76px "Gowun Batang"';const ls=wrapText(x,c.name,W-220);ls.forEach((l,i)=>x.fillText(l,W/2,1060+i*100));
-  let y=1060+ls.length*100+10;x.font='400 40px "Noto Sans KR"';x.globalAlpha=.85;x.fillText(`${c.s.k} × ${c.t}`,W/2,y);x.globalAlpha=1;
+  const im=new Image();im.src=IMG[c.p.s];try{await im.decode()}catch(e){}
+  x.fillStyle=P;x.beginPath();x.arc(W/2,640,300,0,Math.PI*2);x.fill();
+  if(im.naturalWidth){x.save();x.beginPath();x.arc(W/2,640,292,0,Math.PI*2);x.clip();x.drawImage(im,W/2-292,348,584,584);x.restore()}
+  x.fillStyle=EL[c.s.e].c;x.beginPath();x.arc(W/2+215,855,72,0,Math.PI*2);x.fill();x.strokeStyle=P;x.lineWidth=5;x.stroke();
+  x.fillStyle=P;x.font='700 78px "Gowun Batang"';x.textBaseline='middle';x.fillText(c.s.h,W/2+215,860);x.textBaseline='alphabetic';
+  x.font='700 76px "Gowun Batang"';const ls=wrapText(x,c.name,W-220);ls.forEach((l,i)=>x.fillText(l,W/2,1080+i*100));
+  let y=1080+ls.length*100+10;x.font='400 40px "Noto Sans KR"';x.globalAlpha=.85;x.fillText(`${c.s.k} × ${c.t}`,W/2,y);x.globalAlpha=1;
   y+=110;const tags=[...c.s.kw,c.r[1]];x.font='400 36px "Noto Sans KR"';const tw=tags.map(t=>x.measureText(t).width+56),tot=tw.reduce((a,b)=>a+b,0)+(tags.length-1)*18;let tx=(W-tot)/2;
   tags.forEach((t,i)=>{x.fillStyle='rgba(247,243,234,.15)';x.beginPath();x.roundRect(tx,y-48,tw[i],70,35);x.fill();x.fillStyle=P;x.fillText(t,tx+tw[i]/2,y);tx+=tw[i]+18});
   x.strokeStyle='rgba(247,243,234,.35)';x.lineWidth=2;x.beginPath();x.moveTo(140,1580);x.lineTo(W-140,1580);x.stroke();
