@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>기운도감 시제품</title>
+<meta name="description" content="태어난 날의 기운과 성격유형으로 찾는 160명의 캐릭터. 같은 유형, 다른 기운.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="기운도감 · 같은 유형, 다른 기운">
+<meta property="og:description" content="생일과 성격유형으로 나의 기운 캐릭터를 찾아보세요. 친구와 궁합도 볼 수 있어요.">
+<meta property="og:image" content="https://dnpstudio81-cmyk.github.io/img/share/og.jpg">
+<meta property="og:url" content="https://dnpstudio81-cmyk.github.io/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -80,6 +86,32 @@ h2.sec{font:700 clamp(24px,3.5vw,32px)/1.15 "Gowun Batang",serif;margin:0 0 16px
 .relsub{text-align:center;color:var(--sub);margin:0 0 12px}
 .save img{width:min(100%,280px);border-radius:12px;display:block;margin:12px auto 0;border:1px solid var(--line)}
 footer{font-size:13px;color:var(--sub);border-top:1px solid var(--line)}
+.dsel{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px}
+.kakao{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 16px;border:0;border-radius:10px;background:#FEE500;color:#191919;font:500 15px "Noto Sans KR",sans-serif;cursor:pointer}
+.kakao.wide{width:100%;height:50px;margin-top:16px;font-size:16px}
+.sum{width:min(100%,400px)}
+.sum h3{font:700 19px/1.35 "Gowun Batang",serif;margin:0 0 10px}
+.sum ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.sum li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;font-size:15px}
+.sum li b{color:var(--seal);font-weight:500;font-size:14px}
+.btn.more{width:min(100%,400px);margin-top:0}
+.invite{padding-top:0;padding-bottom:0}.invite .panel{border-color:var(--seal)}
+.pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:560px}
+.pil{text-align:center;display:grid;gap:6px}
+.pil small{font-size:13px;color:var(--sub)}
+.pil .ch{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;color:#fff;font:700 clamp(28px,7vw,40px)/1 "Gowun Batang",serif}
+.pil .ch.empty{background:var(--panel);border:1px dashed var(--line);color:var(--sub);font-size:20px}
+.pil .me{outline:3px solid var(--seal);outline-offset:2px}
+.elgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.elgrid h3,.tti h3{font:700 20px/1.3 "Gowun Batang",serif;margin:0 0 6px}
+.tti p{margin:0;color:var(--sub)}.tti .kick{margin-bottom:2px}
+.bar{display:grid;grid-template-columns:44px minmax(0,1fr) 28px;gap:10px;align-items:center;margin:8px 0;font-size:15px}
+.bar div{height:14px;border-radius:7px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;border-radius:7px}
+.bar span:last-child{text-align:right;color:var(--sub)}
+.lucky{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.lucky div{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.lucky small{display:block;color:var(--sub);font-size:13px}
+@media(max-width:760px){.elgrid{grid-template-columns:minmax(0,1fr)}}
 .matchgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .mc{display:flex;gap:14px;align-items:flex-start}
 .mc .mini{flex:none;width:60px;height:60px;font-size:28px}
@@ -117,10 +149,12 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
   <p class="lead">태어난 날의 일간 10가지와 성격유형 16가지가 만나 160명의 캐릭터가 됩니다. 나는 그중 누구일까요?</p>
 </header>
 
+<div class="band wrap invite" id="invite" hidden><div class="panel"><b>친구가 보낸 궁합 신청이에요.</b> 내 생일과 유형을 넣고 「내 캐릭터 찾기」를 누르면, 내 캐릭터와 함께 친구와의 궁합이 바로 나와요.</div></div>
+
 <section class="band wrap main">
   <form class="panel" id="f" novalidate>
-    <label class="l" for="d">태어난 날 (양력)</label>
-    <input type="date" id="d" min="1900-01-01" max="2026-12-31" value="1995-03-14">
+    <span class="l">태어난 날 (양력)</span>
+    <div class="dsel"><select id="dY" aria-label="태어난 해"></select><select id="dM" aria-label="태어난 달"></select><select id="dD" aria-label="태어난 날"></select></div>
     <label class="check"><input type="checkbox" id="late"> 밤 11시 이후에 태어났어요</label>
     <p class="note" id="lateNote" hidden>밤 11시~자정 출생은 학파에 따라 다음 날로 보기도 해요. 이 시제품은 태어난 날짜 그대로 계산합니다.</p>
 
@@ -146,11 +180,40 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
       <div class="mark">氣</div>
     </article>
     <div class="actions">
-      <button class="ghost" type="button" id="copyTxt">자랑 문구 복사</button>
+      <button class="kakao" type="button" id="shareMe"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>카카오톡 공유</button>
       <button class="ghost" type="button" id="mkImg">저장용 이미지 만들기</button>
     </div>
     <p class="note" id="copyMsg" role="status"></p>
+    <div class="panel sum" id="sum"></div>
+    <button class="btn more" type="button" id="moreBtn" aria-expanded="false" aria-controls="detail">자세히 보기 ▾</button>
   </div>
+</section>
+
+<section class="band wrap save" id="saveBox" hidden>
+  <h2>저장용 카드 이미지</h2>
+  <p class="note">휴대폰은 이미지를 길게 눌러 저장하고, PC는 우클릭해서 저장하세요. 인스타 스토리 크기(1080×1920)입니다.</p>
+  <img id="out" alt="내 캐릭터 카드 이미지">
+</section>
+
+<div id="detail" hidden>
+<section class="band wrap">
+  <h2 class="sec" id="dTitle">자세한 풀이</h2>
+  <h3 class="mh">나의 사주 원국</h3>
+  <div class="pillars" id="pillars"></div>
+  <p class="note" id="pNote" style="margin:10px 0 0"></p>
+</section>
+
+<section class="band wrap">
+  <h2 class="sec">오행 분포와 행운 아이템</h2>
+  <div class="elgrid">
+    <div class="panel" id="elBars"></div>
+    <div class="panel"><h3 id="elT"></h3><p id="elTxt" style="margin:0;color:var(--sub)"></p><div class="lucky" id="lucky"></div></div>
+  </div>
+</section>
+
+<section class="band wrap">
+  <h2 class="sec">띠로 보는 2027 정미년</h2>
+  <div class="panel tti"><p class="kick" id="ttiK"></p><h3 id="ttiT"></h3><p id="ttiTxt"></p></div>
 </section>
 
 <section class="band wrap">
@@ -164,6 +227,8 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     <div class="panel"><h3>돈 스타일</h3><p id="rMoney"></p></div>
     <div class="panel"><h3>그림자</h3><p id="rShadow"></p></div>
     <div class="panel"><h3>지칠 때 필요한 것</h3><p id="rRest"></p></div>
+    <div class="panel"><h3>사회에서 쓰는 힘</h3><p id="rSocial"></p></div>
+    <div class="panel"><h3>배우자 자리</h3><p id="rSpouse"></p></div>
   </div>
 </section>
 
@@ -187,13 +252,14 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     <div class="lockcta"><div class="panel"><p>5월부터 2028년 1월까지는 정식 버전에서 유료로 열릴 구역이에요.</p><button class="btn" type="button" id="unlock">시제품이라 무료로 보기</button></div></div>
   </div>
 </section>
+</div>
 
 <section class="band wrap compat">
   <form class="panel" id="f2" novalidate>
     <h2>친구와 궁합 보기</h2>
     <p class="note" style="margin:0 0 14px">친구의 생일과 유형을 넣으면 두 캐릭터의 관계를 알려 드려요.</p>
-    <label class="l" for="d2">친구가 태어난 날 (양력)</label>
-    <input type="date" id="d2" min="1900-01-01" max="2026-12-31" value="1996-08-02">
+    <span class="l">친구가 태어난 날 (양력)</span>
+    <div class="dsel"><select id="d2Y" aria-label="친구가 태어난 해"></select><select id="d2M" aria-label="친구가 태어난 달"></select><select id="d2D" aria-label="친구가 태어난 날"></select></div>
     <label class="l" for="t2" style="margin-top:14px">친구의 성격유형</label>
     <select id="t2"></select>
     <p class="err" id="err2" role="alert"></p>
@@ -207,14 +273,11 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     <p class="relsub" id="relSub"></p>
     <p id="relTxt" style="margin:0 0 10px"></p>
     <p id="typeTxt" style="margin:0;color:var(--sub)"></p>
+    <button class="kakao wide" type="button" id="shareC"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>친구에게 카카오톡으로 궁합 공유</button>
+    <p class="note" id="copyMsg2" role="status"></p>
   </div>
 </section>
 
-<section class="band wrap save" id="saveBox" hidden>
-  <h2>저장용 카드 이미지</h2>
-  <p class="note">휴대폰은 이미지를 길게 눌러 저장하고, PC는 우클릭해서 저장하세요. 인스타 스토리 크기(1080×1920)입니다.</p>
-  <img id="out" alt="내 캐릭터 카드 이미지">
-</section>
 
 <footer class="band wrap">
   재미와 자기 이해를 위한 콘텐츠이며, 의료·법률·투자 결정의 근거가 될 수 없습니다. 성격유형 표기는 16가지 유형을 부르는 일반적인 방식이며, 이 서비스는 Myers-Briggs Company 및 공식 MBTI® 검사와 무관합니다. 일간 계산은 양력 날짜 기준입니다.
@@ -272,6 +335,33 @@ const SH='甲乙丙丁戊己庚辛壬癸';
 function tenGod(i,j){const a=Math.floor(i/2),b=Math.floor(j/2),sp=i%2===j%2;if(a===b)return sp?'비견':'겁재';if((b+1)%5===a)return sp?'편인':'정인';if((a+1)%5===b)return sp?'식신':'상관';if((a+2)%5===b)return sp?'편재':'정재';return sp?'편관':'정관'}
 function nm(si,t){const s=ST[si];return `${s.m[temp(t)]} ${s.noun} ${TY[t][0]}`}
 function dots(n){return '<i>'+'●'.repeat(n)+'</i>'+'○'.repeat(5-n)}
+const SITE='https://dnpstudio81-cmyk.github.io/';
+const KAKAO_KEY='';
+const EB=[4,2,0,0,2,1,1,2,3,3,2,4],ANI=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'],BRK='자축인묘진사오미신유술해',STK='갑을병정무기경신임계',ELN=['목','화','토','금','수'],ELW=['나무','불','흙','쇠','물'];
+const ELSTRONG=['나무 기운이 많아 성장 욕구와 추진력이 강해요. 시작은 누구보다 잘하니, 마무리하는 습관을 들이면 크게 됩니다.','불 기운이 많아 열정과 표현력이 넘쳐요. 쉽게 달아올랐다 식을 수 있으니 페이스 조절이 중요해요.','흙 기운이 많아 듬직하고 신뢰를 받아요. 변화 앞에서 머뭇거리지 않는 연습이 필요합니다.','쇠 기운이 많아 결단력과 원칙이 분명해요. 말의 날을 조금 무디게 하면 관계가 한결 편해져요.','물 기운이 많아 생각이 깊고 유연해요. 생각이 많아질 땐 몸을 먼저 움직여 보세요.'];
+const ELWEAK=['나무 기운이 부족하면 새로운 시작을 망설이기 쉬워요.','불 기운이 부족하면 마음을 표현하는 데 서툴 수 있어요.','흙 기운이 부족하면 생활 리듬이 쉽게 흔들릴 수 있어요.','쇠 기운이 부족하면 결정을 미루거나 거절을 어려워할 수 있어요.','물 기운이 부족하면 쉬지 않고 달리다 지치기 쉬워요.'];
+const LUCKY=[['초록, 연두','동쪽','3, 8','화분, 원목 소품'],['빨강, 주황','남쪽','2, 7','향초, 따뜻한 조명'],['노랑, 베이지','가운데(집 중심)','5, 10','도자기, 흙 소재 소품'],['흰색, 은색','서쪽','4, 9','금속 액세서리, 시계'],['검정, 남색','북쪽','1, 6','작은 어항, 물병, 검정 소품']];
+const TGMEAN={'비견':'나와 같은 힘이에요. 독립심과 자존감이 강해요.','겁재':'경쟁하는 힘이에요. 승부욕과 추진력이 있어요.','식신':'즐기며 만드는 힘이에요. 재능과 여유가 있어요.','상관':'표현하는 힘이에요. 말솜씨와 창의성이 뛰어나요.','편재':'넓게 버는 힘이에요. 기회를 잡는 감각과 활동성이 있어요.','정재':'차곡차곡 모으는 힘이에요. 성실하고 관리를 잘해요.','편관':'버티는 힘이에요. 도전 정신과 카리스마가 있어요.','정관':'인정받는 힘이에요. 책임감과 명예를 중요하게 여겨요.','편인':'직감의 힘이에요. 영감과 독창성이 있어요.','정인':'배우는 힘이에요. 학습 능력과 보살핌이 있어요.'};
+const SPOUSE=['함께 성장하는 관계를 원해요. 서로의 꿈을 응원해 주는 사람이 잘 맞아요.','표현이 분명하고 설레는 관계를 원해요. 애정 표현을 아끼지 않는 사람이 잘 맞아요.','안정적이고 편안한 관계를 원해요. 한결같은 사람이 잘 맞아요.','약속과 신뢰를 중요하게 여겨요. 말과 행동이 같은 사람이 잘 맞아요.','깊은 대화가 통하는 관계를 원해요. 감정을 잘 들어 주는 사람이 잘 맞아요.'];
+function tti(b){if(b===7)return['나의 해가 돌아왔어요','띠의 해(본명년)는 변화가 많은 해로 봐요. 큰 결정은 한 번 더 점검하고, 건강 검진을 챙기세요.'];
+  if(b===6||b===11||b===3)return['정미년과 손잡는 띠','올해의 기운과 합(合)을 이루는 띠예요. 사람과 기회가 자연스럽게 모이는 해입니다. 미뤄 둔 제안이 있다면 올해 꺼내 보세요.'];
+  if(b===1)return['정미년과 부딪히는 띠','올해의 기운과 정면으로 부딪히는 충(沖)이에요. 이사나 이직 같은 변화가 생기기 쉬우니 서두르지 말고 준비하세요. 변화가 곧 기회가 되기도 합니다.'];
+  if(b===0)return['살짝 어긋나는 띠','작은 오해가 생기기 쉬운 해예요. 말과 약속을 분명히 하면 무난하게 지나갑니다.'];
+  if(b===10)return['마찰을 조심할 띠','규칙과 절차에서 마찰이 생기기 쉬워요. 서류와 계약을 꼼꼼히 챙기면 오히려 실속을 챙기는 해가 됩니다.'];
+  return['무난한 흐름의 띠','큰 충돌 없이 흘러가는 해예요. 꾸준히 해 온 일을 이어 가면 성과가 차곡차곡 쌓입니다.']}
+function saju(str){const [y,m,d]=str.split('-').map(Number),md=m*100+d,yy=md<204?y-1:y,ys=((yy-4)%10+10)%10,yb=((yy-4)%12+12)%12;
+  const bd=[[106,11],[204,0],[306,1],[405,2],[506,3],[606,4],[707,5],[808,6],[908,7],[1008,8],[1107,9],[1207,10]];let k=10;for(const [b,kk] of bd)if(md>=b)k=kk;
+  const dp=pillar(str);return{yy,y:[ys,yb],m:[((ys%5)*2+2+k)%10,(2+k)%12],d:[dp.s,dp.b],near:bd.some(([b])=>Math.abs(md-b)<=1)}}
+const NOW_Y=2026;
+function fillDate(p,def){const [y,m,d]=def.split('-').map(Number);
+  $(p+'Y').innerHTML=Array.from({length:NOW_Y-1929},(_,i)=>NOW_Y-i).map(v=>`<option value="${v}">${v}년</option>`).join('');
+  $(p+'M').innerHTML=Array.from({length:12},(_,i)=>`<option value="${i+1}">${i+1}월</option>`).join('');
+  $(p+'Y').value=y;$(p+'M').value=m;days(p,d);
+  $(p+'Y').addEventListener('change',()=>days(p));$(p+'M').addEventListener('change',()=>days(p))}
+function days(p,want){const y=+$(p+'Y').value,m=+$(p+'M').value,n=new Date(y,m,0).getDate(),cur=want||+$(p+'D').value||1;
+  $(p+'D').innerHTML=Array.from({length:n},(_,i)=>`<option value="${i+1}">${i+1}일</option>`).join('');$(p+'D').value=Math.min(cur,n)}
+function getD(p){return `${$(p+'Y').value}-${String($(p+'M').value).padStart(2,'0')}-${String($(p+'D').value).padStart(2,'0')}`}
+function setD(p,str){const [y,m,d]=str.split('-').map(Number);$(p+'Y').value=y;$(p+'M').value=m;days(p,d)}
 const AX=[['E','I'],['S','N'],['T','F'],['J','P']];
 const QZ=[['주말에 에너지를 채우는 방법은?','사람들과 만나서','혼자 조용히'],['새로운 걸 배울 때 나는?','예시와 경험부터','전체 원리부터'],['친구가 고민을 털어놓으면?','해결책을 같이 찾는다','마음부터 공감한다'],['여행을 갈 때 나는?','일정을 미리 짠다','가서 정한다']];
 let type=['I','S','T','J'];
@@ -280,7 +370,7 @@ const $=id=>document.getElementById(id);
 function pillar(str){const [y,m,d]=str.split('-').map(Number);const days=Math.round((Date.UTC(y,m-1,d)-Date.UTC(1900,0,1))/864e5);const i=((10+days)%60+60)%60;return{s:i%10,b:i%12}}
 function temp(t){return t[1]==='N'?(t[2]==='F'?'NF':'NT'):(t[3]==='J'?'SJ':'SP')}
 function valid(str){if(!/^\d{4}-\d{2}-\d{2}$/.test(str))return false;const y=+str.slice(0,4);return y>=1900&&y<=2026}
-function build(str,t){const p=pillar(str),s=ST[p.s],r=TY[t],g=temp(t);return{p,s,t,r,g,name:`${s.m[g]} ${s.noun} ${r[0]}`,no:p.s*16+TYK.indexOf(t)+1}}
+function build(str,t){const p=pillar(str),s=ST[p.s],r=TY[t],g=temp(t);return{dd:str,p,s,t,r,g,name:`${s.m[g]} ${s.noun} ${r[0]}`,no:p.s*16+TYK.indexOf(t)+1}}
 
 function axesUI(){$('axes').innerHTML=AX.map((a,i)=>`<div class="axis">${a.map(l=>`<button type="button" data-i="${i}" data-l="${l}" aria-pressed="${type[i]===l}">${l}</button>`).join('')}</div>`).join('');
   $('qs').innerHTML=QZ.map((q,i)=>`<div class="q"><p>${q[0]}</p><div>${[1,2].map(k=>`<button type="button" data-q="${i}" data-l="${AX[i][k-1]}" aria-pressed="${type[i]===AX[i][k-1]}">${q[k]}</button>`).join('')}</div></div>`).join('')}
@@ -313,10 +403,32 @@ function render(str,t,anim){cur=build(str,t);const c=cur,el=EL[c.s.e];
   const row=x=>`<div class="mrow"><div class="mm">${x.m}<small>${SH[x.j]}${'寅卯辰巳午未申酉戌亥子丑'[MONTHS.indexOf(x.m)]}월</small></div><div><b>${x.g[0]}</b><span class="tip">${x.g[1]}</span></div><div class="dots"><span>연애 ${dots(x.g[2])}</span><span>재물 ${dots(x.g[3])}</span></div></div>`;
   $('mFree').innerHTML=ms.slice(0,3).map(row).join('');$('mLock').innerHTML=ms.slice(3).map(row).join('');
   if(anim)$('lw').classList.add('locked');
+  const sj=saju(str);c.sj=sj;const ani=ANI[sj.y[1]];
+  $('sum').innerHTML=`<h3>${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${ani}띠 · 일주 ${ST[si].h}${BR[c.p.b]}</h3><ul>
+   <li><b>본성</b><span>${c.s.ess.split('. ')[0]}.</span></li>
+   <li><b>올해</b><span>2027년은 「${c.s.yt}」 · ${tti(sj.y[1])[0]}</span></li>
+   <li><b>연애</b><span>${yg[4]} · 좋은 달 ${top(2)}</span></li>
+   <li><b>재물</b><span>${yg[6]} · 좋은 달 ${top(3)}</span></li></ul>`;
+  const P=[['시주',null],['일주',sj.d],['월주',sj.m],['연주',sj.y]];
+  $('pillars').innerHTML=P.map(([lb,v])=>v?`<div class="pil"><small>${lb}</small><div class="ch${lb==='일주'?' me':''}" style="background:${EL[Math.floor(v[0]/2)].c}">${SH[v[0]]}</div><div class="ch" style="background:${EL[EB[v[1]]].c}">${BR[v[1]]}</div><small>${lb==='일주'?'나 (일간)':tenGod(si,v[0])}</small></div>`:`<div class="pil"><small>${lb}</small><div class="ch empty">?</div><div class="ch empty">?</div><small>출생 시간 모름</small></div>`).join('');
+  $('pNote').textContent=`${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${STK[sj.m[0]]}${BRK[sj.m[1]]}월 ${STK[si]}${BRK[c.p.b]}일생이에요. 출생 시간을 넣지 않아 시주는 비워 뒀어요.${sj.near?' 절기가 바뀌는 날 전후에 태어나서 월주가 하루 차이로 달라질 수 있어요.':''}`;
+  const cnt=[0,0,0,0,0];for(const v of [sj.y,sj.m,sj.d]){cnt[Math.floor(v[0]/2)]++;cnt[EB[v[1]]]++}
+  $('elBars').innerHTML='<h3>나의 오행 (여섯 글자 기준)</h3>'+cnt.map((n,i)=>`<div class="bar"><span>${ELN[i]}(${ELW[i]})</span><div><i style="width:${Math.round(n/6*100)}%;background:${EL[i].c}"></i></div><span>${n}</span></div>`).join('');
+  const mx=cnt.indexOf(Math.max(...cnt)),mn=cnt.indexOf(Math.min(...cnt));
+  $('elT').textContent=`${ELW[mx]} 기운이 가장 많고, ${ELW[mn]} 기운이 ${cnt[mn]?'가장 적어요':'없어요'}`;
+  $('elTxt').textContent=`${ELSTRONG[mx]} ${ELWEAK[mn]} 부족한 ${ELW[mn]} 기운을 생활 속에서 채워 주면 균형이 잡혀요.`;
+  const L=LUCKY[mn];$('lucky').innerHTML=[['행운의 색',L[0]],['행운의 방향',L[1]],['행운의 숫자',L[2]],['곁에 두면 좋은 것',L[3]]].map(([a,b])=>`<div><small>${a}</small>${b}</div>`).join('');
+  const tt=tti(sj.y[1]);$('ttiK').textContent=`${ani}띠 (${STK[sj.y[0]]}${BRK[sj.y[1]]}년)${sj.yy!==+str.slice(0,4)?` · 입춘 전에 태어나서 ${sj.yy}년 띠로 봐요`:''}`;$('ttiT').textContent=tt[0];$('ttiTxt').textContent=tt[1];
+  const tm=tenGod(si,sj.m[0]),ty=tenGod(si,sj.y[0]);
+  $('rSocial').textContent=`월간 ${SH[sj.m[0]]}(${tm}): ${TGMEAN[tm]} 직장과 사회생활에서 이 힘이 가장 자연스럽게 나와요. 뿌리가 되는 연간 ${SH[sj.y[0]]}(${ty})는 어린 시절과 집안에서 물려받은 기운이에요.`;
+  $('rSpouse').textContent=`일지 ${BR[c.p.b]}(${ANI[c.p.b]})에 ${ELW[EB[c.p.b]]} 기운이 있어요. ${SPOUSE[EB[c.p.b]]}`;
+  $('dTitle').textContent=`「${c.name}」 자세한 풀이`;
+  if(anim){$('detail').hidden=true;$('moreBtn').textContent='자세히 보기 ▾';$('moreBtn').setAttribute('aria-expanded','false')}
   if(anim){card.classList.remove('reveal');void card.offsetWidth;card.classList.add('reveal')}
   compat()}
 
-function compat(){if(!cur)return;const d2=$('d2').value;if(!valid(d2)){$('err2').textContent='친구의 생일을 1900~2026년 사이로 입력하세요.';return}$('err2').textContent='';
+let lastC=null;
+function compat(){if(!cur)return;const d2=getD('d2');if(!valid(d2)){$('err2').textContent='친구의 생일을 1900~2026년 사이로 입력하세요.';return}$('err2').textContent='';
   const b=build(d2,$('t2').value),a=cur,ea=a.s.e,eb=b.s.e;
   for(const [id,x] of [['m1',a],['m2',b]]){const m=$(id);m.style.backgroundImage=`url(${IMG[x.p.s]})`;m.style.setProperty('--mc',EL[x.s.e].c);m.textContent='';m.title=x.s.k}
   let rel,sub,txt,base;const hap=Math.abs(a.p.s-b.p.s)===5;
@@ -330,8 +442,14 @@ function compat(){if(!cur)return;const d2=$('d2').value;if(!valid(d2)){$('err2')
   const tt=same===4?'성격유형까지 같은 쌍둥이 같은 사이예요.':same===0?'성격유형은 정반대라서, 서로의 빈 곳을 채워 줄 수 있어요.':`성격유형은 네 글자 중 ${same}개가 같아요.`;
   $('sc').textContent=Math.min(99,base+(same===0||same===4?4:same));
   $('rel').textContent=rel;$('relSub').textContent=`${sub} · ${a.s.k} × ${b.s.k}`;$('relTxt').textContent=txt;
-  $('typeTxt').textContent=`「${b.name}」 · ${tt}`}
+  $('typeTxt').textContent=`「${b.name}」 · ${tt}`;lastC={a,b,rel,sc:$('sc').textContent};$('copyMsg2').textContent=''}
 
+function loadKakao(){if(!KAKAO_KEY||window.Kakao)return;const sc=document.createElement('script');sc.src='https://t1.kakaocdn.net/kakao_js_sdk/2.8.2/kakao.min.js';sc.integrity='sha384-zt/G7/KfaRQ9dT/QIkS0ujMtzouJqzuSJcXVQu50x0rl/+mD1dc70AeOejVbMD9E';sc.crossOrigin='anonymous';sc.onload=()=>{try{Kakao.init(KAKAO_KEY)}catch(e){}};document.head.appendChild(sc)}
+function code(x){return x.d.replace(/-/g,'')+x.t}
+async function share(o,msg){const url=SITE+'?f='+o.code;
+  if(window.Kakao&&Kakao.isInitialized&&Kakao.isInitialized()){try{Kakao.Share.sendDefault({objectType:'feed',content:{title:o.title,description:o.desc,imageUrl:SITE+'img/share/'+o.img+'.jpg',link:{mobileWebUrl:url,webUrl:url}},buttons:[{title:o.btn,link:{mobileWebUrl:url,webUrl:url}}]});return}catch(e){}}
+  if(navigator.share){try{await navigator.share({title:o.title,text:o.desc,url});return}catch(e){if(e&&e.name==='AbortError')return}}
+  try{await navigator.clipboard.writeText(`${o.desc}\n${url}`);$(msg).textContent='링크를 복사했어요. 카카오톡 대화방에 붙여 넣어 보내 주세요.'}catch(e){$(msg).textContent=`${o.desc} ${url}`}}
 function wrapText(ctx,text,max){const w=text.split(' '),lines=[];let l='';for(const x of w){const t=l?l+' '+x:x;if(ctx.measureText(t).width>max&&l){lines.push(l);l=x}else l=t}lines.push(l);return lines}
 async function makeImg(){const c=cur;if(!c)return;try{await document.fonts.load('700 80px "Gowun Batang"');await document.fonts.load('400 40px "Noto Sans KR"')}catch(e){}
   const cv=$('cv'),x=cv.getContext('2d'),W=1080,H=1920,P='#f7f3ea';
@@ -353,17 +471,20 @@ async function makeImg(){const c=cur;if(!c)return;try{await document.fonts.load(
   $('out').src=cv.toDataURL('image/png');$('saveBox').hidden=false;$('saveBox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
 
 $('t2').innerHTML=TYK.map(k=>`<option value="${k}"${k==='ENFP'?' selected':''}>${k} · ${TY[k][0]}</option>`).join('');
-try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){$('d').value=s.d;type=s.t.split('');$('sample').textContent='지난번에 찾은 내 카드'}}catch(e){}
-axesUI();render($('d').value,type.join(''),false);
+fillDate('d','1995-03-14');fillDate('d2','1996-08-02');
+try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);type=s.t.split('');$('sample').textContent='지난번에 찾은 내 카드'}}catch(e){}
+{const f=new URLSearchParams(location.search).get('f');const m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){setD('d2',`${m[1]}-${m[2]}-${m[3]}`);$('t2').value=m[4];$('invite').hidden=false}}
+loadKakao();
+axesUI();render(getD('d'),type.join(''),false);
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(!b)return;const i=+(b.dataset.i??b.dataset.q);type[i]=b.dataset.l;axesUI();if(b.dataset.q!==undefined)$('quiz').open=true});
 $('late').addEventListener('change',e=>{$('lateNote').hidden=!e.target.checked});
-$('d').addEventListener('input',()=>{$('err').textContent=''});
-$('f').addEventListener('submit',e=>{e.preventDefault();const d=$('d').value;if(!valid(d)){$('err').textContent='태어난 날을 1900~2026년 사이로 입력하세요.';return}
+$('f').addEventListener('submit',e=>{e.preventDefault();const d=getD('d');if(!valid(d)){$('err').textContent='태어난 날을 1900~2026년 사이로 입력하세요.';return}
   const t=type.join('');render(d,t,true);$('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;$('saveBox').hidden=true;try{localStorage.setItem('giun',JSON.stringify({d,t}))}catch(e){}
   if(matchMedia('(max-width:760px)').matches)$('card').scrollIntoView({behavior:'smooth',block:'center'})});
 $('f2').addEventListener('submit',e=>{e.preventDefault();compat()});
-$('d2').addEventListener('input',()=>{$('err2').textContent=''});
-$('copyTxt').addEventListener('click',async()=>{const c=cur;const txt=`나는 「${c.name}」 (${c.s.k} × ${c.t}), 160명 중 No.${String(c.no).padStart(3,'0')}이래. 너는 누구야?`;try{await navigator.clipboard.writeText(txt);$('copyMsg').textContent='복사했어요. 친구에게 붙여 넣어 보내 보세요.'}catch(err){$('copyMsg').textContent=txt}});
+$('shareMe').addEventListener('click',()=>{const c=cur;share({code:code({d:c.dd,t:c.t}),title:`나는 「${c.name}」`,desc:`나는 ${c.s.k} × ${c.t}, 160명 중 No.${String(c.no).padStart(3,'0')} 「${c.name}」이래. 너는 어떤 캐릭터야? 우리 궁합도 봐 줘!`,img:IMG[c.p.s].slice(4,-5),btn:'내 캐릭터 찾기'},'copyMsg')});
+$('shareC').addEventListener('click',()=>{if(!lastC)return;const {a,rel,sc}=lastC;share({code:code({d:a.dd,t:a.t}),title:`우리 궁합은 ${sc}점, 「${rel}」`,desc:`기운도감에서 우리 궁합을 봤어! ${sc}점 「${rel}」이래. 너도 네 생일 넣고 확인해 봐.`,img:IMG[a.p.s].slice(4,-5),btn:'궁합 확인하기'},'copyMsg2')});
+$('moreBtn').addEventListener('click',()=>{const d=$('detail'),open=d.hidden;d.hidden=!open;$('moreBtn').textContent=open?'접기 ▴':'자세히 보기 ▾';$('moreBtn').setAttribute('aria-expanded',String(open));if(open)d.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
 $('mkImg').addEventListener('click',makeImg);
 $('unlock').addEventListener('click',()=>{$('lw').classList.remove('locked')});
 }
