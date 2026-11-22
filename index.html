@@ -90,6 +90,38 @@ h2.sec{font:700 clamp(24px,3.5vw,32px)/1.15 "Gowun Batang",serif;margin:0 0 16px
 .relsub{text-align:center;color:var(--sub);margin:0 0 12px}
 .save img{width:min(100%,280px);border-radius:12px;display:block;margin:12px auto 0;border:1px solid var(--line)}
 footer{font-size:13px;color:var(--sub);border-top:1px solid var(--line)}
+input.txt{width:100%;height:46px;font:16px "Noto Sans KR",sans-serif;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.chal{border:2px solid var(--seal)}
+.chal h2{font:700 clamp(22px,4vw,28px)/1.25 "Gowun Batang",serif;margin:2px 0 14px}
+.vsrow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center;margin-bottom:16px;max-width:520px}
+.vs{font:700 22px/1 "Gowun Batang",serif;color:var(--seal)}
+.cslot{border-radius:14px;padding:10px;text-align:center;background:var(--el,#5c6066);color:#f7f3ea;min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.cslot img{width:100%;max-width:150px;aspect-ratio:1;object-fit:cover;border-radius:10px;border:3px solid #f7f3ea}
+.cslot b{font:700 15px/1.3 "Gowun Batang",serif}.cslot small{font-size:13px;opacity:.9}
+.cslot.back{background:repeating-linear-gradient(45deg,var(--panel),var(--panel) 10px,var(--line) 10px,var(--line) 12px);color:var(--sub);border:2px dashed var(--line)}
+.cslot.back span{font:700 48px/1 "Gowun Batang",serif}
+.cslot.flip{animation:flip .7s ease-out}
+@keyframes flip{0%{transform:rotateY(90deg)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.cslot.flip{animation:none}}
+.pair>div{display:grid;justify-items:center;gap:4px}.pair small{font-size:13px;color:var(--sub);max-width:110px;text-align:center}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:6px 0 16px}
+.tabs button{min-height:44px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;font:500 14px/1.2 "Noto Sans KR",sans-serif;cursor:pointer;padding:4px}
+.tabs button[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.res{text-align:center;margin:0 0 12px}.res b{display:block;font:700 clamp(26px,6vw,34px)/1.2 "Gowun Batang",serif;color:var(--seal)}.res span{color:var(--sub);font-size:14px}
+.rnd{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:9px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line);margin-bottom:6px;font-size:15px}
+.rnd em{font-style:normal;color:var(--sub)}.rnd .w{color:var(--seal);font-weight:700}
+.cmp{display:grid;grid-template-columns:64px minmax(0,1fr);gap:4px 10px;align-items:center;font-size:13px;margin-top:12px}
+.cmp .two{display:grid;gap:3px}.cmp .two i{display:block;height:8px;border-radius:4px}
+.legend{font-size:13px;color:var(--sub);margin-top:6px}.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 8px;vertical-align:-1px}
+.vtab{width:100%;border-collapse:collapse;font-size:15px;margin-bottom:10px}.vtab th,.vtab td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:center}.vtab th{font-weight:500;color:var(--sub);font-size:13px}.vtab td:first-child{text-align:left;color:var(--sub)}
+.consol{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;color:var(--sub);margin-top:10px}
+.trow{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2.2fr) minmax(0,1fr) 40px;gap:6px;align-items:center;margin-bottom:8px}
+.trow .dsel{grid-template-columns:1.3fr 1fr 1fr;gap:4px}.trow select,.trow input{height:42px;font-size:15px;padding:0 6px}
+.trow .x{height:42px;border:1px solid var(--line);background:var(--bg);color:var(--sub);border-radius:10px;cursor:pointer;font-size:18px}
+.bracket h3{font:700 18px/1.3 "Gowun Batang",serif;margin:16px 0 8px}
+.champ{display:flex;gap:14px;align-items:center;border:2px solid var(--seal);border-radius:14px;padding:14px;margin-top:16px;background:var(--panel)}
+.champ .mini{flex:none}.champ b{display:block;font:700 22px/1.3 "Gowun Batang",serif}.champ span{color:var(--sub);font-size:14px}
+@media(max-width:600px){.tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 40px}.trow .dsel{grid-column:1/-1;grid-row:2}}
 .dsel{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px}
 .kakao{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 16px;border:0;border-radius:10px;background:#FEE500;color:#191919;font:500 15px "Noto Sans KR",sans-serif;cursor:pointer}
 .kakao.wide{width:100%;height:50px;margin-top:16px;font-size:16px}
@@ -153,10 +185,26 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
   <p class="lead">태어난 날의 일간 10가지와 성격유형 16가지가 만나 160장의 카드가 됩니다. 나는 어떤 카드를 뽑을까요?</p>
 </header>
 
-<div class="band wrap invite" id="invite" hidden><div class="panel"><b>친구가 보낸 궁합 신청이에요.</b> 내 생일과 유형을 넣고 「내 카드 뽑기」를 누르면, 내 카드와 함께 친구와의 궁합이 바로 나와요.</div></div>
+<section class="band wrap" id="challenge" hidden>
+  <div class="panel chal">
+    <p class="kick">카드 배틀 도전장</p>
+    <h2 id="chT">친구님이 도전장을 보냈어요</h2>
+    <div class="vsrow"><div class="cslot" id="chOpp"></div><span class="vs">VS</span><div class="cslot back" id="chMe"><span>?</span><small>내 카드 (아직 안 뽑음)</small></div></div>
+    <label class="l" for="cN">닉네임 <span style="font-weight:400;color:var(--sub)">(선택)</span></label>
+    <input class="txt" id="cN" maxlength="10" placeholder="친구에게 보일 이름" style="margin-bottom:14px">
+    <span class="l">태어난 날 (양력)</span>
+    <div class="dsel"><select id="cdY" aria-label="태어난 해"></select><select id="cdM" aria-label="태어난 달"></select><select id="cdD" aria-label="태어난 날"></select></div>
+    <label class="l" for="cT" style="margin-top:14px">성격유형</label>
+    <select id="cT"></select>
+    <p class="err" id="cErr" role="alert"></p>
+    <button class="btn" type="button" id="cGo">내 카드 뽑고 대결하기</button>
+  </div>
+</section>
 
 <section class="band wrap main">
   <form class="panel" id="f" novalidate>
+    <label class="l" for="nick">닉네임 <span style="font-weight:400;color:var(--sub)">(선택)</span></label>
+    <input class="txt" id="nick" maxlength="10" placeholder="친구들이 부르는 이름" style="margin-bottom:14px">
     <span class="l">태어난 날 (양력)</span>
     <div class="dsel"><select id="dY" aria-label="태어난 해"></select><select id="dM" aria-label="태어난 달"></select><select id="dD" aria-label="태어난 날"></select></div>
     <label class="check"><input type="checkbox" id="late"> 밤 11시 이후에 태어났어요</label>
@@ -184,7 +232,7 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
       </div>
     </article>
     <div class="actions">
-      <button class="kakao" type="button" id="shareMe"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>카카오톡 공유</button>
+      <button class="kakao" type="button" id="shareMe"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>카톡으로 도전장</button>
       <button class="ghost" type="button" id="mkImg">저장용 이미지 만들기</button>
     </div>
     <p class="note" id="copyMsg" role="status"></p>
@@ -258,28 +306,55 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
 </section>
 </div>
 
-<section class="band wrap compat">
+<section class="band wrap" id="arena">
+  <h2 class="sec">대결</h2>
+  <div class="compat">
   <form class="panel" id="f2" novalidate>
-    <h2>친구와 궁합 대결</h2>
-    <p class="note" style="margin:0 0 14px">친구의 생일과 유형을 넣으면 두 캐릭터의 관계를 알려 드려요.</p>
-    <span class="l">친구가 태어난 날 (양력)</span>
-    <div class="dsel"><select id="d2Y" aria-label="친구가 태어난 해"></select><select id="d2M" aria-label="친구가 태어난 달"></select><select id="d2D" aria-label="친구가 태어난 날"></select></div>
-    <label class="l" for="t2" style="margin-top:14px">친구의 성격유형</label>
+    <h2>상대 카드</h2>
+    <p class="note" style="margin:0 0 14px">상대의 생일과 유형을 넣으면 카드 배틀, 케미, 2027 운빨, 오늘의 운빨까지 네 가지로 겨뤄요.</p>
+    <label class="l" for="n2">상대 닉네임 <span style="font-weight:400;color:var(--sub)">(선택)</span></label>
+    <input class="txt" id="n2" maxlength="10" placeholder="친구" style="margin-bottom:14px">
+    <span class="l">상대가 태어난 날 (양력)</span>
+    <div class="dsel"><select id="d2Y" aria-label="상대가 태어난 해"></select><select id="d2M" aria-label="상대가 태어난 달"></select><select id="d2D" aria-label="상대가 태어난 날"></select></div>
+    <label class="l" for="t2" style="margin-top:14px">상대의 성격유형</label>
     <select id="t2"></select>
     <p class="err" id="err2" role="alert"></p>
-    <button class="btn" type="submit">궁합 대결 시작</button>
+    <button class="btn" type="submit">대결 시작</button>
   </form>
   <div class="panel" id="cRes">
-    <div class="pair"><div class="mini" id="m1"></div><span aria-hidden="true">↔</span><div class="mini" id="m2"></div></div>
-    <div class="score" id="sc"></div>
-    <p class="note" style="text-align:center;margin:2px 0 0">재미로 보는 점수</p>
-    <div class="rel" id="rel"></div>
-    <p class="relsub" id="relSub"></p>
-    <p id="relTxt" style="margin:0 0 10px"></p>
-    <p id="typeTxt" style="margin:0;color:var(--sub)"></p>
-    <button class="kakao wide" type="button" id="shareC"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>친구에게 카카오톡으로 궁합 공유</button>
+    <div class="pair"><div><div class="mini" id="m1"></div><small id="m1n">나</small></div><span class="vs">VS</span><div><div class="mini" id="m2"></div><small id="m2n">친구</small></div></div>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" data-tab="battle" aria-selected="true">카드 배틀</button>
+      <button type="button" role="tab" data-tab="chem" aria-selected="false">케미 대결</button>
+      <button type="button" role="tab" data-tab="year" aria-selected="false">2027 운빨</button>
+      <button type="button" role="tab" data-tab="today" aria-selected="false">오늘의 운빨</button>
+    </div>
+    <div class="tabp" id="tab-battle"></div>
+    <div class="tabp" id="tab-chem" hidden>
+      <div class="score" id="sc"></div>
+      <p class="note" style="text-align:center;margin:2px 0 0">재미로 보는 케미 점수</p>
+      <div class="rel" id="rel"></div>
+      <p class="relsub" id="relSub"></p>
+      <p id="relTxt" style="margin:0 0 10px"></p>
+      <p id="typeTxt" style="margin:0;color:var(--sub)"></p>
+    </div>
+    <div class="tabp" id="tab-year" hidden></div>
+    <div class="tabp" id="tab-today" hidden></div>
+    <button class="kakao wide" type="button" id="shareC"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>결과 보내기 (리턴매치 신청)</button>
     <p class="note" id="copyMsg2" role="status"></p>
   </div>
+  </div>
+</section>
+
+<section class="band wrap" id="tour">
+  <h2 class="sec">단톡방 토너먼트</h2>
+  <p class="note" style="margin:-6px 0 14px">3~8명의 생일과 유형을 넣으면 카드 배틀 대진표로 우승 카드를 가려요. 방장 한 명이 입력하면 돼요.</p>
+  <div class="panel">
+    <div id="tRows"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="ghost" type="button" id="tAdd">+ 참가자 추가</button><button class="btn" type="button" id="tGo" style="width:auto;padding:0 22px;margin:0">토너먼트 시작</button></div>
+    <p class="err" id="tErr" role="alert"></p>
+  </div>
+  <div class="bracket" id="tRes"></div>
 </section>
 
 
@@ -437,6 +512,7 @@ function render(str,t,anim){cur=build(str,t);const c=cur,el=EL[c.s.e];
 let lastC=null;
 function compat(){if(!cur)return;const d2=getD('d2');if(!valid(d2)){$('err2').textContent='친구의 생일을 1900~2026년 사이로 입력하세요.';return}$('err2').textContent='';
   const b=build(d2,$('t2').value),a=cur,ea=a.s.e,eb=b.s.e;
+  const an=myNick(),bn=($('n2').value.trim()||'친구');$('m1n').textContent=`${an} · ${a.s.k}`;$('m2n').textContent=`${bn} · ${b.s.k}`;
   for(const [id,x] of [['m1',a],['m2',b]]){const m=$(id);m.style.backgroundImage=`url(${IMG[x.p.s]})`;m.style.setProperty('--mc',EL[x.s.e].c);m.textContent='';m.title=x.s.k}
   let rel,sub,txt,base;const hap=Math.abs(a.p.s-b.p.s)===5;
   if(hap){const pair=[a.s,b.s].sort((x,y)=>ST.indexOf(x)-ST.indexOf(y));rel='운명의 짝';sub=`${pair[0].k[0]}${pair[1].k[0]}합(合)`;txt='서로 다른 기운이 만나 하나로 묶이는 특별한 조합이에요. 처음 만났는데 오래 안 것 같은 느낌을 주는 사이입니다.';base=92}
@@ -449,11 +525,65 @@ function compat(){if(!cur)return;const d2=getD('d2');if(!valid(d2)){$('err2').te
   const tt=same===4?'성격유형까지 같은 쌍둥이 같은 사이예요.':same===0?'성격유형은 정반대라서, 서로의 빈 곳을 채워 줄 수 있어요.':`성격유형은 네 글자 중 ${same}개가 같아요.`;
   $('sc').textContent=Math.min(99,base+(same===0||same===4?4:same));
   $('rel').textContent=rel;$('relSub').textContent=`${sub} · ${a.s.k} × ${b.s.k}`;$('relTxt').textContent=txt;
-  $('typeTxt').textContent=`「${b.name}」 · ${tt}`;lastC={a,b,rel,sc:$('sc').textContent};$('copyMsg2').textContent=''}
+  $('typeTxt').textContent=`「${b.name}」 · ${tt}`;lastC={a,b,an,bn,rel,sc:$('sc').textContent};arena(lastC);$('copyMsg2').textContent=''}
 
+function jo(w,a,b){const c=w.charCodeAt(w.length-1);return w+((c>=44032&&c<=55203&&(c-44032)%28)?a:b)}
+function myNick(){return $('nick').value.trim()||'나'}
+const STATN=['성장력','열정','안정감','결단력','지혜'],LBON={N:0,P:0,E:1,F:1,S:2,J:2,T:3,I:4};
+function statsOf(x){const sj=saju(x.dd),st=[0,0,0,0,0];for(const v of [sj.y,sj.m,sj.d]){st[Math.floor(v[0]/2)]+=20;st[EB[v[1]]]+=20}st[x.s.e]+=10;for(const l of x.t)st[LBON[l]]+=8;return st}
+function fight(a,b){const sa=statsOf(a),sb=statsOf(b),ord=[0,1,2,3,4].sort((i,j)=>(sa[j]+sb[j])-(sa[i]+sb[i])||i-j).slice(0,3);let wa=0,wb=0;
+  const rounds=ord.map(i=>{const r=Math.sign(sa[i]-sb[i]);if(r>0)wa++;else if(r<0)wb++;return{i,va:sa[i],vb:sb[i],r}});
+  const ta=sa.reduce((p,q)=>p+q,0),tb=sb.reduce((p,q)=>p+q,0);return{sa,sb,rounds,wa,wb,ta,tb,res:wa!==wb?Math.sign(wa-wb):Math.sign(ta-tb)}}
+function yearScore(x){let L=0,M=0;MONTHS.forEach((m,k)=>{const g=TG[tenGod(x.p.s,(8+k)%10)];L+=g[2];M+=g[3]});return{L,M,T:L+M}}
+function todayStr(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function todayScore(x){const tp=pillar(todayStr()),g=TG[tenGod(x.p.s,tp.s)];return{g,tp,T:g[2]+g[3]}}
+const RESW=r=>r>0?'승리!':r<0?'패배':'무승부';
+let curTab='battle';
+function arena(C){const {a,b,an,bn}=C,f=fight(a,b);C.f=f;
+  const strong=x=>{const st=statsOf(x),i=st.indexOf(Math.max(...st));return `${STATN[i]}(${ELN[i]}) ${st[i]}`};
+  const loser=f.res>0?[b,bn]:f.res<0?[a,an]:null;
+  $('tab-battle').innerHTML=`<div class="res"><b>${f.wa} : ${f.wb} ${RESW(f.res)}</b><span>${an}의 「${a.name}」 vs ${bn}의 「${b.name}」</span></div>`+
+   f.rounds.map((r,k)=>`<div class="rnd"><span>R${k+1} ${STATN[r.i]} <em>(${ELN[r.i]})</em></span><span><span class="${r.r>0?'w':''}">${r.va}</span> : <span class="${r.r<0?'w':''}">${r.vb}</span></span></div>`).join('')+
+   (f.wa===f.wb?`<p class="note" style="margin:4px 0 0">라운드 승수가 같아서 다섯 능력치 총합(${f.ta} : ${f.tb})으로 판정했어요.</p>`:'')+
+   `<div class="cmp">${STATN.map((n,i)=>`<span>${n}</span><div class="two"><i style="width:${Math.round(f.sa[i]/1.4)}%;background:var(--seal)"></i><i style="width:${Math.round(f.sb[i]/1.4)}%;background:var(--sub)"></i></div>`).join('')}</div>
+   <div class="legend"><i style="background:var(--seal)"></i>${an}<i style="background:var(--sub)"></i>${bn}</div>`+
+   (loser?`<div class="consol">${loser[1]}의 「${loser[0].name}」 최고 능력치는 ${strong(loser[0])}. 이 능력이 나오는 라운드라면 판이 뒤집혀요.</div>`:`<div class="consol">완전히 비긴 승부예요. 케미 대결에서 둘의 관계를 확인해 보세요.</div>`)+
+   `<p class="note" style="margin:8px 0 0">능력치는 생일의 오행(여섯 글자)과 성격유형으로 정해지는 재미용 수치예요. 같은 두 사람은 언제 붙어도 결과가 같아요.</p>`;
+  const ya=yearScore(a),yb=yearScore(b);C.y=[ya,yb];const yr=Math.sign(ya.T-yb.T);
+  $('tab-year').innerHTML=`<div class="res"><b>${yr>0?an+' 승리!':yr<0?bn+' 승리!':'무승부'}</b><span>2027 정미년 열두 달 운세 합산</span></div>
+   <table class="vtab"><tr><th></th><th>${an}</th><th>${bn}</th></tr><tr><td>연애운</td><td>${ya.L}</td><td>${yb.L}</td></tr><tr><td>재물운</td><td>${ya.M}</td><td>${yb.M}</td></tr><tr><td>총점</td><td><b>${ya.T}</b></td><td><b>${yb.T}</b></td></tr><tr><td>올해 테마</td><td>${a.s.yt}</td><td>${b.s.yt}</td></tr></table>
+   <div class="consol">연애운은 ${ya.L>=yb.L?an:bn}, 재물운은 ${ya.M>=yb.M?an:bn} 쪽이 앞서요. 월별 흐름은 각자 카드의 「자세히 보기」에서 확인할 수 있어요.</div>`;
+  const da=todayScore(a),db=todayScore(b);C.d=[da,db];const dr=Math.sign(da.T-db.T);
+  $('tab-today').innerHTML=`<div class="res"><b>${dr>0?an+' 승리!':dr<0?bn+' 승리!':'무승부'}</b><span>오늘(${todayStr().replace(/-/g,'.')})은 ${SH[da.tp.s]}${BR[da.tp.b]}일 · 매일 자정에 결과가 바뀌어요</span></div>
+   <table class="vtab"><tr><th></th><th>${an}</th><th>${bn}</th></tr><tr><td>오늘의 기운</td><td>${da.g[0].replace(/달$/,'날')}</td><td>${db.g[0].replace(/달$/,'날')}</td></tr><tr><td>연애</td><td>${dots(da.g[2])}</td><td>${dots(db.g[2])}</td></tr><tr><td>재물</td><td>${dots(da.g[3])}</td><td>${dots(db.g[3])}</td></tr></table>
+   <div class="consol">${an}: ${da.g[1]}<br>${bn}: ${db.g[1]}</div>`;
+  showTab(curTab)}
+function showTab(t){curTab=t;for(const b of document.querySelectorAll('.tabs button'))b.setAttribute('aria-selected',String(b.dataset.tab===t));for(const id of ['battle','chem','year','today'])$('tab-'+id).hidden=id!==t}
+function slotHTML(x,nm){return `<img src="${IMG[x.p.s]}" alt=""><b>${x.name}</b><small>${nm} · ${x.s.k} × ${x.t}</small>`}
+let TN=0;
+function addRow(name,date,t){const i=TN++;const d=document.createElement('div');d.className='trow';d.id='tr'+i;
+  d.innerHTML=`<input class="txt" id="tn${i}" maxlength="10" value="${name}" aria-label="참가자 이름"><div class="dsel"><select id="t${i}Y" aria-label="태어난 해"></select><select id="t${i}M" aria-label="태어난 달"></select><select id="t${i}D" aria-label="태어난 날"></select></div><select id="tt${i}" aria-label="성격유형">${TYK.map(k=>`<option${k===t?' selected':''}>${k}</option>`).join('')}</select><button type="button" class="x" aria-label="참가자 빼기" data-rm="${i}">×</button>`;
+  $('tRows').appendChild(d);fillDate('t'+i,date)}
+function runTour(){const rows=[...document.querySelectorAll('.trow')];$('tErr').textContent='';
+  if(rows.length<3||rows.length>8){$('tErr').textContent='참가자는 3명에서 8명 사이로 넣어 주세요.';return}
+  const P=rows.map((r,k)=>{const i=r.id.slice(2);const nm=$('tn'+i).value.trim()||`참가자${k+1}`;return{nm,x:build(getD('t'+i),$('tt'+i).value)}});
+  let size=1;while(size<P.length)size*=2;const byes=size-P.length;let cur=[],k0=0;for(let i=0;i<byes;i++)cur.push(P[k0++],null);while(k0<P.length)cur.push(P[k0++]);
+  const rname=n=>n===2?'결승':n===4?'4강':'8강';let html='';
+  while(cur.length>1){html+=`<h3>${rname(cur.length)}</h3>`;const next=[];
+    for(let k=0;k<cur.length;k+=2){const A=cur[k],B=cur[k+1];
+      if(!B){next.push(A);html+=`<div class="rnd"><span>${A.nm} 「${A.x.name}」</span><span><em>부전승</em></span></div>`;continue}
+      const f=fight(A.x,B.x),W=f.res>=0?A:B;next.push(W);
+      html+=`<div class="rnd"><span>${A.nm} vs ${B.nm}</span><span><span class="${W===A?'w':''}">${f.wa}</span> : <span class="${W===B?'w':''}">${f.wb}</span>${f.wa===f.wb?' <em>(총합 판정)</em>':''} → <b>${W.nm}</b></span></div>`}
+    cur=next}
+  const C=cur[0];window.__champ=C;
+  $('tRes').innerHTML=html+`<div class="champ"><div class="mini" style="background-image:url(${IMG[C.x.p.s]});--mc:${EL[C.x.s.e].c}"></div><div><span>우승</span><b>${C.nm}의 「${C.x.name}」</b><span>${C.x.s.k} × ${C.x.t}</span></div></div>
+   <button class="kakao wide" type="button" id="tShare"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>단톡방에 결과 보내기</button><p class="note" id="tMsg" role="status"></p>`;
+  $('tShare').addEventListener('click',()=>{const c=cur0();share({code:code({d:c.dd,t:c.t}),n:myNick(),title:`단톡방 토너먼트 우승: ${C.nm}`,desc:`운빨카드 토너먼트 우승은 ${C.nm}의 「${C.x.name}」! 너도 카드 뽑고 도전해 봐.`,img:IMG[C.x.p.s].slice(4,-5),btn:'나도 도전하기'},'tMsg')});
+  $('tRes').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+function cur0(){return cur}
 function loadKakao(){if(!KAKAO_KEY||window.Kakao)return;const sc=document.createElement('script');sc.src='https://t1.kakaocdn.net/kakao_js_sdk/2.8.2/kakao.min.js';sc.integrity='sha384-zt/G7/KfaRQ9dT/QIkS0ujMtzouJqzuSJcXVQu50x0rl/+mD1dc70AeOejVbMD9E';sc.crossOrigin='anonymous';sc.onload=()=>{try{Kakao.init(KAKAO_KEY)}catch(e){}};document.head.appendChild(sc)}
 function code(x){return x.d.replace(/-/g,'')+x.t}
-async function share(o,msg){const url=SITE+'?f='+o.code;
+async function share(o,msg){const url=SITE+'?f='+o.code+(o.n?'&n='+encodeURIComponent(o.n):'');
   if(window.Kakao&&Kakao.isInitialized&&Kakao.isInitialized()){try{Kakao.Share.sendDefault({objectType:'feed',content:{title:o.title,description:o.desc,imageUrl:SITE+'img/share/'+o.img+'.jpg',link:{mobileWebUrl:url,webUrl:url}},buttons:[{title:o.btn,link:{mobileWebUrl:url,webUrl:url}}]});return}catch(e){}}
   if(navigator.share){try{await navigator.share({title:o.title,text:o.desc,url});return}catch(e){if(e&&e.name==='AbortError')return}}
   try{await navigator.clipboard.writeText(`${o.desc}\n${url}`);$(msg).textContent='링크를 복사했어요. 카카오톡 대화방에 붙여 넣어 보내 주세요.'}catch(e){$(msg).textContent=`${o.desc} ${url}`}}
@@ -484,18 +614,37 @@ async function makeImg(){const c=cur;if(!c)return;try{await document.fonts.load(
 
 $('t2').innerHTML=TYK.map(k=>`<option value="${k}"${k==='ENFP'?' selected':''}>${k} · ${TY[k][0]}</option>`).join('');
 fillDate('d','1995-03-14');fillDate('d2','1996-08-02');
-try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);type=s.t.split('');$('sample').textContent='지난번에 찾은 내 카드'}}catch(e){}
-{const f=new URLSearchParams(location.search).get('f');const m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){setD('d2',`${m[1]}-${m[2]}-${m[3]}`);$('t2').value=m[4];$('invite').hidden=false}}
+try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);if(s.n)$('nick').value=s.n;type=s.t.split('');$('sample').textContent='지난번에 찾은 내 카드'}}catch(e){}
+$('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map(k=>`<option value="${k}">${k} · ${TY[k][0]}</option>`).join('');fillDate('cd','1996-08-02');
+{const q=new URLSearchParams(location.search),f=q.get('f'),m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);
+ if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){const od=`${m[1]}-${m[2]}-${m[3]}`,on=(q.get('n')||'친구').slice(0,10),ox=build(od,m[4]);
+  setD('d2',od);$('t2').value=m[4];$('n2').value=on;$('challenge').hidden=false;$('chT').textContent=`${on}님이 카드 배틀 도전장을 보냈어요`;
+  const o=$('chOpp');o.style.setProperty('--el',EL[ox.s.e].c);o.innerHTML=slotHTML(ox,on)}}
 loadKakao();
 axesUI();render(getD('d'),type.join(''),false);
+addRow(myNick(),getD('d'),type.join(''));addRow('친구1','1996-08-02','ENFP');addRow('친구2','1993-05-17','INFJ');addRow('친구3','1998-12-01','ESTP');
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(!b)return;const i=+(b.dataset.i??b.dataset.q);type[i]=b.dataset.l;axesUI();if(b.dataset.q!==undefined)$('quiz').open=true});
 $('late').addEventListener('change',e=>{$('lateNote').hidden=!e.target.checked});
 $('f').addEventListener('submit',e=>{e.preventDefault();const d=getD('d');if(!valid(d)){$('err').textContent='태어난 날을 1900~2026년 사이로 입력하세요.';return}
-  const t=type.join('');render(d,t,true);$('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;$('saveBox').hidden=true;try{localStorage.setItem('giun',JSON.stringify({d,t}))}catch(e){}
+  const t=type.join('');render(d,t,true);$('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;$('saveBox').hidden=true;try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim()}))}catch(e){}
   if(matchMedia('(max-width:760px)').matches)$('card').scrollIntoView({behavior:'smooth',block:'center'})});
 $('f2').addEventListener('submit',e=>{e.preventDefault();compat()});
-$('shareMe').addEventListener('click',()=>{const c=cur;share({code:code({d:c.dd,t:c.t}),title:`나는 「${c.name}」`,desc:`나는 ${c.s.k} × ${c.t}, 160명 중 No.${String(c.no).padStart(3,'0')} 「${c.name}」이래. 너는 어떤 캐릭터야? 우리 궁합도 봐 줘!`,img:IMG[c.p.s].slice(4,-5),btn:'내 카드 뽑기'},'copyMsg')});
-$('shareC').addEventListener('click',()=>{if(!lastC)return;const {a,rel,sc}=lastC;share({code:code({d:a.dd,t:a.t}),title:`우리 궁합은 ${sc}점, 「${rel}」`,desc:`운빨카드에서 우리 궁합을 봤어! ${sc}점 「${rel}」이래. 너도 네 생일 넣고 확인해 봐.`,img:IMG[a.p.s].slice(4,-5),btn:'궁합 확인하기'},'copyMsg2')});
+$('shareMe').addEventListener('click',()=>{const c=cur,n=myNick();share({code:code({d:c.dd,t:c.t}),n,title:`${n==='나'?'친구':n}님이 카드 배틀 도전장을 보냈어요`,desc:`「${c.name}」(${c.s.k} × ${c.t}) vs ? · 내 카드를 뽑아서 맞서 보세요!`,img:IMG[c.p.s].slice(4,-5),btn:'도전 받기'},'copyMsg')});
+$('shareC').addEventListener('click',()=>{if(!lastC)return;const C=lastC,{a,b,an,bn}=C,n=myNick();let title,desc;
+  if(curTab==='battle'){title=`카드 배틀 ${C.f.wa}:${C.f.wb} ${RESW(C.f.res)}`;desc=`${an}의 「${a.name}」 vs ${bn}의 「${b.name}」 카드 배틀 결과는 ${C.f.wa}:${C.f.wb}! 리턴매치 받아 줄래?`}
+  else if(curTab==='chem'){title=`우리 케미는 ${C.sc}점, 「${C.rel}」`;desc=`운빨카드에서 우리 케미를 봤어! ${C.sc}점 「${C.rel}」이래. 너도 네 카드 뽑고 확인해 봐.`}
+  else if(curTab==='year'){title=`2027 운빨 대결 ${C.y[0].T} : ${C.y[1].T}`;desc=`2027 정미년 운빨 대결! ${an} ${C.y[0].T}점 vs ${bn} ${C.y[1].T}점. 네 올해 운빨도 확인해 봐.`}
+  else{title=`오늘의 운빨 대결 ${C.d[0].T} : ${C.d[1].T}`;desc=`오늘의 운빨 대결! ${jo(an,'은','는')} 「${C.d[0].g[0].replace(/달$/,'날')}」, ${jo(bn,'은','는')} 「${C.d[1].g[0].replace(/달$/,'날')}」. 내일은 또 달라져!`}
+  share({code:code({d:a.dd,t:a.t}),n,title,desc,img:IMG[a.p.s].slice(4,-5),btn:'리턴매치 하기'},'copyMsg2')});
+document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button[data-tab]');if(b){showTab(b.dataset.tab);$('copyMsg2').textContent=''}});
+$('tAdd').addEventListener('click',()=>{if(document.querySelectorAll('.trow').length>=8){$('tErr').textContent='최대 8명까지 넣을 수 있어요.';return}{const n=TN;addRow(`친구${n}`,`${1988+(n*7)%17}-${String((n*5)%12+1).padStart(2,'0')}-${String((n*11)%28+1).padStart(2,'0')}`,TYK[(n*5+3)%16])}});
+$('tRows').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(b){$('tr'+b.dataset.rm).remove();$('tErr').textContent=''}});
+$('tGo').addEventListener('click',runTour);
+$('cGo').addEventListener('click',()=>{const t=$('cT').value;if(!t){$('cErr').textContent='성격유형을 골라 주세요. 모르면 아래 「유형을 모르겠어요」 버튼으로 찾을 수 있어요.';return}$('cErr').textContent='';
+  const d=getD('cd');if($('cN').value.trim())$('nick').value=$('cN').value.trim();setD('d',d);type=t.split('');axesUI();render(d,t,true);
+  $('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim()}))}catch(e){}
+  const me=$('chMe');me.className='cslot flip';me.style.setProperty('--el',EL[cur.s.e].c);me.innerHTML=slotHTML(cur,myNick());
+  compat();showTab('battle');setTimeout(()=>$('arena').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}),900)});
 $('moreBtn').addEventListener('click',()=>{const d=$('detail'),open=d.hidden;d.hidden=!open;$('moreBtn').textContent=open?'접기 ▴':'자세히 보기 ▾';$('moreBtn').setAttribute('aria-expanded',String(open));if(open)d.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
 $('mkImg').addEventListener('click',makeImg);
 $('unlock').addEventListener('click',()=>{$('lw').classList.remove('locked')});
