@@ -498,6 +498,22 @@ details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-
 .expert .xsec{padding:4px 14px 18px;border-top:1px solid var(--line)}.expert .xsec>h2.sec{font-size:19px;margin-top:16px}
 .pm .ph b{font-size:16px;line-height:1.4}.pm .ph small{display:block;margin-top:3px;line-height:1.5}
 .story .sh b{background:none}
+
+/* today one-screen */
+.tdhead{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 6px}.tdhead b{font:700 16px "Gowun Batang",serif}.tdhead span{font-size:12px;color:var(--seal)}
+.wk7{grid-auto-columns:minmax(44px,1fr)!important;gap:5px!important;padding:2px 0 8px!important;overflow:visible!important}
+.wkc{gap:2px!important;font-size:11px!important;text-align:center}.wkc small{font-size:11px;color:var(--sub)}.wkc.on small{color:var(--seal);font-weight:700}
+.wkm{display:grid;justify-items:center;gap:1px;padding:5px 2px 4px;border-radius:10px;background:var(--ec);box-shadow:inset 0 0 0 2px #e8c46a;color:#fff}.wkm img{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#f7f3ea;border:1.5px solid #f3dc9a}.wkm b{font:700 12px/1 "Gowun Batang",serif;letter-spacing:.04em}
+.wkc.on .wkm{box-shadow:inset 0 0 0 2px #ffe39a,0 0 0 2.5px var(--seal);transform:translateY(-2px)}.wkc.lk .wkm{box-shadow:inset 0 0 0 2px #ffe39a,0 0 10px rgba(255,205,90,.8)}.wkc.on.lk .wkm{box-shadow:inset 0 0 0 2px #ffe39a,0 0 0 2.5px var(--seal),0 0 10px rgba(255,205,90,.8)}
+.wkc>i{height:3px!important;justify-self:center!important}
+.fflip{width:min(100%,400px)!important;height:clamp(330px,calc(100svh - 310px),470px)}.fin{aspect-ratio:auto!important;height:100%}
+.fc{display:flex!important;flex-direction:column;justify-content:space-between;gap:4px!important;padding:12px 14px!important}
+.fc-duo img{width:clamp(48px,9svh,84px)!important}
+.fc-t{font-size:clamp(19px,3.2svh,24px)!important}
+.fc-st{grid-template-columns:repeat(3,1fr)!important;text-align:center!important;gap:0 4px!important;padding:6px 6px!important}.fc-st span{grid-row:1;font-size:11px}.fc-st b{grid-row:2;font-size:13px!important;letter-spacing:.02em!important;white-space:nowrap}
+.fc-adv{font-size:13px!important}
+@media (max-height:700px){.fc-ft{display:none}.fc-duo figcaption{font-size:10px}}
+.rnd .luck{display:block;font-size:11px;color:#8a6a1f;font-weight:400;text-align:right}
 </style>
 </head>
 <body>
@@ -718,7 +734,7 @@ details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-
     <div class="tabp" id="tab-year" hidden></div>
     <div class="tabp" id="tab-today" hidden></div>
     <div id="cAct" hidden>
-      <div class="cact"><button class="ghost" type="button" id="replay">다시 보기</button><button class="ghost" type="button" id="toPick">다른 대결 고르기</button></div>
+      <div class="cact"><button class="ghost" type="button" id="replay">다시 붙기</button><button class="ghost" type="button" id="toPick">다른 대결 고르기</button></div>
       <button class="kakao wide" type="button" id="shareC"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>결과 보내기 (리턴매치 신청)</button>
       <p class="note" id="copyMsg2" role="status"></p>
       <div class="plact" id="plAct" hidden><p class="kick" id="plActT"></p>
@@ -1248,6 +1264,21 @@ NOJAE:{t:'돈보다 의미가 먼저야',scene:'좋아하는 일이면 계산 �
 STRONG:{t:'한번 정하면 안 꺾여',scene:'옳다고 믿으면 끝까지 밀어붙여. 대부분은 그게 맞는데, 가끔은 상대가 상처받은 걸 한참 뒤에야 알지.',why:A=>`나를 돕는 기운이 ${A.sc}%야. 엔진이 큰 사주라 브레이크보다 액셀이 먼저 밟혀.`,btn:'내 방식을 의심받으면 욱해.',flip:'그 힘으로 길을 내는 사람이 너야. 속도만 조금 맞춰 주면 사람들이 따라와.',me:'나 강해 보이지? 근데 가끔은 그냥 져 주고 싶을 때도 있어.'},
 WEAK:{t:'눈치를 너무 많이 봐',scene:'분위기를 너무 잘 읽어서, 내 의견보다 상대 기분이 먼저 보여. 뭘 정할 때마다 "다들 괜찮을까"부터 생각하지.',why:A=>`나를 돕는 기운이 ${A.sc}%라 주변 기운의 영향을 크게 받는 사주야. 섬세한 대신 쉽게 지쳐.`,btn:'싫은데 싫다고 말을 못 해.',flip:'그 섬세함이 사람을 살려. 대신 네 편이 되어 줄 사람을 곁에 두면 훨씬 커져.',me:'나도 내 마음대로 해 보고 싶어. 근데 누가 실망할까 봐.'},
 MID:{t:'다 잘하는데 하나를 못 골라',scene:'이것도 괜찮고 저것도 괜찮아서 결정을 미루게 돼. 어디서든 적응은 잘하는데, "그래서 넌 뭘 원해?"라는 질문 앞에선 멈칫하지.',why:A=>`나를 돕는 기운이 ${A.sc}%로 균형 잡힌 사주야. 극단이 없는 대신, 확 끌어당기는 한 방이 아직 안 정해졌어.`,btn:'남들이 다 하는 선택에 괜히 마음이 흔들려.',flip:'균형 잡힌 사람이 방향을 정하면 제일 멀리 가. 너한테 필요한 건 딱 하나의 "이거다"야.',me:'나도 확 빠져드는 뭔가가 있었으면 좋겠어.'}};
+const PAT2={
+JAEDA:{scene:'약속은 겹치고, 할 일 목록은 줄지 않고, 그 와중에 누가 부탁하면 또 "응, 내가 할게". 주말이 와도 쉬는 게 아니라 밀린 걸 처리하는 날이 되지.',me:'하나만 내려놔도 되는 거 아는데, 뭘 내려놔야 할지 모르겠어.'},
+GWAN:{scene:'단톡방에 메시지 하나 보내는데도 세 번은 고쳐 써. 혹시 오해할까 봐, 괜히 나만 튈까 봐. 그렇게 조심하다 보면 하루가 끝나 있지.',me:'누가 나한테 "너 잘하고 있어"라고 한마디만 해 주면 좋겠어.'},
+SIK:{scene:'모임이든 회의든 네가 입을 열면 분위기가 바뀌어. 문제는 그다음이야. 꽂힌 게 생기면 남의 속도는 안 보이고, 결국 "너무 앞서간다"는 말을 듣지.',me:'나는 그냥 더 좋게 만들고 싶었던 건데.'},
+IN:{scene:'메모장엔 하고 싶은 게 가득한데, 실제로 시작한 건 몇 개 없어. "조금만 더 알아보고"가 습관이 됐지.',me:'완벽하게 준비되면 시작하고 싶었어. 근데 그런 날은 안 오더라.'},
+BI:{scene:'누가 "괜찮아?" 하고 물으면 반사적으로 "응, 괜찮아"가 나와. 사실 안 괜찮은데. 그렇게 버티다 혼자 방전되지.',me:'혼자서도 잘하는 사람인 척, 이제 좀 피곤해.'},
+NOSIK:{scene:'단톡방에 할 말을 썼다 지웠다 하다가 결국 이모티콘 하나 보내고 끝내. 다들 네가 무덤덤한 줄 알지만, 사실 제일 많이 느끼는 건 너야.',me:'말하면 관계가 어색해질까 봐, 그냥 삼키는 게 편했어.'},
+NOGWAN:{scene:'출근 시간, 보고 양식, 정해진 순서. 그런 게 쌓일수록 숨이 차. 대신 네가 직접 정한 일엔 밤을 새워도 안 지쳐.',me:'나한테 맡겨 주면 잘할 수 있는데, 자꾸 틀에 넣으려고 하잖아.'},
+NOIN:{scene:'아무것도 안 하는 날이면 오히려 불안해서 휴대폰을 붙잡고 할 일을 찾아. 몸은 쉬는데 머리는 계속 돌아가지.',me:'쉬는 것도 실력이라는데, 나는 그게 제일 어려워.'},
+NOJAE:{scene:'좋아하는 사람, 좋아하는 일엔 지갑이 쉽게 열려. 그러다 월말이 되면 "다 어디 갔지?" 하고 통장을 들여다보지.',me:'돈 생각만 하면서 살고 싶진 않아. 근데 불안한 건 싫어.'},
+STRONG:{scene:'네가 운전대를 잡으면 일이 빨리 끝나. 대신 옆자리 사람은 손잡이를 꽉 잡고 있지. 너는 그걸 나중에야 알아.',me:'나라고 다 확신이 있는 건 아니야. 그냥 누군가는 정해야 하니까.'},
+WEAK:{scene:'메뉴 고를 때 "아무거나"라고 하지만 사실 먹고 싶은 게 있어. 말하면 분위기 깰까 봐 넘기는 거지.',me:'나도 가끔은 내가 먼저 고르고 싶어.'},
+MID:{scene:'남들은 꿈이 뚜렷해 보이는데 너는 하고 싶은 게 너무 많거나, 반대로 딱히 없는 것 같아. 그래서 남과 비교하는 밤이 생기지.',me:'나는 대체 뭘 좋아하는 사람일까.'}};
+const YREP2=['나무는 하루아침에 크지 않아. 오늘 하나만 새로 시작해 봐. 작게, 근데 매일.','네 안에 불씨는 이미 있어. 좋아하는 사람한테 먼저 연락하는 것, 그게 불을 붙이는 거야.','흔들릴 땐 발밑부터 단단히 해. 잠, 밥, 정리. 기본이 서면 마음도 선다.','버려야 빛나는 게 있어. 이번 주에 딱 하나만 정리해 봐. 물건이든 약속이든.','흐르는 물은 썩지 않아. 걷고, 마시고, 자. 그럼 막힌 게 저절로 풀려.'];
+const OPEN2=['네 여덟 글자, 내가 다 읽고 왔어.','네 사주를 펼쳐 보고 한참 웃다가, 한참 생각했어.','솔직하게 말할게. 듣기 좋은 말만 하진 않을 거야.'];
 function pickPat(A){const g=A.gc;if(g[2]>=3&&A.tier<=1)return'JAEDA';if(g[3]>=3&&A.tier<=1)return'GWAN';if(g[1]>=3)return'SIK';if(g[4]>=3)return'IN';if(g[0]>=3)return'BI';if(g[1]===0)return'NOSIK';if(g[3]===0)return'NOGWAN';if(g[4]===0)return'NOIN';if(g[2]===0)return'NOJAE';return A.tier>=3?'STRONG':A.tier<=1?'WEAK':'MID'}
 const YREP=['그럼 나랑 같이 자라자. 새로 배우는 거 하나, 아침 햇빛 한 번. 그거면 네 안에서 다시 싹이 터.','그럼 내가 좀 데워 줄게. 사람 만나고, 땀 흘리고, 좋아하는 걸 좋아한다고 말해. 네 안의 불이 켜지면 다 풀려.','그럼 나한테 기대. 같은 시간에 먹고 자는 것, 작은 약속 하나 지키는 것. 땅이 단단해지면 흔들릴 일이 줄어.','그럼 내가 정리해 줄게. 안 쓰는 물건, 안 맞는 약속, 붙잡고 있던 것 하나. 덜어 내면 네가 더 빛나.','그럼 잠깐 쉬어. 물 마시고, 푹 자고, 혼자 생각할 시간을 가져. 고여 있던 게 흐르기 시작하면 답이 보여.'];
 const ILJIV={비견:'친구 같은 사람이 편하고, 대등한 관계에서 사랑이 오래 가.',겁재:'자극을 주는 사람한테 끌리는데, 주도권 싸움이 자주 붙어.',식신:'같이 맛있는 거 먹고 노는 게 사랑인 타입. 편안한 사람이 최고야.',상관:'말이 통하는 사람한테 빠지는데, 상대를 고치려 드는 순간 삐걱대.',편재:'연애가 활동적이고 인연이 많은 편이야.',정재:'한 사람한테 성실한 타입. 안정된 관계를 만드는 힘이 있어.',편관:'카리스마 있는 사람한테 끌려. 끌림과 긴장이 같이 와.',정관:'반듯하고 책임감 있는 사람과 인연이 깊어.',편인:'정신적으로 통해야 마음이 열려. 혼자만의 시간을 존중해 주는 사람이 맞아.',정인:'나를 아껴 주고 챙겨 주는 사람과 인연이 있어.'};
@@ -1259,13 +1290,13 @@ function storyRender(c){const A=c.A,sj=c.sj,si=c.p.s,ce=Math.floor(si/2),n=myNic
   const ti=(((sj.m[1]-2+12)%12)+1)%12,dsince=Math.max(0,Math.floor((sj.t-sj.prev)/864e5)),dnext=Math.floor((sj.next-sj.t)/864e5),TN=['소한','입춘','경칩','청명','입하','망종','소서','입추','백로','한로','입동','대설'];
   const cnt=A.cnt,zero=[0,1,2,3,4].filter(i=>cnt[i]===0),mx=Math.max(...cnt),mxs=[0,1,2,3,4].filter(i=>cnt[i]===mx);
   const y27s=tenGod(si,3),y27b=tenGod(si,5),MO=y27months(si),best=MO.slice().sort((a,b)=>b.sc-a.sc)[0],worst=MO.slice().sort((a,b)=>a.sc-b.sc)[0];
-  const P=PAT[pickPat(A)],wc=worryCats(c.worry,c.wchips),DW=daewoon(c),cur=DW.find(x=>x.cur),up=DW.find(x=>good2(A,x)>=2&&x.age>(cur?cur.age:0));
+  const pk=pickPat(A),vv=h01(c.dd+'v')<.5,P=vv?{...PAT[pk],...PAT2[pk]}:PAT[pk],wc=worryCats(c.worry,c.wchips),DW=daewoon(c),cur=DW.find(x=>x.cur),up=DW.find(x=>good2(A,x)>=2&&x.age>(cur?cur.age:0));
   // 제목
   const twist=zero.length===1?`${LACK[zero[0]]} 태어난`:mx>=4?`${ELW[mxs[0]]}만 ${mx}개 품고 태어난`:A.ss.some(x=>x[0]==='괴강살')?'우두머리 별을 달고 태어난':A.tier>=4?'엔진이 너무 큰':A.tier<=0?'유난히 마음이 여린':'균형 위에 선';
   const head=`${twist} ${HEADN[si]}, ${Y27H[y27s]} ${EMO[si]}`;
   const q=t=>`<blockquote class="sq">${t}</blockquote>`,part=(no,emo,t,h)=>`<section class="sp"><p class="spn">${emo} PART ${no}</p><h3>${t}</h3>${h}</section>`;
   const zeroLine=zero.length?`${zero.map(i=>ELW[i]).join('·')}${bat(ELW[zero[zero.length-1]])?'은':'는'} 하나도 없어. 여덟 글자 중에 ${zero.length===1?'한 오행이':'두 오행이나'} 통째로 빠진 사람, 생각보다 많지 않아.`:`다섯 기운이 하나도 빠짐없이 다 있어. 이것도 은근히 드문 구조야.`;
-  const open=`<p>${nm}, 시작하기 전에 네가 태어난 순간부터 짚고 갈게. ${Y}년 ${M}월 ${D}일 ${wd}요일${tm}. ${dnext<=1?`${jo(TN[(ti+1)%12],'을','를')} ${dnext?'딱 하루':'몇 시간'} 앞둔 날이었어. 계절이 막 바뀌려던 참이었지`:SEASONS[ti]+'였어'}${dnext>1&&dsince<=2?`. 그것도 절기가 ${dsince?`바뀐 지 ${dsince}일밖에 안 된 날`:'바뀐 바로 그날'}`:''}.</p>
+  const open=`<p>${nm}, ${OPEN2[Math.floor(h01(c.dd+'o')*3)]} 먼저 네가 태어난 순간부터. ${Y}년 ${M}월 ${D}일 ${wd}요일${tm}. ${dnext<=1?`${jo(TN[(ti+1)%12],'을','를')} ${dnext?'딱 하루':'몇 시간'} 앞둔 날이었어. 계절이 막 바뀌려던 참이었지`:SEASONS[ti]+'였어'}${dnext>1&&dsince<=2?`. 그것도 절기가 ${dsince?`바뀐 지 ${dsince}일밖에 안 된 날`:'바뀐 바로 그날'}`:''}.</p>
    <p>그 순간의 하늘과 땅을 여덟 글자${c.mins==null?'(시간을 몰라서 여섯 글자)':''}로 펼쳐 보면, <b>${mxs.map(i=>ELW[i]).join('·')}</b>${bat(ELW[mxs[mxs.length-1]])?'이':'가'}${mxs.length>1?' 각각':''} ${mx}개로 제일 많고, ${zeroLine}</p>
    <p>그리고 이 여덟 글자의 주인, 그러니까 <b>너 자신을 뜻하는 글자는 ${STK[si]}(${SH[si]})</b>. ${IMGP[si]}${iya(IMGP[si])}. 내가 바로 그 기운에서 태어난 ${me}${iya(me)}.</p>`+
    (c.worry?`<p>아, 그리고 네가 이렇게 적었지.</p>${q(esc(c.worry))}<p>이 얘기는 PART 3에서 제대로 할게. 그 전에 네가 어떤 사람인지부터.</p>`:wc.length?`<p>${wc.map(k=>({연애:'연애',재물:'돈',직장:'일',건강:'건강',관계:'사람',학업:'공부',변화:'변화'})[k]).join(', ')} 얘기가 궁금하다고 했지? PART 3에서 짚어 줄게. 그 전에 네가 어떤 사람인지부터.</p>`:`<p>네가 어떤 사람인지, 왜 자꾸 같은 데서 넘어지는지, 그리고 2027년에 뭐가 오는지. 하나씩 풀어 볼게.</p>`);
@@ -1285,7 +1316,7 @@ function storyRender(c){const A=c.A,sj=c.sj,si=c.p.s,ce=Math.floor(si/2),n=myNic
   p3h+=(wc.length?wc.slice(0,2).map(k=>L[k]).join(''):'')+(cur?`<p>지금 네가 지나는 10년은 <b>${STK[cur.s]}${BRK[cur.b]} 대운</b>, 한마디로 <b>'${DWV[cur.gs]}'</b>이야. ${cur.age}세에 시작해서 ${cur.age+9}세까지 이어져.</p>`:'')+
    `<p>그리고 2027년 정미년. 그해의 불(丁)은 너한테 ${y27s}${iya(y27s)}. 한마디로 <b>'${Y27N[y27s]}'</b>야. 열두 달 중 제일 좋은 달은 <b>${best.m}</b>(${best.title}), 제일 조심할 달은 <b>${worst.m}</b>(${worst.title}).</p>`;
   const p3=part(3,'🧭',c.worry||wc.length?'요즘 네 마음, 그리고 2027년':'지금 네가 서 있는 곳, 그리고 2027년',p3h);
-  const p4=part(4,'💬','네 사주가 입 밖으로 못 꺼낸 말',`<p>네 안의 기운들이 서로 속마음을 털어놓는다면, 아마 이런 대화가 오갈 거야.</p><div class="chat"><div class="cb me"><small>${ELW[ce]} · 나 (${me})</small><p>${P.me}</p></div><div class="cb you"><small>${ELW[yong]} · 너를 살리는 기운${yong===ce?' (같은 편)':''}</small><p>${yong===ce?'우리 같은 편이잖아. ':''}${YREP[yong]}</p></div></div><p>${nm==='너'?'':nm.replace(/[아야]$/,'')+', '}오늘 딱 하나만 해 봐. <b>${YONGT[yong][5].split(', ')[0]}</b>. 거창한 것보다 이런 게 기운을 바꿔.</p><p class="sign">— 너의 ${me}${bat(me)?'이':'가'}</p>`);
+  const p4=part(4,'💬','네 사주가 입 밖으로 못 꺼낸 말',`<p>네 안의 기운들이 서로 속마음을 털어놓는다면, 아마 이런 대화가 오갈 거야.</p><div class="chat"><div class="cb me"><small>${ELW[ce]} · 나 (${me})</small><p>${P.me}</p></div><div class="cb you"><small>${ELW[yong]} · 너를 살리는 기운${yong===ce?' (같은 편)':''}</small><p>${yong===ce?'우리 같은 편이잖아. ':''}${(h01(c.dd+'y')<.5?YREP2:YREP)[yong]}</p></div></div><p>${nm==='너'?'':nm.replace(/[아야]$/,'')+', '}오늘 딱 하나만 해 봐. <b>${YONGT[yong][5].split(', ')[0]}</b>. 거창한 것보다 이런 게 기운을 바꿔.</p><p class="sign">— 너의 ${me}${bat(me)?'이':'가'}</p>`);
   $('sum').insertAdjacentHTML('afterbegin',`<p class="shead">${head}</p>`);
   $('story').innerHTML=`<header class="sh"><img src="${IMG[si]}" alt=""><div><b>${me}</b><small>너의 기운에서 태어난 정령 · 사주 여덟 글자를 다 읽고 왔어</small></div></header><h2 class="stitle">${head}</h2><p class="sprivacy">🔒 입력한 생년월일과 고민은 이 기기 밖으로 나가지 않아요</p>${open}${p1}${p2}${p3}${p4}`;
   // 유료 챕터 티저
@@ -1404,8 +1435,8 @@ function myNick(){return $('nick').value.trim()||'나'}
 const STATN=['성장력','열정','안정감','결단력','지혜'],LBON={N:0,P:0,E:1,F:1,S:2,J:2,T:3,I:4};
 function statsOf(x){if(x.stats)return x.stats.slice();const sj=saju(x.dd),st=[0,0,0,0,0];for(const v of [sj.y,sj.m,sj.d]){st[Math.floor(v[0]/2)]+=20;st[EB[v[1]]]+=20}st[x.s.e]+=10;for(const l of x.t)st[LBON[l]]+=8;return st}
 function fight(a,b){const sa=statsOf(a),sb=statsOf(b),ord=[0,1,2,3,4].sort((i,j)=>(sa[j]+sb[j])-(sa[i]+sb[i])||i-j).slice(0,3);let wa=0,wb=0;
-  const rounds=ord.map(i=>{const r=Math.sign(sa[i]-sb[i]);if(r>0)wa++;else if(r<0)wb++;return{i,va:sa[i],vb:sb[i],r}});
-  const ta=sa.reduce((p,q)=>p+q,0),tb=sb.reduce((p,q)=>p+q,0);return{sa,sb,rounds,wa,wb,ta,tb,res:wa!==wb?Math.sign(wa-wb):Math.sign(ta-tb)}}
+  const D=()=>Math.floor(Math.random()*31);const rounds=ord.map(i=>{const da=D(),db=D(),va=sa[i]+da,vb=sb[i]+db,r=Math.sign(va-vb);if(r>0)wa++;else if(r<0)wb++;return{i,va,vb,da,db,r}});
+  const ta=rounds.reduce((p,q)=>p+q.va,0),tb=rounds.reduce((p,q)=>p+q.vb,0);return{sa,sb,rounds,wa,wb,ta,tb,res:wa!==wb?Math.sign(wa-wb):Math.sign(ta-tb)}}
 function yearScore(x){let L=0,M=0;MONTHS.forEach((m,k)=>{const g=TG[tenGod(x.p.s,(8+k)%10)];L+=g[2];M+=g[3]});return{L,M,T:L+M}}
 function todayStr(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function todayScore(x){const tp=pillar(todayStr()),g=TG[tenGod(x.p.s,tp.s)];return{g,tp,T:g[2]+g[3]}}
@@ -1414,11 +1445,11 @@ let curTab='battle';
 function arena(C){const {a,b,an,bn}=C,f=fight(a,b);C.f=f;
   const strong=x=>{const st=statsOf(x),i=st.indexOf(Math.max(...st));return `${STATN[i]}(${ELN[i]}) ${st[i]}`};
   const loser=f.res>0?[b,bn]:f.res<0?[a,an]:null;
-  $('tab-battle').innerHTML=(f.wa===f.wb?`<p class="note" style="margin:4px 0 0">라운드 승수가 같아서 다섯 능력치 총합(${f.ta} : ${f.tb})으로 판정했어요.</p>`:'')+
+  $('tab-battle').innerHTML=(f.wa===f.wb?`<p class="note" style="margin:4px 0 0">라운드 승수가 같아서 세 라운드 점수 합(${f.ta} : ${f.tb})으로 판정했어요.</p>`:'')+
    `<div class="cmp">${STATN.map((n,i)=>`<span>${n}</span><div class="two"><i style="width:${Math.round(f.sa[i]/1.4)}%;background:var(--seal)"></i><i style="width:${Math.round(f.sb[i]/1.4)}%;background:var(--sub)"></i></div>`).join('')}</div>
    <div class="legend"><i style="background:var(--seal)"></i>${an}<i style="background:var(--sub)"></i>${bn}</div>`+
-   (loser?`<div class="consol">${loser[1]}의 「${loser[0].name}」 최고 능력치는 ${strong(loser[0])}. 이 능력이 나오는 라운드라면 판이 뒤집혀요.</div>`:`<div class="consol">완전히 비긴 승부예요. 케미 대결에서 둘의 관계를 확인해 보세요.</div>`)+
-   `<p class="note" style="margin:8px 0 0">능력치는 생년월일의 오행(여섯 글자)과 성격 코드로 정해지는 재미용 수치예요. 같은 두 사람은 언제 붙어도 결과가 같아요.</p>`;
+   (loser?`<div class="consol">${loser[1]}의 「${loser[0].name}」 최고 능력치는 ${strong(loser[0])}. 이 능력이 나오는 라운드라면 판이 뒤집혀요. 「다시 붙기」로 운을 시험해 보세요.</div>`:`<div class="consol">완전히 비긴 승부예요. 케미 대결에서 둘의 관계를 확인해 보세요.</div>`)+
+   `<p class="note" style="margin:8px 0 0">능력치는 생년월일의 오행(여섯 글자)과 성격 코드로 정해지고, 라운드마다 <b>운빨 주사위(0~30)</b>가 더해져요. 져도 다시 붙으면 뒤집힐 수 있어요.</p>`;
   const ya=yearScore(a),yb=yearScore(b);C.y=[ya,yb];const yr=Math.sign(ya.T-yb.T);
   $('tab-year').innerHTML=`<table class="vtab"><tr><th></th><th>${an}</th><th>${bn}</th></tr><tr><td>연애운</td><td>${ya.L}</td><td>${yb.L}</td></tr><tr><td>재물운</td><td>${ya.M}</td><td>${yb.M}</td></tr><tr><td>총점</td><td><b>${ya.T}</b></td><td><b>${yb.T}</b></td></tr><tr><td>올해 테마</td><td>${a.s.yt}</td><td>${b.s.yt}</td></tr></table>
    <div class="consol">연애운은 ${ya.L>=yb.L?an:bn}, 재물운은 ${ya.M>=yb.M?an:bn} 쪽이 앞서요. 월별 흐름은 각자 카드의 「자세히 보기」에서 확인할 수 있어요.</div>`;
@@ -1442,7 +1473,7 @@ async function play(m){const tok=++playTok,C=lastC;if(!C)return;const {a,b,an,bn
   const hit=(w)=>{const L=w>0?B:w<0?A:null;if(L){L.classList.remove('hit');void L.offsetWidth;L.classList.add('hit')}};
   let title,sub;
   if(m==='battle'){const f=C.f;let x=0,y=0;sb.textContent='0 : 0';
-    for(const [k,r] of f.rounds.entries()){const row=document.createElement('div');row.className='rnd';row.innerHTML=`<span>R${k+1} ${STATN[r.i]} <em>(${ELN[r.i]})</em></span><span><span class="va">0</span> : <span class="vb">0</span></span>`;$('tick').appendChild(row);
+    for(const [k,r] of f.rounds.entries()){const row=document.createElement('div');row.className='rnd';row.innerHTML=`<span>R${k+1} ${STATN[r.i]} <em>(${ELN[r.i]})</em></span><span><span class="va">0</span> : <span class="vb">0</span><small class="luck">운 +${r.da} / +${r.db}</small></span>`;$('tick').appendChild(row);
       LA.textContent=STATN[r.i];LB.textContent=STATN[r.i];
       await Promise.all([countUp(row.querySelector('.va'),r.va,700),countUp(row.querySelector('.vb'),r.vb,700)]);if(!alive())return;
       if(r.r>0){row.querySelector('.va').classList.add('w');x++}else if(r.r<0){row.querySelector('.vb').classList.add('w');y++}
@@ -1543,7 +1574,7 @@ $('f').addEventListener('submit',e=>{e.preventDefault();const er=(m,f)=>{$('err'
   $('flip').scrollIntoView({behavior:RM()?'auto':'smooth',block:'center'})});
 $('f2').addEventListener('submit',e=>{e.preventDefault();startMode('battle')});
 $('picker').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)startMode(b.dataset.mode)});
-$('replay').addEventListener('click',()=>play(curTab));
+$('replay').addEventListener('click',()=>{if(lastC&&curTab==='battle')arena(lastC);play(curTab)});
 $('toPick').addEventListener('click',()=>$('picker').scrollIntoView({behavior:RM()?'auto':'smooth'}));
 for(const id of ['n2','t2','d2Y','d2M','d2D'])$(id).addEventListener('change',()=>{playTok++;vsSource='form';$('cRes').hidden=true;$('vsNote').textContent=''});
 $('shareMe').addEventListener('click',()=>{const c=cur,n=myNick();share({code:code({d:c.dd,t:c.t}),n,title:`${n==='나'?'친구':n}님이 카드 배틀 도전장을 보냈어요`,desc:`${NICK[c.p.s]} 「${c.name}」(${c.s.k} × ${c.t}) vs ? · 내 카드를 뽑아서 맞서 보세요!`,img:IMG[c.p.s].slice(4,-5),btn:'도전 받기'},'copyMsg')});
@@ -1611,12 +1642,11 @@ function todayRender(){const c=cur,base=new Date(),A=c.A||analyze(c.sj,c.gender)
     <p class="fc-adv">${t.g[1]}</p>
     <div class="fc-lk"><span>행운의 색<b>${yt[0].split('·')[0]}</b></span><span>숫자<b>${yt[2]}</b></span><span>방향<b>${yt[1]}</b></span></div>
     <div class="fc-ft">운빨카드 · 오늘의 운빨</div></div>`;
-  $('todayBox').innerHTML=`<p class="kick" style="text-align:center;margin:0 0 8px">${tdSel?`${t.d.getMonth()+1}월 ${t.d.getDate()}일 미리보기`:`오늘의 운빨 카드 · 육십갑자 ${Object.keys(got).length}/60`}</p>
-   <div class="fflip${open?' show':''}" id="fFlip"><div class="fin"><div class="fback"><span>運</span><small>${c.s.noun} ${c.r[0]}의 오늘</small><em>눌러서 뒤집기</em></div><div class="ffront">${front}</div></div></div>
-   ${!open?'<button type="button" class="btn" id="ijGet">오늘의 운빨 카드 뒤집기</button>':''}
-   <h3 class="mh" style="margin-top:20px">이번 주 운빨 카드</h3>
-   <div class="wk7">${days.map((x,k)=>`<button type="button" class="wkc${k===tdSel?' on':''}" data-day="${k}"><small>${k?WD[x.d.getDay()]+' '+x.d.getDate():'오늘'}</small>${mcHTML({s:x.tp.s,b:x.tp.b,top:x.gn,name:x.g[0].replace(/달$/,'날'),cls:x.lucky?'gold':''})}<i style="width:${Math.min(100,x.sc*10)}%"></i></button>`).join('')}</div>
-   <p class="note" style="margin:8px 0 0">카드를 누르면 그날의 운빨을 미리 볼 수 있어요. 오늘 카드는 뒤집으면 카드함 「일진」에 모여요.</p>
+  $('todayBox').innerHTML=`<div class="tdhead"><b>이번 주 운빨 카드</b><span>${tdSel?`${t.d.getMonth()+1}월 ${t.d.getDate()}일 미리보기`:`일진 ${Object.keys(got).length}/60`}</span></div>
+   <div class="wk7">${days.map((x,k)=>`<button type="button" class="wkc${k===tdSel?' on':''}${x.lucky?' lk':''}" data-day="${k}" aria-label="${x.d.getMonth()+1}월 ${x.d.getDate()}일"><small>${k?WD[x.d.getDay()]+' '+x.d.getDate():'오늘'}</small><span class="wkm" style="--ec:${EL[Math.floor(x.tp.s/2)].c}"><img src="${IMG[x.tp.s]}" alt=""><b>${SH[x.tp.s]}${BR[x.tp.b]}</b></span><i style="width:${Math.min(100,x.sc*10)}%"></i></button>`).join('')}</div>
+   <div class="fflip${open?' show':''}" id="fFlip"><div class="fin"><div class="fback"><span>運</span><small>${c.s.noun} ${c.r[0]}의 오늘</small><em>눌러서 오늘의 카드 뒤집기</em></div><div class="ffront">${front}</div></div></div>
+   
+   <p class="note" style="margin:10px 0 0;text-align:center">위의 요일을 누르면 그날 카드로 바뀌어요. 오늘 카드는 뒤집으면 카드함 「일진」에 모여요.</p>
    <div class="actions" style="margin-top:12px"><button class="kakao" type="button" id="todayShare"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>오늘의 운빨 공유</button><button class="ghost" type="button" data-nav="dex">카드함 보기</button></div><p class="note" id="todayMsg" role="status"></p>`;
   const d0=days[0];$('todayShare').addEventListener('click',()=>share({code:code({d:c.dd,t:c.t}),n:myNick(),title:`오늘 나는 「${d0.g[0].replace(/달$/,'날')}」`,desc:`운빨카드 오늘의 운빨: ${d0.g[1]} 너의 오늘은 어때?`,img:IMG[c.p.s].slice(4,-5),btn:'내 오늘 보기'},'todayMsg'));
   const fl=$('fFlip');if(!open)fl.addEventListener('click',iljinTake)}
