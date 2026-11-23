@@ -123,6 +123,7 @@ input.txt{width:100%;height:46px;font:16px "Noto Sans KR",sans-serif;padding:0 1
 .champ .mini{flex:none}.champ b{display:block;font:700 22px/1.3 "Gowun Batang",serif}.champ span{color:var(--sub);font-size:14px}
 @media(max-width:600px){.tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.trow{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 40px}.trow .dsel{grid-column:1/-1;grid-row:2}}
 .dsel{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px}
+.tsel{display:grid;grid-template-columns:1fr 2fr;gap:8px}.tsel.off{opacity:.4;pointer-events:none}
 .mode-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .mode{display:grid;grid-template-columns:46px minmax(0,1fr);grid-template-rows:auto auto;column-gap:12px;align-items:center;text-align:left;padding:14px;border-radius:14px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:0 3px 0 var(--line);transition:transform .15s,border-color .15s,box-shadow .15s;font-family:"Noto Sans KR",sans-serif}
 .mode:hover{border-color:var(--ink);transform:translateY(-2px);box-shadow:0 5px 0 var(--line)}
@@ -323,8 +324,10 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     <input class="txt" id="nick" maxlength="10" placeholder="예: 현철" style="margin-bottom:14px">
     <span class="l">태어난 날 (양력)</span>
     <div class="dsel"><select id="dY" aria-label="태어난 해"></select><select id="dM" aria-label="태어난 달"></select><select id="dD" aria-label="태어난 날"></select></div>
-    <label class="check"><input type="checkbox" id="late"> 밤 11시 이후에 태어났어요</label>
-    <p class="note" id="lateNote" hidden>밤 11시~자정 출생은 학파에 따라 다음 날로 보기도 해요. 이 시제품은 태어난 날짜 그대로 계산합니다.</p>
+    <span class="l" style="display:block;margin-top:16px">태어난 시간</span>
+    <div class="tsel" id="tsel"><select id="tAP" aria-label="오전 오후"><option value="0">오전</option><option value="12">오후</option></select><select id="tH" aria-label="태어난 시각"></select></div>
+    <label class="check"><input type="checkbox" id="tUnk"> 출생시간 모름</label>
+    <p class="note" id="tNote"></p>
 
     <div class="row">
       <span class="l">나의 성격유형</span>
@@ -333,7 +336,7 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     </div>
     <p class="err" id="err" role="alert"></p>
     <button class="btn" type="submit">카드 뽑기</button>
-    <p class="note">음력 입력과 출생 시간 반영은 정식 버전에서 추가돼요.</p>
+    <p class="note">음력 입력은 정식 버전에서 추가돼요.</p>
   </form>
 
   <div class="stage" id="stageBox" hidden>
@@ -622,6 +625,11 @@ const QZ=[['주말에 에너지를 채우는 방법은?','사람들과 만나서
 let type=['I','S','T','J'];
 const $=id=>document.getElementById(id);
 
+const SIJIN=['자','축','인','묘','진','사','오','미','신','유','술','해'];
+function hb24(h){return Math.floor((h+1)/2)%12}
+function fillTH(){const ap=+$('tAP').value,cur=$('tH').value;$('tH').innerHTML='<option value="">시간 선택</option>'+Array.from({length:12},(_,k)=>{const h=ap+k,a=k===0?12:k,b=k+1;return `<option value="${h}">${a}시 ~ ${b===12?12:b}시 (${SIJIN[hb24(h)]}시)</option>`}).join('');if(cur!==''&&+cur>=ap&&+cur<ap+12)$('tH').value=cur}
+function getH(){if($('tUnk').checked)return null;const v=$('tH').value;return v===''?undefined:+v}
+function tNoteUI(){const u=$('tUnk').checked;$('tsel').classList.toggle('off',u);const h=getH();$('tNote').textContent=u?'시주(태어난 시)를 빼고 여섯 글자로 풀이해요.':h==null?'모르면 아래 "출생시간 모름"에 체크하세요.':`${SIJIN[hb24(h)]}시(${BR[hb24(h)]}時)로 봐요.${h===23?' 밤 11시 이후 출생은 날짜를 그대로 두고 계산해요.':''}`}
 function pillar(str){const [y,m,d]=str.split('-').map(Number);const days=Math.round((Date.UTC(y,m-1,d)-Date.UTC(1900,0,1))/864e5);const i=((10+days)%60+60)%60;return{s:i%10,b:i%12}}
 function temp(t){return t[1]==='N'?(t[2]==='F'?'NF':'NT'):(t[3]==='J'?'SJ':'SP')}
 function valid(str){if(!/^\d{4}-\d{2}-\d{2}$/.test(str))return false;const y=+str.slice(0,4);return y>=1900&&y<=2026}
@@ -636,7 +644,8 @@ function rollKind(c){const force=new URLSearchParams(location.search).get('rare'
   if(h01(c.dd+c.t+todayStr())>=p)return 'n';if(mon&&!lov)return 'm';if(lov&&!mon)return 'l';return h01(todayStr()+c.dd)<0.5?'m':'l'}
 function cardSrc(c,k){return `img/c/${String(c.no).padStart(3,'0')}${k}.webp`}
 let cur=null;
-function render(str,t,anim){cur=build(str,t);const c=cur,el=EL[c.s.e];
+let HR=null;
+function render(str,t,anim){cur=build(str,t);cur.hr=HR;const c=cur,el=EL[c.s.e];
   c.kind=rollKind(c);$('cardImg').src=cardSrc(c,c.kind);$('cardImg').alt=`${c.name} 카드`;$('flip').classList.toggle('rare',c.kind!=='n');
   {const mm=new Date().getMonth()+1,lucky=MONEY_M[c.p.s]===mm||LOVE_M[c.p.s]===mm;
    $('rareNote').innerHTML=c.kind==='n'?`카드는 하루에 한 번 새로 뽑혀요. 레어 확률 6%${lucky?' · <b>이번 달은 내 대길 달이라 18%!</b>':` · 내 대길 달(재물 ${MONEY_M[c.p.s]}월, 연애 ${LOVE_M[c.p.s]}월)에는 18%`}`:`<b>레어 카드 등장!</b> 오늘 ${c.kind==='m'?'금전운':'연애운'} 대길 카드가 뽑혔어요.`}
@@ -668,17 +677,17 @@ function render(str,t,anim){cur=build(str,t);const c=cur,el=EL[c.s.e];
   const row=x=>`<div class="mrow"><div class="mm">${x.m}<small>${SH[x.j]}${'寅卯辰巳午未申酉戌亥子丑'[MONTHS.indexOf(x.m)]}월</small></div><div><b>${x.g[0]}</b><span class="tip">${x.g[1]}</span></div><div class="dots"><span>연애 ${dots(x.g[2])}</span><span>재물 ${dots(x.g[3])}</span></div></div>`;
   $('mFree').innerHTML=ms.slice(0,3).map(row).join('');$('mLock').innerHTML=ms.slice(3).map(row).join('');
   if(anim)$('lw').classList.add('locked');
-  const sj=saju(str);c.sj=sj;const ani=ANI[sj.y[1]];
+  const sj=saju(str);const hh=c.hr;if(hh!=null){const b=hb24(hh);sj.h=[((si%5)*2+b)%10,b]}c.sj=sj;const ani=ANI[sj.y[1]];
   $('sum').innerHTML=(c.kind!=='n'?`<p class="kick" style="margin:0 0 6px">★ 레어 카드 · ${c.kind==='m'?MONEY_M[si]+'월 금전운 대길':LOVE_M[si]+'월 연애운 대길'}</p>`:'')+`<h3>${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${ani}띠 · 일주 ${ST[si].h}${BR[c.p.b]}</h3><ul>
    <li><b>본성</b><span>${c.s.ess.split('. ')[0]}.</span></li>
    <li><b>올해</b><span>2027년은 「${c.s.yt}」 · ${tti(sj.y[1])[0]}</span></li>
    <li><b>연애</b><span>${yg[4]} · 좋은 달 ${top(2)}</span></li>
    <li><b>재물</b><span>${yg[6]} · 좋은 달 ${top(3)}</span></li></ul>`;
-  const P=[['시주',null],['일주',sj.d],['월주',sj.m],['연주',sj.y]];
+  const P=[['시주',sj.h||null],['일주',sj.d],['월주',sj.m],['연주',sj.y]];
   $('pillars').innerHTML=P.map(([lb,v])=>v?`<div class="pil"><small>${lb}</small><div class="ch${lb==='일주'?' me':''}" style="background:${EL[Math.floor(v[0]/2)].c}">${SH[v[0]]}</div><div class="ch" style="background:${EL[EB[v[1]]].c}">${BR[v[1]]}</div><small>${lb==='일주'?'나 (일간)':tenGod(si,v[0])}</small></div>`:`<div class="pil"><small>${lb}</small><div class="ch empty">?</div><div class="ch empty">?</div><small>출생 시간 모름</small></div>`).join('');
-  $('pNote').textContent=`${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${STK[sj.m[0]]}${BRK[sj.m[1]]}월 ${STK[si]}${BRK[c.p.b]}일생이에요. 출생 시간을 넣지 않아 시주는 비워 뒀어요.${sj.near?' 절기가 바뀌는 날 전후에 태어나서 월주가 하루 차이로 달라질 수 있어요.':''}`;
-  const cnt=[0,0,0,0,0];for(const v of [sj.y,sj.m,sj.d]){cnt[Math.floor(v[0]/2)]++;cnt[EB[v[1]]]++}
-  $('elBars').innerHTML='<h3>나의 오행 (여섯 글자 기준)</h3>'+cnt.map((n,i)=>`<div class="bar"><span>${ELN[i]}(${ELW[i]})</span><div><i style="width:${Math.round(n/6*100)}%;background:${EL[i].c}"></i></div><span>${n}</span></div>`).join('');
+  $('pNote').textContent=`${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${STK[sj.m[0]]}${BRK[sj.m[1]]}월 ${STK[si]}${BRK[c.p.b]}일생이에요. ${sj.h?`${SIJIN[sj.h[1]]}시에 태어나 시주가 ${STK[sj.h[0]]}${BRK[sj.h[1]]}(${SH[sj.h[0]]}${BR[sj.h[1]]})로 잡혀요.`:'출생 시간을 넣지 않아 시주는 비워 뒀어요.'}${sj.near?' 절기가 바뀌는 날 전후에 태어나서 월주가 하루 차이로 달라질 수 있어요.':''}`;
+  const PS=[sj.y,sj.m,sj.d].concat(sj.h?[sj.h]:[]),NN=PS.length*2;const cnt=[0,0,0,0,0];for(const v of PS){cnt[Math.floor(v[0]/2)]++;cnt[EB[v[1]]]++}
+  $('elBars').innerHTML=`<h3>나의 오행 (${NN===8?'여덟':'여섯'} 글자 기준)</h3>`+cnt.map((n,i)=>`<div class="bar"><span>${ELN[i]}(${ELW[i]})</span><div><i style="width:${Math.round(n/NN*100)}%;background:${EL[i].c}"></i></div><span>${n}</span></div>`).join('');
   const mx=cnt.indexOf(Math.max(...cnt)),mn=cnt.indexOf(Math.min(...cnt));
   $('elT').textContent=`${ELW[mx]} 기운이 가장 많고, ${ELW[mn]} 기운이 ${cnt[mn]?'가장 적어요':'없어요'}`;
   $('elTxt').textContent=`${ELSTRONG[mx]} ${ELWEAK[mn]} 부족한 ${ELW[mn]} 기운을 생활 속에서 채워 주면 균형이 잡혀요.`;
@@ -828,7 +837,7 @@ async function makeImg(){const c=cur;if(!c)return;$('out').src=$('cardImg').src;
 
 $('t2').innerHTML=TYK.map(k=>`<option value="${k}"${k==='ENFP'?' selected':''}>${k} · ${TY[k][0]}</option>`).join('');
 fillDate('d','1995-03-14');fillDate('d2','1996-08-02');
-try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);if(s.n)$('nick').value=s.n;type=s.t.split('');window.__restored=true}}catch(e){}
+fillTH();try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);if(s.n)$('nick').value=s.n;if(typeof s.h==='number'){HR=s.h;$('tAP').value=s.h>=12?'12':'0';fillTH();$('tH').value=String(s.h)}else if(s.h===null)$('tUnk').checked=true;type=s.t.split('');window.__restored=true}}catch(e){}
 $('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map(k=>`<option value="${k}">${k} · ${TY[k][0]}</option>`).join('');fillDate('cd','1996-08-02');
 {const q=new URLSearchParams(location.search),f=q.get('f'),m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);
  if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){const od=`${m[1]}-${m[2]}-${m[3]}`,on=(q.get('n')||'친구').slice(0,10),ox=build(od,m[4]);
@@ -839,10 +848,11 @@ axesUI();render(getD('d'),type.join(''),false);
 if(window.__restored){$('stageBox').hidden=false;$('flipper').classList.add('show');$('sample').textContent='오늘의 내 카드'}
 addRow(myNick(),getD('d'),type.join(''));addRow('친구1','1996-08-02','ENFP');addRow('친구2','1993-05-17','INFJ');addRow('친구3','1998-12-01','ESTP');
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(!b)return;const i=+(b.dataset.i??b.dataset.q);type[i]=b.dataset.l;axesUI();if(b.dataset.q!==undefined)$('quiz').open=true});
-$('late').addEventListener('change',e=>{$('lateNote').hidden=!e.target.checked});
+$('tAP').addEventListener('change',()=>{fillTH();tNoteUI()});$('tH').addEventListener('change',tNoteUI);$('tUnk').addEventListener('change',tNoteUI);tNoteUI();
 $('f').addEventListener('submit',e=>{e.preventDefault();const d=getD('d');if(!valid(d)){$('err').textContent='태어난 날을 1900~2026년 사이로 입력하세요.';return}
+  const h=getH();if(h===undefined){$('err').textContent='태어난 시간을 고르거나 "출생시간 모름"에 체크하세요.';$('tH').focus();return}$('err').textContent='';HR=h;
   const t=type.join('');$('flipper').classList.remove('show');render(d,t,true);$('stageBox').hidden=false;$('sample').textContent=`${$('nick').value.trim()||'나'}의 카드 · ${d.replace(/-/g,'.')} · ${t}`;$('saveBox').hidden=true;
-  const im=$('cardImg'),show=()=>setTimeout(()=>$('flipper').classList.add('show'),RM()?0:350);if(im.complete&&im.naturalWidth)show();else{im.onload=show;im.onerror=show}try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim()}))}catch(e){}
+  const im=$('cardImg'),show=()=>setTimeout(()=>$('flipper').classList.add('show'),RM()?0:350);if(im.complete&&im.naturalWidth)show();else{im.onload=show;im.onerror=show}try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim(),h}))}catch(e){}
   $('flip').scrollIntoView({behavior:RM()?'auto':'smooth',block:'center'})});
 $('f2').addEventListener('submit',e=>{e.preventDefault();startMode('battle')});
 $('picker').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)startMode(b.dataset.mode)});
@@ -862,7 +872,7 @@ $('tRows').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if
 $('tGo').addEventListener('click',runTour);
 $('cGo').addEventListener('click',()=>{const t=$('cT').value;if(!t){$('cErr').textContent='성격유형을 골라 주세요. 모르면 아래 「유형을 모르겠어요」 버튼으로 찾을 수 있어요.';return}$('cErr').textContent='';
   const d=getD('cd');if($('cN').value.trim())$('nick').value=$('cN').value.trim();setD('d',d);type=t.split('');axesUI();render(d,t,true);
-  $('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim()}))}catch(e){}
+  $('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim(),h:HR}))}catch(e){}
   const me=$('chMe');me.className='cslot flip';me.style.setProperty('--el',EL[cur.s.e].c);me.innerHTML=slotHTML(cur,myNick());
   chAccepted=true;compat();$('cRes').hidden=true;setTimeout(()=>{$('arena').hidden=false;$('picker').scrollIntoView({behavior:RM()?'auto':'smooth'})},1000)});
 $('moreBtn').addEventListener('click',()=>{const d=$('detail'),open=d.hidden;d.hidden=!open;$('moreBtn').textContent=open?'접기 ▴':'자세히 보기 ▾';$('moreBtn').setAttribute('aria-expanded',String(open));if(open)d.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
