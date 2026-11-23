@@ -442,6 +442,12 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
 .dexgrid .seen img{filter:grayscale(1);opacity:.8}.dexgrid .seen b{color:#8a6a1f}
 @media(max-width:420px){.halls{grid-template-columns:repeat(5,minmax(0,1fr))}.hall img{width:38px;height:38px}}
 .sty{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}.sty b{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--ink);color:#e8c46a;font:700 18px 'Gowun Batang',serif}.sty span{font-size:14px;line-height:1.55}
+
+.plact{margin-top:12px;padding:14px;border-radius:14px;background:#fff7e8;border:1px solid #f0d49a;display:grid;gap:8px}.plact .kick{margin:0}.plact .txt{margin:0}
+.plrec{display:inline-block;margin-top:4px;margin-right:6px;font-size:12px;color:#8a5a12;background:#fff1d6;border-radius:999px;padding:1px 8px}.plrec.me{background:var(--ink);color:#e8c46a}
+.pc.minep{box-shadow:0 0 0 2px #e8c46a inset}
+.plnotice{margin-bottom:14px;border-color:#e8c46a}.plnotice h3{font:700 17px "Gowun Batang",serif;margin:0 0 4px}.plnotice .nw{font:500 12px "Noto Sans KR",sans-serif;background:var(--seal);color:#fff;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.bt{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}.bt img{width:40px;height:40px;border-radius:50%;object-fit:cover}.bt small{display:block;color:var(--sub);font-size:12px}.bt em{font-style:normal;font-weight:700;margin-left:4px}.bt em.w{color:#2f7a4a}.bt em.l{color:var(--seal)}.bt q{display:block;font-size:13px;color:#3b3934;margin-top:2px}
 </style>
 </head>
 <body>
@@ -666,6 +672,11 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
       <div class="cact"><button class="ghost" type="button" id="replay">다시 보기</button><button class="ghost" type="button" id="toPick">다른 대결 고르기</button></div>
       <button class="kakao wide" type="button" id="shareC"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>결과 보내기 (리턴매치 신청)</button>
       <p class="note" id="copyMsg2" role="status"></p>
+      <div class="plact" id="plAct" hidden><p class="kick" id="plActT"></p>
+        <input class="txt" id="plTaunt" maxlength="40" placeholder="상대에게 한마디 (선택) 예: 다음엔 오행으로 붙자!">
+        <button class="btn" type="button" id="plSend">광장에 결과 남기기</button>
+        <div class="cact"><button class="ghost" type="button" data-nav="plaza">광장으로 돌아가기</button><button class="ghost" type="button" id="plBrag">친구에게 자랑하기</button></div>
+        <p class="note" id="plSent" role="status"></p></div>
     </div>
   </div>
 </section>
@@ -727,6 +738,7 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
   <h2 class="sec">카드 광장</h2>
   <p class="note" id="plMode" style="margin:-6px 0 14px"></p>
   <div class="panel plpost" id="plPost"></div>
+  <div class="panel plnotice" id="plNotice" hidden></div>
   <div class="plhead"><h3>올라온 카드</h3><button type="button" class="ghost" id="plRefresh">새로고침</button></div>
   <div class="plgrid" id="plList"></div>
 </div>
@@ -1313,7 +1325,7 @@ async function play(m){const tok=++playTok,C=lastC;if(!C)return;const {a,b,an,bn
   if(m!=='chem'){if(w>0)A.classList.add('win');else if(w<0)B.classList.add('win')}
   await wait(300);if(!alive())return;
   $('banner').innerHTML=`<div class="banner"><b>${title}</b><span>${sub}</span></div>`;
-  await wait(500);if(!alive())return;$('tab-'+m).hidden=false;$('cAct').hidden=false}
+  await wait(500);if(!alive())return;$('tab-'+m).hidden=false;$('cAct').hidden=false;plActUI()}
 function slotHTML(x,nm){return `<img src="${IMG[x.p.s]}" alt=""><b>${x.name} <span class="nkb">${NICK[x.p.s]}</span></b><small>${nm} · ${x.s.k} × ${x.t}</small>`}
 let TN=0;
 function addRow(name,date,t){const i=TN++;const d=document.createElement('div');d.className='trow';d.id='tr'+i;
@@ -1506,10 +1518,24 @@ const BAD=['시발','씨발','ㅅㅂ','ㅆㅂ','병신','ㅂㅅ','좆','개새',
 function cleanMsg(t){const x=t.replace(/\s+/g,' ').trim();if(BAD.some(w=>x.toLowerCase().includes(w)))return[null,'욕설이나 비하 표현은 올릴 수 없어요.'];if(/(https?:|www\.|\.com|\.kr|@)/i.test(x))return[null,'링크나 아이디는 올릴 수 없어요.'];if(/\d{3,4}[-\s.]?\d{3,4}[-\s.]?\d{4}/.test(x)||/\d{6,}/.test(x))return[null,'전화번호 같은 개인정보는 올릴 수 없어요.'];return[x,null]}
 async function plList(){if(plOnline()){const r=await fetch(`${SUPA.url}/rest/v1/cards_public?select=*&order=created_at.desc&limit=60`,{headers:SH_(false)});if(!r.ok)throw new Error('list');return r.json()}
   try{return JSON.parse(localStorage.getItem('plaza')||'[]')}catch(e){return window.__pl||[]}}
-async function plAdd(rec){if(plOnline()){const r=await fetch(`${SUPA.url}/rest/v1/cards`,{method:'POST',headers:SH_(true),body:JSON.stringify(rec)});if(!r.ok)throw new Error('post');return}
-  const L=await plList();L.unshift({...rec,id:Date.now(),created_at:new Date().toISOString()});window.__pl=L.slice(0,60);try{localStorage.setItem('plaza',JSON.stringify(window.__pl))}catch(e){}}
+async function plAdd(rec){if(plOnline()){const h=SH_(true);h.Prefer='return=representation';const r=await fetch(`${SUPA.url}/rest/v1/cards`,{method:'POST',headers:h,body:JSON.stringify(rec)});if(!r.ok)throw new Error('post');try{const j=await r.json();if(j[0]&&j[0].id){const M=lsGet('myPosts',[]);M.unshift(j[0].id);lsSet('myPosts',M.slice(0,20))}}catch(e){}return}
+  const L=await plList();const nid=Date.now();{const M=lsGet('myPosts',[]);M.unshift(nid);lsSet('myPosts',M.slice(0,20))}L.unshift({...rec,id:nid,created_at:new Date().toISOString()});window.__pl=L.slice(0,60);try{localStorage.setItem('plaza',JSON.stringify(window.__pl))}catch(e){}}
 async function plReport(id){if(plOnline()){await fetch(`${SUPA.url}/rest/v1/reports`,{method:'POST',headers:SH_(true),body:JSON.stringify({card_id:id})});return}
   const L=(await plList()).filter(x=>x.id!==id);window.__pl=L;try{localStorage.setItem('plaza',JSON.stringify(L))}catch(e){}}
+
+/* 광장 대결 기록 */
+let BT_OK=true;
+async function btAdd(rec){if(plOnline()){const r=await fetch(`${SUPA.url}/rest/v1/battles`,{method:'POST',headers:SH_(true),body:JSON.stringify(rec)});if(!r.ok){BT_OK=false;throw new Error('bt')}return}
+  const L=lsGet('battlesLocal',[]);L.unshift({...rec,id:Date.now(),created_at:new Date().toISOString()});lsSet('battlesLocal',L.slice(0,200))}
+async function btList(ids){if(!ids.length)return[];if(plOnline()){try{const r=await fetch(`${SUPA.url}/rest/v1/battles?select=*&card_id=in.(${ids.join(',')})&order=created_at.desc&limit=300`,{headers:SH_(false)});if(!r.ok){BT_OK=false;return[]}BT_OK=true;return r.json()}catch(e){return[]}}
+  return lsGet('battlesLocal',[]).filter(b=>ids.includes(b.card_id))}
+function plResSet(){const C=lastC,m=curTab;if(!C)return null;const r=m==='battle'?C.f.res:m==='year'?C.yr:m==='today'?C.dr:0;const sc=m==='battle'?`${C.f.wa}:${C.f.wb}`:m==='year'?`${C.y[0].T}:${C.y[1].T}`:m==='today'?`${C.d[0].T}:${C.d[1].T}`:'';return{r,sc}}
+function plActUI(){const pl=vsSource==='plaza'&&window.__plCard;$('shareC').hidden=!!pl;$('plAct').hidden=!pl;if(!pl)return;const R=plResSet(),M={battle:'카드 배틀',chem:'케미 대결',year:'2027 운빨',today:'오늘의 운빨'}[curTab];
+  $('plActT').textContent=`${window.__plCard.nick}님의 카드에 ${M} 결과를 남겨요 · ${R.r>0?'나의 승리':R.r<0?'나의 패배':'무승부'}`;$('plSent').textContent='';$('plSend').disabled=false;$('plTaunt').value=''}
+function plNotice(BT,mine){const L=BT.filter(b=>mine.has(b.card_id)),seen=lsGet('plSeenBt',0),nw=L.filter(b=>new Date(b.created_at).getTime()>seen);const box=$('plNotice');if(!box)return;
+  if(!L.length){box.hidden=true;return}box.hidden=false;const W=L.filter(b=>b.res<0).length;
+  box.innerHTML=`<h3>내 카드 대결 기록 ${nw.length?`<span class="nw">새 도전 ${nw.length}</span>`:''}</h3><p class="note" style="margin:0 0 8px">지금까지 ${L.length}명이 도전, <b>${W}번 막아냈어요</b>.</p>`+L.slice(0,6).map(b=>{const x=mkCard(b.stem,b.type,b.branch);return `<div class="bt"><img src="${IMG[b.stem]}" alt=""><div><b>${esc(b.nick)}</b> · ${({battle:'카드 배틀',chem:'케미',year:'2027 운빨',today:'오늘의 운빨'})[b.mode]} <em class="${b.res<0?'w':b.res>0?'l':''}">${b.res<0?'방어 성공':b.res>0?'방어 실패':'무승부'}${b.score?' '+b.score:''}</em><small>${NICK[b.stem]} · ${x.name} · ${ago(b.created_at)}</small>${b.msg?`<q>${esc(b.msg)}</q>`:''}</div></div>`}).join('');
+  lsSet('plSeenBt',Date.now())}
 function ago(iso){const m=Math.max(0,Math.round((Date.now()-new Date(iso))/60000));return m<1?'방금':m<60?`${m}분 전`:m<1440?`${Math.round(m/60)}시간 전`:`${Math.round(m/1440)}일 전`}
 let plCache=[];
 async function plazaRender(){$('plMode').textContent=plOnline()?'모르는 사람들과 카드를 나누고, 마음에 드는 카드에 운빨배틀을 걸어 보세요. 생년월일은 공개되지 않아요.':'지금은 미리보기 모드예요. 올린 카드가 이 기기에만 보이고, 데이터베이스를 연결하면 모든 사용자에게 보여요.';
@@ -1527,10 +1553,12 @@ async function plazaList(){$('plList').innerHTML='<p class="note">불러오는 �
   try{plCache=await plList()}catch(e){$('plList').innerHTML='<p class="note">광장을 불러오지 못했어요. 새로고침을 눌러 주세요.</p>';return}
   if(!plCache.length){$('plList').innerHTML='<p class="note">아직 올라온 카드가 없어요. 첫 카드를 올려 보세요.</p>';return}
   const esc=t=>String(t).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
-  $('plList').innerHTML=plCache.map(r=>{const x=mkCard(r.stem,r.type,r.branch);return `<div class="pc"><div class="mini" style="background-image:url(${IMG[r.stem]});--mc:${EL[x.s.e].c}"></div><div><b>${x.name}</b><small>${esc(r.nick)} · ${x.s.k} × ${r.type} · ${ago(r.created_at)}</small>${r.msg?`<q>${esc(r.msg)}</q>`:''}</div>
+  const BT=await btList(plCache.map(r=>r.id)),rec=id=>{const L=BT.filter(b=>b.card_id===id);return{n:L.length,def:L.filter(b=>b.res<0).length,L}};const mine=new Set(lsGet('myPosts',[]));
+  plNotice(BT,mine);
+  $('plList').innerHTML=plCache.map(r=>{const x=mkCard(r.stem,r.type,r.branch),R=rec(r.id);return `<div class="pc${mine.has(r.id)?' minep':''}"><div class="mini" style="background-image:url(${IMG[r.stem]});--mc:${EL[x.s.e].c}"></div><div><b>${x.name}</b><small>${esc(r.nick)} · ${x.s.k} × ${r.type} · ${ago(r.created_at)}</small>${r.msg?`<q>${esc(r.msg)}</q>`:''}${R.n?`<span class="plrec">⚔ 도전 ${R.n} · 방어 ${R.def}승${R.L[0]&&R.L[0].msg?` · 「${esc(R.L[0].msg)}」`:''}</span>`:''}${mine.has(r.id)?'<span class="plrec me">내가 올린 카드</span>':''}</div>
     <div class="pa"><button class="btn" type="button" data-fight="${r.id}">운빨배틀</button><button class="ghost" type="button" data-rep="${r.id}">신고</button></div></div>`}).join('')}
 $('plList').addEventListener('click',async e=>{const f=e.target.closest('[data-fight]'),rp=e.target.closest('[data-rep]');
-  if(f){if(!hasCard()){go('draw');return}const r=plCache.find(x=>String(x.id)===f.dataset.fight);if(!r)return;const x=mkCard(r.stem,r.type,r.branch);x.stats=r.stats;window.__plazaFight=true;
+  if(f){if(!hasCard()){go('draw');return}const r=plCache.find(x=>String(x.id)===f.dataset.fight);if(!r)return;const x=mkCard(r.stem,r.type,r.branch);x.stats=r.stats;window.__plazaFight=true;window.__plCard={id:r.id,nick:r.nick};
     chActive=false;go('battle');vsSource='plaza';runVs(cur,x,r.nick);$('vsNote').textContent=`상대: 카드 광장의 ${r.nick} 「${x.name}」`;$('cRes').hidden=true;$('picker').scrollIntoView({behavior:RM()?'auto':'smooth'})}
   if(rp){rp.disabled=true;rp.textContent='신고됨';try{await plReport(+rp.dataset.rep)}catch(err){}}});
 $('plRefresh').addEventListener('click',plazaList);
@@ -1560,6 +1588,11 @@ document.addEventListener('click',e=>{const h=e.target.closest('[data-hall]');if
   const o=e.target.closest('[data-opp]');if(o){trainFight(o.dataset.opp)}});
 
 window.__T={build,mkCard,statsOf,oppStats,TYK,sajuTypeRaw,sajuType,STY};
+$('plSend').addEventListener('click',async()=>{const P=window.__plCard,C=lastC;if(!P||!C)return;const R=plResSet();let msg=$('plTaunt').value.trim();if(msg){const [ok,er]=cleanMsg(msg);if(!ok){$('plSent').textContent=er;return}msg=ok}
+  $('plSend').disabled=true;try{await btAdd({card_id:P.id,nick:(myNick()||'익명').slice(0,12),stem:cur.p.s,branch:cur.p.b,type:cur.t,mode:curTab,res:R.r,score:R.sc,msg});$('plSent').textContent=`${P.nick}님의 카드에 결과를 남겼어요. 상대가 광장에 오면 이 기록을 보게 돼요.`}
+  catch(e){$('plSend').disabled=false;$('plSent').textContent=BT_OK?'남기지 못했어요. 잠시 뒤 다시 시도해 주세요.':'대결 기록 기능이 아직 준비 중이에요.'}});
+$('plBrag').addEventListener('click',()=>$('shareC').click());
+
 }
 </script>
 </body>
