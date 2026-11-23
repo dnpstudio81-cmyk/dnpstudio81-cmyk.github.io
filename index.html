@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>운빨카드 · 사주로 뽑는 나의 기운 카드</title>
+<title>운빨카드 배틀 · 사주로 뽑는 나의 기운 카드</title>
 <meta name="description" content="태어난 날의 기운과 성격유형으로 찾는 160명의 캐릭터. 같은 유형, 다른 기운.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="운빨카드 · 같은 유형, 다른 기운">
+<meta property="og:title" content="운빨카드 배틀 · 타고난 기운이 카드가 된다">
 <meta property="og:description" content="생년월일로 사주를 보고, 160종 캐릭터 카드를 모으고, 친구와 운빨배틀까지!">
 <meta property="og:image" content="https://dnpstudio81-cmyk.github.io/img/share/og.jpg">
 <meta property="og:url" content="https://dnpstudio81-cmyk.github.io/">
@@ -16,6 +16,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap&text=%EC%9A%B4%EB%B9%A8%EC%B9%B4%EB%93%9C%EB%B0%B0%ED%8B%80BATLE" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* VOICE: 고요하고 품위 있는 동양적 도감, 재미는 이름에서
@@ -448,13 +449,43 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
 .pc.minep{box-shadow:0 0 0 2px #e8c46a inset}
 .plnotice{margin-bottom:14px;border-color:#e8c46a}.plnotice h3{font:700 17px "Gowun Batang",serif;margin:0 0 4px}.plnotice .nw{font:500 12px "Noto Sans KR",sans-serif;background:var(--seal);color:#fff;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle}
 .bt{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}.bt img{width:40px;height:40px;border-radius:50%;object-fit:cover}.bt small{display:block;color:var(--sub);font-size:12px}.bt em{font-style:normal;font-weight:700;margin-left:4px}.bt em.w{color:#2f7a4a}.bt em.l{color:var(--seal)}.bt q{display:block;font-size:13px;color:#3b3934;margin-top:2px}
+
+/* game title */
+.gtitle{position:relative;text-align:center;display:grid;justify-items:center;margin-top:2px;z-index:2}
+.rays{position:absolute;left:50%;top:52%;width:560px;height:560px;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;border-radius:50%;
+ background:repeating-conic-gradient(from 0deg,rgba(255,206,110,.16) 0 6deg,transparent 6deg 18deg);-webkit-mask:radial-gradient(circle,#000 18%,transparent 62%);mask:radial-gradient(circle,#000 18%,transparent 62%);animation:spin 40s linear infinite,raysin 1s .2s ease-out both}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}@keyframes raysin{from{opacity:0}}
+.orn{display:flex;align-items:center;gap:10px;margin:0 0 6px;font:700 12px "Gowun Batang",serif;letter-spacing:.3em;color:#e8c46a;animation:fadeup .6s .1s both}
+.orn i{width:44px;height:1px;background:linear-gradient(90deg,transparent,#e8c46a);position:relative}.orn i:last-child{transform:scaleX(-1)}.orn i::after{content:"";position:absolute;right:-4px;top:-3px;width:7px;height:7px;background:#e8c46a;transform:rotate(45deg)}
+.gt{position:relative;margin:0;display:grid;justify-items:center;line-height:1}
+.gword{position:relative;font:400 clamp(54px,17vw,84px)/1 "Black Han Sans","Noto Sans KR",sans-serif;letter-spacing:.02em;
+ background:linear-gradient(180deg,#fff8dc 0%,#ffe28a 38%,#e0a92e 55%,#b8741a 75%,#ffd76a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+ -webkit-text-stroke:1.5px #3a1d08;filter:drop-shadow(0 3px 0 #6b3510) drop-shadow(0 6px 0 #3a1d08) drop-shadow(0 0 18px rgba(255,190,80,.55));animation:slam .7s .35s cubic-bezier(.2,1.4,.4,1) both}
+.gword::after{content:attr(data-t);position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.95) 50%,transparent 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0;animation:gshine 3.2s 1.6s ease-in-out infinite}
+@keyframes gshine{0%{background-position:150% 0}45%,100%{background-position:-60% 0}}
+@keyframes slam{0%{opacity:0;transform:scale(2.6);filter:blur(8px)}60%{opacity:1;transform:scale(.94)}100%{transform:scale(1)}}
+.gseal{position:absolute;left:-30px;top:-16px;display:grid;place-items:center;width:44px;height:44px;border-radius:9px;background:#b0392b;color:#ffecbe;font:700 26px "Gowun Batang",serif;border:2px solid #ffd77a;box-shadow:0 4px 12px rgba(0,0,0,.5);transform:rotate(-12deg);animation:stamp2 .45s 1s cubic-bezier(.2,1.8,.4,1) both;z-index:2}
+@keyframes stamp2{0%{opacity:0;transform:rotate(-12deg) scale(3)}100%{opacity:1;transform:rotate(-12deg) scale(1)}}
+.gband{position:relative;margin-top:-6px;padding:5px 30px 6px;background:linear-gradient(180deg,#d8463a,#8e1f17);clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%,6% 50%);box-shadow:inset 0 2px 0 rgba(255,255,255,.25);animation:bandin .5s 1.05s cubic-bezier(.2,1.3,.4,1) both;overflow:hidden}
+.gband b{display:block;font:400 clamp(18px,5.4vw,26px)/1 "Black Han Sans",sans-serif;letter-spacing:.42em;margin-right:-.42em;color:#fff3cf;text-shadow:0 2px 0 #5a120c}
+.gband::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);animation:sweep 1.2s 1.6s ease-out,sweep 1.6s 5s ease-out infinite}
+@keyframes bandin{0%{opacity:0;transform:scaleX(0)}100%{opacity:1;transform:scaleX(1)}}
+.gsub{margin:10px 0 0;font:700 14px "Gowun Batang",serif;letter-spacing:.12em;color:rgba(247,243,234,.85);animation:fadeup .6s 1.4s both}
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}}
+.home.shake{animation:shake .35s .55s}@keyframes shake{20%{transform:translate(-4px,2px)}40%{transform:translate(4px,-2px)}60%{transform:translate(-3px,1px)}80%{transform:translate(2px,0)}}
+.home .stagec{height:min(52vh,430px)}.home.open .stagec{height:min(34vh,290px)}
+.home.open .gword{font-size:clamp(44px,13vw,64px)}.home .gword{transition:font-size .5s}
+@media (prefers-reduced-motion:reduce){.rays,.gword,.gword::after,.gseal,.gband,.gband::after,.gsub,.orn,.home.shake{animation:none!important}}
 </style>
 </head>
 <body>
 <section class="scr home" id="scr-home">
   <div class="glow" aria-hidden="true"></div><div class="pt" id="pt" aria-hidden="true"></div>
   <button type="button" class="cont" id="contBtn" data-nav="draw" hidden></button>
-  <div class="ttl2"><span class="s1">같은 유형, 다른 기운</span><h1 class="logo"><span class="seal">運</span><span class="lt">운빨카드</span></h1></div>
+  <div class="gtitle" id="gtitle"><div class="rays" aria-hidden="true"></div>
+    <p class="orn"><i></i><span>天運 · 地運 · 人運</span><i></i></p>
+    <h1 class="gt"><span class="gseal" aria-hidden="true">運</span><span class="gword" data-t="운빨카드">운빨카드</span><span class="gband"><b>BATTLE</b></span></h1>
+    <p class="gsub">타고난 기운이 카드가 된다</p></div>
   <div class="stagec" aria-hidden="true"><div class="track" id="track"></div><div class="hero2" id="hero2"><img id="heroImg" alt=""><i class="sweep"></i></div><div class="spark" id="spark"></div></div>
   <p class="herocap" id="heroCap">오늘의 카드 · 복주머니 품은 태양 탐험가 「해랑이」</p>
   <button type="button" class="tap" id="tap">화면을 누르면 시작</button>
@@ -1445,7 +1476,7 @@ function go(n,fromHash){if(!SCR.includes(n))n='home';for(const k of SCR)$('scr-'
 window.addEventListener('popstate',()=>go(location.hash.slice(1)||'home',true));
 document.addEventListener('click',e=>{const b=e.target.closest('[data-nav]');if(b){e.preventDefault();go(b.dataset.nav)}});
 /* intro */
-function introInit(){const T=["145m", "048n", "126n", "114n", "087n", "079n", "081n", "136n", "103n", "130n", "052n", "034n", "029n", "066n", "011n", "033m"];
+function introInit(){if(!RM()){const h=$('scr-home');h.classList.add('shake');setTimeout(()=>h.classList.remove('shake'),1200)}const T=["145m", "048n", "126n", "114n", "087n", "079n", "081n", "136n", "103n", "130n", "052n", "034n", "029n", "066n", "011n", "033m"];
   const tr=$('track'),sc=document.querySelector('.stagec');tr.innerHTML=T.map((f,i)=>`<img src="img/t/${f}.webp" alt="" decoding="async" style="--r:${(i%2?1:-1)*(3+i%4)}deg">`).join('');$('heroImg').src='img/c/033m.webp';
   $('spark').innerHTML=Array.from({length:18},(_,i)=>{const a=i/18*Math.PI*2,d=120+(i%3)*40;return `<i style="--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px"></i>`}).join('');
   const run=()=>{const w=tr.firstElementChild.getBoundingClientRect().width+14,n=T.length;tr.style.transform=`translate(${-w/2}px,-50%)`;
