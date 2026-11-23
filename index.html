@@ -350,6 +350,28 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 .herocap{margin:8px 0 0;font-size:13px;color:#e8c46a;opacity:0;transition:opacity .6s}.stagec.land~.herocap{opacity:1}
 .home.open .stagec{height:min(40vh,330px)}.home .stagec{transition:height .5s}
 @media (prefers-reduced-motion:reduce){.stagec.land .hero2,.hero2 .sweep{animation:none!important;opacity:1;transform:translate(-50%,-50%)}}
+
+/* collect */
+.mc{position:relative;aspect-ratio:5/7;border-radius:12px;padding:7px 6px 8px;display:grid;grid-template-rows:auto 1fr auto auto auto;justify-items:center;gap:2px;text-align:center;color:#f7f3ea;background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--ec,#555) 55%,#fff) 0%,var(--ec,#555) 60%,color-mix(in srgb,var(--ec,#555) 70%,#000) 100%);box-shadow:inset 0 0 0 2px #e8c46a,inset 0 0 0 5px rgba(0,0,0,.25),0 4px 12px rgba(0,0,0,.18);overflow:hidden}
+.mc .mt2{font-size:10px;letter-spacing:.04em;opacity:.9}.mc .mimg{width:62%;aspect-ratio:1;border-radius:50%;object-fit:cover;border:2px solid #f3dc9a;align-self:center;background:#f7f3ea}.mc .mimg.q{display:grid;place-items:center;color:#8a857a;font:700 22px serif}
+.mc .mhj{font:700 18px/1 "Gowun Batang",serif;letter-spacing:.06em}.mc .mn{font-size:11px;line-height:1.25}.mc small{font-size:10px;opacity:.85}
+.mc.seal{background:repeating-linear-gradient(45deg,#2a2722 0 8px,#24211d 8px 16px);color:#9a9488}.mc.me{box-shadow:inset 0 0 0 2px #ffe39a,inset 0 0 0 5px rgba(0,0,0,.25),0 0 0 3px var(--seal)}
+.mc.gold{box-shadow:inset 0 0 0 3px #ffe39a,0 0 22px rgba(255,205,90,.85)}
+.mc.big .mhj{font-size:30px}.mc.big .mt2{font-size:13px}.mc.big .mn{font-size:15px}.mc.big small{font-size:13px}
+.pcpanel h3{font:700 18px "Gowun Batang",serif;margin:0 0 10px}.pcpanel h3 small{font:400 13px "Noto Sans KR",sans-serif;color:var(--sub);margin-left:4px}
+.pcards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.mcb{padding:0;border:0;background:none;cursor:pointer;border-radius:12px;animation:dealin .5s both;transition:transform .15s}.mcb.on{transform:translateY(-6px)}
+@keyframes dealin{from{opacity:0;transform:translateY(20px) rotate(-6deg)}}
+.pcinfo{margin-top:10px;font-size:14px;line-height:1.7}.pcinfo p{margin:0}
+.ijbox{text-align:center;margin-bottom:14px}.ijflip{width:min(56vw,220px);margin:10px auto 12px;perspective:900px}.ijin{position:relative;aspect-ratio:5/7;transition:transform .7s;transform-style:preserve-3d}.ijflip.show .ijin{transform:rotateY(180deg)}
+.ijback,.ijfront{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}.ijfront{transform:rotateY(180deg)}.ijfront .mc{height:100%}
+.ijback{border-radius:12px;background:#1d1a15;box-shadow:inset 0 0 0 3px #e8c46a;display:grid;place-content:center;gap:6px;color:#e8c46a}.ijback span{font:700 56px "Gowun Batang",serif}.ijback small{font-size:13px}
+.ijmsg{margin:0;font-size:15px;line-height:1.6}
+.ctabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:14px}.ctabs button{min-height:52px;border-radius:12px;border:1.5px solid var(--line);background:var(--panel);font:500 14px "Noto Sans KR",sans-serif;color:var(--ink);cursor:pointer;display:grid;gap:1px;align-content:center}.ctabs small{font-size:11px;color:var(--sub)}.ctabs button[aria-pressed=true]{background:var(--ink);color:#f7f3ea;border-color:var(--ink)}.ctabs button[aria-pressed=true] small{color:#e8c46a}
+.mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:10px}.mgrid.four{grid-template-columns:repeat(4,minmax(0,1fr))}.mgrid .mc .mn{font-size:10px}.mgrid .mc small{display:none}.mgrid .mc .mhj{font-size:14px}
+@media(min-width:600px){.mgrid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.psh{margin:16px 0 0;font:700 15px "Gowun Batang",serif}.empty{color:var(--sub);text-align:center;padding:24px 0}
+.eximg{width:min(60%,200px);border-radius:12px;margin:6px auto 10px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+#cx-fr .btn{margin-top:8px}
 </style>
 </head>
 <body>
@@ -368,7 +390,7 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
       <button type="button" class="hm" data-nav="newyear"><b>2027 신년운세</b><small>정미년 · 띠별 운세</small></button>
       <button type="button" class="hm" data-nav="tour"><b>단톡방 토너먼트</b><small>3~8명 대진표</small></button>
       <button type="button" class="hm" data-nav="plaza"><b>카드 광장</b><small>모르는 사람과 운빨배틀</small></button>
-      <button type="button" class="hm" data-nav="dex"><b>카드 도감</b><small>160장 모으기</small></button>
+      <button type="button" class="hm" data-nav="dex"><b>카드함</b><small>도감 · 일진 · 친구 카드</small></button>
     </div>
     <div class="hfoot"><button type="button" id="aboutBtn">이용 안내</button><button type="button" id="shareSite">링크 공유</button></div>
     <p class="about" id="about" hidden>운빨카드는 생일의 사주(일간·오행)와 성격유형 16가지를 엮은 재미용 콘텐츠예요. 의료·법률·투자 결정의 근거가 될 수 없고, 공식 MBTI® 검사와 무관합니다. 생년월일은 내 기기에만 저장돼요.</p><p class="about" id="shareMsg" role="status"></p>
@@ -427,15 +449,15 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
     </article>
     <div class="actions">
       <button class="kakao" type="button" id="shareMe"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>카톡으로 도전장</button>
-      <button class="ghost" type="button" id="mkImg">카드 이미지 저장</button>
+      <button class="ghost" type="button" id="exBtn">카드 교환</button><button class="ghost" type="button" id="mkImg">이미지 저장</button>
     </div>
     <p class="note" id="copyMsg" role="status"></p>
     <div class="panel sum" id="sum"></div>
+    <div class="panel pcpanel"><h3>내 네 기둥 카드 <small>사주의 네 기둥이 각각 한 장</small></h3><div class="pcards" id="pcards"></div><div class="pcinfo" id="pcInfo"></div></div>
     <button class="btn more" type="button" id="moreBtn" aria-expanded="false" aria-controls="detail">자세히 보기 ▾</button>
   </div>
 </section>
 
-<div class="paym" id="payModal" hidden><div class="paybox" role="dialog" aria-modal="true" aria-labelledby="payT"><button type="button" class="px" id="payX" aria-label="닫기">×</button><p class="kick">유료 풀이</p><h3 id="payT"></h3><p id="payD"></p><div class="price">990<span>원</span></div><button type="button" class="btn" id="payGo">결제하고 열기</button><p class="note" id="payMsg" role="status"></p><p class="note">결제한 풀이는 같은 생년월일로 이 기기에서 다시 볼 수 있어요.</p></div></div>
 <section class="band wrap save" id="saveBox" hidden>
   <h2>카드 이미지 저장</h2>
   <p class="note">휴대폰은 이미지를 길게 눌러 저장하고, PC는 우클릭해서 저장하세요.</p>
@@ -607,13 +629,15 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 </div>
 </section>
 <section class="scr" id="scr-dex" hidden>
-<div class="topbar band wrap"><button type="button" class="back" data-nav="home">← 메인</button><b>운빨카드</b><span>카드 도감</span></div>
+<div class="topbar band wrap"><button type="button" class="back" data-nav="home">← 메인</button><b>운빨카드</b><span>카드함</span></div>
 <div class="band wrap">
-  <h2 class="sec">카드 도감 <span class="dexn" id="dexN"></span></h2>
-  <p class="note" style="margin:-6px 0 14px">내 카드, 대결한 카드, 토너먼트와 광장에서 만난 카드가 모여요. 아직 못 만난 카드는 흐리게 보여요.</p>
+  <h2 class="sec">카드함</h2>
+  <div class="ctabs" id="cTabs"><button type="button" data-ct="dex" aria-pressed="true">캐릭터 도감<small id="dexN"></small></button><button type="button" data-ct="pil" aria-pressed="false">네 기둥<small></small></button><button type="button" data-ct="ij" aria-pressed="false">일진<small></small></button><button type="button" data-ct="fr" aria-pressed="false">친구<small></small></button></div>
+  <div id="cx-dex"><p class="note" style="margin:0 0 14px">내 카드, 대결·교환한 카드, 토너먼트와 광장에서 만난 카드가 모여요. 아직 못 만난 카드는 흐리게 보여요.</p>
   <div class="dextabs" id="dexTabs"></div>
   <div class="dexgrid" id="dexGrid"></div>
-  <div id="dexView"></div>
+  <div id="dexView"></div></div>
+  <div id="cx-pil" hidden></div><div id="cx-ij" hidden></div><div id="cx-fr" hidden></div>
 </div>
 </section>
 <section class="scr" id="scr-plaza" hidden>
@@ -634,6 +658,8 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 
 <canvas id="cv" width="1080" height="1920" hidden></canvas>
 
+<div class="paym" id="exModal" hidden><div class="paybox" role="dialog" aria-modal="true" aria-labelledby="exT"><button type="button" class="px" id="exX" aria-label="닫기">×</button><p class="kick">카드 교환</p><h3 id="exT"></h3><img id="exImg" class="eximg" alt=""><p id="exD"></p><button type="button" class="btn" id="exGo"></button><p class="note" id="exMsg" role="status"></p></div></div>
+<div class="paym" id="payModal" hidden><div class="paybox" role="dialog" aria-modal="true" aria-labelledby="payT"><button type="button" class="px" id="payX" aria-label="닫기">×</button><p class="kick">유료 풀이</p><h3 id="payT"></h3><p id="payD"></p><div class="price">990<span>원</span></div><button type="button" class="btn" id="payGo">결제하고 열기</button><p class="note" id="payMsg" role="status"></p><p class="note">결제한 풀이는 같은 생년월일로 이 기기에서 다시 볼 수 있어요.</p></div></div>
 <nav class="tabbar" id="tabbar" aria-label="바로가기"><button type="button" data-nav="home"><i>⌂</i>홈</button><button type="button" data-nav="draw"><i>運</i>사주·카드</button><button type="button" data-nav="battle"><i>戰</i>카드배틀</button><button type="button" data-nav="today"><i>今</i>오늘의 운빨</button><button type="button" data-nav="plaza"><i>場</i>카드광장</button></nav>
 <script>
 {
@@ -939,6 +965,49 @@ function premRender(){const c=cur;if(!c||!c.A)return;
     
   }}
 
+/* ===== 수집: 네 기둥 · 일진 · 친구 ===== */
+const PROLE=[['연주','뿌리 카드','조상과 어린 시절, 내가 물려받은 바탕'],['월주','사회 카드','부모·형제와 청년기, 일하고 어울리는 방식'],['일주','나 카드','나 자신과 배우자 자리, 지금의 대표 카드'],['시주','미래 카드','자녀와 노년, 내가 그리는 꿈과 결실']];
+function lsGet(k,d){try{return JSON.parse(localStorage.getItem(k)||'null')??d}catch(e){return d}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function mcHTML(o){/* o:{s,b,top,name,sub,cls,seal} */
+  if(o.seal)return `<div class="mc seal ${o.cls||''}"><span class="mt2">${o.top}</span><div class="mimg q">?</div><span class="mn">${o.name}</span><small>${o.sub||''}</small></div>`;
+  const e=Math.floor(o.s/2);return `<div class="mc ${o.cls||''}" style="--ec:${EL[e].c}"><span class="mt2">${o.top}</span><img class="mimg" src="${IMG[o.s]}" alt=""><b class="mhj">${SH[o.s]}${BR[o.b]}</b><span class="mn">${o.name}</span><small>${o.sub||''}</small></div>`}
+function pillarCards(c){const sj=c.sj,si=c.p.s;return [sj.y,sj.m,sj.d,sj.h].map((v,i)=>{const R=PROLE[i];
+  if(!v)return{seal:true,top:R[1],name:'봉인된 카드',sub:'태어난 시간을 넣으면 열려요',role:R};
+  const g=i===2?'일간(나)':tenGod(si,v[0]);return{s:v[0],b:v[1],top:R[1],name:`${ST[v[0]].noun}과 ${ANI[v[1]]}`,sub:`${R[0]} · ${g}`,role:R,g,cls:i===2?'me':''}})}
+function pillarRender(c,save){const L=pillarCards(c);
+  $('pcards').innerHTML=L.map((o,i)=>`<button type="button" class="mcb" data-pc="${i}" style="animation-delay:${i*.12}s">${mcHTML(o)}</button>`).join('');
+  $('pcInfo').innerHTML='<p class="note" style="margin:0">카드를 누르면 그 기둥의 뜻을 볼 수 있어요.</p>';
+  if(!save)return;const P=lsGet('pcol',{});P[c.dd+(c.mins??'')]={d:c.dd,mins:c.mins,n:myNick(),L:L.map(o=>o.seal?null:[o.s,o.b])};lsSet('pcol',P)}
+function pillarInfo(i){const c=cur,o=pillarCards(c)[i];
+  $('pcInfo').innerHTML=o.seal?`<p><b>${o.top}</b> — ${o.role[2]}을(를) 뜻해요. 태어난 시간을 입력하면 열려요.</p>`:
+   `<p><b>${o.top} · ${SH[o.s]}${BR[o.b]} (${STK[o.s]}${BRK[o.b]})</b> — ${o.role[2]}을(를) 뜻해요. ${ST[o.s].noun}의 기운(${ST[o.s].k})이 ${ANI[o.b]}띠 자리에 앉았어요. ${i===2?'이 기둥의 천간이 바로 나, 일간이에요.':`나에게는 ${o.g}(${GODT[o.g]})의 의미라, 이 시기와 영역에서 ${GODT[o.g]}의 힘이 드러나요.`}</p>`}
+/* 일진 */
+function iljinToday(){const t=todayStr(),p=pillar(t);return{t,s:p.s,b:p.b,i:i60(p.s,p.b)}}
+function iljinGot(){return lsGet('iljin',{})}
+function iljinCard(c){const j=iljinToday(),got=iljinGot(),have=!!got[j.i],g=tenGod(c.p.s,j.s),A=c.A||analyze(c.sj,c.gender),lucky=Math.floor(j.s/2)===A.yong||EB[j.b]===A.yong;
+  const n=Object.keys(got).length;
+  return `<div class="panel ijbox"><p class="kick">오늘의 일진 카드 · 육십갑자 ${n}/60</p>
+   <div class="ijflip${have?' show':''}" id="ijFlip"><div class="ijin"><div class="ijback"><span>日</span><small>오늘의 기운</small></div><div class="ijfront">${mcHTML({s:j.s,b:j.b,top:`${j.t.replace(/-/g,'.')} 일진`,name:`${STK[j.s]}${BRK[j.b]}일 · ${ST[j.s].noun}과 ${ANI[j.b]}`,sub:lucky?'★ 나의 길일':g,cls:'big'+(lucky?' gold':'')})}</div></div></div>
+   ${have?`<p class="ijmsg"><b>${TG[g][0].replace(/달$/,'날')}</b> — ${TG[g][1]}${lucky?' 오늘은 내 용신 기운이 들어온 길일이에요.':''}</p>`:`<button type="button" class="btn" id="ijGet">오늘의 일진 카드 받기</button>`}
+   <p class="note" style="margin:8px 0 0">하루에 한 장, 60일 동안 모두 다른 카드가 와요. 카드함에서 모은 카드를 볼 수 있어요.</p></div>`}
+function iljinTake(){const j=iljinToday(),got=iljinGot();if(!got[j.i]){got[j.i]=j.t;lsSet('iljin',got)}const f=$('ijFlip');if(f)f.classList.add('show');setTimeout(todayRender,RM()?0:700)}
+/* 친구 */
+function friendsGet(){return lsGet('friends',[])}
+function friendAdd(n,f,x){const L=friendsGet().filter(o=>o.f!==f);L.unshift({n,f,si:x.p.s,b:x.p.b,t:x.t,no:x.no,name:x.name,at:todayStr()});lsSet('friends',L.slice(0,100));dexAdd(x.no)}
+function exShare(){const c=cur;if(!c)return;const n=myNick();share({code:code({d:c.dd,t:c.t}),n,x:1,title:`${n==='나'?'친구':n}님이 운빨카드를 보냈어요`,desc:`「${c.name}」 카드를 받고, 내 카드도 보내 주세요! 서로의 카드가 카드함에 모여요.`,img:IMG[c.p.s].slice(4,-5),btn:'카드 받고 교환하기'},'copyMsg')}
+/* 카드함 */
+let colTab='dex';
+function colRender(){for(const b of $('cTabs').children)b.setAttribute('aria-pressed',String(b.dataset.ct===colTab));
+  for(const k of ['dex','pil','ij','fr'])$('cx-'+k).hidden=k!==colTab;
+  const got=iljinGot(),F=friendsGet(),P=lsGet('pcol',{});
+  $('cTabs').querySelector('[data-ct=ij] small').textContent=`${Object.keys(got).length}/60`;$('cTabs').querySelector('[data-ct=fr] small').textContent=`${F.length}명`;
+  $('cTabs').querySelector('[data-ct=pil] small').textContent=`${Object.keys(P).length}세트`;
+  if(colTab==='ij'){$('cx-ij').innerHTML=`<p class="note">매일 「오늘의 운빨」에서 받은 일진 카드가 모여요. 60일을 모두 모으면 육십갑자 완성!</p><div class="mgrid">${Array.from({length:60},(_,i)=>got[i]?`<div title="${got[i]}">${mcHTML({s:i%10,b:i%12,top:got[i].slice(5).replace('-','.'),name:`${STK[i%10]}${BRK[i%12]}일`})}</div>`:`<div>${mcHTML({seal:true,top:'일진',name:`${STK[i%10]}${BRK[i%12]}일`})}</div>`).join('')}</div>`}
+  if(colTab==='fr'){$('cx-fr').innerHTML=`<p class="note">카드 교환 링크를 주고받거나 도전장을 받은 친구의 카드가 모여요.</p><button type="button" class="btn" id="exBtn2">카톡으로 카드 교환하기</button>`+(F.length?`<div class="mgrid">${F.map(o=>`<div>${mcHTML({s:o.si,b:o.b,top:esc(o.n),name:esc(o.name),sub:o.t})}</div>`).join('')}</div>`:'<p class="empty">아직 받은 친구 카드가 없어요. 교환 링크를 보내 보세요.</p>')}
+  if(colTab==='pil'){const S=Object.values(P);$('cx-pil').innerHTML=`<p class="note">카드를 뽑을 때마다 그 사주의 네 기둥 카드가 한 세트씩 모여요. 가족·친구의 생일로 뽑아 봐도 쌓여요.</p>`+(S.length?S.map(x=>`<h4 class="psh">${esc(x.n)} · ${x.d.replace(/-/g,'.')}</h4><div class="mgrid four">${x.L.map((v,i)=>v?mcHTML({s:v[0],b:v[1],top:PROLE[i][1],name:`${ST[v[0]].noun}과 ${ANI[v[1]]}`,cls:i===2?'me':''}):mcHTML({seal:true,top:PROLE[i][1],name:'봉인'})).join('')}</div>`).join(''):'<p class="empty">아직 모은 세트가 없어요.</p>')}
+  if(colTab==='dex')dexRender()}
+
 const SIJIN=['자','축','인','묘','진','사','오','미','신','유','술','해'];
 const FM={g:null,cal:'S',ap:0,mins:null,worry:'',chips:[]};
 function segBind(id,attr,cb){const el=$(id);el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;for(const x of el.children)x.setAttribute('aria-pressed',String(x===b));cb(b.dataset[attr])})}
@@ -1017,7 +1086,7 @@ function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gen
   const tm=tenGod(si,sj.m[0]),ty=tenGod(si,sj.y[0]);
   $('rSocial').textContent=`월간 ${SH[sj.m[0]]}(${tm}): ${TGMEAN[tm]} 직장과 사회생활에서 이 힘이 가장 자연스럽게 나와요. 뿌리가 되는 연간 ${SH[sj.y[0]]}(${ty})는 어린 시절과 집안에서 물려받은 기운이에요.`;
   $('rSpouse').textContent=`일지 ${BR[c.p.b]}(${ANI[c.p.b]})에 ${ELW[EB[c.p.b]]} 기운이 있어요. ${SPOUSE[EB[c.p.b]]}`;
-  $('dTitle').textContent=`「${c.name}」 자세한 풀이`;proRender(c);premRender();
+  $('dTitle').textContent=`「${c.name}」 자세한 풀이`;proRender(c);premRender();pillarRender(c,anim||window.__restored);
   if(anim){playTok++;if($('cRes'))$('cRes').hidden=true;markCard();dexAdd(c.no)}
   if(anim){$('detail').hidden=true;$('moreBtn').textContent='자세히 보기 ▾';$('moreBtn').setAttribute('aria-expanded','false')}
   if(anim){card.classList.remove('reveal');void card.offsetWidth;card.classList.add('reveal')}
@@ -1127,7 +1196,7 @@ function runTour(){const rows=[...document.querySelectorAll('.trow')];$('tErr').
 function cur0(){return cur}
 function loadKakao(){if(!KAKAO_KEY||window.Kakao)return;const sc=document.createElement('script');sc.src='https://t1.kakaocdn.net/kakao_js_sdk/2.8.2/kakao.min.js';sc.integrity='sha384-zt/G7/KfaRQ9dT/QIkS0ujMtzouJqzuSJcXVQu50x0rl/+mD1dc70AeOejVbMD9E';sc.crossOrigin='anonymous';sc.onload=()=>{try{Kakao.init(KAKAO_KEY)}catch(e){}};document.head.appendChild(sc)}
 function code(x){return x.d.replace(/-/g,'')+x.t}
-async function share(o,msg){const url=SITE+(o.code?'?f='+o.code+(o.n?'&n='+encodeURIComponent(o.n):''):'');
+async function share(o,msg){const url=SITE+(o.code?'?f='+o.code+(o.n?'&n='+encodeURIComponent(o.n):'')+(o.x?'&x=1':''):'');
   if(window.Kakao&&Kakao.isInitialized&&Kakao.isInitialized()){try{Kakao.Share.sendDefault({objectType:'feed',content:{title:o.title,description:o.desc,imageUrl:SITE+'img/share/'+(o.img||'og')+'.jpg',link:{mobileWebUrl:url,webUrl:url}},buttons:[{title:o.btn,link:{mobileWebUrl:url,webUrl:url}}]});return}catch(e){}}
   if(navigator.share){try{await navigator.share({title:o.title,text:o.desc,url});return}catch(e){if(e&&e.name==='AbortError')return}}
   try{await navigator.clipboard.writeText(`${o.desc}\n${url}`);$(msg).textContent='링크를 복사했어요. 카카오톡 대화방에 붙여 넣어 보내 주세요.'}catch(e){$(msg).textContent=`${o.desc} ${url}`}}
@@ -1164,8 +1233,8 @@ try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&T
 $('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map(k=>`<option value="${k}">${k} · ${TY[k][0]}</option>`).join('');fillDate('cd','1996-08-02');
 {const q=new URLSearchParams(location.search),f=q.get('f'),m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);
  if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){const od=`${m[1]}-${m[2]}-${m[3]}`,on=(q.get('n')||'친구').slice(0,10),ox=build(od,m[4]);
-  setD('d2',od);$('t2').value=m[4];$('n2').value=on;$('challenge').hidden=false;$('chT').textContent=`${on}님이 카드 배틀 도전장을 보냈어요`;
-  const o=$('chOpp');o.style.setProperty('--el',EL[ox.s.e].c);o.innerHTML=slotHTML(ox,on)}}
+  friendAdd(on,f,ox);if(q.get('x')==='1'){window.__ex={on,ox};}else{setD('d2',od);$('t2').value=m[4];$('n2').value=on;$('challenge').hidden=false;$('chT').textContent=`${on}님이 카드 배틀 도전장을 보냈어요`;
+  const o=$('chOpp');o.style.setProperty('--el',EL[ox.s.e].c);o.innerHTML=slotHTML(ox,on)}}}
 loadKakao();
 axesUI();render(getD('d'),type.join(''),false);
 if(window.__restored){$('stageBox').hidden=false;$('flipper').classList.add('show');$('sample').textContent='오늘의 내 카드'}
@@ -1216,7 +1285,7 @@ function go(n,fromHash){if(!SCR.includes(n))n='home';for(const k of SCR)$('scr-'
   const gate=$('scr-'+n).querySelector('.gate'),need=['battle','today'].includes(n)&&!hasCard()&&!(n==='battle'&&chActive);if(gate)gate.hidden=!need;
   if(n==='battle'){$('challenge').hidden=!(chActive&&!chAccepted);$('arena').hidden=need||(chActive&&!chAccepted)}
   if(n==='today'){$('todayBox').hidden=need;if(!need)todayRender()}
-  if(n==='newyear')nyInit();if(n==='dex')dexRender();if(n==='plaza')plazaRender();
+  if(n==='newyear')nyInit();if(n==='dex')colRender();if(n==='plaza')plazaRender();
   window.scrollTo(0,0)}
 window.addEventListener('popstate',()=>go(location.hash.slice(1)||'home',true));
 document.addEventListener('click',e=>{const b=e.target.closest('[data-nav]');if(b){e.preventDefault();go(b.dataset.nav)}});
@@ -1240,7 +1309,7 @@ function introInit(){const T=["145m", "048n", "126n", "114n", "087n", "079n", "0
 /* today */
 function todayRender(){const c=cur,base=new Date();const days=[...Array(7)].map((_,k)=>{const d=new Date(base);d.setDate(d.getDate()+k);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const tp=pillar(ds),g=TG[tenGod(c.p.s,tp.s)];return{d,ds,tp,g}});
   const t=days[0],sup=(c.s.e+4)%5,L=LUCKY[sup],WD='일월화수목금토';
-  $('todayBox').innerHTML=`<div class="panel"><div class="tdbig"><div class="hj2" style="background:${EL[Math.floor(t.tp.s/2)].c}">${SH[t.tp.s]}${BR[t.tp.b]}</div><div><p class="kick">${t.ds.replace(/-/g,'.')} · ${SH[t.tp.s]}${BR[t.tp.b]}일 · ${c.name}</p><h3>${t.g[0].replace(/달$/,'날')}</h3><p>${t.g[1]}</p></div></div>
+  $('todayBox').innerHTML=iljinCard(c)+`<div class="panel"><div class="tdbig"><div class="hj2" style="background:${EL[Math.floor(t.tp.s/2)].c}">${SH[t.tp.s]}${BR[t.tp.b]}</div><div><p class="kick">${t.ds.replace(/-/g,'.')} · ${SH[t.tp.s]}${BR[t.tp.b]}일 · ${c.name}</p><h3>${t.g[0].replace(/달$/,'날')}</h3><p>${t.g[1]}</p></div></div>
    <table class="vtab" style="margin-top:14px"><tr><td>연애운</td><td>${dots(t.g[2])}</td></tr><tr><td>재물운</td><td>${dots(t.g[3])}</td></tr><tr><td>행운의 색</td><td>${L[0]}</td></tr><tr><td>행운의 숫자</td><td>${L[2]}</td></tr></table>
    <p class="note" style="margin:6px 0 0">행운의 색과 숫자는 내 일간(${c.s.k})을 살려 주는 ${ELW[sup]} 기운에서 골랐어요.</p></div>
    <h3 class="mh" style="margin-top:22px">이번 주 운빨 흐름</h3><div class="week">${days.map((x,k)=>`<div class="${k?'':'on'}"><b>${k?WD[x.d.getDay()]:'오늘'}</b>${x.d.getDate()}일<i style="width:${Math.round((x.g[2]+x.g[3])/10*90)}%"></i></div>`).join('')}</div>
@@ -1267,7 +1336,7 @@ function dexGet(){try{return new Set(JSON.parse(localStorage.getItem('dex')||'[]
 function dexAdd(no){if(!no)return;const d=dexGet();d.add(no);window.__dex=[...d];try{localStorage.setItem('dex',JSON.stringify([...d]))}catch(e){}}
 function mkCard(si,t,b){const s=ST[si],r=TY[t],g=temp(t);return{p:{s:si,b:b??0},s,t,r,g,name:nm(si,t),no:si*16+TYK.indexOf(t)+1}}
 let dexSi=-1;
-function dexRender(){if(dexSi<0)dexSi=cur&&hasCard()?cur.p.s:0;const d=dexGet(),mine=cur&&hasCard()?cur.no:0;$('dexN').textContent=`수집 ${d.size} / 160`;
+function dexRender(){if(dexSi<0)dexSi=cur&&hasCard()?cur.p.s:0;const d=dexGet(),mine=cur&&hasCard()?cur.no:0;$('dexN').textContent=`${d.size}/160`;
   $('dexTabs').innerHTML=ST.map((x,i)=>`<button type="button" data-si="${i}" aria-pressed="${i===dexSi}" aria-label="${x.k}" style="background-image:url(${IMG[i]})"></button>`).join('');
   $('dexGrid').innerHTML=TYK.map(t=>{const c=mkCard(dexSi,t),has=d.has(c.no);return `<button type="button" class="${has?'':'no'} ${c.no===mine?'mine':''}" data-t="${t}"><img src="${IMG[dexSi]}" alt=""><b>${has?c.name:'미발견'}</b><small>No.${String(c.no).padStart(3,'0')} · ${t}</small></button>`}).join('');$('dexView').innerHTML=''}
 function dexView(t){const c=mkCard(dexSi,t),has=dexGet().has(c.no);const ab=abil(c);
@@ -1319,6 +1388,15 @@ $('gBd').addEventListener('input',e=>fmtBD(e.target));for(const id of ['gHH','gM
 $('gf').addEventListener('submit',e=>{e.preventDefault();const p=parseBD($('gBd').value,GF.cal);if(p.err){$('gErr').textContent=p.err;return}const tm=parseTM(GF.ap,$('gHH').value,$('gMM').value);if(tm.err){$('gErr').textContent=tm.err;return}$('gErr').textContent='';
   const o={sj:saju(p.d,tm.none?null:tm.mins),gender:GF.g},nm=$('gName').value.trim()||'상대';$('gOut').innerHTML=`<h4 class="gh">${esc(myNick())} ♥ ${esc(nm)}</h4>`+gungRender(cur,o);$('gOut').scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'})});
 $('payModal').addEventListener('click',e=>{if(e.target.id==='payModal')$('payModal').hidden=true});
+
+document.addEventListener('click',e=>{const t=e.target;
+  const pc=t.closest('[data-pc]');if(pc){for(const b of document.querySelectorAll('[data-pc]'))b.classList.toggle('on',b===pc);pillarInfo(+pc.dataset.pc);return}
+  if(t.closest('#ijGet')){iljinTake();return}
+  if(t.closest('#exBtn')||t.closest('#exBtn2')){if(!hasCard()){go('draw');return}exShare();return}
+  const ct=t.closest('[data-ct]');if(ct){colTab=ct.dataset.ct;colRender();return}});
+$('exX').addEventListener('click',()=>{$('exModal').hidden=true});
+if(window.__ex){const {on,ox}=window.__ex;$('exT').textContent=`${on}님이 카드를 보냈어요`;$('exImg').src=cardSrc(ox,'n');$('exD').textContent=`「${ox.name}」(${ox.s.k} × ${ox.t}) 카드가 카드함 친구 칸에 들어갔어요.`;
+  const me=hasCard();$('exGo').textContent=me?'내 카드도 보내 주기':'나도 카드 뽑고 보내 주기';$('exGo').onclick=()=>{if(me){exShare();$('exMsg').textContent='보낸 뒤 친구도 내 카드를 받게 돼요.'}else{$('exModal').hidden=true;go('draw')}};$('exModal').hidden=false}
 
 }
 </script>
