@@ -524,6 +524,7 @@ details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-
 .storybtn.open{grid-template-columns:1fr auto;animation:none;background:#f3ece0;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}.storybtn.open .sb-t b{color:var(--ink);font-size:15px}.storybtn.open::after{display:none}.storybtn.open .sb-go{background:transparent;color:var(--sub)}
 @keyframes sbpulse{50%{box-shadow:inset 0 0 0 1.5px #ffe39a,0 10px 30px rgba(232,180,80,.45)}}
 @media (prefers-reduced-motion:reduce){.storybtn,.storybtn::after{animation:none}}
+.hmstory{margin:0 0 10px}.hmstory .sb-q{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;border:2px solid #e8c46a;background:radial-gradient(circle,#5a4520,#2a2218);font:700 24px "Gowun Batang",serif;color:#ffe39a}
 .hm.hot{box-shadow:inset 0 0 0 1.5px #e8c46a}.hm.hot b{color:#ffe39a}.pm.flash{animation:pmflash 1s 2}@keyframes pmflash{50%{box-shadow:0 0 0 4px #e8c46a}}
 </style>
 </head>
@@ -539,7 +540,7 @@ details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-
   <p class="herocap" id="heroCap">오늘의 카드 · 복주머니 품은 태양 탐험가 「해랑이」</p>
   <button type="button" class="tap" id="tap">화면을 누르면 시작</button>
   <nav class="hmenu" id="hmenu" aria-label="메인 메뉴">
-    <button type="button" class="hm big" data-nav="draw"><span><b>카드 뽑기 · 사주 보기</b><small>생년월일·시간으로 내 카드와 사주풀이</small></span><i>▶</i></button>
+    <button type="button" class="storybtn hmstory" id="hmDraw" data-nav="draw"></button>
     <div class="hgrid">
       <button type="button" class="hm" data-nav="today"><b>오늘의 운빨</b><small>매일 바뀌는 운세</small></button>
       <button type="button" class="hm hot" id="hmGung"><b>궁합 보기 💞</b><small>그 사람과 나, 진짜 궁합</small></button>
@@ -1618,7 +1619,10 @@ let chAccepted=false,chActive=false;
 function hasCard(){try{if(localStorage.getItem('giun'))return true}catch(e){}return !!window.__drew}
 function markCard(){window.__drew=true;const c=cur;if(c){$('contBtn').hidden=false;$('contBtn').textContent=`이어하기 · ${NICK[c.p.s]}`}}
 const SCR=['home','draw','battle','tour','today','newyear','dex','plaza','train'];
-function go(n,fromHash){if(!SCR.includes(n))n='home';for(const k of SCR)$('scr-'+k).hidden=k!==n;document.body.dataset.scr=n;for(const b of $('tabbar').children)b.toggleAttribute('aria-current',b.dataset.nav===n),b.dataset.nav===n&&b.setAttribute('aria-current','page');
+function homeBtn(){const b=$('hmDraw');if(!b)return;const me=lsGet('meD',null);let si=-1;try{if(me)si=saju(me,720).d[0]}catch(e){}
+  if(si>=0){const nk=NICK[si],sub=(nk.charCodeAt(nk.length-1)-44032)%28?'이':'가';b.innerHTML=`<img src="${IMG[si]}" alt=""><span class="sb-t"><small>카드 뽑기 · 사주 보기</small><b>${nk}${sub} 들려주는 내 사주 이야기</b><em>다시 듣거나, 다른 생일로 새 카드를 뽑아 보세요</em></span><span class="sb-go">열기<i>▶</i></span>`}
+  else b.innerHTML=`<span class="sb-q">?</span><span class="sb-t"><small>카드 뽑기 · 사주 보기 · 무료</small><b>내 카드 뽑고 사주 이야기 듣기</b><em>생년월일·시간만 넣으면 내 수호 정령이 들려줘요</em></span><span class="sb-go">뽑기<i>▶</i></span>`}
+function go(n,fromHash){if(!SCR.includes(n))n='home';if(n==='home')homeBtn();for(const k of SCR)$('scr-'+k).hidden=k!==n;document.body.dataset.scr=n;for(const b of $('tabbar').children)b.toggleAttribute('aria-current',b.dataset.nav===n),b.dataset.nav===n&&b.setAttribute('aria-current','page');
   if(!fromHash&&location.hash.slice(1)!==n){history.pushState(null,'',n==='home'?location.pathname+location.search:'#'+n)}
   const gate=$('scr-'+n).querySelector('.gate'),need=['battle','today'].includes(n)&&!hasCard()&&!(n==='battle'&&chActive);if(gate)gate.hidden=!need;
   if(n==='battle'){$('challenge').hidden=!(chActive&&!chAccepted);$('arena').hidden=need||(chActive&&!chAccepted)}
