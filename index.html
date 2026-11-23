@@ -3,13 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>운빨카드 시제품</title>
+<title>운빨카드 · 사주로 뽑는 나의 기운 카드</title>
 <meta name="description" content="태어난 날의 기운과 성격유형으로 찾는 160명의 캐릭터. 같은 유형, 다른 기운.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="운빨카드 · 같은 유형, 다른 기운">
-<meta property="og:description" content="생일과 성격유형으로 나의 기운 캐릭터를 찾아보세요. 친구와 궁합도 볼 수 있어요.">
+<meta property="og:description" content="생년월일로 사주를 보고, 160종 캐릭터 카드를 모으고, 친구와 운빨배틀까지!">
 <meta property="og:image" content="https://dnpstudio81-cmyk.github.io/img/share/og.jpg">
 <meta property="og:url" content="https://dnpstudio81-cmyk.github.io/">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="theme-color" content="#1d1a15">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml"><link rel="icon" href="img/icon-192.png" sizes="192x192"><link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -54,7 +58,7 @@ details.quiz[open] summary{background:transparent;color:var(--ink);border:1.5px 
 .q button{min-height:44px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;font:14px "Noto Sans KR",sans-serif;cursor:pointer;padding:6px}
 .q button[aria-pressed=true]{border-color:var(--seal);color:var(--seal)}
 .check{display:flex;gap:8px;align-items:center;font-size:14px;margin-top:12px}
-.check input{width:20px;height:20px}
+.check{min-height:44px;cursor:pointer}.check input{width:24px;height:24px;accent-color:var(--seal);flex:none}
 .stage{display:grid;justify-items:center;gap:12px}
 .tag-sample{font-size:13px;color:var(--sub)}
 .card{--el:#5c6066;--tint:#ecebe6;width:min(100%,400px);aspect-ratio:9/14;background:var(--el);border-radius:20px;padding:11px;display:flex;position:relative}
@@ -406,6 +410,13 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 .nkb{display:inline-block;margin-left:6px;padding:1px 9px;border-radius:999px;background:#fff1d6;color:#8a5a12;border:1px solid #f0d49a;font:500 12px/1.6 "Noto Sans KR",sans-serif;vertical-align:middle;white-space:nowrap}
 .nkhead{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:8px 10px;border-radius:14px;background:linear-gradient(90deg,#fff4dc,transparent)}.nkhead img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid #e8c46a;background:#fff}.nkhead small{display:block;font-size:12px;color:var(--sub)}.nkhead b{font:700 20px "Gowun Batang",serif;color:var(--ink)}
 .mtile h3+.nkb{margin:0 0 4px}
+
+.bdw .seg.sm{margin:4px 0 6px}.bdw .seg.sm button{height:36px;font-size:13px}.bdw .bdn{margin:4px 0 0;min-height:0}.txt.bad{border-color:#b0392b}
+.trow .bdw .seg.sm{display:none}.trow .bdw{min-width:0}.trow .bdw .bdn{font-size:11px;margin:2px 0 0}.trow .bdw .bdn:empty{display:none}
+@media(max-width:560px){.trow{grid-template-columns:minmax(0,.75fr) minmax(0,1.45fr) 64px 36px!important;gap:5px}.trow .bdw .txt{font-size:14px;padding:0 4px;letter-spacing:-.02em}.trow select{padding:0 2px;font-size:14px}}
+
+@media(max-width:560px){.cont{position:static;align-self:center;margin:0 0 8px}}
+footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;display:inline-block;padding:10px 2px}footer .biz{margin:6px 0 0;font-size:12px;opacity:.75}
 </style>
 </head>
 <body>
@@ -421,19 +432,19 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
     <div class="hgrid">
       <button type="button" class="hm" data-nav="battle"><b>카드 배틀</b><small>친구와 1:1 · 궁합</small></button>
       <button type="button" class="hm" data-nav="today"><b>오늘의 운빨</b><small>매일 바뀌는 운세</small></button>
-      <button type="button" class="hm" data-nav="newyear"><b>2027 신년운세</b><small>정미년 · 띠별 운세</small></button>
+      <button type="button" class="hm" data-nav="newyear"><b>2027 띠별 운세</b><small>정미년 · 무료</small></button>
       <button type="button" class="hm" data-nav="tour"><b>단톡방 토너먼트</b><small>3~8명 대진표</small></button>
       <button type="button" class="hm" data-nav="plaza"><b>카드 광장</b><small>모르는 사람과 운빨배틀</small></button>
       <button type="button" class="hm" data-nav="dex"><b>카드함</b><small>도감 · 일진 · 친구 카드</small></button>
     </div>
     <div class="hfoot"><button type="button" id="aboutBtn">이용 안내</button><button type="button" id="shareSite">링크 공유</button></div>
-    <p class="about" id="about" hidden>운빨카드는 생일의 사주(일간·오행)와 성격유형 16가지를 엮은 재미용 콘텐츠예요. 의료·법률·투자 결정의 근거가 될 수 없고, 공식 MBTI® 검사와 무관합니다. 생년월일은 내 기기에만 저장돼요.</p><p class="about" id="shareMsg" role="status"></p>
+    <p class="about" id="about" hidden>운빨카드는 생일의 사주(일간·오행)와 성격유형 16가지를 엮은 재미용 콘텐츠예요. 의료·법률·투자 결정의 근거가 될 수 없고, 공식 MBTI® 검사와 무관합니다. 생년월일은 내 기기에만 저장돼요. <a href="terms.html">이용약관</a> · <a href="privacy.html">개인정보처리방침</a></p><p class="about" id="shareMsg" role="status"></p>
   </nav>
 </section>
 <section class="scr" id="scr-draw" hidden>
 <div class="topbar band wrap"><button type="button" class="back" data-nav="home">← 메인</button><b>운빨카드</b><span>카드 뽑기</span></div>
 <header class="band wrap">
-  <div class="brand"><span class="stamp">運</span>운빨카드 · 시제품</div>
+  <div class="brand"><span class="stamp">運</span>운빨카드</div>
   <h1>같은 유형, 다른 기운</h1>
   <p class="lead">태어난 날의 일간 10가지와 성격유형 16가지가 만나 160장의 카드가 됩니다. 나는 어떤 카드를 뽑을까요?</p>
 </header>
@@ -588,7 +599,7 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
     <div class="vsrow"><div class="cslot" id="chOpp"></div><span class="vs">VS</span><div class="cslot back" id="chMe"><span>?</span><small>내 카드 (아직 안 뽑음)</small></div></div>
     <label class="l" for="cN">닉네임 <span style="font-weight:400;color:var(--sub)">(선택)</span></label>
     <input class="txt" id="cN" maxlength="10" placeholder="친구에게 보일 이름" style="margin-bottom:14px">
-    <span class="l">태어난 날 (양력)</span>
+    <span class="l">태어난 날</span>
     <div class="dsel"><select id="cdY" aria-label="태어난 해"></select><select id="cdM" aria-label="태어난 달"></select><select id="cdD" aria-label="태어난 날"></select></div>
     <label class="l" for="cT" style="margin-top:14px">성격유형</label>
     <select id="cT"></select>
@@ -604,7 +615,7 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
     <p class="note" style="margin:0 0 14px">상대의 생일과 유형을 넣고, 오른쪽에서 대결을 골라 주세요.</p>
     <label class="l" for="n2">상대 닉네임 <span style="font-weight:400;color:var(--sub)">(선택)</span></label>
     <input class="txt" id="n2" maxlength="10" placeholder="친구" style="margin-bottom:14px">
-    <span class="l">상대가 태어난 날 (양력)</span>
+    <span class="l">상대가 태어난 날</span>
     <div class="dsel"><select id="d2Y" aria-label="상대가 태어난 해"></select><select id="d2M" aria-label="상대가 태어난 달"></select><select id="d2D" aria-label="상대가 태어난 날"></select></div>
     <label class="l" for="t2" style="margin-top:14px">상대의 성격유형</label>
     <select id="t2"></select>
@@ -654,7 +665,7 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 <div class="band wrap" id="todayBox"></div>
 </section>
 <section class="scr" id="scr-newyear" hidden>
-<div class="topbar band wrap"><button type="button" class="back" data-nav="home">← 메인</button><b>운빨카드</b><span>2027 신년운세</span></div>
+<div class="topbar band wrap"><button type="button" class="back" data-nav="home">← 메인</button><b>운빨카드</b><span>2027 띠별 운세</span></div>
 <div class="band wrap">
   <h2 class="sec">2027 정미년, 내 띠의 운세</h2>
   <p class="note" style="margin:-6px 0 14px">띠만 골라도 볼 수 있어요. 생일로 보면 일간과 월별 흐름까지 더 정확해요.</p>
@@ -687,13 +698,15 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 
 
 <footer class="band wrap">
-  재미와 자기 이해를 위한 콘텐츠이며, 의료·법률·투자 결정의 근거가 될 수 없습니다. 성격유형 표기는 16가지 유형을 부르는 일반적인 방식이며, 이 서비스는 Myers-Briggs Company 및 공식 MBTI® 검사와 무관합니다. 일간 계산은 양력 날짜 기준입니다.
+  재미와 자기 이해를 위한 콘텐츠이며, 의료·법률·투자 결정의 근거가 될 수 없습니다. 성격유형 표기는 16가지 유형을 부르는 일반적인 방식이며, 이 서비스는 Myers-Briggs Company 및 공식 MBTI® 검사와 무관합니다. 절기·음력은 한국 표준시 기준 천문 계산으로 1900~2050년을 지원합니다.
+  <nav class="legal"><a href="terms.html">이용약관</a> · <a href="privacy.html"><b>개인정보처리방침</b></a> · <a href="terms.html#refund">환불 정책</a></nav>
+  <p class="biz" id="bizInfo">상호 [사업자 상호] · 대표 [대표자명] · 사업자등록번호 [000-00-00000] · 통신판매업 [제0000-지역-0000호] · 문의 [이메일]</p>
 </footer>
 
 <canvas id="cv" width="1080" height="1920" hidden></canvas>
 
 <div class="paym" id="exModal" hidden><div class="paybox" role="dialog" aria-modal="true" aria-labelledby="exT"><button type="button" class="px" id="exX" aria-label="닫기">×</button><p class="kick">카드 교환</p><h3 id="exT"></h3><img id="exImg" class="eximg" alt=""><p id="exD"></p><button type="button" class="btn" id="exGo"></button><p class="note" id="exMsg" role="status"></p></div></div>
-<div class="paym" id="payModal" hidden><div class="paybox" role="dialog" aria-modal="true" aria-labelledby="payT"><button type="button" class="px" id="payX" aria-label="닫기">×</button><p class="kick">유료 풀이</p><h3 id="payT"></h3><p id="payD"></p><div class="price">990<span>원</span></div><button type="button" class="btn" id="payGo">결제하고 열기</button><p class="note" id="payMsg" role="status"></p><p class="note">결제한 풀이는 같은 생년월일로 이 기기에서 다시 볼 수 있어요.</p></div></div>
+<div class="paym" id="payModal" hidden><div class="paybox" role="dialog" aria-modal="true" aria-labelledby="payT"><button type="button" class="px" id="payX" aria-label="닫기">×</button><p class="kick">유료 풀이</p><h3 id="payT"></h3><p id="payD"></p><div class="price">990<span>원</span></div><button type="button" class="btn" id="payGo">결제하고 열기</button><p class="note" id="payMsg" role="status"></p><p class="note">결제 즉시 열람되는 디지털 콘텐츠라 열람 후에는 청약철회가 제한돼요. <a href="terms.html#refund" target="_blank">환불 정책</a><br>결제한 풀이는 같은 생년월일로 이 기기에서 다시 볼 수 있어요.</p></div></div>
 <nav class="tabbar" id="tabbar" aria-label="바로가기"><button type="button" data-nav="home"><i>⌂</i>홈</button><button type="button" data-nav="draw"><i>運</i>사주·카드</button><button type="button" data-nav="battle"><i>戰</i>카드배틀</button><button type="button" data-nav="today"><i>今</i>오늘의 운빨</button><button type="button" data-nav="plaza"><i>場</i>카드광장</button></nav>
 <script>
 {
@@ -770,8 +783,16 @@ function fillDate(p,def){const [y,m,d]=def.split('-').map(Number);
   $(p+'Y').addEventListener('change',()=>days(p));$(p+'M').addEventListener('change',()=>days(p))}
 function days(p,want){const y=+$(p+'Y').value,m=+$(p+'M').value,n=new Date(y,m,0).getDate(),cur=want||+$(p+'D').value||1;
   $(p+'D').innerHTML=Array.from({length:n},(_,i)=>`<option value="${i+1}">${i+1}일</option>`).join('');$(p+'D').value=Math.min(cur,n)}
-function getD(p){return `${$(p+'Y').value}-${String($(p+'M').value).padStart(2,'0')}-${String($(p+'D').value).padStart(2,'0')}`}
-function setD(p,str){const [y,m,d]=str.split('-').map(Number);$(p+'Y').value=y;$(p+'M').value=m;days(p,d)}
+function getD(p){const i=document.getElementById(p+'_bd');if(i&&i.dataset.ok!=='1')return '0000-00-00';return `${$(p+'Y').value}-${String($(p+'M').value).padStart(2,'0')}-${String($(p+'D').value).padStart(2,'0')}`}
+function setD(p,str,fromText){const [y,m,d]=str.split('-').map(Number);$(p+'Y').value=y;$(p+'M').value=m;days(p,d);const i=document.getElementById(p+'_bd');if(i&&!fromText){i.value=str.replace(/-/g,'.');i.dataset.ok='1';const sg=i.previousElementSibling;if(sg){sg.dataset.cal='S';for(const x of sg.children)x.setAttribute('aria-pressed',String(x.dataset.c==='S'))}}}
+function upDate(p,prefill,ph){const ds=$(p+'Y').closest('.dsel');if(!ds||$(p+'_bd'))return;ds.style.display='none';
+  const w=document.createElement('div');w.className='bdw';w.innerHTML=`<div class="seg sm" data-cal="S"><button type="button" data-c="S" aria-pressed="true">양력</button><button type="button" data-c="L" aria-pressed="false">음력</button><button type="button" data-c="LL" aria-pressed="false">윤달</button></div><input class="txt" id="${p}_bd" inputmode="numeric" maxlength="10" placeholder="${ph||'예: 1996.08.02'}" aria-label="생년월일 8자리"><p class="note bdn" id="${p}_n"></p>`;
+  ds.parentNode.insertBefore(w,ds);const inp=$(p+'_bd'),seg=w.querySelector('.seg');
+  const upd=()=>{const raw=inp.value,pr=parseBD(raw,seg.dataset.cal),full=raw.replace(/\D/g,'').length===8;inp.dataset.ok=pr.d?'1':'0';if(pr.d)setD(p,pr.d,true);$(p+'_n').textContent=!full?'':pr.err?pr.err:seg.dataset.cal==='S'?'':`양력 ${pr.d.replace(/-/g,'.')}`;inp.classList.toggle('bad',full&&!!pr.err)};
+  seg.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;for(const x of seg.children)x.setAttribute('aria-pressed',String(x===b));seg.dataset.cal=b.dataset.c;upd()});
+  inp.addEventListener('input',()=>{fmtBD(inp);upd()});
+  if(prefill){inp.dataset.ok='1';inp.value=getD(p).replace(/-/g,'.')}else inp.dataset.ok='0'}
+
 const AX=[['E','I'],['S','N'],['T','F'],['J','P']];
 const QZ=[['주말에 에너지를 채우는 방법은?','사람들과 만나서','혼자 조용히'],['새로운 걸 배울 때 나는?','예시와 경험부터','전체 원리부터'],['친구가 고민을 털어놓으면?','해결책을 같이 찾는다','마음부터 공감한다'],['여행을 갈 때 나는?','일정을 미리 짠다','가서 정한다']];
 let type=['I','S','T','J'];
@@ -1129,7 +1150,7 @@ function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gen
   compat()}
 
 let lastC=null;
-function compat(){if(!cur)return false;const d2=getD('d2');if(!valid(d2)){$('err2').textContent='상대의 생일을 1900~2026년 사이로 입력하세요.';return false}$('err2').textContent='';
+function compat(){if(!cur)return false;const d2=getD('d2');if(!valid(d2)){$('err2').textContent='상대의 생년월일을 8자리로 입력하세요. (예: 1996.08.02)';return false}$('err2').textContent='';
   const b=build(d2,$('t2').value),bn=($('n2').value.trim()||'친구');vsSource='form';return runVs(cur,b,bn)}
 let vsSource='form';
 function runVs(a,b,bn){const ea=a.s.e,eb=b.s.e,an=myNick();
@@ -1212,9 +1233,10 @@ function slotHTML(x,nm){return `<img src="${IMG[x.p.s]}" alt=""><b>${x.name} <sp
 let TN=0;
 function addRow(name,date,t){const i=TN++;const d=document.createElement('div');d.className='trow';d.id='tr'+i;
   d.innerHTML=`<input class="txt" id="tn${i}" maxlength="10" value="${name}" aria-label="참가자 이름"><div class="dsel"><select id="t${i}Y" aria-label="태어난 해"></select><select id="t${i}M" aria-label="태어난 달"></select><select id="t${i}D" aria-label="태어난 날"></select></div><select id="tt${i}" aria-label="성격유형">${TYK.map(k=>`<option${k===t?' selected':''}>${k}</option>`).join('')}</select><button type="button" class="x" aria-label="참가자 빼기" data-rm="${i}">×</button>`;
-  $('tRows').appendChild(d);fillDate('t'+i,date)}
+  $('tRows').appendChild(d);fillDate('t'+i,date||'1996-08-02');upDate('t'+i,!!date,'생년월일 8자리')}
 function runTour(){const rows=[...document.querySelectorAll('.trow')];$('tErr').textContent='';
   if(rows.length<3||rows.length>8){$('tErr').textContent='참가자는 3명에서 8명 사이로 넣어 주세요.';return}
+  const badR=rows.find(r=>!valid(getD('t'+r.id.slice(2))));if(badR){const i=badR.id.slice(2);$('tErr').textContent=`${$('tn'+i).value.trim()||'참가자'}의 생년월일을 8자리로 입력해 주세요. (예: 1996.08.02)`;$('t'+i+'_bd').focus();return}
   const P=rows.map((r,k)=>{const i=r.id.slice(2);const nm=$('tn'+i).value.trim()||`참가자${k+1}`;return{nm,x:build(getD('t'+i),$('tt'+i).value)}});
   let size=1;while(size<P.length)size*=2;const byes=size-P.length;let cur=[],k0=0;for(let i=0;i<byes;i++)cur.push(P[k0++],null);while(k0<P.length)cur.push(P[k0++]);
   const rname=n=>n===2?'결승':n===4?'4강':'8강';let html='';
@@ -1262,11 +1284,11 @@ async function makeImg(){const c=cur;if(!c)return;$('out').src=$('cardImg').src;
   $('out').src=cv.toDataURL('image/png');$('saveBox').hidden=false;$('saveBox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
 
 $('t2').innerHTML=TYK.map(k=>`<option value="${k}"${k==='ENFP'?' selected':''}>${k} · ${TY[k][0]}</option>`).join('');
-fillDate('d','1995-03-14');fillDate('d2','1996-08-02');
+fillDate('d','1995-03-14');fillDate('d2','1996-08-02');upDate('d2',false,'상대 생년월일 예: 1996.08.02');
 try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);if(s.n)$('nick').value=s.n;FM.cal=s.cal||'S';$('bd').value=s.raw||s.d.replace(/-/g,'.');segSet('calSeg','c',FM.cal);
   if(s.g){FM.g=s.g;segSet('gSeg','g',s.g)}if(typeof s.mins==='number'){FM.mins=s.mins;const h=Math.floor(s.mins/60),m=s.mins%60;FM.ap=h>=12?12:0;segSet('apSeg','ap',FM.ap);$('tHH').value=String(h%12||12);$('tMM').value=String(m).padStart(2,'0')}else if(s.mins===null)$('tUnk').checked=true;
   type=s.t.split('');window.__restored=!!s.g}}catch(e){}
-$('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map(k=>`<option value="${k}">${k} · ${TY[k][0]}</option>`).join('');fillDate('cd','1996-08-02');
+$('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map(k=>`<option value="${k}">${k} · ${TY[k][0]}</option>`).join('');fillDate('cd','1996-08-02');upDate('cd',false,'내 생년월일 예: 1996.08.02');
 {const q=new URLSearchParams(location.search),f=q.get('f'),m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);
  if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){const od=`${m[1]}-${m[2]}-${m[3]}`,on=(q.get('n')||'친구').slice(0,10),ox=build(od,m[4]);
   friendAdd(on,f,ox);if(q.get('x')==='1'){window.__ex={on,ox};}else{setD('d2',od);$('t2').value=m[4];$('n2').value=on;$('challenge').hidden=false;$('chT').textContent=`${on}님이 카드 배틀 도전장을 보냈어요`;
@@ -1274,7 +1296,7 @@ $('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map
 loadKakao();
 axesUI();render(getD('d'),type.join(''),false);
 if(window.__restored){$('stageBox').hidden=false;$('flipper').classList.add('show');$('sample').textContent='오늘의 내 카드'}
-addRow(myNick(),getD('d'),type.join(''));addRow('친구1','1996-08-02','ENFP');addRow('친구2','1993-05-17','INFJ');addRow('친구3','1998-12-01','ESTP');
+addRow(myNick(),getD('d'),type.join(''));addRow('친구1','','ENFP');addRow('친구2','','INFJ');addRow('친구3','','ESTP');
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(!b)return;const i=+(b.dataset.i??b.dataset.q);type[i]=b.dataset.l;axesUI();if(b.dataset.q!==undefined)$('quiz').open=true});
 segBind('gSeg','g',v=>{FM.g=v});segBind('calSeg','c',v=>{FM.cal=v;bdNoteUI()});segBind('apSeg','ap',v=>{FM.ap=+v;tNoteUI()});
 $('bd').addEventListener('input',e=>{fmtBD(e.target);bdNoteUI()});for(const id of ['tHH','tMM'])$(id).addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'');tNoteUI()});
@@ -1300,11 +1322,11 @@ $('shareC').addEventListener('click',()=>{if(!lastC)return;const C=lastC,{a,b,an
   else{title=`오늘의 운빨 대결 ${C.d[0].T} : ${C.d[1].T}`;desc=`오늘의 운빨 대결! ${jo(an,'은','는')} 「${C.d[0].g[0].replace(/달$/,'날')}」, ${jo(bn,'은','는')} 「${C.d[1].g[0].replace(/달$/,'날')}」. 내일은 또 달라져!`}
   share({code:code({d:a.dd,t:a.t}),n,title,desc,img:IMG[a.p.s].slice(4,-5),btn:'리턴매치 하기'},'copyMsg2')});
 $('f').addEventListener('submit',()=>{setTimeout(()=>{if(!$('err').textContent){markCard()}},0)});
-$('tAdd').addEventListener('click',()=>{if(document.querySelectorAll('.trow').length>=8){$('tErr').textContent='최대 8명까지 넣을 수 있어요.';return}{const n=TN;addRow(`친구${n}`,`${1988+(n*7)%17}-${String((n*5)%12+1).padStart(2,'0')}-${String((n*11)%28+1).padStart(2,'0')}`,TYK[(n*5+3)%16])}});
+$('tAdd').addEventListener('click',()=>{if(document.querySelectorAll('.trow').length>=8){$('tErr').textContent='최대 8명까지 넣을 수 있어요.';return}{const n=TN;addRow(`친구${n}`,'',TYK[(n*5+3)%16])}});
 $('tRows').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(b){$('tr'+b.dataset.rm).remove();$('tErr').textContent=''}});
 $('tGo').addEventListener('click',runTour);
 $('cGo').addEventListener('click',()=>{const t=$('cT').value;if(!t){$('cErr').textContent='성격유형을 골라 주세요. 모르면 아래 「유형을 모르겠어요」 버튼으로 찾을 수 있어요.';return}$('cErr').textContent='';
-  const d=getD('cd');if($('cN').value.trim())$('nick').value=$('cN').value.trim();setD('d',d);type=t.split('');axesUI();render(d,t,true);
+  const d=getD('cd');if(!valid(d)){$('cErr').textContent='내 생년월일을 8자리로 입력해 주세요. (예: 1996.08.02)';$('cd_bd').focus();return}if($('cN').value.trim())$('nick').value=$('cN').value.trim();setD('d',d);$('bd').value=d.replace(/-/g,'.');FM.cal='S';type=t.split('');axesUI();render(d,t,true);
   $('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;try{const o=JSON.parse(localStorage.getItem('giun')||'{}');localStorage.setItem('giun',JSON.stringify({...o,d,t,n:$('nick').value.trim(),raw:o.d===d?o.raw:d.replace(/-/g,'.'),cal:o.d===d?o.cal:'S'}))}catch(e){}
   const me=$('chMe');me.className='cslot flip';me.style.setProperty('--el',EL[cur.s.e].c);me.innerHTML=slotHTML(cur,myNick());
   chAccepted=true;compat();$('cRes').hidden=true;setTimeout(()=>{$('arena').hidden=false;$('picker').scrollIntoView({behavior:RM()?'auto':'smooth'})},1000)});
@@ -1314,7 +1336,7 @@ $('mkImg').addEventListener('click',makeImg);
 /* ---------- app shell ---------- */
 let chAccepted=false,chActive=false;
 function hasCard(){try{if(localStorage.getItem('giun'))return true}catch(e){}return !!window.__drew}
-function markCard(){window.__drew=true;const c=cur;if(c){$('contBtn').hidden=false;$('contBtn').textContent=`이어하기 · ${c.s.noun} ${c.r[0]}`}}
+function markCard(){window.__drew=true;const c=cur;if(c){$('contBtn').hidden=false;$('contBtn').textContent=`이어하기 · ${NICK[c.p.s]}`}}
 const SCR=['home','draw','battle','tour','today','newyear','dex','plaza'];
 function go(n,fromHash){if(!SCR.includes(n))n='home';for(const k of SCR)$('scr-'+k).hidden=k!==n;document.body.dataset.scr=n;for(const b of $('tabbar').children)b.toggleAttribute('aria-current',b.dataset.nav===n),b.dataset.nav===n&&b.setAttribute('aria-current','page');
   if(!fromHash&&location.hash.slice(1)!==n){history.pushState(null,'',n==='home'?location.pathname+location.search:'#'+n)}
@@ -1326,12 +1348,12 @@ function go(n,fromHash){if(!SCR.includes(n))n='home';for(const k of SCR)$('scr-'
 window.addEventListener('popstate',()=>go(location.hash.slice(1)||'home',true));
 document.addEventListener('click',e=>{const b=e.target.closest('[data-nav]');if(b){e.preventDefault();go(b.dataset.nav)}});
 /* intro */
-function introInit(){const T=["145m", "048n", "126n", "114n", "087n", "079n", "081n", "136n", "103n", "130n", "052n", "034n", "029n", "066n", "011n", "113l", "129m", "099n", "145n", "081l", "003n", "097m", "049l", "017m", "054n", "027n", "158n", "065l", "033m"];
-  const tr=$('track'),sc=document.querySelector('.stagec');tr.innerHTML=T.map((f,i)=>`<img src="img/t/${f}.webp" alt="" style="--r:${(i%2?1:-1)*(3+i%4)}deg">`).join('');$('heroImg').src='img/c/033m.webp';
+function introInit(){const T=["145m", "048n", "126n", "114n", "087n", "079n", "081n", "136n", "103n", "130n", "052n", "034n", "029n", "066n", "011n", "033m"];
+  const tr=$('track'),sc=document.querySelector('.stagec');tr.innerHTML=T.map((f,i)=>`<img src="img/t/${f}.webp" alt="" decoding="async" style="--r:${(i%2?1:-1)*(3+i%4)}deg">`).join('');$('heroImg').src='img/c/033m.webp';
   $('spark').innerHTML=Array.from({length:18},(_,i)=>{const a=i/18*Math.PI*2,d=120+(i%3)*40;return `<i style="--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px"></i>`}).join('');
   const run=()=>{const w=tr.firstElementChild.getBoundingClientRect().width+14,n=T.length;tr.style.transform=`translate(${-w/2}px,-50%)`;
     if(RM()||!tr.animate){sc.classList.add('land');return}sc.classList.add('blur');
-    const an=tr.animate([{transform:`translate(${-w/2}px,-50%)`},{transform:`translate(${-w/2-(n-1)*w}px,-50%)`}],{duration:2600,easing:'cubic-bezier(.12,.55,.18,1)',fill:'forwards'});
+    const an=tr.animate([{transform:`translate(${-w/2}px,-50%)`},{transform:`translate(${-w/2-(n-1)*w}px,-50%)`}],{duration:2300,easing:'cubic-bezier(.12,.55,.18,1)',fill:'forwards'});
     setTimeout(()=>sc.classList.remove('blur'),1700);an.onfinish=()=>sc.classList.add('land')};
   const im=tr.lastElementChild;if(im.complete)setTimeout(run,250);else{im.onload=()=>setTimeout(run,150);setTimeout(()=>{if(!sc.classList.contains('land')&&!tr.getAnimations().length)run()},1800)}
   $('pt').innerHTML=Array.from({length:26},(_,i)=>`<i style="left:${(i*37)%100}%;top:${60+(i*23)%40}%;animation-delay:${(i*0.53)%7}s;animation-duration:${6+(i%5)}s"></i>`).join('');
