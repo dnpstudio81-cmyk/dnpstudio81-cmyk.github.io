@@ -528,6 +528,10 @@ details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-
 .hm.hot{box-shadow:inset 0 0 0 1.5px #e8c46a}.hm.hot b{color:#ffe39a}.pm.flash{animation:pmflash 1s 2}@keyframes pmflash{50%{box-shadow:0 0 0 4px #e8c46a}}
 /* iOS: 16px 미만 입력칸은 포커스 시 자동 확대돼 화면이 좌우로 흔들림 */
 input,textarea,select{font-size:max(16px,1em)}html,body{overflow-x:clip}
+.p8{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:4px 0 16px}.p8col{display:grid;gap:4px;text-align:center}.p8col em{font:500 11px "Noto Sans KR",sans-serif;font-style:normal;color:var(--sub)}
+.p8c{display:grid;gap:1px;padding:8px 2px 6px;border-radius:10px;background:color-mix(in srgb,var(--ec) 10%,#fff);border:1px solid color-mix(in srgb,var(--ec) 35%,#fff)}.story .p8c b{background:none;font:700 24px/1.1 "Noto Serif KR","Gowun Batang",serif;color:var(--ec)}.p8c small{font-size:11px;color:#6b645a}.p8x{--ec:#9a9387}
+.pcards .mc .mn{font-size:11px;letter-spacing:-.03em}.pcards .mcb{display:grid}.pcards .mcb>.mc{height:100%;grid-template-rows:auto auto auto 1fr auto}
+.pcards .mc{aspect-ratio:auto;grid-template-rows:auto auto auto auto auto;padding-bottom:9px}.pcards .mc .mimg{width:56%}.pcards .mc .mhj{font-size:16px}.pcards .mc small{white-space:nowrap;letter-spacing:-.04em}
 </style>
 </head>
 <body>
@@ -1316,8 +1320,13 @@ function storyRender(c){const A=c.A,sj=c.sj,si=c.p.s,ce=Math.floor(si/2),n=myNic
   const head=`${twist} ${HEADN[si]}, ${Y27H[y27s]} ${EMO[si]}`;c.head=head;
   const q=t=>`<blockquote class="sq">${t}</blockquote>`,part=(no,emo,t,h)=>`<section class="sp"><p class="spn">${emo} PART ${no}</p><h3>${t}</h3>${h}</section>`;
   const zeroLine=zero.length?`${zero.map(i=>ELW[i]).join('·')}${bat(ELW[zero[zero.length-1]])?'은':'는'} 하나도 없어. 여덟 글자 중에 ${zero.length===1?'한 오행이':'두 오행이나'} 통째로 빠진 사람, 생각보다 많지 않아.`:`다섯 기운이 하나도 빠짐없이 다 있어. 이것도 은근히 드문 구조야.`;
+    let p8html;const sj8=c.sj,cols=[['태어난 해',sj8.y],['태어난 달',sj8.m],['태어난 날',sj8.d],['태어난 시',sj8.h]],
+     ch=(k,t)=>{const e=t?Math.floor(k/2):EB[k];return `<span class="p8c" style="--ec:${EL[e].c}"><b>${t?SH[k]:BR[k]}</b><small>${t?STK[k]:BRK[k]} · ${EL[e].n}</small></span>`};
+   p8html=`<p>참, 사주<b>팔자</b>의 ‘팔자’가 바로 이 <b>여덟 글자</b>야. 태어난 <b>해·달·날·시</b>를 네 개의 기둥으로 세우고, 기둥마다 위에는 하늘의 기운 한 글자, 아래에는 땅의 기운 한 글자를 적어. 4×2=8, 그래서 팔자. 네 건 이렇게 생겼어.</p>
+   <div class="p8">${cols.map(([l,v])=>`<div class="p8col"><em>${l}</em>${v?ch(v[0],1)+ch(v[1],0):'<span class="p8c p8x"><b>?</b><small>모름</small></span><span class="p8c p8x"><b>?</b><small>모름</small></span>'}</div>`).join('')}</div>
+   <p>${c.sj.h?'':'태어난 시간을 몰라서 네 건 여섯 글자만 보여. 그래도 큰 줄기는 충분히 읽혀. '}이 글자들이 어떻게 섞였는지가 네 성격이고, 운이 흘러가는 길이야.</p>`;
   const open=`<p>${nm}, ${OPEN2[Math.floor(h01(c.dd+'o')*3)]} 먼저 네가 태어난 순간부터. ${Y}년 ${M}월 ${D}일 ${wd}요일${tm}. ${dnext<=1?`${jo(TN[(ti+1)%12],'을','를')} ${dnext?'딱 하루':'몇 시간'} 앞둔 날이었어. 계절이 막 바뀌려던 참이었지`:SEASONS[ti]+'였어'}${dnext>1&&dsince<=2?`. 그것도 절기가 ${dsince?`바뀐 지 ${dsince}일밖에 안 된 날`:'바뀐 바로 그날'}`:''}.</p>
-   <p>그 순간의 하늘과 땅을 여덟 글자${c.mins==null?'(시간을 몰라서 여섯 글자)':''}로 펼쳐 보면, <b>${mxs.map(i=>ELW[i]).join('·')}</b>${bat(ELW[mxs[mxs.length-1]])?'이':'가'}${mxs.length>1?' 각각':''} ${mx}개로 제일 많고, ${zeroLine}</p>
+   ${p8html}<p>그 순간의 하늘과 땅을 여덟 글자${c.mins==null?'(시간을 몰라서 여섯 글자)':''}로 펼쳐 보면, <b>${mxs.map(i=>ELW[i]).join('·')}</b>${bat(ELW[mxs[mxs.length-1]])?'이':'가'}${mxs.length>1?' 각각':''} ${mx}개로 제일 많고, ${zeroLine}</p>
    <p>그리고 이 여덟 글자의 주인, 그러니까 <b>너 자신을 뜻하는 글자는 ${STK[si]}(${SH[si]})</b>. ${IMGP[si]}${iya(IMGP[si])}. 내가 바로 그 기운에서 태어난 ${me}${iya(me)}.</p>`+
    (c.worry?`<p>아, 그리고 네가 이렇게 적었지.</p>${q(esc(c.worry))}<p>이 얘기는 PART 3에서 제대로 할게. 그 전에 네가 어떤 사람인지부터.</p>`:wc.length?`<p>${wc.map(k=>({연애:'연애',재물:'돈',직장:'일',건강:'건강',관계:'사람',학업:'공부',변화:'변화'})[k]).join(', ')} 얘기가 궁금하다고 했지? PART 3에서 짚어 줄게. 그 전에 네가 어떤 사람인지부터.</p>`:`<p>네가 어떤 사람인지, 왜 자꾸 같은 데서 넘어지는지, 그리고 2027년에 뭐가 오는지. 하나씩 풀어 볼게.</p>`);
   const ss=A.ss.filter(x=>SSV[x[0]]).slice(0,2);
