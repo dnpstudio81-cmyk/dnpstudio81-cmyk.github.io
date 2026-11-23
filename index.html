@@ -270,6 +270,20 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
 .pc .mini{width:64px;height:64px}.pc b{display:block;font:700 15px/1.3 "Gowun Batang",serif}.pc small{display:block;font-size:13px;color:var(--sub)}.pc q{display:block;margin-top:6px;font-size:14px;quotes:"“" "”"}
 .pc .pa{grid-column:1/-1;display:flex;gap:8px}.pc .pa .btn{margin:0;height:42px;flex:1}.pc .pa .ghost{height:42px}
 @media(max-width:600px){.ttigrid{grid-template-columns:repeat(4,minmax(0,1fr))}.dexgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.week{gap:4px}.week div{padding:6px 2px;font-size:13px}}
+
+.main{grid-template-columns:minmax(0,1fr)!important;max-width:620px}
+.main .stage{order:0!important}
+#card{display:none!important}
+.flip{width:min(100%,400px);aspect-ratio:9/16;perspective:1400px}
+.flipper{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,1.3,.5,1)}
+.flipper.show{transform:rotateY(180deg)}
+.cback,.cfront{position:absolute;inset:0;border-radius:6.7%/3.8%;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.cback{display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#2b2a4a,#121224 70%);border:6px solid #b08c40;box-shadow:inset 0 0 0 10px #121224,inset 0 0 0 12px #b08c40}
+.cback span{width:38%;aspect-ratio:1;display:grid;place-items:center;border:5px solid #e0614f;border-radius:12px;color:#e0614f;font:700 clamp(48px,14vw,80px)/1 "Gowun Batang",serif}
+.cfront{width:100%;height:100%;object-fit:cover;transform:rotateY(180deg);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.flip.rare .cfront{box-shadow:0 0 0 3px #e8c46a,0 0 40px rgba(232,196,106,.8)}
+.rarenote{margin:2px 0 0;font-size:14px;color:var(--sub);text-align:center;max-width:400px}.rarenote b{color:var(--seal)}
+@media (prefers-reduced-motion:reduce){.flipper{transition:none}}
 </style>
 </head>
 <body>
@@ -305,8 +319,8 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
 
 <section class="band wrap main">
   <form class="panel" id="f" novalidate>
-    <label class="l" for="nick">닉네임 <span style="font-weight:400;color:var(--sub)">(선택)</span></label>
-    <input class="txt" id="nick" maxlength="10" placeholder="친구들이 부르는 이름" style="margin-bottom:14px">
+    <label class="l" for="nick">이름 <span style="font-weight:400;color:var(--sub)">(닉네임도 괜찮아요)</span></label>
+    <input class="txt" id="nick" maxlength="10" placeholder="예: 현철" style="margin-bottom:14px">
     <span class="l">태어난 날 (양력)</span>
     <div class="dsel"><select id="dY" aria-label="태어난 해"></select><select id="dM" aria-label="태어난 달"></select><select id="dD" aria-label="태어난 날"></select></div>
     <label class="check"><input type="checkbox" id="late"> 밤 11시 이후에 태어났어요</label>
@@ -318,12 +332,14 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
       <details class="quiz" id="quiz"><summary>유형을 모르겠어요 · 4문항으로 찾기</summary><div id="qs"></div></details>
     </div>
     <p class="err" id="err" role="alert"></p>
-    <button class="btn" type="submit">내 카드 뽑기</button>
+    <button class="btn" type="submit">카드 뽑기</button>
     <p class="note">음력 입력과 출생 시간 반영은 정식 버전에서 추가돼요.</p>
   </form>
 
-  <div class="stage">
-    <span class="tag-sample" id="sample">예시 카드 · 1995년 3월 14일, ISTJ</span>
+  <div class="stage" id="stageBox" hidden>
+    <span class="tag-sample" id="sample"></span>
+    <div class="flip" id="flip"><div class="flipper" id="flipper"><div class="cback" aria-hidden="true"><span>運</span></div><img class="cfront" id="cardImg" alt=""></div></div>
+    <p class="rarenote" id="rareNote"></p>
     <article class="card" id="card" aria-live="polite">
       <div class="tc">
         <div class="top"><div><div class="name" id="cName"></div><div class="sub" id="cSub"></div></div><b class="hj" id="cH"></b></div>
@@ -335,7 +351,7 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     </article>
     <div class="actions">
       <button class="kakao" type="button" id="shareMe"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>카톡으로 도전장</button>
-      <button class="ghost" type="button" id="mkImg">저장용 이미지 만들기</button>
+      <button class="ghost" type="button" id="mkImg">카드 이미지 저장</button>
     </div>
     <p class="note" id="copyMsg" role="status"></p>
     <div class="panel sum" id="sum"></div>
@@ -345,8 +361,8 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
 </section>
 
 <section class="band wrap save" id="saveBox" hidden>
-  <h2>저장용 카드 이미지</h2>
-  <p class="note">휴대폰은 이미지를 길게 눌러 저장하고, PC는 우클릭해서 저장하세요. 인스타 스토리 크기(1080×1920)입니다.</p>
+  <h2>카드 이미지 저장</h2>
+  <p class="note">휴대폰은 이미지를 길게 눌러 저장하고, PC는 우클릭해서 저장하세요.</p>
   <img id="out" alt="내 캐릭터 카드 이미지">
 </section>
 
@@ -613,8 +629,17 @@ function build(str,t){const p=pillar(str),s=ST[p.s],r=TY[t],g=temp(t);return{dd:
 
 function axesUI(){$('axes').innerHTML=AX.map((a,i)=>`<div class="axis">${a.map(l=>`<button type="button" data-i="${i}" data-l="${l}" aria-pressed="${type[i]===l}">${l}</button>`).join('')}</div>`).join('');
   $('qs').innerHTML=QZ.map((q,i)=>`<div class="q"><p>${q[0]}</p><div>${[1,2].map(k=>`<button type="button" data-q="${i}" data-l="${AX[i][k-1]}" aria-pressed="${type[i]===AX[i][k-1]}">${q[k]}</button>`).join('')}</div></div>`).join('')}
+const MONEY_M=[8,9,10,11,2,3,4,5,6,7],LOVE_M=[7,6,3,2,5,4,3,2,5,4];
+function h01(str){let h=2166136261;for(const ch of str){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return (h>>>0)/4294967296}
+function rollKind(c){const force=new URLSearchParams(location.search).get('rare');if(force==='m'||force==='l')return force;
+  const mm=new Date().getMonth()+1,si=c.p.s,mon=MONEY_M[si]===mm,lov=LOVE_M[si]===mm,p=(mon||lov)?0.18:0.06;
+  if(h01(c.dd+c.t+todayStr())>=p)return 'n';if(mon&&!lov)return 'm';if(lov&&!mon)return 'l';return h01(todayStr()+c.dd)<0.5?'m':'l'}
+function cardSrc(c,k){return `img/c/${String(c.no).padStart(3,'0')}${k}.webp`}
 let cur=null;
 function render(str,t,anim){cur=build(str,t);const c=cur,el=EL[c.s.e];
+  c.kind=rollKind(c);$('cardImg').src=cardSrc(c,c.kind);$('cardImg').alt=`${c.name} 카드`;$('flip').classList.toggle('rare',c.kind!=='n');
+  {const mm=new Date().getMonth()+1,lucky=MONEY_M[c.p.s]===mm||LOVE_M[c.p.s]===mm;
+   $('rareNote').innerHTML=c.kind==='n'?`카드는 하루에 한 번 새로 뽑혀요. 레어 확률 6%${lucky?' · <b>이번 달은 내 대길 달이라 18%!</b>':` · 내 대길 달(재물 ${MONEY_M[c.p.s]}월, 연애 ${LOVE_M[c.p.s]}월)에는 18%`}`:`<b>레어 카드 등장!</b> 오늘 ${c.kind==='m'?'금전운':'연애운'} 대길 카드가 뽑혔어요.`}
   const card=$('card');card.style.setProperty('--el',el.c);
   $('cNo').textContent=`No. ${String(c.no).padStart(3,'0')} · ${c.s.place}`;
   $('cH').textContent=c.s.h;$('cImg').src=IMG[c.p.s];$('cImg').alt=`${c.s.k} ${c.s.noun} 정령`;$('cName').textContent=c.name;
@@ -644,7 +669,7 @@ function render(str,t,anim){cur=build(str,t);const c=cur,el=EL[c.s.e];
   $('mFree').innerHTML=ms.slice(0,3).map(row).join('');$('mLock').innerHTML=ms.slice(3).map(row).join('');
   if(anim)$('lw').classList.add('locked');
   const sj=saju(str);c.sj=sj;const ani=ANI[sj.y[1]];
-  $('sum').innerHTML=`<h3>${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${ani}띠 · 일주 ${ST[si].h}${BR[c.p.b]}</h3><ul>
+  $('sum').innerHTML=(c.kind!=='n'?`<p class="kick" style="margin:0 0 6px">★ 레어 카드 · ${c.kind==='m'?MONEY_M[si]+'월 금전운 대길':LOVE_M[si]+'월 연애운 대길'}</p>`:'')+`<h3>${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${ani}띠 · 일주 ${ST[si].h}${BR[c.p.b]}</h3><ul>
    <li><b>본성</b><span>${c.s.ess.split('. ')[0]}.</span></li>
    <li><b>올해</b><span>2027년은 「${c.s.yt}」 · ${tti(sj.y[1])[0]}</span></li>
    <li><b>연애</b><span>${yg[4]} · 좋은 달 ${top(2)}</span></li>
@@ -777,7 +802,7 @@ async function share(o,msg){const url=SITE+(o.code?'?f='+o.code+(o.n?'&n='+encod
   if(navigator.share){try{await navigator.share({title:o.title,text:o.desc,url});return}catch(e){if(e&&e.name==='AbortError')return}}
   try{await navigator.clipboard.writeText(`${o.desc}\n${url}`);$(msg).textContent='링크를 복사했어요. 카카오톡 대화방에 붙여 넣어 보내 주세요.'}catch(e){$(msg).textContent=`${o.desc} ${url}`}}
 function wrapText(ctx,text,max){const w=text.split(' '),lines=[];let l='';for(const x of w){const t=l?l+' '+x:x;if(ctx.measureText(t).width>max&&l){lines.push(l);l=x}else l=t}lines.push(l);return lines}
-async function makeImg(){const c=cur;if(!c)return;try{await document.fonts.load('700 80px "Gowun Batang"');await document.fonts.load('400 40px "Noto Sans KR"');await document.fonts.load('500 40px "Noto Sans KR"')}catch(e){}
+async function makeImg(){const c=cur;if(!c)return;$('out').src=$('cardImg').src;$('saveBox').hidden=false;$('saveBox').scrollIntoView({behavior:RM()?'auto':'smooth'});return;try{await document.fonts.load('700 80px "Gowun Batang"');await document.fonts.load('400 40px "Noto Sans KR"');await document.fonts.load('500 40px "Noto Sans KR"')}catch(e){}
   const cv=$('cv'),x=cv.getContext('2d'),W=1080,H=1920,P='#f7f3ea',ec=EL[c.s.e].c,INK='#1c1b19',SUB='#5f5c55';
   x.clearRect(0,0,W,H);x.fillStyle=ec;x.beginPath();x.roundRect(0,0,W,H,56);x.fill();
   x.fillStyle=mixHex(ec,.13);x.beginPath();x.roundRect(30,30,W-60,H-60,34);x.fill();
@@ -803,7 +828,7 @@ async function makeImg(){const c=cur;if(!c)return;try{await document.fonts.load(
 
 $('t2').innerHTML=TYK.map(k=>`<option value="${k}"${k==='ENFP'?' selected':''}>${k} · ${TY[k][0]}</option>`).join('');
 fillDate('d','1995-03-14');fillDate('d2','1996-08-02');
-try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);if(s.n)$('nick').value=s.n;type=s.t.split('');$('sample').textContent='지난번에 찾은 내 카드'}}catch(e){}
+try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);if(s.n)$('nick').value=s.n;type=s.t.split('');window.__restored=true}}catch(e){}
 $('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map(k=>`<option value="${k}">${k} · ${TY[k][0]}</option>`).join('');fillDate('cd','1996-08-02');
 {const q=new URLSearchParams(location.search),f=q.get('f'),m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);
  if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){const od=`${m[1]}-${m[2]}-${m[3]}`,on=(q.get('n')||'친구').slice(0,10),ox=build(od,m[4]);
@@ -811,12 +836,14 @@ $('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map
   const o=$('chOpp');o.style.setProperty('--el',EL[ox.s.e].c);o.innerHTML=slotHTML(ox,on)}}
 loadKakao();
 axesUI();render(getD('d'),type.join(''),false);
+if(window.__restored){$('stageBox').hidden=false;$('flipper').classList.add('show');$('sample').textContent='오늘의 내 카드'}
 addRow(myNick(),getD('d'),type.join(''));addRow('친구1','1996-08-02','ENFP');addRow('친구2','1993-05-17','INFJ');addRow('친구3','1998-12-01','ESTP');
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(!b)return;const i=+(b.dataset.i??b.dataset.q);type[i]=b.dataset.l;axesUI();if(b.dataset.q!==undefined)$('quiz').open=true});
 $('late').addEventListener('change',e=>{$('lateNote').hidden=!e.target.checked});
 $('f').addEventListener('submit',e=>{e.preventDefault();const d=getD('d');if(!valid(d)){$('err').textContent='태어난 날을 1900~2026년 사이로 입력하세요.';return}
-  const t=type.join('');render(d,t,true);$('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;$('saveBox').hidden=true;try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim()}))}catch(e){}
-  if(matchMedia('(max-width:760px)').matches)$('card').scrollIntoView({behavior:'smooth',block:'center'})});
+  const t=type.join('');$('flipper').classList.remove('show');render(d,t,true);$('stageBox').hidden=false;$('sample').textContent=`${$('nick').value.trim()||'나'}의 카드 · ${d.replace(/-/g,'.')} · ${t}`;$('saveBox').hidden=true;
+  const im=$('cardImg'),show=()=>setTimeout(()=>$('flipper').classList.add('show'),RM()?0:350);if(im.complete&&im.naturalWidth)show();else{im.onload=show;im.onerror=show}try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim()}))}catch(e){}
+  $('flip').scrollIntoView({behavior:RM()?'auto':'smooth',block:'center'})});
 $('f2').addEventListener('submit',e=>{e.preventDefault();startMode('battle')});
 $('picker').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)startMode(b.dataset.mode)});
 $('replay').addEventListener('click',()=>play(curTab));
