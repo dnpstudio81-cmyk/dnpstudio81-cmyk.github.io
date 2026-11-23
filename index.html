@@ -162,7 +162,7 @@ input.txt{width:100%;height:46px;font:16px "Noto Sans KR",sans-serif;padding:0 1
 .sum li b{color:var(--seal);font-weight:500;font-size:14px}
 .btn.more{width:min(100%,400px);margin-top:0}
 .invite{padding-top:0;padding-bottom:0}.invite .panel{border-color:var(--seal)}
-.pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:560px}
+.pillars{max-width:620px}
 .pil{text-align:center;display:grid;gap:6px}
 .pil small{font-size:13px;color:var(--sub)}
 .pil .ch{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;color:#fff;font:700 clamp(28px,7vw,40px)/1 "Gowun Batang",serif}
@@ -171,8 +171,8 @@ input.txt{width:100%;height:46px;font:16px "Noto Sans KR",sans-serif;padding:0 1
 .elgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .elgrid h3,.tti h3{font:700 20px/1.3 "Gowun Batang",serif;margin:0 0 6px}
 .tti p{margin:0;color:var(--sub)}.tti .kick{margin-bottom:2px}
-.bar{display:grid;grid-template-columns:44px minmax(0,1fr) 28px;gap:10px;align-items:center;margin:8px 0;font-size:15px}
-.bar div{height:14px;border-radius:7px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;border-radius:7px}
+.bar{display:grid;grid-template-columns:78px minmax(0,1fr) 28px;gap:10px;align-items:center;margin:8px 0;font-size:15px}
+.bar span:first-child{white-space:nowrap}.bar div{height:14px;border-radius:7px;background:var(--line);overflow:hidden;display:flex}.bar i{display:block;height:100%;border-radius:7px 0 0 7px}.bar i.bn{border-radius:0 7px 7px 0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 3px,transparent 3px 7px)!important}
 .bar span:last-child{text-align:right;color:var(--sub)}
 .lucky{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
 .lucky div{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
@@ -285,19 +285,83 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
 .flip.rare .cfront{box-shadow:0 0 0 3px #e8c46a,0 0 40px rgba(232,196,106,.8)}
 .rarenote{margin:2px 0 0;font-size:14px;color:var(--sub);text-align:center;max-width:400px}.rarenote b{color:var(--seal)}
 @media (prefers-reduced-motion:reduce){.flipper{transition:none}}
+
+/* form v3 */
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;margin:6px 0 8px}
+.seg button{height:44px;border-radius:10px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font:500 15px "Noto Sans KR",sans-serif;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#f7f3ea}
+.tin{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto minmax(0,1fr) auto;gap:6px;align-items:center}.tin .seg{margin:0}.tin .txt{text-align:center;margin:0}.tin span{font-size:14px;color:var(--sub)}
+.tin.off{opacity:.35;pointer-events:none}
+#bd{font-size:18px;letter-spacing:.04em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}.chips button{height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font:14px "Noto Sans KR",sans-serif;color:var(--ink);cursor:pointer}.chips button[aria-pressed=true]{background:var(--seal);border-color:var(--seal);color:#fff}
+.txt.area{font-family:"Noto Sans KR",sans-serif;height:auto;min-height:84px;padding:10px 12px;resize:vertical;line-height:1.5;font-size:15px;width:100%;box-sizing:border-box}
+/* 원국표 */
+.hch{display:inline-grid;place-items:center;width:1.7em;height:1.7em;border-radius:8px;color:#fff;font:700 1em/1 "Gowun Batang",serif}.hch.q{background:var(--panel);border:1px dashed var(--line);color:var(--sub)}
+.mini8{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0 0 12px;text-align:center;font-size:18px}.mini8 div{display:grid;justify-items:center;gap:3px}.mini8 small{font-size:12px;color:var(--sub)}
+.wk{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;font-size:14px}
+.wk-h,.wk-r{display:grid;grid-template-columns:62px repeat(4,minmax(0,1fr));align-items:center;text-align:center}
+.wk-h{background:var(--ink);color:#f7f3ea;padding:8px 0}.wk-h b{font-weight:500}
+.wk-r{border-top:1px solid var(--line);padding:7px 0}.wk-r>span{color:var(--sub);font-size:13px}.wk-r i{font-style:normal}.wk-r i.sm{font-size:13px;color:var(--sub)}
+.wk-r.big{font-size:26px;padding:8px 0}.wk-r.big .hch{width:1.6em;height:1.6em;border-radius:10px}
+/* pro */
+.probox{display:grid;gap:12px}.pro h3{font:700 18px/1.35 "Gowun Batang",serif;margin:0 0 8px;padding-bottom:8px;border-bottom:1px solid var(--line)}.pro p{margin:0 0 8px;line-height:1.75;font-size:15px}.pro p:last-child{margin-bottom:0}.pro small{color:var(--sub)}
+.pro blockquote{margin:0 0 10px;padding:10px 14px;border-left:3px solid var(--seal);background:var(--bg);border-radius:0 10px 10px 0;font-size:14px;color:var(--sub)}
+.meter{position:relative;display:grid;grid-template-columns:repeat(3,1fr);height:30px;margin:4px 0 12px;border-radius:15px;background:linear-gradient(90deg,#24405f,#8a6a1f 50%,#9e2b25);font-size:12px;color:#fff;align-items:center;text-align:center}.meter i{position:absolute;top:-4px;width:6px;height:38px;border-radius:3px;background:var(--ink);border:2px solid #fff;transform:translateX(-3px)}
+.gbars{display:grid;gap:6px;margin-bottom:10px}.gbars>div{display:grid;grid-template-columns:44px minmax(0,1fr) 20px;gap:8px;align-items:center;font-size:14px}.gbars>div>div{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.gbars i{display:block;height:100%;background:var(--seal)}
+/* premium */
+.sec .pr{font:500 14px "Noto Sans KR",sans-serif;color:var(--seal);margin-left:6px}
+.prem{display:grid;gap:12px}.pm{border:1.5px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}.pm.open{border-color:#c9a24a}
+.ph{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px}.ph b{display:block;font:700 17px "Gowun Batang",serif}.ph small{color:var(--sub);font-size:13px}
+.pi{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:#1d1a15;color:#e8c46a;font:700 22px "Gowun Batang",serif}
+.pbtn{height:40px;padding:0 14px;border-radius:999px;border:0;background:var(--seal);color:#fff;font:500 14px "Noto Sans KR",sans-serif;cursor:pointer;white-space:nowrap}.pm.open .pbtn{background:#c9a24a}
+.pbody{padding:0 14px 16px;border-top:1px solid var(--line);padding-top:14px}.pbody p{line-height:1.7}
+.gform{display:grid;gap:8px;margin-bottom:12px}.gform .seg{margin:0}.gform .txt{margin:0}
+.gh{font:700 18px "Gowun Batang",serif;text-align:center;margin:8px 0}
+.gscore{text-align:center;padding:14px;border-radius:14px;background:#1d1a15;color:#f7f3ea;margin-bottom:12px}.gscore b{font:700 48px/1 "Gowun Batang",serif;color:#e8c46a}.gscore span{font-size:16px}.gscore p{margin:6px 0 0;font-size:15px}
+.gp{padding:10px 0;border-top:1px solid var(--line)}.gp>div:first-child{display:flex;justify-content:space-between;font-size:15px}.gp span{color:var(--sub)}.gbar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:6px 0}.gbar i{display:block;height:100%;background:var(--seal)}.gp p{margin:0;font-size:14px;color:var(--sub)}
+.dwrow{display:grid;grid-auto-flow:column;grid-auto-columns:64px;gap:6px;overflow-x:auto;padding:4px 0 10px;font-size:18px}.dw{display:grid;justify-items:center;gap:3px;padding:8px 0;border:1px solid var(--line);border-radius:12px;background:var(--bg)}.dw small{font-size:11px;color:var(--sub)}.dw b{font-size:11px;font-weight:500}.dw b.up{color:#2f7a3f}.dw b.dn{color:#b0392b}.dw.cur{border:2px solid var(--seal);background:#fff4ec}
+.dwt{padding:10px 0;border-top:1px solid var(--line)}.dwt h4{margin:0 0 4px;font:700 16px "Gowun Batang",serif}.dwt h4 small{font:400 13px "Noto Sans KR",sans-serif;color:var(--sub)}.dwt p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}.dwt.cur h4{color:var(--seal)}
+.paym{position:fixed;inset:0;z-index:50;background:rgba(15,13,10,.6);display:grid;place-items:center;padding:16px}.paym[hidden]{display:none}
+.paybox{position:relative;width:min(100%,380px);background:var(--panel);border-radius:18px;padding:22px 20px;text-align:center}.paybox h3{font:700 21px "Gowun Batang",serif;margin:4px 0 6px}.paybox p{margin:0 0 8px;color:var(--sub);font-size:14px}
+.price{font:700 40px/1 "Gowun Batang",serif;margin:12px 0 16px}.price span{font-size:18px}.px{position:absolute;top:8px;right:10px;width:40px;height:40px;border:0;background:none;font-size:26px;cursor:pointer;color:var(--sub)}
+@media(max-width:420px){.wk-h,.wk-r{grid-template-columns:50px repeat(4,minmax(0,1fr))}.wk-r.big{font-size:22px}}
+
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(29,26,21,.96);backdrop-filter:blur(8px);padding:6px 4px calc(6px + env(safe-area-inset-bottom));border-top:1px solid rgba(232,196,106,.3)}
+.tabbar button{background:none;border:0;color:rgba(247,243,234,.7);font:500 11px "Noto Sans KR",sans-serif;display:grid;justify-items:center;gap:2px;min-height:48px;cursor:pointer}.tabbar i{font:700 18px/1 "Gowun Batang",serif;font-style:normal}
+.tabbar button[aria-current=page]{color:#e8c46a}
+body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-bottom:72px}
+
+.ttl2{text-align:center;display:grid;gap:4px;justify-items:center;margin-top:4px}.ttl2 .s1{font-size:13px;letter-spacing:.08em;color:rgba(247,243,234,.75)}
+.stagec{position:relative;width:100%;max-width:520px;height:min(62vh,500px);margin:10px 0 0;overflow:visible}
+.track{position:absolute;left:50%;top:50%;height:72%;display:flex;gap:14px;align-items:center;will-change:transform}
+.track img{height:100%;aspect-ratio:9/16;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.5);transform:rotate(var(--r)) scale(.86);filter:brightness(.85)}
+.stagec.blur .track{filter:blur(1.5px)}
+.hero2{position:absolute;left:50%;top:50%;height:96%;aspect-ratio:9/16;transform:translate(-50%,-50%) scale(.6);opacity:0;border-radius:18px;overflow:hidden;box-shadow:0 0 0 2px rgba(232,196,106,.7),0 0 60px rgba(255,200,90,.55),0 20px 50px rgba(0,0,0,.6)}
+.hero2 img{width:100%;height:100%;object-fit:cover;display:block}
+.hero2 .sweep{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%)}
+.stagec.land .hero2{animation:land .7s cubic-bezier(.2,1.5,.4,1) forwards,halo 2.6s 1s ease-in-out infinite}.stagec.land .hero2 .sweep{animation:sweep 1.1s .5s ease-out,sweep 1.4s 4s ease-out infinite}
+.stagec.land .track{opacity:0;transition:opacity .25s}
+@keyframes land{0%{opacity:0;transform:translate(-50%,-50%) scale(1.5) rotate(-6deg)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes sweep{to{transform:translateX(120%)}}
+@keyframes halo{50%{box-shadow:0 0 0 2px rgba(232,196,106,.9),0 0 90px rgba(255,200,90,.8),0 20px 50px rgba(0,0,0,.6)}}
+.spark{position:absolute;inset:0;pointer-events:none}.spark i{position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;background:#ffe39a;box-shadow:0 0 8px #ffd36a;opacity:0}
+.stagec.land .spark i{animation:burst .9s ease-out forwards}
+@keyframes burst{0%{opacity:1;transform:translate(-50%,-50%)}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.4)}}
+.herocap{margin:8px 0 0;font-size:13px;color:#e8c46a;opacity:0;transition:opacity .6s}.stagec.land~.herocap{opacity:1}
+.home.open .stagec{height:min(40vh,330px)}.home .stagec{transition:height .5s}
+@media (prefers-reduced-motion:reduce){.stagec.land .hero2,.hero2 .sweep{animation:none!important;opacity:1;transform:translate(-50%,-50%)}}
 </style>
 </head>
 <body>
 <section class="scr home" id="scr-home">
   <div class="glow" aria-hidden="true"></div><div class="pt" id="pt" aria-hidden="true"></div>
   <button type="button" class="cont" id="contBtn" data-nav="draw" hidden></button>
-  <div class="hero">
-    <div class="ring" id="ring" aria-hidden="true"></div>
-    <div class="ttl"><span class="s1">같은 유형, 다른 기운</span><h1 class="logo"><span class="seal">運</span><span class="lt">운빨카드</span></h1><span class="s2">160장의 기운 카드</span></div>
-  </div>
+  <div class="ttl2"><span class="s1">같은 유형, 다른 기운</span><h1 class="logo"><span class="seal">運</span><span class="lt">운빨카드</span></h1></div>
+  <div class="stagec" aria-hidden="true"><div class="track" id="track"></div><div class="hero2" id="hero2"><img id="heroImg" alt=""><i class="sweep"></i></div><div class="spark" id="spark"></div></div>
+  <p class="herocap" id="heroCap">오늘의 카드 · 복주머니 품은 태양 탐험가</p>
   <button type="button" class="tap" id="tap">화면을 누르면 시작</button>
   <nav class="hmenu" id="hmenu" aria-label="메인 메뉴">
-    <button type="button" class="hm big" data-nav="draw"><span><b>카드 뽑기</b><small>내 사주로 내 카드 만들기</small></span><i>▶</i></button>
+    <button type="button" class="hm big" data-nav="draw"><span><b>카드 뽑기 · 사주 보기</b><small>생년월일·시간으로 내 카드와 사주풀이</small></span><i>▶</i></button>
     <div class="hgrid">
       <button type="button" class="hm" data-nav="battle"><b>카드 배틀</b><small>친구와 1:1 · 궁합</small></button>
       <button type="button" class="hm" data-nav="today"><b>오늘의 운빨</b><small>매일 바뀌는 운세</small></button>
@@ -322,10 +386,16 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
   <form class="panel" id="f" novalidate>
     <label class="l" for="nick">이름 <span style="font-weight:400;color:var(--sub)">(닉네임도 괜찮아요)</span></label>
     <input class="txt" id="nick" maxlength="10" placeholder="예: 현철" style="margin-bottom:14px">
-    <span class="l">태어난 날 (양력)</span>
-    <div class="dsel"><select id="dY" aria-label="태어난 해"></select><select id="dM" aria-label="태어난 달"></select><select id="dD" aria-label="태어난 날"></select></div>
+    <span class="l">성별</span>
+    <div class="seg" id="gSeg" role="group" aria-label="성별"><button type="button" data-g="M" aria-pressed="false">남자</button><button type="button" data-g="F" aria-pressed="false">여자</button></div>
+    <span class="l" style="display:block;margin-top:16px">생년월일</span>
+    <div class="seg" id="calSeg" role="group" aria-label="달력"><button type="button" data-c="S" aria-pressed="true">양력</button><button type="button" data-c="L" aria-pressed="false">음력</button><button type="button" data-c="LL" aria-pressed="false">음력 윤달</button></div>
+    <input class="txt" id="bd" inputmode="numeric" autocomplete="bday" maxlength="10" placeholder="예: 1990.05.17" aria-label="생년월일 8자리">
+    <p class="note" id="bdNote"></p>
+    <div class="dsel" hidden style="display:none"><select id="dY"></select><select id="dM"></select><select id="dD"></select></div>
     <span class="l" style="display:block;margin-top:16px">태어난 시간</span>
-    <div class="tsel" id="tsel"><select id="tAP" aria-label="오전 오후"><option value="0">오전</option><option value="12">오후</option></select><select id="tH" aria-label="태어난 시각"></select></div>
+    <div class="tin" id="tin"><div class="seg" id="apSeg" role="group" aria-label="오전 오후"><button type="button" data-ap="0" aria-pressed="true">오전</button><button type="button" data-ap="12" aria-pressed="false">오후</button></div>
+      <input class="txt" id="tHH" inputmode="numeric" maxlength="2" placeholder="시" aria-label="시 (1~12)"><span>시</span><input class="txt" id="tMM" inputmode="numeric" maxlength="2" placeholder="분" aria-label="분 (0~59)"><span>분</span></div>
     <label class="check"><input type="checkbox" id="tUnk"> 출생시간 모름</label>
     <p class="note" id="tNote"></p>
 
@@ -334,9 +404,12 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
       <div class="axes" id="axes"></div>
       <details class="quiz" id="quiz"><summary>유형을 모르겠어요 · 4문항으로 찾기</summary><div id="qs"></div></details>
     </div>
+    <label class="l" for="worry" style="display:block;margin-top:16px">지금 고민이나 상황 <span style="font-weight:400;color:var(--sub)">(선택)</span></label>
+    <div class="chips" id="wChips"><button type="button" data-w="연애" aria-pressed="false">연애</button><button type="button" data-w="재물" aria-pressed="false">재물</button><button type="button" data-w="직장" aria-pressed="false">직장·진로</button><button type="button" data-w="건강" aria-pressed="false">건강</button><button type="button" data-w="관계" aria-pressed="false">인간관계</button><button type="button" data-w="학업" aria-pressed="false">학업·시험</button><button type="button" data-w="변화" aria-pressed="false">이사·변화</button></div>
+    <textarea class="txt area" id="worry" maxlength="300" rows="3" placeholder="예: 이직을 고민 중인데 내년에 움직여도 될까요?"></textarea>
+    <p class="note">고민은 내 기기 안에서 풀이에만 쓰이고 어디에도 전송·저장되지 않아요.</p>
     <p class="err" id="err" role="alert"></p>
-    <button class="btn" type="submit">카드 뽑기</button>
-    <p class="note">음력 입력은 정식 버전에서 추가돼요.</p>
+    <button class="btn" type="submit">카드 뽑고 사주 보기</button>
   </form>
 
   <div class="stage" id="stageBox" hidden>
@@ -359,10 +432,10 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     <p class="note" id="copyMsg" role="status"></p>
     <div class="panel sum" id="sum"></div>
     <button class="btn more" type="button" id="moreBtn" aria-expanded="false" aria-controls="detail">자세히 보기 ▾</button>
-    <div class="panel hub" id="hub"><h3>내 카드로 놀기</h3><p>하고 싶은 것을 골라 보세요.</p><div class="mode-grid" style="grid-template-columns:minmax(0,1fr)"><button type="button" class="mode" data-nav="battle"><span class="mi">戰</span><span class="mt"><b>친구와 1:1 대결</b><span>상대 생일만 넣으면 4가지 대결</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="tour"><span class="mi">團</span><span class="mt"><b>단톡방 토너먼트</b><span>3~8명 대진표로 우승 카드 가리기</span></span><span class="go">들어가기 ▶</span></button></div></div>
   </div>
 </section>
 
+<div class="paym" id="payModal" hidden><div class="paybox" role="dialog" aria-modal="true" aria-labelledby="payT"><button type="button" class="px" id="payX" aria-label="닫기">×</button><p class="kick">유료 풀이</p><h3 id="payT"></h3><p id="payD"></p><div class="price">990<span>원</span></div><button type="button" class="btn" id="payGo">결제하고 열기</button><p class="note" id="payMsg" role="status"></p><p class="note">결제한 풀이는 같은 생년월일로 이 기기에서 다시 볼 수 있어요.</p></div></div>
 <section class="band wrap save" id="saveBox" hidden>
   <h2>카드 이미지 저장</h2>
   <p class="note">휴대폰은 이미지를 길게 눌러 저장하고, PC는 우클릭해서 저장하세요.</p>
@@ -372,7 +445,7 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
 <div id="detail" hidden>
 <section class="band wrap">
   <h2 class="sec" id="dTitle">자세한 풀이</h2>
-  <h3 class="mh">나의 사주 원국</h3>
+  <h3 class="mh">사주 원국표</h3>
   <div class="pillars" id="pillars"></div>
   <p class="note" id="pNote" style="margin:10px 0 0"></p>
 </section>
@@ -383,6 +456,11 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
     <div class="panel" id="elBars"></div>
     <div class="panel"><h3 id="elT"></h3><p id="elTxt" style="margin:0;color:var(--sub)"></p><div class="lucky" id="lucky"></div></div>
   </div>
+</section>
+
+<section class="band wrap">
+  <h2 class="sec">전문 사주 풀이</h2>
+  <div class="probox" id="proBox"></div>
 </section>
 
 <section class="band wrap">
@@ -411,22 +489,37 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
   <div class="matchgrid" id="match"></div>
 </section>
 
+
 <section class="band wrap">
-  <h2 class="sec">2027 정미년 운세</h2>
-  <div class="ysum">
+  <h2 class="sec">더 깊이 보기 <small class="pr">각 990원</small></h2>
+  <div class="prem">
+    <div class="pm" id="pm-gung"><div class="ph"><span class="pi">緣</span><div><b>궁합 보기</b><small>상대의 사주와 맞춰 보는 정밀 궁합</small></div><button type="button" class="pbtn" data-pay="gung">990원 · 열기</button></div>
+      <div class="pbody" hidden><form id="gf" class="gform" novalidate>
+        <input class="txt" id="gName" maxlength="10" placeholder="상대 이름 (선택)">
+        <div class="seg" id="gG2"><button type="button" data-g="M" aria-pressed="false">남자</button><button type="button" data-g="F" aria-pressed="true">여자</button></div>
+        <div class="seg" id="gCal"><button type="button" data-c="S" aria-pressed="true">양력</button><button type="button" data-c="L" aria-pressed="false">음력</button><button type="button" data-c="LL" aria-pressed="false">음력 윤달</button></div>
+        <input class="txt" id="gBd" inputmode="numeric" maxlength="10" placeholder="상대 생년월일 예: 1992.11.03">
+        <div class="tin"><div class="seg" id="gAp"><button type="button" data-ap="0" aria-pressed="true">오전</button><button type="button" data-ap="12" aria-pressed="false">오후</button></div><input class="txt" id="gHH" inputmode="numeric" maxlength="2" placeholder="시"><span>시</span><input class="txt" id="gMM" inputmode="numeric" maxlength="2" placeholder="분"><span>분</span></div>
+        <p class="note">시간을 모르면 비워 두세요.</p><p class="err" id="gErr"></p>
+        <button class="btn" type="submit">궁합 보기</button></form><div id="gOut"></div></div></div>
+    <div class="pm" id="pm-dw"><div class="ph"><span class="pi">運</span><div><b>대운 보기</b><small>10년 단위로 바뀌는 인생의 큰 흐름</small></div><button type="button" class="pbtn" data-pay="dw">990원 · 열기</button></div><div class="pbody" hidden></div></div>
+    <div class="pm" id="pm-ny"><div class="ph"><span class="pi">丁</span><div><b>2027 신년운세</b><small>정미년 테마 · 연애·재물 · 12개월 흐름</small></div><button type="button" class="pbtn" data-pay="ny">990원 · 열기</button></div><div class="pbody" hidden><div id="nyMove"><div class="ysum">
     <div class="panel yr best"><p class="kick">올해의 테마</p><h3 id="rYearT"></h3><p id="rYear"></p></div>
     <div class="panel"><p class="kick">연애운</p><h3 id="yLoveT"></h3><p id="yLove"></p><p class="bm" id="yLoveBest"></p></div>
     <div class="panel"><p class="kick">재물운</p><h3 id="yMoneyT"></h3><p id="yMoney"></p><p class="bm" id="yMoneyBest"></p></div>
   </div>
   <h3 class="mh">월별 흐름</h3>
-  <p class="note" style="margin:0 0 14px">사주의 달은 절기 기준이라 매달 4~8일 무렵 바뀌어요. 시제품은 각 달의 천간만 본 간이 흐름입니다.</p>
+  <p class="note" style="margin:0 0 14px">사주의 달은 절기 기준이라 매달 4~8일 무렵 바뀌어요. 각 달의 천간이 내 일간과 맺는 관계로 본 흐름이에요.</p>
   <div class="months" id="mFree"></div>
-  <div class="lockwrap locked" id="lw">
+  <div class="lockwrap" id="lw">
     <div class="months lockzone" id="mLock" style="border-top:0"></div>
-    <div class="lockcta"><div class="panel"><p>5월부터 2028년 1월까지는 정식 버전에서 유료로 열릴 구역이에요.</p><button class="btn" type="button" id="unlock">시제품이라 무료로 보기</button></div></div>
+    
+  </div>
+</div></div></div>
   </div>
 </section>
 </div>
+<section class="band wrap"><div class="panel hub" id="hub"><h3>내 카드로 놀기</h3><p>사주를 봤다면 이제 카드로 놀아 보세요.</p><div class="mode-grid"><button type="button" class="mode" data-nav="battle"><span class="mi">戰</span><span class="mt"><b>카드 배틀</b><span>친구와 1:1 · 4가지 대결</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="today"><span class="mi">今</span><span class="mt"><b>오늘의 운빨</b><span>매일 바뀌는 내 카드 운세</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="plaza"><span class="mi">場</span><span class="mt"><b>카드 광장</b><span>모르는 사람과 운빨배틀</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="tour"><span class="mi">團</span><span class="mt"><b>단톡방 토너먼트</b><span>3~8명 대진표</span></span><span class="go">들어가기 ▶</span></button></div></div></section>
 
 </section>
 <section class="scr" id="scr-battle" hidden>
@@ -541,6 +634,7 @@ h3.mh{font:700 22px/1.3 "Gowun Batang",serif;margin:0 0 4px}
 
 <canvas id="cv" width="1080" height="1920" hidden></canvas>
 
+<nav class="tabbar" id="tabbar" aria-label="바로가기"><button type="button" data-nav="home"><i>⌂</i>홈</button><button type="button" data-nav="draw"><i>運</i>사주·카드</button><button type="button" data-nav="battle"><i>戰</i>카드배틀</button><button type="button" data-nav="today"><i>今</i>오늘의 운빨</button><button type="button" data-nav="plaza"><i>場</i>카드광장</button></nav>
 <script>
 {
 const EL=[{n:'목',c:'#2f5d3a'},{n:'화',c:'#9e2b25'},{n:'토',c:'#8a6a1f'},{n:'금',c:'#5c6066'},{n:'수',c:'#24405f'}];
@@ -607,9 +701,7 @@ function tti(b){if(b===7)return['나의 해가 돌아왔어요','띠의 해(본�
   if(b===0)return['살짝 어긋나는 띠','작은 오해가 생기기 쉬운 해예요. 말과 약속을 분명히 하면 무난하게 지나갑니다.'];
   if(b===10)return['마찰을 조심할 띠','규칙과 절차에서 마찰이 생기기 쉬워요. 서류와 계약을 꼼꼼히 챙기면 오히려 실속을 챙기는 해가 됩니다.'];
   return['무난한 흐름의 띠','큰 충돌 없이 흘러가는 해예요. 꾸준히 해 온 일을 이어 가면 성과가 차곡차곡 쌓입니다.']}
-function saju(str){const [y,m,d]=str.split('-').map(Number),md=m*100+d,yy=md<204?y-1:y,ys=((yy-4)%10+10)%10,yb=((yy-4)%12+12)%12;
-  const bd=[[106,11],[204,0],[306,1],[405,2],[506,3],[606,4],[707,5],[808,6],[908,7],[1008,8],[1107,9],[1207,10]];let k=10;for(const [b,kk] of bd)if(md>=b)k=kk;
-  const dp=pillar(str);return{yy,y:[ys,yb],m:[((ys%5)*2+2+k)%10,(2+k)%12],d:[dp.s,dp.b],near:bd.some(([b])=>Math.abs(md-b)<=1)}}
+
 const NOW_Y=2026;
 function fillDate(p,def){const [y,m,d]=def.split('-').map(Number);
   $(p+'Y').innerHTML=Array.from({length:NOW_Y-1929},(_,i)=>NOW_Y-i).map(v=>`<option value="${v}">${v}년</option>`).join('');
@@ -625,11 +717,242 @@ const QZ=[['주말에 에너지를 채우는 방법은?','사람들과 만나서
 let type=['I','S','T','J'];
 const $=id=>document.getElementById(id);
 
+const LUN="000u81v100bi00xa00lc021j00v7521i015u02lm01fo02vp01pj42mt0207014a02a1023x02jw21v102uk00xa034e642l03f2021903ow02lh03yq55d5049e028l04j9012i04t323q2053r01ul05dm71uj05oa00wr05y40217067y54ej06im01bd06sg0250072a44hh07cz00ja07mt01uj07wo21tj087c00wn08h662hi08rt02tm091n02w509bi52p509m6014l09w100ja0a5v33ou0agj01ta0aqd74z10b1102hh0bav02mi0bkp65e20bvd02950c58012l0cf341230cpr00gt0czl01t90d9f24yz0dk302390dtx75910e4l028a0eef028l0eoa52510eyy00yj0f8t00gr0fin33mf0ftb010r0g35846j0gdt01at0gnn01be0gxh64a20h8502450hi000xi0hru44320i2i021j0icd010n0im732li0iwu02ol0j6p72mt0jhd012i0jr701wt0k1251ul0kbq00xa0klk021a0kve45710l6202lh0lfw859l0lqk028k0m0e02ne0ma963q20mkx01uj0mus00wr0n4m442j0nfa02170np4a4ej0nzs01b90o9m01ck0ojg64hh0ou500ja0p3z01uj0pdu51tj0poi00wn0pyc018r0q8632mi0qit02w50qso82p50r3c014d0rd700ja0rn153n20rxp01ta0s7j02hi0shd45n90ss102mi0t1v02p10tbq228l0tme012k0tw8747v0u6x00gt0ugr01t90uql54yz0v1902390vb3028a0vkx34lm0vvl028l0w5g92450wg400xm0wpy021n0wzt521j0xah010r0xkb02390xu544gl0y4t01be0yen02510yoi22450yz600xi0z9064320zjo021j0ztj010n103d52li10e002oj10nv014a10xp348a118d01v111i8b1ul11sw00xa122q021912ck657112n802lh12x202mq136w55ec13hk029613rf01v1141a21uj14by00wr14ls742f14wg0217156a027915g454h115qs01ck160m025616ah30x9",JQ="5pc4115zv5525z466z7sg88i8ch91c81h7op5z24ar69l5er68t6go8258i78m79b38b77yg68t4ki6jc5oi6ij6qe8bv8rx8vx9kt8ky8876il4u96t35y96sa7048ll91n95n9uk8uq8hz6sd5415yv5405y165v7rc87e8be90b80h7nq5y549t68m5dr67r6fl8128h48l59a28a97xi67w4jk6id5ni6hi6pb8as8qu8uv9jt8jz8796hn4tb6s45x86r76z08kh90j94k9tj8tq8gz6re5325xu52x5ww64p7q58688a98z87zf7mp5x448r67j5cm66l6ed7zt8fv8jx98w8947we66t4ig6h85ma6g86o089g8pi8tk9ik8is8626gh4s46qw5vy6pv6xm8j28z59379s78sf8fq6q551s5wj51k5vh6387oo84q88t8xt7y27ld5vs47f6665b76536cu7y98ec8if97g87p7v165f4h36ft5kt6ep6mg87v8ny8s19h28hc84o6f34qq6pg5ug6oc6w28hh8xk91n9qp8qz8ec6or50e5v35035ty61o7n383687a8wc7wn7k05uf46264s59r63m6bb7wq8cu8gy96186c7tp6444fr6eg5jf6da6kz86e8mi8qm9fq8g183f6du4ph6o65t56mz6uo8g38w690c9pf8pr8d56nl4z85tw4yv5so60d7ls81w8618v57vi7iw5tc44z63n58l62f6a37vi8bm8fs94w8597so6344eq6df5ic6c56jt8588lc8pi9en8f182f6cv4oi6n65s36lw6tk8ey8v28z99oe8os8c76mn4ya5sx4xu5rn5za7ko80t84z8u57uj7hy5sf44162o57l61d6907ue8ai8ep93v84a7rp6264ds6cf5hb6b26ip8438k78of9dl8e081f6bw4ni6m55r06kr6sd8dr8tw8y39na8np8b56ll4x75ru4wp5qf5y17jf7zj83r8sy7td7gt5ra42w61i56c60267o7t18968de92l8317qh60y4ck6b55fz69p6ha82n8is8n09c88co8056am4m76kt5pm6jb6qw8c98sd8wm9lu8mb89s6k94vu5qf4v95ox5wh7hu7xz8288rh7ry7ff5pw41i60254v5yj6637rg87l8bu91381l7p35zk4b569q5ei6856fp8128h78lh9aq8b97yr6984kt6jd5o56hs6pc8ap8qu8v49ke8kx88f6ix4ui5p24tt5ng5uz7gc7wh80s8q27qm7e55om4075yr53i5x564o7q08668ah8zs80b7nv5yd49y68h5d866u6ed7zp8fv8k699i8a27xl6834jp6i85my6gk6o289f8pl8tw9j88jt87d6hv4tg5nz4sp5ma5ts7f57vb7zn8oz7pk7d45nn3z85xq52g5w163j7ov85189d8yq7zc7mw5xf48z67i5c765s6d97yl8es8j498h8937wo6764ir6h95ly6fi6mz88b8oi8su9i88iu86f6gx4si5n04ro5l85sp7e17u77yk8ny7ok7c55mo3y95wq51e5ux62e7np83w8898xn7ya7lv5we47y66g5b364m6c27xd8dk8hx97b87z7vk6634hn6g45kr6e96lp8708n78rk9gz8hn8596fs4rc5ls4qf5jw5rc7cn7st7x78mm7na7ax5lg3wz5vf5025tj60y7m882f86t8w97wx7kk5v346n65359o6356aj7vu8c18gf95v86k7u764q4ga6ep5jb6cr6k585g8lm8q19fi8g783u6ee4px5kc4ox5id5pr7b17r87vn8l57lu79i5k23vl5u04yk5s05zd7kn80u85a8us7vi7j65tq45963o58861n6907ua8ai8ey94g8577sv63f4ey6dd5hw6bb6io83y8k58om9e48ew82l6d54oo5j24nl5h05oc79n7pu7ub8ju7km78b5iv3ue5ss4xb5qp5y27jc7zj8418tk7uc7i25sm44562j57260f67s7t28998dr93b8447rt62e4dx6cb5gt6a66hi82s8j08nh9d28dv81l6c64np5i24mk5fx5n878i7oq7t88it7jm77d5hx3tg5rt4wb5pn5wz7i87yg82z8sk7te7h45rp43861l5625ze66p7ry8868cp92a8347qv61g4cz6bb5fs6936ge81n8hv8me9c08cu80l6b64mp5h14lh5es5m277c7nk7s38hp7ik76b5gw3sf5qq4v65og5vq7gz7x781q8rd7s87g05ql42360f54u5y465d7qm86u8be91181w7po6094br6a25eh67q6ez8088gg8l09an8bj7zb69x4lf5fp4k45dd5kl75u7m27qm8ga7h674z5fk3r25pc4tq5mz5u77ff7vo8088pw7qt7em5p740p5yz53d5wl63t7p185989u8zj80g7o95yv4ad68m5cz6676df7ym8ev8jg9968a47xx68j4k15ea4in5bu5j17497ki7p38et7fs73l5e73pp5ny4sb5lh5so7dw7u57yr8oh7pg7db5nx3ze5xn51z5v662c7nk83t88g8y67z67n05xn49467d5bp64v6c17x98di8i597w88w7wr67e4iv5d44hf5al5hr72y7j87nv8dn7en72i5d53om5mv4r65kb5rh7co7sy7xl8nd7oe7ca5mx3ye5wm50x5u26177mf82p87c8x47y57m15wo48666e5ao63s6ay7w58cf8h396v87x7vt66g4hx5c54gf59j5go71v7i57mt8cm7do71k5c73np5lw4q55j95qe7bk7rv7wj8mc7ne7bb5ly3xf5vm4zv5sy6037l981j8688w27x47l15vo47565c59k62n69r7ux8b78fw95q86t7uq65e4gu5b14f958b5fe70l7gv7lk8be7ch70f5b23mj5kp4ow5hy5p17a77qh7v78l17m57a35kq3w75uc4yj5rk5yn7jt80384t8uo7vs7jq5ue45u63z5866176897tf89p8ef94b85f7td6414fh59m4ds56t5du6z07fa7k189x7b26z159p3l55j94nf5gf5ng78m7ow7tn8jk7kp78o5jc3us5sx4x25q15x27i87yj8398t77ud7ic5t044g62k56p5zo66p7ru8858cx92v8417s162p4e55894cd55c5cd6xi7dt7il88j79q6xq58f3jv5hy4m25f15m17767ni7sa8i87jg77g5i53tl5ro4vs5oq5vq7gv7x781z8ry7t67h75rw43c61f55j5yg65g7ql86x8bp91p82x7qy61o4d35764b95475b66wb7cn7hg87g78p6wq57f3iv5gy4l15dx5kx7617md7r78h77ig76i5h73sn5qp4us5no5un7fs7w480x8qy7s77g95qz42e60h54i5xe64d7pi85t8an90o81y7q060q4c55674a95345a36v77bj7gd86e77o6vr56h3hw5fx4jy5ct5jr74v7l77q28g37he75h5g63rl5pn4tn5mi5tf7ej7uv7zq8ps7r27f65pv41a5zb53b5w56327o684i89d8zf80q7ou5zk4az54z48z51s58p6ts7a47ez85276e6ui5573gm5em4im5be5ib73e7jq7om8ep7g17455ev3qa5o94s85l15rw7d07tc7y78ob7po7ds5oi3zx5xw51u5un61i7ml82x87t8xy7zb7nf5y649k53j47h5095746s778j7dg83l74y6t353u3f85d74h459v5gq71t7i67n38d87em72r5di3ow5mv4qs5jj5qe7bg7rt7wq8mw7oa7cg5n73yl5wk50h5t76017l481h86e8wl7y07m65wx48b5294664yw55q6qt7767c482a73q6rw52o3e25c04fw58m5fg70i7gv7lt8c17dg71n5cf3nt5lr4pm5ic5p67a87ql7vk8lr7n87bf5m63xl5vi4ze5s25yw7jy80c85a8vi7wz7l65vy47c51a4554xt54m6po7627b181972q6qy51q3d45b14ew57k5ed6ze7fs7kr8b07ch70p5bh3mv5ks4om5ha5o27947pi7uh8kq7m87ag5l83wm5uj4yc5r05xs7it7z78478ug7vy7k75uz46c5084424wo53g6oh74v79v80571n6pw50o3c259x4dq56c5d46y57ej7jj89t7bc6zl5ad3lq5jm4ne5g05mr77r7o57t68jg7kz7995k13ve5t94x15pm5wd7hd7xr82s8t37un7iw5tp4524yw42o4v951z6mz73d78e7yq7096oj4zc3ap58j4ca54v5bk6wl7cz7i088c79w6y758z3kc5i64lx5eh5l67667mk7rm8hy7jj77u5in3u05ru4vk5o35us7fs7w68198rl7t77hi5sb43o4xh4174tq50f6lf71t76w7x96yv6n64y039c5764av53e5a26v27bh7gk86x78k6ww57p3j25gv4kk5d25jq74q7l57q88gm7i976l5hf3ss5ql4u95mr5tf7ef7uu7zy8qc7s07gc5r642j4wb4004sh4z56k570k75o7w36xr6m34wx38a56349q52858v6tv7aa7fe85u77i6vv56p3i25fu4ji5by5il73l7k07p58fl7h975n5gh3rt5pl4t95lp5sc7db7tr7yv8pc7r17fe5q941l4vd3z04rg4y26j16zh74m7v26ws6l54w037c55448q51657s6sr7967eb84s76i6uw55r3h35eu4ig5av5hg72f7iv7o08ei7g874m5fh3qt5oj4s55kj5r57c37sj7xo8o67pw7eb5p640i4u83xt4q74ws6hq6y673c7tu6vl6k04uu36653w47h4zu56e6rd77s7cy83h7586tn54i3fu5dj4h459h5g070y7he7ml8d47ev73b5e63ph5n74qq5j35pm7ak7r07w78mq7oi7cy5nt3z44st3wd4op4v86g56wl71s7sc6u56il4tg34s52g45z4yb54u6pr7677bf81z73s6s95343ef5c44fm57x5eg6zd7ft7l18bm7dg71x5cs3o35ls4pa5hl5o37907pg7up8la7n47bl5mh3xs4rg3uy4n84tq6eo6v470d7qz6st6hb4s733i51644n4wx53f6oc74t7a280o72j6r151x3d85aw4ed56n5d46y17ei7jr8ae7ca70s5bo3n05kn4o45gd5mu77r7o87ti8k57m17aj";
+/* ===== 만세력 엔진 (절기·음력 테이블: 천문 계산으로 생성, KST) ===== */
+const JQD=(y,i)=>{if(y<1900)y=1900;if(y>2051)y=2051;const o=((y-1900)*12+i)*3;return Date.UTC(y,i,1)+parseInt(JQ.substr(o,3),36)*60000};
+function lunYear(y){if(y<1900||y>2050)return null;const s=LUN.substr((y-1900)*8,8),off=parseInt(s.slice(0,4),36),lp=parseInt(s[4],16),n=lp?13:12,bits=parseInt(s.slice(5),36).toString(2).padStart(n,'0');
+  const ms=[];let i=0;for(let m=1;m<=12;m++){ms.push({m,leap:false,len:bits[i++]==='1'?30:29});if(m===lp)ms.push({m,leap:true,len:bits[i++]==='1'?30:29})}return{off,lp,ms}}
+const D0=Date.UTC(1900,0,1);
+function ymd(ms){const d=new Date(ms);return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`}
+function lun2sol(y,m,d,leap){const L=lunYear(y);if(!L)return null;let off=L.off;for(const x of L.ms){if(x.m===m&&x.leap===!!leap){if(d<1||d>x.len)return null;return ymd(D0+(off+d-1)*864e5)}off+=x.len}return null}
+function sol2lun(str){const [y,m,d]=str.split('-').map(Number),days=Math.round((Date.UTC(y,m-1,d)-D0)/864e5);for(let ly=Math.min(y,2050);ly>=Math.max(1900,y-1);ly--){const L=lunYear(ly);if(!L||days<L.off)continue;let off=L.off;for(const x of L.ms){if(days<off+x.len)return{y:ly,m:x.m,d:days-off+1,leap:x.leap};off+=x.len}}return null}
+function i60(s,b){for(let i=0;i<60;i++)if(i%10===s&&i%12===b)return i;return 0}
+function sijin(mins){return Math.floor(((mins+30)%1440)/120)}
+function saju(str,mins){const [y,m,d]=str.split('-').map(Number),t=Date.UTC(y,m-1,d)+((mins??720))*60000;
+  const yy=t<JQD(y,1)?y-1:y,ys=((yy-4)%10+10)%10,yb=((yy-4)%12+12)%12;
+  let i=m-1,ty=y;if(t<JQD(y,m-1)){i=m-2;if(i<0){i=11;ty=y-1}}
+  const k=(i+11)%12,ms=((ys%5)*2+2+k)%10,mb=(2+k)%12;
+  const prev=JQD(ty,i),ni=(i+1)%12,next=JQD(i===11?ty+1:ty,ni);
+  const near=mins==null&&(Math.abs(t-prev)<1.5*864e5||Math.abs(next-t)<1.5*864e5);
+  const dp=pillar(str);const r={yy,y:[ys,yb],m:[ms,mb],d:[dp.s,dp.b],near,t,prev,next};
+  if(mins!=null){const b=sijin(mins);r.h=[((dp.s%5)*2+b)%10,b]}return r}
+/* ===== 사주 분석 ===== */
+const BONGI=[9,5,0,1,4,2,3,5,6,7,4,8];
+const JJG=[[8,9],[9,7,5],[4,2,0],[0,1],[1,9,4],[4,6,2],[2,5,3],[3,1,5],[4,8,6],[6,7],[7,3,4],[4,0,8]];
+const UNS=['장생','목욕','관대','건록','제왕','쇠','병','사','묘','절','태','양'],UNS0=[11,6,2,9,2,9,5,0,8,3];
+function unseong(s,b){const st=UNS0[s];return UNS[s%2===0?(b-st+12)%12:(st-b+12)%12]}
+const GRP=['비겁','식상','재성','관성','인성'],GOD2G={비견:0,겁재:0,식신:1,상관:1,편재:2,정재:2,편관:3,정관:3,편인:4,정인:4};
+const ELC2=['#3f7a4f','#b8402f','#a57b25','#6b7078','#2f5687'];
+function analyze(sj,gender){const ds=sj.d[0],de=Math.floor(ds/2);
+  const P=[['연',sj.y],['월',sj.m],['일',sj.d]].concat(sj.h?[['시',sj.h]]:[]);
+  const cnt=[0,0,0,0,0];for(const [,v] of P){cnt[Math.floor(v[0]/2)]++;cnt[EB[v[1]]]++}
+  const gods={};const gc=[0,0,0,0,0];
+  for(const [lb,v] of P){if(lb!=='일'){const g=tenGod(ds,v[0]);gods[lb+'간']=g;gc[GOD2G[g]]++}const g2=tenGod(ds,BONGI[v[1]]);gods[lb+'지']=g2;gc[GOD2G[g2]]++}
+  const W={연간:10,월간:15,시간:10,연지:10,월지:30,일지:15,시지:10};let sup=0,tot=0;
+  for(const [lb,v] of P){for(const [pos,el] of [[lb+'간',Math.floor(v[0]/2)],[lb+'지',EB[v[1]]]]){if(pos==='일간')continue;tot+=W[pos];if(el===de||el===(de+4)%5)sup+=W[pos]}}
+  const sc=Math.round(sup/tot*100);
+  const tier=sc>=70?4:sc>=57?3:sc>=44?2:sc>=32?1:0;
+  const E=k=>(de+k)%5;let yong,why;
+  if(tier>=3){if(gc[4]>gc[0]){yong=E(2);why='인성(나를 돕는 기운)이 넘쳐 생각이 많고 움직임이 무거워요. 재성으로 인성을 눌러 현실로 끌어내는 것이 핵심이에요.'}
+    else if(gc[3]>=1){yong=E(3);why='비겁(나와 같은 기운)이 강해 고집과 독립심이 커요. 관성으로 기준과 틀을 세워 주면 힘이 제 방향으로 쓰여요.'}
+    else{yong=E(1);why='나의 힘이 넘치는데 쓸 곳이 부족해요. 식상으로 기운을 밖으로 흘려보내 재능과 결과물로 바꾸는 것이 핵심이에요.'}}
+  else if(tier<=1){if(gc[3]>=2){yong=E(4);why='관성(나를 누르는 기운)이 강해 부담과 압박을 많이 받아요. 인성으로 관성의 힘을 받아 내 것으로 바꾸는 살인상생(殺印相生)이 핵심이에요.'}
+    else if(gc[2]>=2){yong=E(0);why='재성이 많아 몸보다 일이 커지기 쉬운 재다신약(財多身弱)의 구조예요. 비겁으로 나를 세워야 재물을 감당할 수 있어요.'}
+    else{yong=E(4);why='나를 받쳐 주는 기운이 약해요. 인성으로 힘을 보충하고 쉬어 가며 배우는 흐름이 운을 살려요.'}}
+  else{yong=cnt.indexOf(Math.min(...cnt));why='나와 주변의 힘이 비교적 고르게 맞서는 중화(中和)에 가까워요. 가장 부족한 기운을 채워 균형을 맞추는 것이 운을 키우는 길이에요.'}
+  const hee=(yong+4)%5,gi=(yong+3)%5;
+  const mg=tenGod(ds,BONGI[sj.m[1]]);let gk=mg==='비견'?'건록격':mg==='겁재'?(ds%2===0?'양인격':'월겁격'):mg==='편관'?'편관격(칠살격)':mg+'격';
+  // 신살·합충
+  const brs=P.map(([lb,v])=>[lb,v[1]]),hasB=b=>brs.filter(([,x])=>x===b).map(([lb])=>lb+'지');
+  const tri=b=>[8,0,4].includes(b)?0:[2,6,10].includes(b)?1:[5,9,1].includes(b)?2:3;
+  const DOH=[9,3,6,0],YEOK=[2,8,11,5],HWA=[4,10,1,7];const ss=[];
+  for(const base of [sj.d[1],sj.y[1]]){const g=tri(base);for(const [nm,arr] of [['도화살',DOH],['역마살',YEOK],['화개살',HWA]]){const at=hasB(arr[g]);if(at.length&&!ss.some(x=>x[0]===nm))ss.push([nm,at])}}
+  const CHE=[[1,7],[0,8],[11,9],[11,9],[1,7],[0,8],[1,7],[2,6],[3,5],[3,5]][ds],cheon=CHE.flatMap(hasB);if(cheon.length)ss.push(['천을귀인',cheon]);
+  const MUN=[5,6,8,9,8,9,11,0,2,3][ds],mun=hasB(MUN);if(mun.length)ss.push(['문창귀인',mun]);
+  const YI={0:3,2:6,4:6,6:9,8:0}[ds];if(YI!==undefined){const a=hasB(YI);if(a.length)ss.push(['양인살',a])}
+  const gg=i60(sj.d[0],sj.d[1]);if([16,46,28,58,34].includes(gg))ss.push(['괴강살',['일주']]);
+  const HAP=[[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]],WON=[[0,7],[1,6],[2,9],[3,8],[4,11],[5,10]],rel=[];
+  for(let a=0;a<brs.length;a++)for(let b=a+1;b<brs.length;b++){const x=brs[a][1],y=brs[b][1],pr=`${brs[a][0]}지·${brs[b][0]}지`;
+    if(HAP.some(([p,q])=>(p===x&&q===y)||(p===y&&q===x)))rel.push(['육합',pr,x,y]);else if((x-y+12)%12===6)rel.push(['충',pr,x,y]);else if(WON.some(([p,q])=>(p===x&&q===y)||(p===y&&q===x)))rel.push(['원진',pr,x,y])}
+  const spouseG=gender==='F'?3:2;
+  return{P,cnt,gods,gc,sc,tier,yong,hee,gi,why,gk,mg,ss,rel,spouseG,ds,de}}
+/* ===== 풀이 문장 ===== */
+const DAYPRO=[
+ '갑목(甲木) 일간은 하늘을 향해 곧게 뻗는 큰 나무입니다. 성장과 시작을 주관하는 기운이라 목표가 생기면 정면으로 밀고 나가며, 어디서든 기둥 역할을 맡게 됩니다. 인(仁)의 성정이 있어 약한 사람을 보면 돕고자 하지만, 자존심이 강해 굽혀야 할 때 굽히지 못해 부러지는 일이 생깁니다. 큰 나무는 혼자 서 있을 때보다 숲을 이룰 때 오래 갑니다.',
+ '을목(乙木) 일간은 풀과 덩굴, 꽃의 기운입니다. 겉으로는 부드럽고 순해 보이지만 바위 틈에서도 싹을 틔우는 생명력이 있어, 환경이 바뀌어도 결국 자리를 잡아 냅니다. 사람과 사람 사이를 잇는 친화력과 생활력이 뛰어나고 실리를 놓치지 않습니다. 다만 기댈 곳을 찾는 마음이 커서 관계에 지나치게 마음을 쓰다 지치기 쉽습니다.',
+ '병화(丙火) 일간은 하늘의 태양입니다. 숨김이 없고 공명정대하며, 존재만으로 주변을 밝히는 힘이 있습니다. 예(禮)를 중시하고 표현력과 추진력이 뛰어나 앞에 나설수록 빛이 납니다. 다만 해가 지듯 열정이 식는 속도도 빨라, 시작한 일을 끝까지 이어 가는 지구력이 과제가 됩니다.',
+ '정화(丁火) 일간은 어둠을 밝히는 촛불과 등불입니다. 크게 드러나지 않지만 필요한 곳을 정확하게 비추며, 한 가지에 깊이 몰입하는 집중력이 남다릅니다. 겉은 조용해도 속에는 꺼지지 않는 열정과 헌신이 있습니다. 감정의 기복이 안으로 쌓이기 쉬워, 마음을 털어놓을 통로를 두는 것이 좋습니다.',
+ '무토(戊土) 일간은 크고 높은 산입니다. 중후하고 신용을 중시하며, 쉽게 흔들리지 않아 사람들이 기대어 쉬어 가는 존재가 됩니다. 포용력이 크고 중재에 능합니다. 반면 변화에 둔하고 고집이 세다는 평을 듣기 쉬워, 때로는 먼저 움직이는 결단이 필요합니다.',
+ '기토(己土) 일간은 곡식을 길러 내는 논밭과 정원의 흙입니다. 무엇이든 받아들여 키워 내는 힘이 있어 교육·양육·관리에 재능이 있고, 현실 감각과 실속이 뛰어납니다. 배려가 깊지만 속마음을 잘 드러내지 않고 계산이 많아져 스스로를 피곤하게 만들 때가 있습니다.',
+ '경금(庚金) 일간은 다듬어지지 않은 원석과 강철입니다. 결단력과 추진력, 의리가 강하고 옳다고 믿는 일에는 물러서지 않습니다. 불에 단련될수록 명검이 되듯 시련을 거치며 크게 성장하는 기운입니다. 말과 행동이 거칠게 비칠 수 있어 표현의 온도를 조절하면 사람을 얻습니다.',
+ '신금(辛金) 일간은 잘 다듬어진 보석입니다. 예리한 감각과 미적 안목, 완벽을 추구하는 기준을 갖고 있으며 자존감과 품위를 중시합니다. 정밀함이 필요한 일에서 누구보다 빛납니다. 다만 예민하고 상처를 오래 기억하는 편이라, 스스로에게 관대해지는 연습이 필요합니다.',
+ '임수(壬水) 일간은 큰 강과 바다입니다. 생각의 스케일이 크고 지혜로우며, 어떤 사람과 상황도 품어 흘려보내는 포용력이 있습니다. 기획력과 정보력이 뛰어나 큰 그림을 그리는 자리에서 강합니다. 흐름이 자유로운 만큼 방향을 잃으면 에너지가 흩어지기 쉬워 중심 목표를 세워 두는 것이 중요합니다.',
+ '계수(癸水) 일간은 비와 이슬, 안개입니다. 총명하고 직관이 뛰어나며 남들이 보지 못하는 감정의 결을 읽어 냅니다. 조용히 스며들어 주변을 적시는 참모형의 힘이 있습니다. 생각이 많아 걱정이 깊어지기 쉬우니, 결정한 일은 믿고 밀어붙이는 연습이 운을 엽니다.'];
+const TIERT=[['신약(身弱)','나를 받쳐 주는 기운이 약한 사주예요. 주변의 영향을 많이 받고 섬세하며, 혼자 버티기보다 사람과 배움의 도움을 받을 때 크게 됩니다. 무리한 확장보다 체력과 실력을 먼저 쌓는 전략이 맞습니다.'],
+ ['약간 신약','힘이 조금 부족한 편이에요. 협력자와 함께할 때 능력이 배가되고, 감당할 수 있는 범위를 정해 두면 실속이 커집니다.'],
+ ['중화(中和)','힘의 균형이 비교적 잘 잡힌 사주예요. 극단으로 치우치지 않아 어떤 환경에도 적응하며, 운의 흐름을 타면 고르게 성과를 냅니다.'],
+ ['약간 신강','주체성이 뚜렷하고 버티는 힘이 좋아요. 스스로 판단하고 끌고 가는 자리에서 능력이 드러나며, 에너지를 쓸 목표가 분명할수록 좋습니다.'],
+ ['신강(身强)','자기 기운이 매우 강한 사주예요. 독립심과 추진력이 크고 웬만한 압박에 꺾이지 않습니다. 힘이 넘치는 만큼 고집과 독단을 경계하고, 남는 에너지를 일과 성과로 흘려보내야 운이 열립니다.']];
+const GKT={'건록격':'월지에 나와 같은 기운이 뿌리내린 건록격이에요. 자수성가형으로, 남의 도움보다 내 손으로 일군 것이 오래 갑니다. 독립·전문직·자영업에 강합니다.',
+ '양인격':'월지에 강한 칼날 같은 겁재가 자리한 양인격이에요. 승부욕과 돌파력이 뛰어나 위기에 강하며, 군·경·의료·스포츠처럼 강단이 필요한 분야에서 빛납니다. 급한 성정을 다스리는 것이 관건입니다.',
+ '월겁격':'월지에 겁재가 자리한 월겁격이에요. 경쟁 속에서 실력이 자라는 구조로, 동료와 경쟁자가 곧 성장의 동력입니다. 돈 거래와 보증은 신중해야 합니다.',
+ '식신격':'월지에 식신이 자리한 식신격이에요. 타고난 재능과 손재주, 여유로운 성정으로 먹고사는 걱정이 적은 복록의 격입니다. 전문 기술·요리·교육·창작에서 꾸준히 인정받습니다.',
+ '상관격':'월지에 상관이 자리한 상관격이에요. 언변과 표현력, 비판적 사고가 뛰어나 기존 틀을 깨는 창의성이 있습니다. 방송·강연·기획·예술·변호처럼 말과 아이디어로 승부하는 일에 강하며, 윗사람과의 마찰을 조심해야 합니다.',
+ '편재격':'월지에 편재가 자리한 편재격이에요. 돈의 흐름을 읽는 감각과 사업 수완, 활동성이 뛰어납니다. 유통·영업·투자·사업처럼 큰돈이 오가는 무대에서 기회를 잡지만, 들어오는 만큼 나가는 흐름을 관리해야 합니다.',
+ '정재격':'월지에 정재가 자리한 정재격이에요. 성실하고 계획적이며 정직하게 쌓아 올리는 재물복이 있습니다. 금융·회계·관리·공무처럼 안정적인 조직에서 신뢰를 얻고 차곡차곡 자산을 늘립니다.',
+ '편관격(칠살격)':'월지에 편관이 자리한 편관격(칠살격)이에요. 강한 압박과 책임을 견디며 권위를 얻는 구조로, 리더십과 카리스마가 있습니다. 군·경·법조·의료·위기관리 분야에서 두각을 나타내며, 제어가 잘 되면 큰 권력을 쥡니다.',
+ '정관격':'월지에 정관이 자리한 정관격이에요. 원칙과 명예를 중시하는 반듯한 구조로, 조직에서 인정받고 승진하는 관운이 있습니다. 공직·대기업·교육·행정에서 안정적으로 성장합니다.',
+ '편인격':'월지에 편인이 자리한 편인격이에요. 직관과 영감, 독특한 시각이 뛰어나 남들이 가지 않는 길에서 전문성을 쌓습니다. 연구·IT·종교·철학·예술·심리 분야에 인연이 깊습니다.',
+ '정인격':'월지에 정인이 자리한 정인격이에요. 학문과 자격, 어른의 후원을 받는 구조로 배움이 곧 운이 됩니다. 교육·학술·출판·자격 기반의 전문직에서 꾸준히 성장합니다.'};
+const GRPT=[['자아·경쟁·형제','많으면 주관이 뚜렷하고 독립심이 강하지만 고집과 경쟁심이 과해질 수 있어요.','없으면 남의 의견에 쉽게 휘둘리고 자기 몫을 챙기는 데 약할 수 있어요.'],
+ ['표현·재능·자식','많으면 말과 재주가 뛰어나고 끼가 넘치지만 산만하거나 말실수가 잦을 수 있어요.','없으면 생각을 밖으로 표현하는 데 서툴러 능력이 덜 알려질 수 있어요.'],
+ ['재물·현실·활동','많으면 현실 감각과 사업 수완이 좋지만 일과 돈에 끌려다녀 몸이 지칠 수 있어요.','없으면 돈 욕심이 적고 담백하지만 재물 관리와 현실 감각을 따로 길러야 해요.'],
+ ['명예·조직·책임','많으면 책임감과 명예욕이 강하지만 압박과 스트레스를 크게 받을 수 있어요.','없으면 자유로운 대신 조직 생활과 규칙에 답답함을 느낄 수 있어요.'],
+ ['학문·보호·어머니','많으면 생각이 깊고 배움을 좋아하지만 실행이 늦고 의존적이 될 수 있어요.','없으면 실천력은 좋으나 꾸준한 공부와 쉬어 가는 습관을 의식적으로 챙겨야 해요.']];
+const GODT={비견:'나와 대등한 동료·친구',겁재:'경쟁자·승부욕',식신:'재능·여유·먹을복',상관:'표현·비판·끼',편재:'큰돈·사업·활동',정재:'성실한 재물·안정',편관:'압박·도전·권위',정관:'명예·직장·규율',편인:'직관·특수한 재주',정인:'학문·후원·인정'};
+const SST={'도화살':'사람을 끌어당기는 매력과 인기의 별이에요. 대중을 상대하는 일, 예술·방송·서비스에서 큰 장점이 되며, 이성 관계에서는 선을 분명히 하는 것이 좋아요.',
+ '역마살':'이동과 변화의 별이에요. 한곳에 머무르기보다 출장·여행·해외·무역처럼 움직이는 일에서 운이 열립니다. 이사와 이직이 잦을 수 있어요.',
+ '화개살':'예술과 종교, 학문의 별이에요. 혼자만의 세계가 깊고 영적인 감수성이 있어 연구·예술·수행에서 깊이를 얻습니다. 외로움을 타기 쉬워요.',
+ '천을귀인':'최고의 길신(吉神)으로, 어려울 때마다 귀인이 나타나 도움을 주는 별이에요. 위기에서 구원받는 복이 있습니다.',
+ '문창귀인':'총명함과 학문의 별이에요. 글·시험·문서와 인연이 좋아 공부와 자격에서 성과를 냅니다.',
+ '양인살':'강한 칼날의 별이에요. 결단력과 승부 근성이 뛰어나지만 성급함과 다툼, 부상을 조심해야 해요. 잘 쓰면 큰 권위가 됩니다.',
+ '괴강살':'우두머리의 기운이 서린 강렬한 일주예요. 총명하고 카리스마가 있으며 극과 극의 운을 겪기 쉬워, 큰 그릇으로 쓰일 때 빛납니다.'};
+const RELT={육합:'서로 끌어당기는 합(合)이라 그 자리의 인연이 단단하게 묶여요.',충:'정면으로 부딪히는 충(沖)이라 그 자리에 변화와 이동이 잦아요. 변화가 곧 기회가 되기도 해요.',원진:'미묘하게 서운함이 쌓이는 원진(怨嗔)이라 그 자리의 관계에서 오해를 풀어 가는 노력이 필요해요.'};
+const YONGT=[['초록·청록','동쪽','3, 8','봄','교육·출판·디자인·식물·패션','아침 산책, 새로운 공부 시작, 화분 기르기'],
+ ['빨강·주황·분홍','남쪽','2, 7','여름','방송·마케팅·뷰티·조명·IT 서비스','햇볕 쬐기, 운동으로 땀 내기, 밝은 옷 입기'],
+ ['노랑·베이지·갈색','중앙','5, 10','환절기','부동산·중개·컨설팅·농업·인사','규칙적인 식사, 집 정리, 신뢰를 쌓는 약속 지키기'],
+ ['흰색·은색·금색','서쪽','4, 9','가을','금융·법률·의료·기계·품질관리','물건과 관계 정리, 원칙 세우기, 악세서리 착용'],
+ ['검정·남색·파랑','북쪽','1, 6','겨울','무역·물류·연구·여행·IT','충분한 수면, 물 자주 마시기, 혼자 생각하는 시간']];
+const HEALTHT=['간·담, 눈, 근육과 신경계','심장·소장, 혈압과 혈액순환, 눈의 피로','위장·비장, 소화기와 체중 관리','폐·대장, 호흡기와 피부','신장·방광, 허리, 생식기와 수분대사'];
+const UNST={장생:'새로 태어나는 기운이라 배움과 시작이 순조로워요',목욕:'꾸밈과 감성의 기운이라 매력이 있고 변화가 잦아요',관대:'성장하여 의관을 갖춘 기운이라 자신감과 패기가 있어요',건록:'스스로 녹을 받는 기운이라 자립심과 생활력이 강해요',제왕:'기운이 정점에 이른 상태라 주도권과 고집이 강해요',쇠:'원숙해진 기운이라 노련하고 신중해요',병:'기운이 약해진 상태라 섬세하고 정이 많아요',사:'멈춰 고요한 기운이라 생각이 깊고 정신적이에요',묘:'저장하는 기운이라 모으고 지키는 힘이 있어요',절:'끊어지고 새로 잇는 기운이라 변화와 반전이 많아요',태:'잉태의 기운이라 가능성과 호기심이 커요',양:'길러지는 기운이라 보호받고 무난하게 자라요'};
+/* ===== 렌더 ===== */
+const esc=t=>String(t).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+function chip(s){return `<span class="hch" style="background:${ELC2[Math.floor(s/2)]}">${SH[s]}</span>`}
+function bchip(b){return `<span class="hch" style="background:${ELC2[EB[b]]}">${BR[b]}</span>`}
+function ohScore(A,ce){const sc=A.cnt.slice();let bonus=0;const mo=Math.max(...sc.filter((_,i)=>i!==ce));if(sc[ce]<=mo){bonus=mo+1-sc[ce]}return{sc,bonus}}
+const WORRY=[['연애',/연애|사랑|썸|이성|남친|여친|남자친구|여자친구|결혼|이별|재회|짝|소개팅|배우자|남편|아내/],['재물',/돈|재물|투자|주식|코인|부동산|빚|대출|월급|수입|사업|장사|매출|재테크/],['직장',/직장|회사|이직|취업|퇴사|승진|진로|일자리|면접|창업|커리어|상사|업무|프리랜서/],['건강',/건강|병|아프|수술|몸|피곤|스트레스|불면|다이어트/],['관계',/관계|친구|가족|부모|동료|인간관계|사람|갈등|싸움|형제|자녀|아이/],['학업',/시험|공부|합격|수능|자격증|학교|입시|성적|유학|고시/],['변화',/이사|이민|해외|변화|이동|독립|여행/]];
+function worryCats(txt,chips){const s=new Set(chips||[]);for(const [k,re] of WORRY)if(re.test(txt||''))s.add(k);return[...s]}
+function proRender(c){const sj=c.sj,A=analyze(sj,c.gender),si=c.p.s,ce=c.s.e;c.A=A;const yt=YONGT[A.yong];
+  const y27s=tenGod(si,3),y27b=tenGod(si,5),dbr=sj.d[1];const y27rel=dbr===1?'충':[6].includes(dbr)?'육합':'';
+  const lun=sol2lun(c.dd);const P=[['시주',sj.h],['일주',sj.d],['월주',sj.m],['연주',sj.y]];
+  const wc=worryCats(c.worry,c.wchips);
+  /* 간단 풀이 */
+  $('sum').innerHTML=(c.kind!=='n'?`<p class="kick" style="margin:0 0 6px">★ 레어 카드 · ${c.kind==='m'?MONEY_M[si]+'월 금전운 대길':LOVE_M[si]+'월 연애운 대길'}</p>`:'')+
+   `<h3>${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${ANI[sj.y[1]]}띠 · ${STK[si]}${BRK[dbr]} 일주</h3>
+   <div class="mini8">${P.map(([lb,v])=>`<div><small>${lb}</small>${v?chip(v[0])+bchip(v[1]):'<span class="hch q">?</span><span class="hch q">?</span>'}</div>`).join('')}</div><ul>
+   <li><b>본성</b><span>${c.s.ess.split('. ')[0]}.</span></li>
+   <li><b>힘</b><span>${TIERT[A.tier][0]} · ${A.gk}</span></li>
+   <li><b>용신</b><span>${ELW[A.yong]}(${ELN[A.yong]}) 기운이 나를 살려요 · ${yt[0]}</span></li>
+   <li><b>2027</b><span>${y27s}·${y27b}의 해 · ${TG[y27s][0].replace(/달$/,'해')}</span></li>
+   ${wc.length||c.worry?`<li><b>고민</b><span>${worryShort(A,wc,c)}</span></li>`:''}</ul>`;
+  /* 원국표 */
+  const cols=P.filter(([,v])=>v||true);
+  $('pillars').innerHTML=`<div class="wk"><div class="wk-h"><span></span>${cols.map(([lb])=>`<b>${lb}</b>`).join('')}</div>
+   <div class="wk-r"><span>십신</span>${cols.map(([lb,v])=>`<i>${v?(lb==='일주'?'일간(나)':tenGod(si,v[0])):'-'}</i>`).join('')}</div>
+   <div class="wk-r big"><span>천간</span>${cols.map(([lb,v])=>`<i>${v?chip(v[0]):'<span class="hch q">?</span>'}</i>`).join('')}</div>
+   <div class="wk-r big"><span>지지</span>${cols.map(([lb,v])=>`<i>${v?bchip(v[1]):'<span class="hch q">?</span>'}</i>`).join('')}</div>
+   <div class="wk-r"><span>십신</span>${cols.map(([lb,v])=>`<i>${v?tenGod(si,BONGI[v[1]]):'-'}</i>`).join('')}</div>
+   <div class="wk-r"><span>지장간</span>${cols.map(([lb,v])=>`<i class="sm">${v?JJG[v[1]].map(x=>SH[x]).join(' '):'-'}</i>`).join('')}</div>
+   <div class="wk-r"><span>12운성</span>${cols.map(([lb,v])=>`<i>${v?unseong(si,v[1]):'-'}</i>`).join('')}</div></div>`;
+  $('pNote').textContent=`양력 ${c.dd.replace(/-/g,'.')}${lun?` (음력 ${lun.y}.${String(lun.m).padStart(2,'0')}.${String(lun.d).padStart(2,'0')}${lun.leap?' 윤달':''})`:''}${c.mins!=null?` ${String(Math.floor(c.mins/60)).padStart(2,'0')}:${String(c.mins%60).padStart(2,'0')} · ${BRK[sj.h[1]]}시`:' · 시간 모름(시주 제외)'} · ${c.gender==='F'?'여성':'남성'}. 절기는 한국 표준시 기준으로 계산했어요.${sj.near?' 절기가 바뀌는 날 근처에 태어나 태어난 시간에 따라 월주가 달라질 수 있어요.':''}`;
+  /* 오행 */
+  const {sc,bonus}=ohScore(A,ce),tot=sc.reduce((a,b)=>a+b,0)+bonus;
+  $('elBars').innerHTML=`<h3>나의 오행 (${A.P.length*2}글자 + 일간 가중)</h3>`+sc.map((n,i)=>{const v=n+(i===ce?bonus:0);return `<div class="bar"><span>${ELN[i]}(${ELW[i]})</span><div><i style="width:${Math.round(n/tot*100*1.6)}%;background:${EL[i].c}"></i>${i===ce&&bonus?`<i class="bn" style="width:${Math.round(bonus/tot*100*1.6)}%;background:${EL[i].c}"></i>`:''}</div><span>${v}</span></div>`}).join('')+
+   `<p class="note" style="margin:8px 0 0">카드의 중심 기운은 일간(나)인 ${ELW[ce]}(${ELN[ce]})이에요. 일간은 사주의 주인이라 가중치${bonus?` +${bonus}`:''}를 더해 가장 높게 표시해요. 빗금 부분이 가중치예요.</p>`;
+  const lows=[0,1,2,3,4].filter(i=>sc[i]===Math.min(...sc)).map(i=>ELW[i]);
+  $('elT').textContent=`중심은 ${ELW[ce]} 기운, ${lows.join('·')} 기운이 ${Math.min(...sc)?'가장 적어요':'없어요'}`;
+  const rmx=sc.indexOf(Math.max(...sc));$('elTxt').textContent=`원국에서 실제로 가장 많은 글자는 ${ELW[rmx]}(${sc[rmx]}개)예요. ${ELSTRONG[rmx]} ${lows.length>2?'여러 기운이 고르게 적어 특정 기운에 치우치지 않는 편이에요.':ELWEAK[[0,1,2,3,4].find(i=>ELW[i]===lows[0])]} 운을 살리는 용신은 ${ELW[A.yong]}(${ELN[A.yong]}) 기운이에요.`;
+  $('lucky').innerHTML=[['행운의 색',yt[0]],['행운의 방향',yt[1]],['행운의 숫자',yt[2]],['기운이 오르는 계절',yt[3]]].map(([a,b])=>`<div><small>${a}</small>${b}</div>`).join('');
+  /* 전문 풀이 */
+  const top=GRP.map((g,i)=>[g,A.gc[i],i]).sort((a,b)=>b[1]-a[1]);const none=top.filter(x=>x[1]===0);
+  const ilji=tenGod(si,BONGI[dbr]),spc=A.gc[A.spouseG];
+  const curDW=daewoon(c).find(x=>x.cur);
+  const sec=(t,h)=>`<div class="panel pro"><h3>${t}</h3>${h}</div>`;
+  $('proBox').innerHTML=
+   sec('일간 · 타고난 그릇',`<p>${DAYPRO[si]}</p><p>일지에 ${BR[dbr]}(${ANI[dbr]})가 앉아 ${unseong(si,dbr)}의 자리에 있어요. ${UNST[unseong(si,dbr)]}.</p>`)+
+   sec('신강·신약과 용신',`<div class="meter"><i style="left:${A.sc}%"></i><span>신약</span><span>중화</span><span>신강</span></div><p><b>${TIERT[A.tier][0]}</b> (나를 돕는 기운 ${A.sc}%) — ${TIERT[A.tier][1]}</p><p><b>용신 ${ELW[A.yong]}(${ELN[A.yong]})</b> · 희신 ${ELW[A.hee]} · 기신 ${ELW[A.gi]}. ${A.why}</p><p class="note">용신 기운을 살리는 법: ${yt[5]}. 어울리는 분야: ${yt[4]}.</p>`)+
+   sec('격국 · 사회에서 쓰는 힘',`<p><b>${A.gk}</b> — ${GKT[A.gk]}</p>`)+
+   sec('십신 분포',`<div class="gbars">${GRP.map((g,i)=>`<div><span>${g}</span><div><i style="width:${A.gc[i]/ (A.P.length*2-1)*100}%"></i></div><b>${A.gc[i]}</b></div>`).join('')}</div>
+     <p>가장 두드러진 것은 <b>${top[0][0]}</b>(${GRPT[top[0][2]][0]})이에요. ${top[0][1]>=3?GRPT[top[0][2]][1]:'적당히 자리 잡아 장점으로 쓰여요.'}${none.length?` 반면 ${none.map(x=>x[0]).join('·')}이 없어요. ${GRPT[none[0][2]][2]}`:''}</p>`)+
+   sec('신살과 합충',(A.ss.length?A.ss.map(([n,at])=>`<p><b>${n}</b> <small>(${at.join(', ')})</small> — ${SST[n]}</p>`).join(''):'<p>두드러진 신살이 없는 담백한 구조예요. 특정 기운에 휘둘리지 않고 노력한 만큼 결과가 나오는 사주입니다.</p>')+
+     (A.rel.length?Object.values(A.rel.reduce((m,[n,pr,x,y])=>{const k=n+Math.min(x,y)+Math.max(x,y);(m[k]=m[k]||[n,[],x,y])[1].push(pr);return m},{})).map(([n,prs,x,y])=>`<p><b>${BR[x]}${BR[y]} ${n}</b> <small>(${prs.join(', ')})</small> — ${RELT[n]}</p>`).join(''):''))+
+   sec('성격과 대인관계',`<p>${c.s.ess} ${c.r[2]}</p><p>${A.tier>=3?'자기 주관이 뚜렷해 리더 역할을 자연스럽게 맡지만, 상대의 속도를 기다려 주는 여유가 관계를 지켜 줍니다.':A.tier<=1?'사람의 마음을 잘 헤아리고 협력에 강하지만, 싫은 것을 싫다고 말하는 연습이 나를 지켜 줍니다.':'상황에 따라 앞에 서기도, 뒤에서 받치기도 하는 균형 감각이 있어 어느 무리에서든 잘 섞입니다.'}</p>`)+
+   sec('직업과 적성',`<p>${GKT[A.gk].split('. ').slice(-1)[0]} 십신으로 보면 ${top[0][0]}이 강해 ${['독립적으로 내 이름을 거는 일, 동업·팀 경쟁이 있는 일','기술·창작·강의·콘텐츠처럼 재능을 드러내는 일','영업·사업·유통·재무처럼 돈과 사람이 움직이는 일','조직·공직·관리직처럼 책임과 직위가 있는 일','연구·교육·자격 기반 전문직처럼 깊이가 쌓이는 일'][top[0][2]]}에 적성이 있어요. 용신인 ${ELW[A.yong]} 기운의 분야(${yt[4]})를 곁들이면 운이 붙습니다.</p>`)+
+   sec('재물운',`<p>${A.gc[2]===0?'원국에 재성이 드러나지 않아 큰돈을 좇기보다 전문성과 신용으로 버는 구조예요. 재성 운이 들어오는 해에 기회를 잡으세요.':A.gc[2]>=3&&A.tier<=1?'재성이 많은데 나의 힘이 약한 재다신약 구조예요. 돈이 보여도 감당할 범위를 정하고, 동업자나 전문가의 도움을 받을 때 실속이 커집니다.':A.gc[2]>=2&&A.tier>=3?'신강한 몸에 재성이 받쳐 주어 재물을 다루는 그릇이 커요. 적극적으로 기회를 잡아도 감당할 힘이 있습니다.':'재성이 적당히 자리해 성실하게 쌓으면 꾸준히 불어나는 재물운이에요.'} ${A.gc[1]>=2?'식상이 재성을 생해 재능과 아이디어가 곧 돈이 되는 흐름도 있어요.':''}${A.gc[0]>=3?' 비겁이 많아 돈이 들어와도 나눠지기 쉬우니 보증과 돈거래는 피하세요.':''}</p>`)+
+   sec('연애와 배우자',`<p>배우자 자리인 일지에 <b>${ilji}</b>(${GODT[ilji]})가 있어요. ${{비견:'친구 같은 편안한 관계를 원하고, 대등한 배우자와 인연이 깊어요.',겁재:'서로 자극을 주는 열정적인 관계에 끌리지만 주도권 다툼을 조심해야 해요.',식신:'다정하고 여유로운 사람과 잘 맞고, 함께 즐기는 데서 사랑이 자라요.',상관:'말이 잘 통하고 재치 있는 사람에게 끌리지만 상대를 바꾸려는 마음은 내려놓아야 해요.',편재:'활동적이고 사교적인 연애를 하며 이성 인연이 많은 편이에요.',정재:'성실하고 알뜰한 배우자 복이 있고, 안정된 가정을 꾸리는 힘이 있어요.',편관:'카리스마 있는 사람에게 끌리고, 관계에서 긴장과 끌림이 함께 있어요.',정관:'반듯하고 책임감 있는 배우자와 인연이 있으며 결혼 운이 안정적이에요.',편인:'정신적 교감을 중요하게 여기며 혼자만의 시간을 존중해 주는 사람이 맞아요.',정인:'나를 아껴 주고 챙겨 주는 배우자 복이 있어요.'}[ilji]} ${c.gender==='F'?'여성에게 배우자를 뜻하는 관성':'남성에게 배우자를 뜻하는 재성'}이 원국에 ${spc===0?'':spc+'개'}${spc===0?'보이지 않아 인연이 늦게 오거나 스스로 고르는 눈이 까다로운 편이에요. 운에서 배우자성이 들어오는 해에 좋은 인연이 닿습니다.':spc>=3?'로 많아 이성 인연이 많은 만큼 한 사람에게 마음을 모으는 것이 중요해요.':'로 적당해 때가 되면 자연스럽게 인연이 이어져요.'}</p>`)+
+   sec('건강',`<p>오행 중 ${lows.join('·')} 기운이 약하고 ${ELW[sc.indexOf(Math.max(...sc))]} 기운이 많은 편이에요. 약한 기운 쪽인 ${lows.slice(0,2).map(w=>HEALTHT[ELW.indexOf(w)]).join(', ')} 쪽을 평소에 챙기세요. ${A.tier>=3?'기운이 강해 무리해도 티가 덜 나니 과로를 조심하세요.':'회복에 시간이 걸리는 편이라 수면과 휴식을 우선하세요.'}</p><p class="note">건강 풀이는 재미용 참고이며 의학적 진단을 대신하지 않아요.</p>`)+
+   sec('2027 정미년(丁未年)과 나',`<p>정미년의 천간 丁은 나에게 <b>${y27s}</b>, 지지 未는 <b>${y27b}</b>예요. ${TG[y27s][7]} ${y27rel==='충'?'특히 일지 丑과 未가 충(沖)해 집·직장·관계에 변화가 생기기 쉬운 해예요.':y27rel==='육합'?'일지 午와 未가 합(合)해 좋은 인연과 협력이 붙는 해예요.':''} ${[1,2].includes(A.yong)?`올해의 불·흙 기운이 용신(${ELW[A.yong]})을 도와 전반적으로 순풍이에요.`:[1,2].includes(A.gi)?`올해의 기운에 기신(${ELW[A.gi]})이 섞여 있어 확장보다 내실을 다지는 해로 쓰세요.`:'올해는 용신과 큰 충돌 없이 무난하게 흘러가요.'}</p><p class="note">월별 흐름과 자세한 신년운세는 아래 「2027 신년운세」에서 볼 수 있어요.</p>`)+
+   (curDW?sec('지금 지나는 대운',`<p>현재 <b>${curDW.age}세부터 ${STK[curDW.s]}${BRK[curDW.b]} 대운</b>(${curDW.gs}·${curDW.gb})을 지나고 있어요. 10년 단위 흐름 전체와 해설은 「대운 보기」에서 열 수 있어요.</p>`):'')+
+   sec('고민 상담',worryLong(A,wc,c));
+}
+function worryShort(A,wc,c){const k=wc[0];const m={연애:`도화의 시기를 잡으세요 · 연애가 좋은 달은 ${c.loveTop}`,재물:`${A.gc[2]?'재성이 있어 기회는 와요':'재성이 약해 실력으로 버는 길'} · 재물이 좋은 달은 ${c.moneyTop}`,직장:`${A.gk}의 힘을 쓰는 자리로 · 용신 ${ELW[A.yong]} 분야가 유리`,건강:'약한 오행 쪽 장기를 챙기고 수면을 우선하세요',관계:`${A.tier>=3?'한 박자 기다려 주기':'싫은 건 분명히 말하기'}가 열쇠`,학업:`${A.gc[4]?'인성이 있어 공부운이 받쳐 줘요':'인성이 약해 꾸준함이 관건'}`,변화:`${A.ss.some(x=>x[0]==='역마살')?'역마가 있어 움직일수록 길해요':'충분히 준비하고 움직이세요'}`};return k?m[k]:'아래 자세히 보기에서 고민에 맞춘 풀이를 확인하세요'}
+function worryLong(A,wc,c){const q=c.worry?`<blockquote>${esc(c.worry)}</blockquote>`:'';if(!wc.length&&!c.worry)return '<p>입력한 고민이 없어요. 카드 뽑기 화면의 「지금 고민이나 상황」에 적으면 사주에 맞춘 조언을 드려요.</p>';
+  const yt=YONGT[A.yong],L={
+  연애:`연애·인연의 고민은 배우자 자리(일지)와 ${c.gender==='F'?'관성':'재성'}을 봐요. 원국에 배우자성이 ${A.gc[A.spouseG]}개 있어 ${A.gc[A.spouseG]?'인연 자체는 들어오는 구조예요. 관건은 시기와 선택이에요.':'스스로 기준이 높은 편이라 인연이 늦게 닿을 수 있어요.'} 2027년에 연애 기운이 좋은 달은 ${c.loveTop}이에요. 용신 색인 ${yt[0]} 계열을 곁들이고, 내 쪽에서 먼저 한 걸음 다가가는 편이 좋아요.`,
+  재물:`재물 고민은 재성과 신강약의 균형을 봐요. ${A.tier<=1?'지금은 몸보다 돈이 크면 탈이 나는 구조라, 큰 투자나 확장보다 지출 구조를 정리하고 고정 수입을 지키는 쪽이 맞아요.':'버티는 힘이 있어 기회를 잡을 체력이 되는 구조예요. 다만 한 번에 크게 걸기보다 나눠서 들어가세요.'} 2027년 재물이 좋은 달은 ${c.moneyTop}이에요. 계약과 큰 결정은 이 시기에 맞추면 유리해요.`,
+  직장:`일과 진로는 격국과 관성을 봐요. ${A.gk}인 당신은 ${GKT[A.gk].split('. ').slice(-1)[0]} ${A.gc[3]?'관성이 있어 조직 안에서 인정받는 흐름도 있어요.':'관성이 약해 조직의 틀보다 전문성과 독립성으로 승부하는 길이 더 맞아요.'} 이직·전환을 고민한다면 용신 ${ELW[A.yong]} 기운의 분야(${yt[4]})를 우선 살펴보세요.`,
+  건강:`건강 고민은 약한 오행을 봐요. ${HEALTHT[A.cnt.indexOf(Math.min(...A.cnt))]} 쪽이 상대적으로 약한 구조예요. ${yt[5]} 같은 습관이 기운의 균형을 돕습니다. 증상이 있다면 꼭 전문의와 상담하세요.`,
+  관계:`사람 사이의 고민은 비겁(동료)과 합충을 봐요. ${A.rel.some(x=>x[0]==='충')?'원국에 충이 있어 가까운 관계에서 부딪힘이 생기기 쉬워요. 감정이 오를 때는 하루 미뤄 말하는 것이 좋아요.':'원국에 큰 충돌이 없어 관계 자체보다 소통 방식의 문제일 가능성이 커요.'} ${A.gc[0]>=3?'비겁이 많아 경쟁심이 관계를 해치지 않게 하세요.':'혼자 감당하지 말고 내 편이 되어 줄 사람에게 먼저 털어놓으세요.'}`,
+  학업:`공부와 시험은 인성과 문창을 봐요. ${A.gc[4]?'인성이 있어 배운 것을 내 것으로 만드는 힘이 있어요.':'인성이 약해 오래 앉아 있기보다 짧게 자주 반복하는 방식이 맞아요.'}${A.ss.some(x=>x[0]==='문창귀인')?' 문창귀인까지 있어 시험운이 좋은 편이에요.':''} 용신 방향인 ${yt[1]}쪽 자리에서 공부하는 것도 작은 도움이 돼요.`,
+  변화:`이사·이동은 역마와 충을 봐요. ${A.ss.some(x=>x[0]==='역마살')?'역마살이 있어 움직일 때 운이 열리는 사주예요. 변화를 두려워하지 마세요.':'역마가 두드러지지 않아 충분히 준비하고 움직이는 편이 좋아요.'} 방향은 용신 쪽인 ${yt[1]}이 유리해요.`};
+  return q+(wc.length?wc.map(k=>`<p><b>${k}</b> — ${L[k]}</p>`).join(''):`<p>${TIERT[A.tier][1]} 지금 상황에서는 용신 ${ELW[A.yong]} 기운(${yt[5]})을 생활에 들이고, 2027년 좋은 달(재물 ${c.moneyTop} · 연애 ${c.loveTop})에 중요한 결정을 맞춰 보세요.</p>`)}
+/* ===== 대운 ===== */
+function daewoon(c){const sj=c.sj;if(!sj||!c.gender)return[];const fw=(sj.y[0]%2===0)===(c.gender==='M');const days=(fw?sj.next-sj.t:sj.t-sj.prev)/864e5;const st=Math.max(1,Math.round(days/3));
+  const m0=i60(sj.m[0],sj.m[1]),by=+c.dd.slice(0,4),now=new Date().getFullYear(),age=now-by;const L=[];
+  for(let k=1;k<=9;k++){const ix=((m0+(fw?k:-k))%60+60)%60,s=ix%10,b=ix%12,a=st+(k-1)*10;L.push({age:a,y:by+a,s,b,gs:tenGod(c.p.s,s),gb:tenGod(c.p.s,BONGI[b]),un:unseong(c.p.s,b),cur:age>=a&&age<a+10})}
+  L.start=st;L.fw=fw;return L}
+const DWT={비견:'나와 같은 기운이 들어와 독립과 자립의 시기예요. 동료와 경쟁자가 함께 늘어나니 내 몫을 분명히 하세요.',겁재:'경쟁과 승부의 시기예요. 과감한 도전이 성과를 내지만 재물이 새기 쉬워 보증·동업은 조심해야 해요.',식신:'재능이 꽃피고 생활이 넉넉해지는 시기예요. 좋아하는 일을 업으로 만들기 좋고 건강과 여유가 따라요.',상관:'표현과 변화의 시기예요. 새로운 길을 열고 이름을 알리지만, 윗사람·규칙과의 마찰과 구설을 조심하세요.',편재:'활동 무대가 넓어지고 큰돈이 오가는 시기예요. 사업·투자의 기회가 오지만 관리가 성패를 가릅니다.',정재:'차곡차곡 쌓는 안정의 시기예요. 결혼·내 집 마련처럼 삶의 기반을 다지기에 좋습니다.',편관:'압박과 시험의 시기예요. 책임이 무거워지지만 견디면 권위와 지위를 얻습니다. 건강 관리가 중요해요.',정관:'인정과 승진의 시기예요. 조직에서 자리를 잡고 명예가 오르며, 결혼 인연도 좋아집니다.',편인:'전환과 연구의 시기예요. 특수한 분야를 깊이 파고들기 좋지만 생각이 많아 실행이 늦어질 수 있어요.',정인:'배움과 후원의 시기예요. 자격과 학위, 윗사람의 도움이 따르며 마음이 안정됩니다.'};
+function dwRender(c){const L=daewoon(c);const yg=[1,2];const good=x=>{const e1=Math.floor(x.s/2),e2=EB[x.b],A=c.A;let s=0;for(const e of [e1,e2]){if(e===A.yong)s+=2;else if(e===A.hee)s+=1;else if(e===A.gi)s-=1}return s};
+  return `<p>대운은 10년마다 바뀌는 인생의 큰 계절이에요. ${c.gender==='F'?'여성':'남성'}이고 연간이 ${c.sj.y[0]%2===0?'양(陽)':'음(陰)'}이라 대운이 <b>${L.fw?'순행':'역행'}</b>하며, <b>${L.start}세</b>부터 첫 대운이 시작돼요.${c.mins==null?' (출생 시간을 모르면 시작 나이가 1년 정도 차이 날 수 있어요.)':''}</p>
+   <div class="dwrow">${L.map(x=>{const g=good(x);return `<div class="dw${x.cur?' cur':''}"><small>${x.age}세</small>${chip(x.s)}${bchip(x.b)}<small>${x.gs}</small><b class="${g>=2?'up':g<0?'dn':''}">${g>=2?'상승':g<0?'주의':'보통'}</b></div>`}).join('')}</div>`+
+   L.map(x=>{const g=good(x);return `<div class="dwt${x.cur?' cur':''}"><h4>${x.age}~${x.age+9}세 · ${STK[x.s]}${BRK[x.b]} 대운 <small>(${x.y}~${x.y+9}년${x.cur?' · 지금':''})</small></h4><p>천간 ${x.gs}: ${DWT[x.gs]} 지지 ${x.gb}·${x.un}: ${UNST[x.un]}. ${g>=2?`용신 기운이 들어와 인생에서 손꼽히는 상승기예요.`:g<0?`기신 기운이 섞여 무리한 확장보다 지키는 전략이 맞아요.`:'큰 기복 없이 노력한 만큼 거두는 시기예요.'}</p></div>`}).join('')}
+/* ===== 궁합 ===== */
+function gungRender(c,o){const A=c.A,B=analyze(o.sj,o.gender),a=c.p.s,b=o.sj.d[0],ea=Math.floor(a/2),eb=Math.floor(b/2);let pts=[];
+  let s1,t1;if(Math.abs(a-b)===5){s1=25;t1=`두 사람의 일간 ${SH[a]}·${SH[b]}가 천간합(合)을 이뤄요. 처음부터 끌리고 서로를 자연스럽게 받아들이는 최상의 조합입니다.`}else if((ea+1)%5===eb||(eb+1)%5===ea){s1=19;t1=`${ELW[ea]}과(와) ${ELW[eb]}이(가) 서로 살려 주는 상생 관계예요. ${(ea+1)%5===eb?'내가 상대를 키워 주는':'상대가 나를 키워 주는'} 흐름이라 한쪽이 든든한 버팀목이 됩니다.`}else if(ea===eb){s1=14;t1='같은 오행이라 말하지 않아도 통하는 친구 같은 사이예요. 다만 둘 다 양보하지 않으면 경쟁이 될 수 있어요.'}else{s1=8;t1=`${ELW[ea]}과(와) ${ELW[eb]}이(가) 서로 부딪히는 상극 관계예요. 강하게 끌리지만 생각의 방식이 달라 조율이 필요합니다. 차이를 인정하면 서로를 단련하는 짝이 돼요.`}
+  pts.push(['일간의 만남',s1,25,t1]);
+  const x=c.sj.d[1],y=o.sj.d[1],HAP=[[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]],WON=[[0,7],[1,6],[2,9],[3,8],[4,11],[5,10]],has=(L)=>L.some(([p,q])=>(p===x&&q===y)||(p===y&&q===x)),tri=v=>[8,0,4].includes(v)?0:[2,6,10].includes(v)?1:[5,9,1].includes(v)?2:3;
+  let s2,t2;if(has(HAP)){s2=20;t2='배우자 자리(일지)끼리 육합을 이뤄 생활 속 궁합이 아주 좋아요.'}else if(x!==y&&tri(x)===tri(y)){s2=16;t2='일지끼리 삼합의 기운으로 이어져 같은 목표를 향해 함께 가는 동반자 궁합이에요.'}else if((x-y+12)%12===6){s2=5;t2='일지끼리 충(沖)이라 생활 방식과 리듬이 달라 부딪히기 쉬워요. 각자의 공간을 존중하는 것이 열쇠예요.'}else if(has(WON)){s2=7;t2='일지끼리 원진이라 사소한 서운함이 쌓이기 쉬워요. 그때그때 마음을 말로 풀어 주세요.'}else{s2=12;t2='일지끼리 큰 충돌 없이 무난하게 어울려요.'}
+  pts.push(['생활 궁합',s2,20,t2]);
+  const lowA=A.cnt.indexOf(Math.min(...A.cnt)),lowB=B.cnt.indexOf(Math.min(...B.cnt));const fill=(B.cnt[lowA]>=2?1:0)+(A.cnt[lowB]>=2?1:0)+(B.cnt[A.yong]>=2?1:0)+(A.cnt[B.yong]>=2?1:0);
+  pts.push(['오행 보완',8+fill*4,24,`${fill>=3?'서로에게 부족한 기운을 채워 주는 보완 궁합이에요. 함께 있으면 운이 같이 오르는 사이입니다.':fill>=1?`한쪽이 다른 쪽의 부족한 기운(${ELW[B.cnt[lowA]>=2?lowA:lowB]})을 채워 줘요.`:'부족한 기운이 비슷해 함께 있을 때 같은 약점이 커질 수 있어요. 둘이 함께 용신 기운을 생활에 들이세요.'}`]);
+  const ya=c.sj.y[1],yb=o.sj.y[1];let s4,t4;if(HAP.some(([p,q])=>(p===ya&&q===yb)||(p===yb&&q===ya))||(ya!==yb&&tri(ya)===tri(yb))){s4=13;t4=`${ANI[ya]}띠와 ${ANI[yb]}띠는 합이 드는 띠 궁합이에요. 집안과 주변의 응원을 받기 쉬워요.`}else if((ya-yb+12)%12===6){s4=4;t4=`${ANI[ya]}띠와 ${ANI[yb]}띠는 충이 드는 띠 궁합이에요. 가족이나 주변 환경의 차이를 미리 맞춰 두세요.`}else{s4=9;t4=`${ANI[ya]}띠와 ${ANI[yb]}띠는 무난한 띠 궁합이에요.`}
+  pts.push(['띠 궁합',s4,13,t4]);
+  const myG=tenGod(a,b),spouse=c.gender==='F'?['정관','편관']:['정재','편재'];const s5=spouse.includes(myG)?18:['정인','식신','비견'].includes(myG)?13:9;
+  pts.push(['배우자성',s5,18,`상대의 일간은 나에게 ${myG}(${GODT[myG]})이에요. ${spouse.includes(myG)?'사주에서 배우자를 뜻하는 별이라 결혼 상대로서 인연이 깊어요.':s5===13?'편안하게 서로를 돌보는 관계로 이어지기 좋아요.':'연인보다는 자극을 주는 파트너의 성격이 강해 서로의 역할을 정해 두면 좋아요.'}`]);
+  const tot=pts.reduce((s,p)=>s+p[1],0),max=pts.reduce((s,p)=>s+p[2],0),score=Math.round(tot/max*100);
+  return `<div class="gscore"><b>${score}</b><span>점</span><p>${score>=85?'하늘이 맺어 준 천생연분':score>=72?'서로를 키워 주는 좋은 인연':score>=58?'노력할수록 깊어지는 인연':'차이를 배우며 성장하는 인연'}</p></div>`+pts.map(([n,s,m,t])=>`<div class="gp"><div><b>${n}</b><span>${s}/${m}</span></div><div class="gbar"><i style="width:${s/m*100}%"></i></div><p>${t}</p></div>`).join('')}
+/* ===== 결제 (990원) ===== */
+const PAYITEMS={gung:{t:'궁합 보기',d:'두 사람의 일간·일지·오행·띠·배우자성을 종합한 정밀 궁합'},dw:{t:'대운 보기',d:'10년 단위 인생 흐름 9구간과 상승기·주의기 해설'},ny:{t:'2027 신년운세',d:'정미년 월별 흐름 12개월 전체와 연애·재물 집중 시기'}};
+const PAY={price:990,live:false,
+  key(it){return 'paid_'+it+'_'+(cur?cur.dd+(cur.mins??'')+cur.gender:'')},
+  has(it){try{return localStorage.getItem(PAY.key(it))==='1'}catch(e){return false}},
+  grant(it){try{localStorage.setItem(PAY.key(it),'1')}catch(e){}},
+  buy(it,done){const P=PAYITEMS[it];const m=$('payModal');$('payT').textContent=P.t;$('payD').textContent=P.d;$('payMsg').textContent='';m.hidden=false;
+    $('payGo').onclick=()=>{if(PAY.live&&window.PortOne){/* 정식 결제 연동 자리 */}else{$('payMsg').textContent='정식 오픈 전 테스트 기간이라 실제 결제 없이 열려요.';setTimeout(()=>{PAY.grant(it);m.hidden=true;done()},900)}};
+    $('payX').onclick=()=>{m.hidden=true}}};
+function premRender(){const c=cur;if(!c||!c.A)return;
+  for(const it of ['gung','dw','ny']){const box=$('pm-'+it),open=PAY.has(it);box.classList.toggle('open',open);
+    box.querySelector('.pbtn').textContent=open?'열림 ✓':`${PAY.price}원 · 열기`;
+    const body=box.querySelector('.pbody');
+    if(!open){body.hidden=true;continue}body.hidden=false;
+    if(it==='dw')body.innerHTML=dwRender(c);
+    
+  }}
+
 const SIJIN=['자','축','인','묘','진','사','오','미','신','유','술','해'];
-function hb24(h){return Math.floor((h+1)/2)%12}
-function fillTH(){const ap=+$('tAP').value,cur=$('tH').value;$('tH').innerHTML='<option value="">시간 선택</option>'+Array.from({length:12},(_,k)=>{const h=ap+k,a=k===0?12:k,b=k+1;return `<option value="${h}">${a}시 ~ ${b===12?12:b}시 (${SIJIN[hb24(h)]}시)</option>`}).join('');if(cur!==''&&+cur>=ap&&+cur<ap+12)$('tH').value=cur}
-function getH(){if($('tUnk').checked)return null;const v=$('tH').value;return v===''?undefined:+v}
-function tNoteUI(){const u=$('tUnk').checked;$('tsel').classList.toggle('off',u);const h=getH();$('tNote').textContent=u?'시주(태어난 시)를 빼고 여섯 글자로 풀이해요.':h==null?'모르면 아래 "출생시간 모름"에 체크하세요.':`${SIJIN[hb24(h)]}시(${BR[hb24(h)]}時)로 봐요.${h===23?' 밤 11시 이후 출생은 날짜를 그대로 두고 계산해요.':''}`}
+const FM={g:null,cal:'S',ap:0,mins:null,worry:'',chips:[]};
+function segBind(id,attr,cb){const el=$(id);el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;for(const x of el.children)x.setAttribute('aria-pressed',String(x===b));cb(b.dataset[attr])})}
+function segSet(id,attr,v){for(const x of $(id).children)x.setAttribute('aria-pressed',String(x.dataset[attr]===String(v)))}
+function fmtBD(el){const d=el.value.replace(/\D/g,'').slice(0,8);el.value=d.length>6?`${d.slice(0,4)}.${d.slice(4,6)}.${d.slice(6)}`:d.length>4?`${d.slice(0,4)}.${d.slice(4)}`:d}
+function parseBD(raw,cal){const d=raw.replace(/\D/g,'');if(d.length!==8)return{err:'생년월일 8자리를 입력하세요. 예: 1990.05.17'};const y=+d.slice(0,4),m=+d.slice(4,6),dd=+d.slice(6);
+  if(y<1900||y>2026)return{err:'1900~2026년생까지 볼 수 있어요.'};if(m<1||m>12)return{err:'월은 1~12 사이로 입력하세요.'};
+  if(cal==='S'){const t=new Date(Date.UTC(y,m-1,dd));if(t.getUTCMonth()!==m-1||t.getUTCDate()!==dd)return{err:'없는 날짜예요. 다시 확인해 주세요.'};return{d:`${y}-${String(m).padStart(2,'0')}-${String(dd).padStart(2,'0')}`}}
+  const L=lunYear(y);if(cal==='LL'&&L&&L.lp!==m)return{err:L.lp?`음력 ${y}년의 윤달은 ${L.lp}월이에요.`:`음력 ${y}년에는 윤달이 없어요.`};
+  const r=lun2sol(y,m,dd,cal==='LL');if(!r)return{err:'음력에 없는 날짜예요. (음력 한 달은 29일 또는 30일이에요)'};return{d:r}}
+function parseTM(apv,hh,mm){if(hh===''&&mm==='')return{none:true};const h=+hh,m=mm===''?0:+mm;if(!(h>=1&&h<=12))return{err:'시는 1~12 사이로 입력하세요.'};if(!(m>=0&&m<=59))return{err:'분은 0~59 사이로 입력하세요.'};return{mins:((h%12)+apv)*60+m}}
+function bdNoteUI(){const raw=$('bd').value,p=parseBD(raw,FM.cal);$('bdNote').textContent=raw.replace(/\D/g,'').length<8?(FM.cal==='S'?'':'음력 날짜를 넣으면 양력으로 바꿔서 보여 드려요.'):p.err?p.err:FM.cal==='S'?(()=>{const l=sol2lun(p.d);return l?`음력 ${l.y}.${String(l.m).padStart(2,'0')}.${String(l.d).padStart(2,'0')}${l.leap?' (윤달)':''}`:''})():`양력 ${p.d.replace(/-/g,'.')}로 계산해요.`}
+function tNoteUI(){const u=$('tUnk').checked;$('tin').classList.toggle('off',u);if(u){$('tNote').textContent='시주(태어난 시)를 빼고 여섯 글자로 풀이해요.';return}
+  const t=parseTM(FM.ap,$('tHH').value,$('tMM').value);$('tNote').textContent=t.none?'모르면 "출생시간 모름"에 체크하세요.':t.err?t.err:`${SIJIN[sijin(t.mins)]}시(${BR[sijin(t.mins)]}時)로 봐요.${t.mins>=1410?' 밤 11시 30분 이후 출생은 날짜를 그대로 두고 계산해요.':''}`}
 function pillar(str){const [y,m,d]=str.split('-').map(Number);const days=Math.round((Date.UTC(y,m-1,d)-Date.UTC(1900,0,1))/864e5);const i=((10+days)%60+60)%60;return{s:i%10,b:i%12}}
 function temp(t){return t[1]==='N'?(t[2]==='F'?'NF':'NT'):(t[3]==='J'?'SJ':'SP')}
 function valid(str){if(!/^\d{4}-\d{2}-\d{2}$/.test(str))return false;const y=+str.slice(0,4);return y>=1900&&y<=2026}
@@ -644,8 +967,7 @@ function rollKind(c){const force=new URLSearchParams(location.search).get('rare'
   if(h01(c.dd+c.t+todayStr())>=p)return 'n';if(mon&&!lov)return 'm';if(lov&&!mon)return 'l';return h01(todayStr()+c.dd)<0.5?'m':'l'}
 function cardSrc(c,k){return `img/c/${String(c.no).padStart(3,'0')}${k}.webp`}
 let cur=null;
-let HR=null;
-function render(str,t,anim){cur=build(str,t);cur.hr=HR;const c=cur,el=EL[c.s.e];
+function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gender:FM.g||'M',worry:FM.worry,wchips:FM.chips});const c=cur,el=EL[c.s.e];
   c.kind=rollKind(c);$('cardImg').src=cardSrc(c,c.kind);$('cardImg').alt=`${c.name} 카드`;$('flip').classList.toggle('rare',c.kind!=='n');
   {const mm=new Date().getMonth()+1,lucky=MONEY_M[c.p.s]===mm||LOVE_M[c.p.s]===mm;
    $('rareNote').innerHTML=c.kind==='n'?`카드는 하루에 한 번 새로 뽑혀요. 레어 확률 6%${lucky?' · <b>이번 달은 내 대길 달이라 18%!</b>':` · 내 대길 달(재물 ${MONEY_M[c.p.s]}월, 연애 ${LOVE_M[c.p.s]}월)에는 18%`}`:`<b>레어 카드 등장!</b> 오늘 ${c.kind==='m'?'금전운':'연애운'} 대길 카드가 뽑혔어요.`}
@@ -676,8 +998,7 @@ function render(str,t,anim){cur=build(str,t);cur.hr=HR;const c=cur,el=EL[c.s.e];
   $('yLoveBest').textContent=`연애운이 좋은 달 · ${top(2)}`;$('yMoneyBest').textContent=`재물운이 좋은 달 · ${top(3)}`;
   const row=x=>`<div class="mrow"><div class="mm">${x.m}<small>${SH[x.j]}${'寅卯辰巳午未申酉戌亥子丑'[MONTHS.indexOf(x.m)]}월</small></div><div><b>${x.g[0]}</b><span class="tip">${x.g[1]}</span></div><div class="dots"><span>연애 ${dots(x.g[2])}</span><span>재물 ${dots(x.g[3])}</span></div></div>`;
   $('mFree').innerHTML=ms.slice(0,3).map(row).join('');$('mLock').innerHTML=ms.slice(3).map(row).join('');
-  if(anim)$('lw').classList.add('locked');
-  const sj=saju(str);const hh=c.hr;if(hh!=null){const b=hb24(hh);sj.h=[((si%5)*2+b)%10,b]}c.sj=sj;const ani=ANI[sj.y[1]];
+  const sj=saju(str,c.mins);c.sj=sj;c.loveTop=top(2);c.moneyTop=top(3);const ani=ANI[sj.y[1]];
   $('sum').innerHTML=(c.kind!=='n'?`<p class="kick" style="margin:0 0 6px">★ 레어 카드 · ${c.kind==='m'?MONEY_M[si]+'월 금전운 대길':LOVE_M[si]+'월 연애운 대길'}</p>`:'')+`<h3>${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${ani}띠 · 일주 ${ST[si].h}${BR[c.p.b]}</h3><ul>
    <li><b>본성</b><span>${c.s.ess.split('. ')[0]}.</span></li>
    <li><b>올해</b><span>2027년은 「${c.s.yt}」 · ${tti(sj.y[1])[0]}</span></li>
@@ -696,7 +1017,7 @@ function render(str,t,anim){cur=build(str,t);cur.hr=HR;const c=cur,el=EL[c.s.e];
   const tm=tenGod(si,sj.m[0]),ty=tenGod(si,sj.y[0]);
   $('rSocial').textContent=`월간 ${SH[sj.m[0]]}(${tm}): ${TGMEAN[tm]} 직장과 사회생활에서 이 힘이 가장 자연스럽게 나와요. 뿌리가 되는 연간 ${SH[sj.y[0]]}(${ty})는 어린 시절과 집안에서 물려받은 기운이에요.`;
   $('rSpouse').textContent=`일지 ${BR[c.p.b]}(${ANI[c.p.b]})에 ${ELW[EB[c.p.b]]} 기운이 있어요. ${SPOUSE[EB[c.p.b]]}`;
-  $('dTitle').textContent=`「${c.name}」 자세한 풀이`;
+  $('dTitle').textContent=`「${c.name}」 자세한 풀이`;proRender(c);premRender();
   if(anim){playTok++;if($('cRes'))$('cRes').hidden=true;markCard();dexAdd(c.no)}
   if(anim){$('detail').hidden=true;$('moreBtn').textContent='자세히 보기 ▾';$('moreBtn').setAttribute('aria-expanded','false')}
   if(anim){card.classList.remove('reveal');void card.offsetWidth;card.classList.add('reveal')}
@@ -837,7 +1158,9 @@ async function makeImg(){const c=cur;if(!c)return;$('out').src=$('cardImg').src;
 
 $('t2').innerHTML=TYK.map(k=>`<option value="${k}"${k==='ENFP'?' selected':''}>${k} · ${TY[k][0]}</option>`).join('');
 fillDate('d','1995-03-14');fillDate('d2','1996-08-02');
-fillTH();try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);if(s.n)$('nick').value=s.n;if(typeof s.h==='number'){HR=s.h;$('tAP').value=s.h>=12?'12':'0';fillTH();$('tH').value=String(s.h)}else if(s.h===null)$('tUnk').checked=true;type=s.t.split('');window.__restored=true}}catch(e){}
+try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);if(s.n)$('nick').value=s.n;FM.cal=s.cal||'S';$('bd').value=s.raw||s.d.replace(/-/g,'.');segSet('calSeg','c',FM.cal);
+  if(s.g){FM.g=s.g;segSet('gSeg','g',s.g)}if(typeof s.mins==='number'){FM.mins=s.mins;const h=Math.floor(s.mins/60),m=s.mins%60;FM.ap=h>=12?12:0;segSet('apSeg','ap',FM.ap);$('tHH').value=String(h%12||12);$('tMM').value=String(m).padStart(2,'0')}else if(s.mins===null)$('tUnk').checked=true;
+  type=s.t.split('');window.__restored=!!s.g}}catch(e){}
 $('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map(k=>`<option value="${k}">${k} · ${TY[k][0]}</option>`).join('');fillDate('cd','1996-08-02');
 {const q=new URLSearchParams(location.search),f=q.get('f'),m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);
  if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){const od=`${m[1]}-${m[2]}-${m[3]}`,on=(q.get('n')||'친구').slice(0,10),ox=build(od,m[4]);
@@ -848,11 +1171,16 @@ axesUI();render(getD('d'),type.join(''),false);
 if(window.__restored){$('stageBox').hidden=false;$('flipper').classList.add('show');$('sample').textContent='오늘의 내 카드'}
 addRow(myNick(),getD('d'),type.join(''));addRow('친구1','1996-08-02','ENFP');addRow('친구2','1993-05-17','INFJ');addRow('친구3','1998-12-01','ESTP');
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(!b)return;const i=+(b.dataset.i??b.dataset.q);type[i]=b.dataset.l;axesUI();if(b.dataset.q!==undefined)$('quiz').open=true});
-$('tAP').addEventListener('change',()=>{fillTH();tNoteUI()});$('tH').addEventListener('change',tNoteUI);$('tUnk').addEventListener('change',tNoteUI);tNoteUI();
-$('f').addEventListener('submit',e=>{e.preventDefault();const d=getD('d');if(!valid(d)){$('err').textContent='태어난 날을 1900~2026년 사이로 입력하세요.';return}
-  const h=getH();if(h===undefined){$('err').textContent='태어난 시간을 고르거나 "출생시간 모름"에 체크하세요.';$('tH').focus();return}$('err').textContent='';HR=h;
+segBind('gSeg','g',v=>{FM.g=v});segBind('calSeg','c',v=>{FM.cal=v;bdNoteUI()});segBind('apSeg','ap',v=>{FM.ap=+v;tNoteUI()});
+$('bd').addEventListener('input',e=>{fmtBD(e.target);bdNoteUI()});for(const id of ['tHH','tMM'])$(id).addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'');tNoteUI()});
+$('tUnk').addEventListener('change',tNoteUI);tNoteUI();bdNoteUI();
+$('wChips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(on))});
+$('f').addEventListener('submit',e=>{e.preventDefault();const er=(m,f)=>{$('err').textContent=m;if(f)$(f).focus()};
+  if(!FM.g)return er('성별을 골라 주세요.');const p=parseBD($('bd').value,FM.cal);if(p.err)return er(p.err,'bd');const d=p.d;if(!valid(d))return er('1900~2026년생까지 볼 수 있어요.','bd');
+  let mins=null;if(!$('tUnk').checked){const tm=parseTM(FM.ap,$('tHH').value,$('tMM').value);if(tm.none)return er('태어난 시간을 입력하거나 "출생시간 모름"에 체크하세요.','tHH');if(tm.err)return er(tm.err,'tHH');mins=tm.mins}
+  $('err').textContent='';FM.mins=mins;FM.worry=$('worry').value.trim();FM.chips=[...$('wChips').querySelectorAll('[aria-pressed=true]')].map(b=>b.dataset.w);setD('d',d);
   const t=type.join('');$('flipper').classList.remove('show');render(d,t,true);$('stageBox').hidden=false;$('sample').textContent=`${$('nick').value.trim()||'나'}의 카드 · ${d.replace(/-/g,'.')} · ${t}`;$('saveBox').hidden=true;
-  const im=$('cardImg'),show=()=>setTimeout(()=>$('flipper').classList.add('show'),RM()?0:350);if(im.complete&&im.naturalWidth)show();else{im.onload=show;im.onerror=show}try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim(),h}))}catch(e){}
+  const im=$('cardImg'),show=()=>setTimeout(()=>$('flipper').classList.add('show'),RM()?0:350);if(im.complete&&im.naturalWidth)show();else{im.onload=show;im.onerror=show}try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim(),mins,g:FM.g,cal:FM.cal,raw:$('bd').value}))}catch(e){}
   $('flip').scrollIntoView({behavior:RM()?'auto':'smooth',block:'center'})});
 $('f2').addEventListener('submit',e=>{e.preventDefault();startMode('battle')});
 $('picker').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)startMode(b.dataset.mode)});
@@ -872,18 +1200,18 @@ $('tRows').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if
 $('tGo').addEventListener('click',runTour);
 $('cGo').addEventListener('click',()=>{const t=$('cT').value;if(!t){$('cErr').textContent='성격유형을 골라 주세요. 모르면 아래 「유형을 모르겠어요」 버튼으로 찾을 수 있어요.';return}$('cErr').textContent='';
   const d=getD('cd');if($('cN').value.trim())$('nick').value=$('cN').value.trim();setD('d',d);type=t.split('');axesUI();render(d,t,true);
-  $('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim(),h:HR}))}catch(e){}
+  $('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;try{const o=JSON.parse(localStorage.getItem('giun')||'{}');localStorage.setItem('giun',JSON.stringify({...o,d,t,n:$('nick').value.trim(),raw:o.d===d?o.raw:d.replace(/-/g,'.'),cal:o.d===d?o.cal:'S'}))}catch(e){}
   const me=$('chMe');me.className='cslot flip';me.style.setProperty('--el',EL[cur.s.e].c);me.innerHTML=slotHTML(cur,myNick());
   chAccepted=true;compat();$('cRes').hidden=true;setTimeout(()=>{$('arena').hidden=false;$('picker').scrollIntoView({behavior:RM()?'auto':'smooth'})},1000)});
 $('moreBtn').addEventListener('click',()=>{const d=$('detail'),open=d.hidden;d.hidden=!open;$('moreBtn').textContent=open?'접기 ▴':'자세히 보기 ▾';$('moreBtn').setAttribute('aria-expanded',String(open));if(open)d.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
 $('mkImg').addEventListener('click',makeImg);
-$('unlock').addEventListener('click',()=>{$('lw').classList.remove('locked')});
+
 /* ---------- app shell ---------- */
 let chAccepted=false,chActive=false;
 function hasCard(){try{if(localStorage.getItem('giun'))return true}catch(e){}return !!window.__drew}
 function markCard(){window.__drew=true;const c=cur;if(c){$('contBtn').hidden=false;$('contBtn').textContent=`이어하기 · ${c.s.noun} ${c.r[0]}`}}
 const SCR=['home','draw','battle','tour','today','newyear','dex','plaza'];
-function go(n,fromHash){if(!SCR.includes(n))n='home';for(const k of SCR)$('scr-'+k).hidden=k!==n;document.body.dataset.scr=n;
+function go(n,fromHash){if(!SCR.includes(n))n='home';for(const k of SCR)$('scr-'+k).hidden=k!==n;document.body.dataset.scr=n;for(const b of $('tabbar').children)b.toggleAttribute('aria-current',b.dataset.nav===n),b.dataset.nav===n&&b.setAttribute('aria-current','page');
   if(!fromHash&&location.hash.slice(1)!==n){history.pushState(null,'',n==='home'?location.pathname+location.search:'#'+n)}
   const gate=$('scr-'+n).querySelector('.gate'),need=['battle','today'].includes(n)&&!hasCard()&&!(n==='battle'&&chActive);if(gate)gate.hidden=!need;
   if(n==='battle'){$('challenge').hidden=!(chActive&&!chAccepted);$('arena').hidden=need||(chActive&&!chAccepted)}
@@ -893,12 +1221,18 @@ function go(n,fromHash){if(!SCR.includes(n))n='home';for(const k of SCR)$('scr-'
 window.addEventListener('popstate',()=>go(location.hash.slice(1)||'home',true));
 document.addEventListener('click',e=>{const b=e.target.closest('[data-nav]');if(b){e.preventDefault();go(b.dataset.nav)}});
 /* intro */
-function introInit(){const r=$('ring'),EC=['#4a8c58','#4a8c58','#d1513f','#d1513f','#c49a35','#c49a35','#9aa0a8','#9aa0a8','#4b7bb0','#4b7bb0'];
-  r.innerHTML=IMG.map((src,i)=>{const a=i/10*Math.PI*2-Math.PI/2,x=Math.cos(a)*40,y=Math.sin(a)*40;return `<img src="${src}" alt="" style="--c:${EC[i]};transform:translate(calc(-50% + ${x*6.1}%),calc(-50% + ${y*6.1}%));animation-delay:${.15+i*.08}s,0s">`}).join('');
+function introInit(){const T=["145m", "048n", "126n", "114n", "087n", "079n", "081n", "136n", "103n", "130n", "052n", "034n", "029n", "066n", "011n", "113l", "129m", "099n", "145n", "081l", "003n", "097m", "049l", "017m", "054n", "027n", "158n", "065l", "033m"];
+  const tr=$('track'),sc=document.querySelector('.stagec');tr.innerHTML=T.map((f,i)=>`<img src="img/t/${f}.webp" alt="" style="--r:${(i%2?1:-1)*(3+i%4)}deg">`).join('');$('heroImg').src='img/c/033m.webp';
+  $('spark').innerHTML=Array.from({length:18},(_,i)=>{const a=i/18*Math.PI*2,d=120+(i%3)*40;return `<i style="--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px"></i>`}).join('');
+  const run=()=>{const w=tr.firstElementChild.getBoundingClientRect().width+14,n=T.length;tr.style.transform=`translate(${-w/2}px,-50%)`;
+    if(RM()||!tr.animate){sc.classList.add('land');return}sc.classList.add('blur');
+    const an=tr.animate([{transform:`translate(${-w/2}px,-50%)`},{transform:`translate(${-w/2-(n-1)*w}px,-50%)`}],{duration:2600,easing:'cubic-bezier(.12,.55,.18,1)',fill:'forwards'});
+    setTimeout(()=>sc.classList.remove('blur'),1700);an.onfinish=()=>sc.classList.add('land')};
+  const im=tr.lastElementChild;if(im.complete)setTimeout(run,250);else{im.onload=()=>setTimeout(run,150);setTimeout(()=>{if(!sc.classList.contains('land')&&!tr.getAnimations().length)run()},1800)}
   $('pt').innerHTML=Array.from({length:26},(_,i)=>`<i style="left:${(i*37)%100}%;top:${60+(i*23)%40}%;animation-delay:${(i*0.53)%7}s;animation-duration:${6+(i%5)}s"></i>`).join('');
   const open=()=>{$('scr-home').classList.add('open');try{sessionStorage.setItem('seen','1')}catch(e){}};
   let seen=false;try{seen=!!sessionStorage.getItem('seen')}catch(e){}
-  if(seen||RM())open();else{setTimeout(open,3600)}
+  if(seen||RM())setTimeout(open,RM()?0:2900);else{setTimeout(open,4200)}
   $('tap').addEventListener('click',open);$('scr-home').addEventListener('click',e=>{if(!e.target.closest('button'))open()});
   $('aboutBtn').addEventListener('click',()=>{$('about').hidden=!$('about').hidden});
   $('shareSite').addEventListener('click',()=>share({title:'운빨카드',desc:'생일과 성격유형으로 내 기운 카드를 뽑고, 친구와 운빨배틀 해 보자!',img:'og',btn:'카드 뽑으러 가기'},'shareMsg'));
@@ -978,6 +1312,13 @@ $('dexTabs').addEventListener('click',e=>{const b=e.target.closest('[data-si]');
 $('dexGrid').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b)dexView(b.dataset.t)});
 introInit();
 {const q=new URLSearchParams(location.search);chActive=!$('challenge').hidden;if(chActive)go('battle',true);else go(location.hash.slice(1)||'home',true)}
+
+document.addEventListener('click',e=>{const b=e.target.closest('[data-pay]');if(!b)return;const it=b.dataset.pay;if(PAY.has(it)){const body=$('pm-'+it).querySelector('.pbody');body.hidden=!body.hidden;return}PAY.buy(it,()=>{premRender();$('pm-'+it).scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'})})});
+const GF={g:'F',cal:'S',ap:0};segBind('gG2','g',v=>GF.g=v);segBind('gCal','c',v=>GF.cal=v);segBind('gAp','ap',v=>GF.ap=+v);
+$('gBd').addEventListener('input',e=>fmtBD(e.target));for(const id of ['gHH','gMM'])$(id).addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'')});
+$('gf').addEventListener('submit',e=>{e.preventDefault();const p=parseBD($('gBd').value,GF.cal);if(p.err){$('gErr').textContent=p.err;return}const tm=parseTM(GF.ap,$('gHH').value,$('gMM').value);if(tm.err){$('gErr').textContent=tm.err;return}$('gErr').textContent='';
+  const o={sj:saju(p.d,tm.none?null:tm.mins),gender:GF.g},nm=$('gName').value.trim()||'상대';$('gOut').innerHTML=`<h4 class="gh">${esc(myNick())} ♥ ${esc(nm)}</h4>`+gungRender(cur,o);$('gOut').scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'})});
+$('payModal').addEventListener('click',e=>{if(e.target.id==='payModal')$('payModal').hidden=true});
 
 }
 </script>
