@@ -178,11 +178,15 @@ input.txt{width:100%;height:46px;font:16px "Noto Sans KR",sans-serif;padding:0 1
 .lucky div{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
 .lucky small{display:block;color:var(--sub);font-size:13px}
 @media(max-width:760px){.elgrid{grid-template-columns:minmax(0,1fr)}}
-.matchgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.mc{display:flex;gap:14px;align-items:flex-start}
-.mc .mini{flex:none;width:60px;height:60px;font-size:28px}
-.mc h3{font:700 19px/1.35 "Gowun Batang",serif;margin:2px 0 6px}
-.mc p{margin:0;color:var(--sub)}
+.matchgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mtile{display:grid;grid-template-columns:78px minmax(0,1fr);gap:14px;align-items:center;padding:12px;border-radius:16px;background:var(--panel);border:1px solid var(--line);position:relative;overflow:hidden}
+.mtile::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--tc)}
+.mtile.good{--tc:#2f7a4a;--tb:#e7f3ea}.mtile.bad{--tc:#b0392b;--tb:#f8e6e2}
+.mt-card{width:78px;aspect-ratio:9/16;object-fit:cover;border-radius:9px;box-shadow:0 6px 14px rgba(0,0,0,.22);background:#ddd}
+.mt-b{min-width:0}.mt-tag{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 4px;border-radius:999px;background:var(--tb);color:var(--tc);font:500 12px "Noto Sans KR",sans-serif}
+.mt-tag b{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--tc);color:#fff;font:700 11px "Gowun Batang",serif}
+.mtile h3{font:700 17px/1.35 "Gowun Batang",serif;margin:6px 0 2px;color:var(--ink);word-break:keep-all}
+.mt-sub{margin:0 0 6px;font-size:12px;color:var(--sub)}.mt-txt{margin:0;font-size:13.5px;line-height:1.6;color:#3b3934;word-break:keep-all}.mt-txt b{color:var(--ink);font-weight:500}
 .kick{font-size:13px;color:var(--seal);margin:0}
 .best{border-color:var(--seal)}
 .ysum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:28px}
@@ -392,6 +396,12 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 .fc-ft{font:700 11px "Gowun Batang",serif;color:rgba(255,227,154,.8);letter-spacing:.1em}
 .wk7{display:grid;grid-auto-flow:column;grid-auto-columns:84px;gap:8px;overflow-x:auto;padding:4px 2px 8px}.wkc{padding:0;border:0;background:none;cursor:pointer;display:grid;gap:4px;font:12px "Noto Sans KR",sans-serif;color:var(--ink);transition:transform .15s}.wkc.on{transform:translateY(-4px)}.wkc.on .mc{box-shadow:inset 0 0 0 2px #ffe39a,0 0 0 3px var(--seal)}
 .wkc>i{height:5px;border-radius:3px;background:var(--seal);justify-self:start}.wkc .mc .mn{font-size:10px}
+
+/* compact 해설 */
+.read{display:block!important;border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:2px 16px}
+.read>.panel{display:grid;grid-template-columns:108px minmax(0,1fr);gap:12px;align-items:baseline;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;box-shadow:none;padding:12px 0;margin:0}
+.read>.panel:last-child{border-bottom:0}.read>.panel h3{font:700 14px/1.5 "Noto Sans KR",sans-serif;color:var(--seal);margin:0}.read>.panel p{margin:0;font-size:14px;line-height:1.65;color:#3b3934;word-break:keep-all}
+@media(max-width:420px){.read>.panel{grid-template-columns:98px minmax(0,1fr);gap:10px}.read>.panel h3{font-size:13px;word-break:keep-all}}
 </style>
 </head>
 <body>
@@ -1078,7 +1088,8 @@ function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gen
   const bs=(si+5)%10,bt=(c.t[0]==='E'?'I':'E')+c.t[1]+c.t[2]+(c.t[3]==='J'?'P':'J');
   const ws=Math.floor(si/2),cs=((ws+3)%5)*2+(si%2),ct=c.t.split('').map((l,i)=>AX[i][0]===l?AX[i][1]:AX[i][0]).join('');
   const pr=[ST[si],ST[bs]].sort((x,y)=>ST.indexOf(x)-ST.indexOf(y));
-  $('match').innerHTML=[[bs,bt,'잘 맞는 캐릭터',`${pr[0].k[0]}${pr[1].k[0]}합(合)으로 서로 끌리는 운명의 짝 기운이에요. 성격유형은 에너지 방향과 생활 리듬이 반대라 서로의 빈 곳을 채워 줍니다.`,true],[cs,ct,'부딪히는 캐릭터',`${ST[cs].k}${(ST[cs].k.charCodeAt(1)-44032)%28?'은':'는'} 내 기운을 강하게 다듬는 상극이고, 성격유형은 네 글자가 모두 반대예요. 부딪히지만 가장 많이 배우는 사이입니다.`,false]].map(([s,t,k,txt,b])=>`<div class="panel mc${b?' best':''}"><div class="mini" style="background-image:url(${IMG[s]});--mc:${EL[ST[s].e].c}" title="${ST[s].k}"></div><div><p class="kick">${k}</p><h3>${nm(s,t)}</h3><p>${ST[s].k} × ${t} · ${txt}</p></div></div>`).join('');
+  const tno=(s,t)=>String(s*16+TYK.indexOf(t)+1).padStart(3,'0');
+  $('match').innerHTML=[[bs,bt,'合','잘 맞는 캐릭터',`${pr[0].k[0]}${pr[1].k[0]}합으로 서로 끌리는 짝 기운`,'성격유형은 에너지와 생활 리듬이 반대라 서로의 빈 곳을 채워 줘요.','good'],[cs,ct,'沖','부딪히는 캐릭터',`${ST[cs].k}${(ST[cs].k.charCodeAt(1)-44032)%28?'은':'는'} 내 기운을 다듬는 상극`,'성격유형 네 글자가 모두 반대예요. 부딪히지만 가장 많이 배우는 사이예요.','bad']].map(([s,t,hj,k,l1,l2,cl])=>`<div class="mtile ${cl}"><img class="mt-card" src="img/t/${tno(s,t)}n.webp" alt="${nm(s,t)} 카드" loading="lazy"><div class="mt-b"><span class="mt-tag"><b>${hj}</b>${k}</span><h3>${nm(s,t)}</h3><p class="mt-sub">${ST[s].k} × ${t}</p><p class="mt-txt"><b>${l1}.</b> ${l2}</p></div></div>`).join('');
   $('rYearT').textContent=c.s.yt;$('rYear').textContent=c.s.yd;
   const yg=TG[tenGod(si,3)];
   $('yLoveT').textContent=yg[4];$('yLove').textContent=yg[5];$('yMoneyT').textContent=yg[6];$('yMoney').textContent=yg[7];
