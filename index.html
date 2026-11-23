@@ -481,6 +481,23 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
 .pi svg{width:24px;height:24px}.tabbar i svg{width:22px;height:22px;display:block}
 details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-details-marker{display:none}details.dwt summary h4::after{content:' ▾';color:var(--sub)}details.dwt[open] summary h4::after{content:' ▴'}.dwt h4 em{font:500 12px 'Noto Sans KR',sans-serif;font-style:normal;margin-left:4px}.dwt h4 em.up{color:#2f7a3f}.dwt h4 em.dn{color:#b0392b}
 @media(max-width:380px){.home .gword{font-size:50px}.home.open .gword{font-size:44px}}
+
+/* story */
+.story{background:#fffdf8;border:1px solid var(--line);border-radius:20px;padding:22px 18px 26px;box-shadow:0 10px 30px rgba(60,40,10,.06)}
+.sh{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px dashed var(--line)}.sh img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #e8c46a;background:#fff}.sh b{display:block;font:700 17px "Gowun Batang",serif}.sh small{color:var(--sub);font-size:12.5px;line-height:1.4;display:block}
+.stitle{font:700 clamp(22px,6.2vw,28px)/1.42 "Gowun Batang",serif;margin:18px 0 8px;color:#1d1a15;letter-spacing:-.01em}
+.sprivacy{font-size:12px!important;color:var(--sub)!important;margin:0 0 18px!important}
+.story p{font-size:16.5px;line-height:1.9;margin:0 0 16px;color:#2b2925}.story b{color:#1d1a15;background:linear-gradient(transparent 62%,#ffe7a8 62%)}
+.sq{margin:6px 0 18px;padding:14px 16px;border-radius:4px 16px 16px 16px;background:#f3ece0;font-size:15.5px;line-height:1.7;color:#3b3934;white-space:pre-line;position:relative}
+.sp{margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}.spn{font:700 12px "Noto Sans KR",sans-serif!important;letter-spacing:.14em;color:var(--seal)!important;margin:0 0 6px!important}.sp h3{font:700 21px/1.45 "Gowun Batang",serif;margin:0 0 14px;color:#1d1a15}
+.chat{display:grid;gap:10px;margin:4px 0 18px}.cb{max-width:86%;padding:12px 14px;border-radius:16px}.cb small{display:block;font-size:11.5px;color:var(--sub);margin-bottom:4px}.cb p{margin:0!important;font-size:15.5px!important;line-height:1.7!important}
+.cb.me{background:#efe9dd;border-radius:4px 16px 16px 16px;justify-self:start}.cb.you{background:#fbe6df;border-radius:16px 4px 16px 16px;justify-self:end}
+.sign{text-align:right;font:700 15px "Gowun Batang",serif!important;color:var(--seal)!important}
+.shead{margin:0 0 10px!important;font:700 17px/1.5 "Gowun Batang",serif;color:#1d1a15}
+.expert{border:1px solid var(--line);border-radius:16px;background:var(--panel)}.expert>summary{list-style:none;cursor:pointer;padding:16px 18px;display:grid;gap:2px}.expert>summary::-webkit-details-marker{display:none}.expert>summary span{font:700 17px "Gowun Batang",serif}.expert>summary span::after{content:" ▾";color:var(--sub)}.expert[open]>summary span::after{content:" ▴"}.expert>summary small{color:var(--sub);font-size:12.5px}
+.expert .xsec{padding:4px 14px 18px;border-top:1px solid var(--line)}.expert .xsec>h2.sec{font-size:19px;margin-top:16px}
+.pm .ph b{font-size:16px;line-height:1.4}.pm .ph small{display:block;margin-top:3px;line-height:1.5}
+.story .sh b{background:none}
 </style>
 </head>
 <body>
@@ -567,7 +584,7 @@ details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-
     <p class="note" id="copyMsg" role="status"></p>
     <div class="panel sum" id="sum"></div>
     <div class="panel pcpanel"><h3>내 네 기둥 카드 <small>사주의 네 기둥이 각각 한 장</small></h3><div class="pcards" id="pcards"></div><div class="pcinfo" id="pcInfo"></div></div>
-    <button class="btn more" type="button" id="moreBtn" aria-expanded="false" aria-controls="detail">자세히 보기 ▾</button>
+    <button class="btn more" type="button" id="moreBtn" aria-expanded="false" aria-controls="detail">내 사주 이야기 읽기 ▾</button>
   </div>
 </section>
 
@@ -578,55 +595,9 @@ details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-
 </section>
 
 <div id="detail" hidden>
+<section class="band wrap"><article class="story" id="story"></article></section>
 <section class="band wrap">
-  <h2 class="sec" id="dTitle">자세한 풀이</h2>
-  <h3 class="mh">사주 원국표</h3>
-  <div class="pillars" id="pillars"></div>
-  <p class="note" id="pNote" style="margin:10px 0 0"></p>
-</section>
-
-<section class="band wrap">
-  <h2 class="sec">오행 분포와 행운 아이템</h2>
-  <div class="elgrid">
-    <div class="panel" id="elBars"></div>
-    <div class="panel"><h3 id="elT"></h3><p id="elTxt" style="margin:0;color:var(--sub)"></p><div class="lucky" id="lucky"></div></div>
-  </div>
-</section>
-
-<section class="band wrap">
-  <h2 class="sec">전문 사주 풀이</h2>
-  <div class="probox" id="proBox"></div>
-</section>
-
-<section class="band wrap">
-  <h2 class="sec">띠로 보는 2027 정미년</h2>
-  <div class="panel tti"><p class="kick" id="ttiK"></p><h3 id="ttiT"></h3><p id="ttiTxt"></p></div>
-</section>
-
-<section class="band wrap">
-  <h2 class="sec" id="readTitle">카드 해설</h2>
-  <div class="read">
-    <div class="panel"><h3>타고난 본성</h3><p id="rEss"></p></div>
-    <div class="panel"><h3>움직이는 방식</h3><p id="rRole"></p></div>
-    <div class="panel"><h3>둘이 만나면</h3><p id="rCombo"></p></div>
-    <div class="panel"><h3>연애 스타일</h3><p id="rLove"></p></div>
-    <div class="panel"><h3>일 스타일</h3><p id="rWork"></p></div>
-    <div class="panel"><h3>돈 스타일</h3><p id="rMoney"></p></div>
-    <div class="panel"><h3>그림자</h3><p id="rShadow"></p></div>
-    <div class="panel"><h3>지칠 때 필요한 것</h3><p id="rRest"></p></div>
-    <div class="panel"><h3>사회에서 쓰는 힘</h3><p id="rSocial"></p></div>
-    <div class="panel"><h3>배우자 자리</h3><p id="rSpouse"></p></div>
-  </div>
-</section>
-
-<section class="band wrap">
-  <h2 class="sec">나와 잘 맞는 캐릭터, 부딪히는 캐릭터</h2>
-  <div class="matchgrid" id="match"></div>
-</section>
-
-
-<section class="band wrap">
-  <h2 class="sec">더 깊이 보기 <small class="pr">각 990원</small></h2>
+  <h2 class="sec">더 깊이 읽기 <small class="pr">다음 내용을 골라요 · 각 990원</small></h2>
   <div class="prem">
     <div class="pm" id="pm-gung"><div class="ph"><span class="pi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><div><b>궁합 보기</b><small>상대의 사주와 맞춰 보는 정밀 궁합</small></div><button type="button" class="pbtn" data-pay="gung">990원 · 열기</button></div>
       <div class="pbody" hidden><form id="gf" class="gform" novalidate>
@@ -653,6 +624,48 @@ details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-
 </div></div></div>
   </div>
 </section>
+<section class="band wrap">
+  <h2 class="sec">나와 잘 맞는 캐릭터, 부딪히는 캐릭터</h2>
+  <div class="matchgrid" id="match"></div>
+</section>
+<section class="band wrap"><details class="expert" id="expert"><summary><span>📜 전문가용 사주 자료</span><small>원국표 · 오행 · 신강약 · 격국 · 십신 · 신살 · 띠 · 카드 해설</small></summary>
+<div class="xsec">
+  <h2 class="sec" id="dTitle">자세한 풀이</h2>
+  <h3 class="mh">사주 원국표</h3>
+  <div class="pillars" id="pillars"></div>
+  <p class="note" id="pNote" style="margin:10px 0 0"></p>
+</div>
+<div class="xsec">
+  <h2 class="sec">오행 분포와 행운 아이템</h2>
+  <div class="elgrid">
+    <div class="panel" id="elBars"></div>
+    <div class="panel"><h3 id="elT"></h3><p id="elTxt" style="margin:0;color:var(--sub)"></p><div class="lucky" id="lucky"></div></div>
+  </div>
+</div>
+<div class="xsec">
+  <h2 class="sec">전문 사주 풀이</h2>
+  <div class="probox" id="proBox"></div>
+</div>
+<div class="xsec">
+  <h2 class="sec">띠로 보는 2027 정미년</h2>
+  <div class="panel tti"><p class="kick" id="ttiK"></p><h3 id="ttiT"></h3><p id="ttiTxt"></p></div>
+</div>
+<div class="xsec">
+  <h2 class="sec" id="readTitle">카드 해설</h2>
+  <div class="read">
+    <div class="panel"><h3>타고난 본성</h3><p id="rEss"></p></div>
+    <div class="panel"><h3>움직이는 방식</h3><p id="rRole"></p></div>
+    <div class="panel"><h3>둘이 만나면</h3><p id="rCombo"></p></div>
+    <div class="panel"><h3>연애 스타일</h3><p id="rLove"></p></div>
+    <div class="panel"><h3>일 스타일</h3><p id="rWork"></p></div>
+    <div class="panel"><h3>돈 스타일</h3><p id="rMoney"></p></div>
+    <div class="panel"><h3>그림자</h3><p id="rShadow"></p></div>
+    <div class="panel"><h3>지칠 때 필요한 것</h3><p id="rRest"></p></div>
+    <div class="panel"><h3>사회에서 쓰는 힘</h3><p id="rSocial"></p></div>
+    <div class="panel"><h3>배우자 자리</h3><p id="rSpouse"></p></div>
+  </div>
+</div>
+</details></section>
 </div>
 <section class="band wrap"><div class="panel hub" id="hub"><h3>내 카드로 놀기</h3><p>사주를 봤다면 이제 카드로 놀아 보세요.</p><div class="mode-grid"><button type="button" class="mode" data-nav="battle"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/><path d="M9.5 17.5 21 6V3h-3L6.5 14.5"/><path d="m11 19-6-6"/><path d="m8 16-4 4"/><path d="m5 21-2-2"/></svg></span><span class="mt"><b>카드 배틀</b><span>친구와 1:1 · 4가지 대결</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="today"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span><span class="mt"><b>오늘의 운빨</b><span>매일 바뀌는 내 카드 운세</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="plaza"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2c3 .2 5.5 2.6 5.5 5.8"/></svg></span><span class="mt"><b>카드 광장</b><span>모르는 사람과 운빨배틀</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="tour"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/><path d="M12 14v4M8 21h8M9.5 18h5"/></svg></span><span class="mt"><b>단톡방 토너먼트</b><span>3~8명 대진표</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="train"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 20 7-12 4 6 2-3 7 9z"/><path d="M9 8V4l4 2-4 2"/></svg></span><span class="mt"><b>기운 수련</b><span>혼자 이겨서 카드 얻기</span></span><span class="go">들어가기 ▶</span></button></div></div></section>
 
@@ -1197,6 +1210,92 @@ function sajuTypeRaw(dd){const sj=saju(dd),A=analyze(sj,'M'),c=A.cnt,gods=Object
   return{ei:A.sc,sn:(c[2]+c[3])-(c[4]+c[0]),tf:(A.gc[2]+A.gc[3])-(A.gc[1]+A.gc[4]),jp:jung-pyeon,ds:sj.d[0]}}
 function sajuType(dd){const r=sajuTypeRaw(dd),h=k=>h01(dd+k)<.5;
   return (r.ei>STY.E||(r.ei===STY.E&&h('e'))?'E':'I')+(r.sn>STY.N?'S':'N')+(r.tf>STY.T||(r.tf===STY.T&&h('t'))?'T':'F')+(r.jp>STY.J||(r.jp===STY.J&&h('j'))?'J':'P')}
+/* ===== 스토리형 사주 리포트 (내 캐릭터가 반말로 들려주는 이야기) ===== */
+const bat=w=>{const c=String(w).charCodeAt(String(w).length-1);return c>=44032&&c<=55203&&(c-44032)%28>0};
+const ro=w=>{const c=String(w).charCodeAt(String(w).length-1);return c>=44032&&c<=55203&&(c-44032)%28>0&&(c-44032)%28!==8?'으로':'로'};
+const ieyo=w=>bat(w)?'이에요':'예요',iya=w=>bat(w)?'이야':'야';
+function callName(n){if(!n||n==='나')return'너';return n.length>=3?n.slice(-2)+(bat(n.slice(-2))?'아':'야'):n+(bat(n)?'아':'야')}
+const IMGP=['꺾이지 않는 큰 나무','바위틈에서 꽃 피우는 덩굴','숨길 줄 모르는 한낮의 해','꺼질 듯 꺼지지 않는 촛불','아무도 못 넘는 큰 산','뭐든 키워 내는 텃밭','아직 덜 벼린 칼','스스로 빛나는 보석','속을 알 수 없는 바다','조용히 스며드는 이슬비'];
+const HEADN=['큰 나무','덩굴','한낮의 해','촛불','큰 산','텃밭','칼','보석','바다','이슬비'];
+const EMO=['🌳','🌿','☀️','🕯️','⛰️','🌾','⚔️','💎','🌊','💧'];
+const LACK=['나무 한 그루 없이','불씨 하나 없이','흙 한 줌 없이','쇠붙이 하나 없이','물 한 방울 없이'];
+const Y27N={비견:'내 편이 생기는 해',겁재:'승부를 거는 해',식신:'즐기는 만큼 풀리는 해',상관:'할 말 하고 뜨는 해',편재:'판이 커지는 해',정재:'통장이 채워지는 해',편관:'시험대에 오르는 해',정관:'드디어 인정받는 해',편인:'새 길이 보이는 해',정인:'귀인이 오는 해'};
+const Y27H={비견:'2027년엔 내 편이 생긴다',겁재:'2027년엔 승부를 건다',식신:'2027년엔 즐기는 만큼 풀린다',상관:'2027년엔 할 말 하고 뜬다',편재:'2027년엔 판이 커진다',정재:'2027년엔 통장이 채워진다',편관:'2027년엔 시험대에 오른다',정관:'2027년엔 드디어 인정받는다',편인:'2027년엔 새 길이 보인다',정인:'2027년엔 귀인이 온다'};
+const SEASONS=['소한 무렵, 한겨울 추위가 가장 매서울 때','입춘이 막 지나 봄기운이 땅 밑에서 꿈틀대던 때','경칩 지나 겨울잠 자던 것들이 깨어나던 때','청명 무렵, 하늘이 맑고 꽃이 터지던 때','입하 지나 초록이 짙어지던 때','망종 무렵, 보리 베고 모 심느라 들판이 제일 바쁠 때','소서 지나 장마와 더위가 한꺼번에 오던 때','입추는 지났는데 여름 열기가 아직 남아 있던 때','백로 무렵, 풀잎에 첫 이슬이 맺히던 때','한로 지나 찬 이슬이 내리던 가을 한복판','입동 지나 겨울 문턱에 들어서던 때','대설 무렵, 첫눈 소식이 들리던 때'];
+const STRV=[
+'너는 위로 자라는 사람이야. 목표가 생기면 돌아가는 법을 몰라. 남들이 "적당히 해"라고 할 때 너는 "왜?"라고 묻지. 그 고집 덕분에 결국 어디서든 기둥이 돼. 힘들 때 사람들이 너한테 기대는 거, 우연 아니야.',
+'너는 어디서든 뿌리를 내리는 사람이야. 바위틈이든 담벼락이든, 환경 탓하는 대신 일단 자라고 보지. 사람 마음을 읽는 감이 좋아서 낯선 자리에서도 금방 네 편을 만들어. 부드러워 보여도, 너 생각보다 훨씬 질겨.',
+'너는 숨기는 게 안 되는 사람이야. 기분 좋으면 얼굴에 다 쓰여 있고, 네가 웃으면 방 전체가 밝아져. 사람들이 너를 찾는 건 네가 뭘 해 줘서가 아니라, 그냥 네 옆이 따뜻해서야.',
+'너는 작지만 꺼지지 않는 불이야. 크게 떠들지 않아도 한 가지에 꽂히면 끝까지 파고들지. 겉은 조용한데 속은 누구보다 뜨거워서, 너를 오래 본 사람만 그걸 알아. 네 진심을 한 번 받아 본 사람은 그걸 못 잊어.',
+'너는 쉽게 안 흔들리는 사람이야. 다들 우왕좌왕할 때 너는 일단 버텨. 그래서 사람들이 너를 믿고, 기대고, 쉬어 가. 말수가 적어도 네 한마디엔 무게가 있지.',
+'너는 뭐든 키워 내는 사람이야. 사람이든 일이든 네 손을 거치면 이상하게 자라. 꿈만 꾸지 않고 "그래서 어떻게 할 건데"를 먼저 생각하는 현실파고. 챙겨 주는 건 잘하는데 챙김 받는 건 어색해하지?',
+'너는 아직 덜 벼린 칼이야. 결단이 빠르고, 아니다 싶으면 바로 아니라고 말해. 내 사람이라고 정하면 끝까지 가는 의리파고. 불에 달굴수록 단단해지는 쇠처럼, 너는 힘든 시기를 지날 때마다 한 단계씩 올라왔어.',
+'너는 스스로 빛나는 보석이야. 기준이 높고 디테일을 귀신같이 봐. 대충은 못 견디니까, 네 손을 거친 건 티가 나. 대신 반짝이는 표면처럼 작은 흠집도 오래 남는 편이야.',
+'너는 속을 다 알 수 없는 바다야. 생각의 스케일이 크고, 웬만한 일은 다 품고 흘려보내. 사람들이 너한테 고민을 털어놓는 건 네가 판단 없이 들어 주기 때문이야. 근데 정작 네 얘기는 잘 안 하지?',
+'너는 조용히 스며드는 이슬비야. 크게 티 내지 않아도 주변 공기를 바꿔 놓지. 눈치가 빠르고 직관이 좋아서 말 안 해도 상대 기분을 먼저 알아채. 그만큼 생각도 많아서, 밤에 혼자 이것저것 곱씹는 날이 많을 거야.'];
+const GKV={'건록격':'남이 깔아 준 판보다 네가 직접 만든 판에서 훨씬 잘해. 자수성가형이야.','양인격':'위기에 강해. 다들 무너질 때 혼자 칼을 뽑는 타입이지.','월겁격':'경쟁이 붙어야 실력이 올라가. 라이벌이 있을 때 네가 제일 빛나.','식신격':'재주가 밥이 되는 사주야. 좋아하는 걸 잘하게 되면 먹고사는 걱정이 줄어.','상관격':'말과 아이디어로 판을 뒤집는 사람이야. 틀을 깰 때 제일 살아 있어.','편재격':'돈과 사람이 움직이는 흐름을 읽어. 판이 클수록 신나는 타입.','정재격':'차곡차곡 쌓아서 결국 이기는 사람이야. 신용이 곧 재산인 사주.','편관격(칠살격)':'압박을 버티고 권위를 쥐는 사주야. 책임이 무거울수록 오히려 강해져.','정관격':'원칙대로 가서 인정받는 사람이야. 조직에서 자리를 잡으면 오래 가.','편인격':'남들이 안 보는 걸 보는 사람이야. 특이한 분야에서 독보적으로 커.','정인격':'배우는 만큼 운이 열리는 사주야. 자격과 공부가 곧 무기야.'};
+const SSV={'도화살':'도화살이 있어서 가만히 있어도 사람이 꼬여. 이건 연애운만이 아니라 인기운이야.','역마살':'역마살이 있어서 한곳에 오래 있으면 답답해. 움직일 때 운이 붙어.','화개살':'화개살이 있어서 혼자만의 세계가 깊어. 예술이나 공부에서 남다른 깊이가 나와.','천을귀인':'천을귀인이 있어. 쉽게 말하면, 결정적인 순간마다 누가 꼭 도와주는 사주야.','문창귀인':'문창귀인이 있어서 머리가 좋고 글·시험과 인연이 깊어.','양인살':'양인살이 있어서 한번 마음먹으면 아무도 못 말려.','괴강살':'괴강살까지 있어. 우두머리 기질이라 판을 쥐면 확 크고, 아니면 크게 흔들려.'};
+const PAT={
+JAEDA:{t:'일이 늘 네 몸보다 커',scene:'해야 할 일, 챙길 사람, 벌일 판이 늘 네 체력보다 한 사이즈 커. 시작할 땐 "이 정도쯤이야" 했다가, 어느 순간 다 끌어안고 혼자 녹초가 돼 있지.',why:A=>`사주에 재성(내가 다루고 책임지는 것들)이 ${A.gc[2]}개나 있는데, 정작 나를 받쳐 주는 힘은 ${A.sc}%밖에 안 돼. 그릇보다 담을 게 많은 구조야.`,btn:'누가 "이것도 좀 해 줄 수 있어?" 하면 거절을 못 해.',flip:'근데 이건 능력이 없어서가 아니라 욕심나는 게 많아서야. 덜어 내기만 하면 다 네 것이 돼.',me:'솔직히 나 좀 지쳤어. 다 잘하고 싶은데 몸이 하나라서.'},
+GWAN:{t:'남의 기대가 너를 짓눌러',scene:'누가 실망할까 봐, 혹시 한소리 들을까 봐 미리 겁먹고 움직이지. 칭찬을 받아도 "다음엔 더 잘해야 하는데"부터 떠올라.',why:A=>`관성(나를 평가하고 누르는 기운)이 ${A.gc[3]}개인데, 나를 받쳐 주는 힘은 ${A.sc}%야. 시험지가 늘 내 실력보다 어려운 느낌이지.`,btn:'상대 표정이 조금만 굳어도 "내가 뭘 잘못했나" 싶어.',flip:'근데 그 압박을 버틴 사람만 쥐는 게 권위야. 너는 버틸수록 단단해지는 사주야.',me:'나 사실 늘 시험 보는 기분이야. 한 번쯤은 그냥 잘했다는 말 듣고 싶어.'},
+SIK:{t:'말이 마음보다 한 발 빨라',scene:'생각나면 바로 말해야 하고, 아이디어가 떠오르면 일단 벌여. 분위기는 네가 다 살리는데, 집에 와서 "아까 그 말은 하지 말걸" 하고 이불 차는 날이 있지.',why:A=>`식상(마음을 밖으로 꺼내는 기운)이 ${A.gc[1]}개야. 재능이 넘치는 대신 브레이크가 약해.`,btn:'답답한 사람을 보면 참지 못하고 한마디 하게 돼.',flip:'근데 그 입이 네 밥줄이야. 말과 재주로 먹고사는 사주라서, 방향만 잡으면 무기가 돼.',me:'나도 알아, 말이 좀 세게 나간다는 거. 근데 진심은 그게 아닌데.'},
+IN:{t:'생각만 하다 타이밍을 놓쳐',scene:'결정하기 전에 머릿속으로 열 번은 돌려 봐. 그러다 보면 남들이 먼저 가 있고, 너는 "나도 저거 생각했었는데" 하지.',why:A=>`인성(생각하고 배우는 기운)이 ${A.gc[4]}개야. 머리는 늘 바쁜데, 몸이 따라 나가는 힘이 상대적으로 약해.`,btn:'확신이 없으면 시작을 못 해.',flip:'근데 한번 움직이면 누구보다 깊게 가. 너는 늦게 출발해도 제대로 도착하는 사람이야.',me:'나 겁나서 그런 거 아니야. 틀리기 싫어서 그래.'},
+BI:{t:'도와 달라는 말을 못 해',scene:'힘들어도 혼자 해결하는 게 편하지. 누가 도와주겠다고 하면 "괜찮아, 내가 할게"가 먼저 나와. 그러다 어느 날 "왜 아무도 안 알아줘" 하고 서운해져.',why:A=>`비겁(나와 같은 기운)이 ${A.gc[0]}개야. 자존심과 독립심이 강해서, 기대는 걸 지는 거라고 느끼는 구조야.`,btn:'누가 나를 가르치려 들면 바로 마음이 닫혀.',flip:'근데 그 고집이 너를 여기까지 데려왔어. 이제 기댈 줄만 알면 돼.',me:'나도 누가 먼저 괜찮냐고 물어봐 줬으면 좋겠어.'},
+NOSIK:{t:'속으로 삭이는 게 습관이 됐어',scene:'서운해도 말 안 하고, 하고 싶은 말은 집에 가서 혼자 정리해. 그러니까 상대는 네가 괜찮은 줄 알아.',why:()=>'사주에 식상(마음을 밖으로 꺼내는 기운)이 하나도 없어. 느끼는 건 많은데 출구가 좁은 구조야.',btn:'한참 참다가 한 번에 터져.',flip:'근데 너는 한번 꺼낸 말엔 끝까지 책임지는 사람이야. 조금씩, 자주 꺼내기만 하면 돼.',me:'나 괜찮은 척하는 거, 사실 안 괜찮아서 그래.'},
+NOGWAN:{t:'남이 정한 틀에선 숨이 막혀',scene:'시키는 대로, 정해진 대로는 영 안 맞아. 회사든 관계든 규칙이 많아지면 슬슬 도망갈 궁리를 하지.',why:()=>'사주에 관성(규칙과 책임의 기운)이 하나도 없어. 자유로운 대신, 스스로 정한 틀이 없으면 쉽게 흐트러져.',btn:'"원래 다 그렇게 해"라는 말이 제일 싫어.',flip:'근데 그래서 너는 남이 안 가는 길을 만들 수 있어. 네 규칙은 네가 정하면 돼.',me:'나 책임감 없는 거 아니야. 내가 납득한 일엔 누구보다 진심이야.'},
+NOIN:{t:'쉬는 법을 몰라',scene:'가만히 있으면 불안해서 뭐라도 해야 해. 쉬는 날에도 머릿속은 출근해 있지.',why:()=>'사주에 인성(나를 채우고 쉬게 하는 기운)이 없어. 달리는 힘은 있는데 충전기가 없는 셈이야.',btn:'누가 "좀 쉬어"라고 하면 오히려 초조해져.',flip:'그 추진력은 진짜야. 쉬는 시간을 일처럼 일정에 넣으면 훨씬 오래 달릴 수 있어.',me:'멈추면 뒤처질까 봐 무서워.'},
+NOJAE:{t:'돈보다 의미가 먼저야',scene:'좋아하는 일이면 계산 안 하고 일단 뛰어들어. 정신 차리고 보면 통장이 허전하지.',why:()=>'사주에 재성(돈과 현실을 다루는 기운)이 보이지 않아. 욕심이 없는 게 아니라, 돈을 쫓는 감각이 비어 있는 거야.',btn:'돈 얘기를 먼저 꺼내는 게 어색해.',flip:'대신 실력과 신용이 쌓이면 돈이 따라오는 구조야. 재성 운이 들어오는 해를 노려.',me:'나도 안정적이고 싶어. 근데 의미 없는 일은 못 하겠어.'},
+STRONG:{t:'한번 정하면 안 꺾여',scene:'옳다고 믿으면 끝까지 밀어붙여. 대부분은 그게 맞는데, 가끔은 상대가 상처받은 걸 한참 뒤에야 알지.',why:A=>`나를 돕는 기운이 ${A.sc}%야. 엔진이 큰 사주라 브레이크보다 액셀이 먼저 밟혀.`,btn:'내 방식을 의심받으면 욱해.',flip:'그 힘으로 길을 내는 사람이 너야. 속도만 조금 맞춰 주면 사람들이 따라와.',me:'나 강해 보이지? 근데 가끔은 그냥 져 주고 싶을 때도 있어.'},
+WEAK:{t:'눈치를 너무 많이 봐',scene:'분위기를 너무 잘 읽어서, 내 의견보다 상대 기분이 먼저 보여. 뭘 정할 때마다 "다들 괜찮을까"부터 생각하지.',why:A=>`나를 돕는 기운이 ${A.sc}%라 주변 기운의 영향을 크게 받는 사주야. 섬세한 대신 쉽게 지쳐.`,btn:'싫은데 싫다고 말을 못 해.',flip:'그 섬세함이 사람을 살려. 대신 네 편이 되어 줄 사람을 곁에 두면 훨씬 커져.',me:'나도 내 마음대로 해 보고 싶어. 근데 누가 실망할까 봐.'},
+MID:{t:'다 잘하는데 하나를 못 골라',scene:'이것도 괜찮고 저것도 괜찮아서 결정을 미루게 돼. 어디서든 적응은 잘하는데, "그래서 넌 뭘 원해?"라는 질문 앞에선 멈칫하지.',why:A=>`나를 돕는 기운이 ${A.sc}%로 균형 잡힌 사주야. 극단이 없는 대신, 확 끌어당기는 한 방이 아직 안 정해졌어.`,btn:'남들이 다 하는 선택에 괜히 마음이 흔들려.',flip:'균형 잡힌 사람이 방향을 정하면 제일 멀리 가. 너한테 필요한 건 딱 하나의 "이거다"야.',me:'나도 확 빠져드는 뭔가가 있었으면 좋겠어.'}};
+function pickPat(A){const g=A.gc;if(g[2]>=3&&A.tier<=1)return'JAEDA';if(g[3]>=3&&A.tier<=1)return'GWAN';if(g[1]>=3)return'SIK';if(g[4]>=3)return'IN';if(g[0]>=3)return'BI';if(g[1]===0)return'NOSIK';if(g[3]===0)return'NOGWAN';if(g[4]===0)return'NOIN';if(g[2]===0)return'NOJAE';return A.tier>=3?'STRONG':A.tier<=1?'WEAK':'MID'}
+const YREP=['그럼 나랑 같이 자라자. 새로 배우는 거 하나, 아침 햇빛 한 번. 그거면 네 안에서 다시 싹이 터.','그럼 내가 좀 데워 줄게. 사람 만나고, 땀 흘리고, 좋아하는 걸 좋아한다고 말해. 네 안의 불이 켜지면 다 풀려.','그럼 나한테 기대. 같은 시간에 먹고 자는 것, 작은 약속 하나 지키는 것. 땅이 단단해지면 흔들릴 일이 줄어.','그럼 내가 정리해 줄게. 안 쓰는 물건, 안 맞는 약속, 붙잡고 있던 것 하나. 덜어 내면 네가 더 빛나.','그럼 잠깐 쉬어. 물 마시고, 푹 자고, 혼자 생각할 시간을 가져. 고여 있던 게 흐르기 시작하면 답이 보여.'];
+const ILJIV={비견:'친구 같은 사람이 편하고, 대등한 관계에서 사랑이 오래 가.',겁재:'자극을 주는 사람한테 끌리는데, 주도권 싸움이 자주 붙어.',식신:'같이 맛있는 거 먹고 노는 게 사랑인 타입. 편안한 사람이 최고야.',상관:'말이 통하는 사람한테 빠지는데, 상대를 고치려 드는 순간 삐걱대.',편재:'연애가 활동적이고 인연이 많은 편이야.',정재:'한 사람한테 성실한 타입. 안정된 관계를 만드는 힘이 있어.',편관:'카리스마 있는 사람한테 끌려. 끌림과 긴장이 같이 와.',정관:'반듯하고 책임감 있는 사람과 인연이 깊어.',편인:'정신적으로 통해야 마음이 열려. 혼자만의 시간을 존중해 주는 사람이 맞아.',정인:'나를 아껴 주고 챙겨 주는 사람과 인연이 있어.'};
+const DWV={비견:'내 힘으로 서는 10년',겁재:'승부를 거는 10년',식신:'재능이 꽃피는 10년',상관:'틀을 깨고 이름을 알리는 10년',편재:'판이 커지는 10년',정재:'차곡차곡 쌓는 10년',편관:'시험받고 단련되는 10년',정관:'인정받고 자리 잡는 10년',편인:'방향을 트는 10년',정인:'배우고 보호받는 10년'};
+function y27months(si){const R=[];for(let k=0;k<12;k++){const st=(8+k)%10,g=tenGod(si,st),T=TG[g];R.push({m:k===11?'2028년 1월':(k+2)+'월',g,love:T[2],money:T[3],sc:T[2]+T[3],title:T[0]})}return R}
+function storyRender(c){const A=c.A,sj=c.sj,si=c.p.s,ce=Math.floor(si/2),n=myNick(),nm=callName(n),me=NICK[si],yong=A.yong;
+  const [Y,M,D]=c.dd.split('-').map(Number),wd='일월화수목금토'[new Date(Date.UTC(Y,M-1,D)).getUTCDay()];
+  const tm=c.mins!=null?` ${c.mins>=720?'오후':'오전'} ${((Math.floor(c.mins/60)+11)%12)+1}시${c.mins%60?' '+(c.mins%60)+'분':''}`:'';
+  const ti=(((sj.m[1]-2+12)%12)+1)%12,dsince=Math.max(0,Math.floor((sj.t-sj.prev)/864e5)),dnext=Math.floor((sj.next-sj.t)/864e5),TN=['소한','입춘','경칩','청명','입하','망종','소서','입추','백로','한로','입동','대설'];
+  const cnt=A.cnt,zero=[0,1,2,3,4].filter(i=>cnt[i]===0),mx=Math.max(...cnt),mxs=[0,1,2,3,4].filter(i=>cnt[i]===mx);
+  const y27s=tenGod(si,3),y27b=tenGod(si,5),MO=y27months(si),best=MO.slice().sort((a,b)=>b.sc-a.sc)[0],worst=MO.slice().sort((a,b)=>a.sc-b.sc)[0];
+  const P=PAT[pickPat(A)],wc=worryCats(c.worry,c.wchips),DW=daewoon(c),cur=DW.find(x=>x.cur),up=DW.find(x=>good2(A,x)>=2&&x.age>(cur?cur.age:0));
+  // 제목
+  const twist=zero.length===1?`${LACK[zero[0]]} 태어난`:mx>=4?`${ELW[mxs[0]]}만 ${mx}개 품고 태어난`:A.ss.some(x=>x[0]==='괴강살')?'우두머리 별을 달고 태어난':A.tier>=4?'엔진이 너무 큰':A.tier<=0?'유난히 마음이 여린':'균형 위에 선';
+  const head=`${twist} ${HEADN[si]}, ${Y27H[y27s]} ${EMO[si]}`;
+  const q=t=>`<blockquote class="sq">${t}</blockquote>`,part=(no,emo,t,h)=>`<section class="sp"><p class="spn">${emo} PART ${no}</p><h3>${t}</h3>${h}</section>`;
+  const zeroLine=zero.length?`${zero.map(i=>ELW[i]).join('·')}${bat(ELW[zero[zero.length-1]])?'은':'는'} 하나도 없어. 여덟 글자 중에 ${zero.length===1?'한 오행이':'두 오행이나'} 통째로 빠진 사람, 생각보다 많지 않아.`:`다섯 기운이 하나도 빠짐없이 다 있어. 이것도 은근히 드문 구조야.`;
+  const open=`<p>${nm}, 시작하기 전에 네가 태어난 순간부터 짚고 갈게. ${Y}년 ${M}월 ${D}일 ${wd}요일${tm}. ${dnext<=1?`${jo(TN[(ti+1)%12],'을','를')} ${dnext?'딱 하루':'몇 시간'} 앞둔 날이었어. 계절이 막 바뀌려던 참이었지`:SEASONS[ti]+'였어'}${dnext>1&&dsince<=2?`. 그것도 절기가 ${dsince?`바뀐 지 ${dsince}일밖에 안 된 날`:'바뀐 바로 그날'}`:''}.</p>
+   <p>그 순간의 하늘과 땅을 여덟 글자${c.mins==null?'(시간을 몰라서 여섯 글자)':''}로 펼쳐 보면, <b>${mxs.map(i=>ELW[i]).join('·')}</b>${bat(ELW[mxs[mxs.length-1]])?'이':'가'}${mxs.length>1?' 각각':''} ${mx}개로 제일 많고, ${zeroLine}</p>
+   <p>그리고 이 여덟 글자의 주인, 그러니까 <b>너 자신을 뜻하는 글자는 ${STK[si]}(${SH[si]})</b>. ${IMGP[si]}${iya(IMGP[si])}. 내가 바로 그 기운에서 태어난 ${me}${iya(me)}.</p>`+
+   (c.worry?`<p>아, 그리고 네가 이렇게 적었지.</p>${q(esc(c.worry))}<p>이 얘기는 PART 3에서 제대로 할게. 그 전에 네가 어떤 사람인지부터.</p>`:wc.length?`<p>${wc.map(k=>({연애:'연애',재물:'돈',직장:'일',건강:'건강',관계:'사람',학업:'공부',변화:'변화'})[k]).join(', ')} 얘기가 궁금하다고 했지? PART 3에서 짚어 줄게. 그 전에 네가 어떤 사람인지부터.</p>`:`<p>네가 어떤 사람인지, 왜 자꾸 같은 데서 넘어지는지, 그리고 2027년에 뭐가 오는지. 하나씩 풀어 볼게.</p>`);
+  const ss=A.ss.filter(x=>SSV[x[0]]).slice(0,2);
+  const p1=part(1,'✨',`네가 가진 가장 큰 무기: ${IMGP[si]}`,`<p>${STRV[si]}</p><p>네 사주는 ${A.gk.replace('(칠살격)','')}${iya(A.gk.replace('(칠살격)',''))}. ${GKV[A.gk]}</p>${ss.length?`<p>${ss.map(x=>SSV[x[0]]).join(' ')}</p>`:''}${c.real?`<p>참고로 네가 고른 MBTI는 ${c.real}인데, 사주가 본 너는 ${c.t}${iya(c.t)}. ${c.real===c.t?'완벽히 같아. 타고난 대로 살고 있다는 뜻이지.':`${[...c.t].filter((l,i)=>l===c.real[i]).length}글자가 같아. 다른 글자는 살면서 네가 만든 너야.`}</p>`:''}`);
+  const chung=A.rel.filter(r=>r[0]==='충'||r[0]==='원진');
+  const p2=part(2,'🔁',`네가 자꾸 같은 데서 넘어지는 이유: ${P.t}`,`<p>이런 장면, 익숙하지?</p><p>${P.scene}</p><p>이유가 있어. ${P.why(A)}</p><p>그래서 너한테는 버튼이 하나 있어.</p>${q(P.btn)}<p>${P.flip}</p>${chung.length?`<p>하나 더. 네 사주엔 ${chung.map(r=>`${r[1]} 사이의 ${r[0]}`).join(', ')}이 있어. ${chung[0][0]==='충'?'그 자리는 늘 조용할 틈이 없어. 이사, 이직, 관계 변화가 남들보다 잦은 편이야.':'그 자리 관계에선 작은 서운함이 쌓이기 쉬워. 그때그때 말로 풀어.'}</p>`:''}`);
+  let p3h='';const sp=A.gc[A.spouseG],ilji=tenGod(si,BONGI[sj.d[1]]);
+  const L={연애:`<p><b>연애 얘기, 결론부터.</b> 마음이 있다면 말하는 쪽이 맞아. 다만 타이밍은 <b>${c.loveTop.split(',')[0]}</b>${y27s==='정관'||y27s==='편관'?(c.gender==='F'?'. 2027년엔 네 사주에 남자 인연의 별이 들어와':'. 2027년은 책임감 있는 관계가 들어오는 해야'):''}.</p><p> 네 배우자 자리(일지)엔 ${ilji}${bat(ilji)?'이':'가'} 앉아 있어. ${ILJIV[ilji]} ${sp?`사주에 배우자 별(${c.gender==='F'?'관성':'재성'})이 ${sp}개 있으니까 인연 자체는 들어와.`:`근데 사주에 배우자 별이 안 보여. 인연이 늦거나, 네가 고르는 눈이 까다로운 거야.`} 2027년에 연애 기운이 올라오는 달은 <b>${c.loveTop}</b>. 그때 먼저 연락하는 쪽이 이겨.</p>`,
+   재물:`<p><b>돈 얘기, 결론부터.</b> ${c.moneyTop.split(',')[0]} 전엔 큰돈 묶지 마.  ${A.gc[2]===0?'솔직히 네 사주는 돈을 쫓아가면 도망가는 구조야. 실력과 신용을 쌓으면 돈이 따라와.':A.gc[2]>=3&&A.tier<=1?'돈 들어올 구멍은 많은데 담을 그릇이 작아. 한 번에 크게 말고, 감당할 만큼만.':'재성이 적당히 있어서 꾸준히 쌓으면 불어나는 사주야.'} 2027년 돈이 열리는 달은 <b>${c.moneyTop}</b>. 계약이나 큰 결정은 그때로 미뤄 둬.</p>`,
+   직장:`<p><b>일 얘기, 결론부터 말할게.</b> ${['정관','정인','정재','식신'].includes(y27s)?`2027년은 '${Y27N[y27s]}'라서, 지금 자리에서 버티면 보상이 오는 흐름이야. 나갈 거라면 옮길 곳부터 정해 두고 ${c.moneyTop.split(',')[0]}쯤 움직여.`:`2027년은 '${Y27N[y27s]}'야. 판이 바뀌는 해라 움직이기 좋은 타이밍이야. 특히 ${best.m}.`} 그리고 넌 ${A.gk.replace('(칠살격)','')}${iya(A.gk.replace('(칠살격)',''))}. ${GKV[A.gk]} ${A.gc[3]?'관성이 있어서 조직 안에서 인정받는 흐름도 있어.':'관성이 없어서 남이 정한 틀보다 네 이름을 거는 일이 맞아.'} 움직일 거면 ${ELW[yong]} 기운이 도는 분야(${YONGT[yong][4]})부터 봐.</p>`,
+   건강:`<p><b>건강 얘기.</b> 네 사주에서 약한 쪽은 ${ELW[cnt.indexOf(Math.min(...cnt))]} 기운이라 ${jo(HEALTHT[cnt.indexOf(Math.min(...cnt))],'을','를')} 챙겨야 해. ${A.tier>=3?'체력이 좋아서 무리해도 티가 안 나는 게 함정이야.':'회복이 느린 편이니까 잠부터 챙겨.'} (이건 재미로 보는 참고야. 아프면 꼭 병원 가.)</p>`,
+   관계:`<p><b>사람 얘기.</b> ${A.rel.some(x=>x[0]==='충')?'사주에 충이 있어서 가까운 사이일수록 부딪히기 쉬워. 감정이 오를 땐 하루만 미뤄서 말해.':'사주에 큰 충돌이 없어. 문제는 관계 자체보다 말하는 방식일 가능성이 커.'} ${P.btn.replace(/\.$/,'')}, 이 버튼만 알아도 절반은 풀려.</p>`,
+   학업:`<p><b>공부 얘기.</b> ${A.gc[4]?'인성이 있어서 배운 걸 내 것으로 만드는 힘이 있어.':'인성이 약해서 오래 앉아 있기보다 짧게, 자주 하는 게 맞아.'}${A.ss.some(x=>x[0]==='문창귀인')?' 게다가 문창귀인까지 있어. 시험운 좋은 사주야.':''} 공부는 ${YONGT[yong][1]}쪽 자리에서 해 봐.</p>`,
+   변화:`<p><b>변화 얘기.</b> ${A.ss.some(x=>x[0]==='역마살')?'역마살이 있어서 움직일 때 운이 열려. 겁내지 마.':'역마가 두드러지진 않아서, 충분히 준비하고 움직이는 게 좋아.'} 방향은 ${YONGT[yong][1]}이 유리해.</p>`};
+  if(c.worry)p3h+=`<p>처음에 네가 적은 말, 다시 꺼낼게.</p>${q(esc(c.worry))}`;
+  p3h+=(wc.length?wc.slice(0,2).map(k=>L[k]).join(''):'')+(cur?`<p>지금 네가 지나는 10년은 <b>${STK[cur.s]}${BRK[cur.b]} 대운</b>, 한마디로 <b>'${DWV[cur.gs]}'</b>이야. ${cur.age}세에 시작해서 ${cur.age+9}세까지 이어져.</p>`:'')+
+   `<p>그리고 2027년 정미년. 그해의 불(丁)은 너한테 ${y27s}${iya(y27s)}. 한마디로 <b>'${Y27N[y27s]}'</b>야. 열두 달 중 제일 좋은 달은 <b>${best.m}</b>(${best.title}), 제일 조심할 달은 <b>${worst.m}</b>(${worst.title}).</p>`;
+  const p3=part(3,'🧭',c.worry||wc.length?'요즘 네 마음, 그리고 2027년':'지금 네가 서 있는 곳, 그리고 2027년',p3h);
+  const p4=part(4,'💬','네 사주가 입 밖으로 못 꺼낸 말',`<p>네 안의 기운들이 서로 속마음을 털어놓는다면, 아마 이런 대화가 오갈 거야.</p><div class="chat"><div class="cb me"><small>${ELW[ce]} · 나 (${me})</small><p>${P.me}</p></div><div class="cb you"><small>${ELW[yong]} · 너를 살리는 기운${yong===ce?' (같은 편)':''}</small><p>${yong===ce?'우리 같은 편이잖아. ':''}${YREP[yong]}</p></div></div><p>${nm==='너'?'':nm.replace(/[아야]$/,'')+', '}오늘 딱 하나만 해 봐. <b>${YONGT[yong][5].split(', ')[0]}</b>. 거창한 것보다 이런 게 기운을 바꿔.</p><p class="sign">— 너의 ${me}${bat(me)?'이':'가'}</p>`);
+  $('sum').insertAdjacentHTML('afterbegin',`<p class="shead">${head}</p>`);
+  $('story').innerHTML=`<header class="sh"><img src="${IMG[si]}" alt=""><div><b>${me}</b><small>너의 기운에서 태어난 정령 · 사주 여덟 글자를 다 읽고 왔어</small></div></header><h2 class="stitle">${head}</h2><p class="sprivacy">🔒 입력한 생년월일과 고민은 이 기기 밖으로 나가지 않아요</p>${open}${p1}${p2}${p3}${p4}`;
+  // 유료 챕터 티저
+  const T={ny:[`2027년, 너한테 오는 세 번의 기회 🔮`,`${c.loveTop.split(',')[0]===c.moneyTop.split(',')[0]?`연애도 돈도 ${c.moneyTop.split(',')[0]}에 같이 열려.`:`연애는 ${c.loveTop.split(',')[0]}, 돈은 ${c.moneyTop.split(',')[0]}.`} 그리고 꼭 피해야 할 달이 하나 있어. 열두 달 흐름을 전부 펼쳐 줄게.`],
+   dw:[`10년마다 바뀌는 너의 계절, 지금은 ${cur?STK[cur.s]+BRK[cur.b]:'첫'} 대운 🌊`,up?`인생에서 손꼽히는 상승기가 ${up.age}세에 와. ${up.age-(cur?cur.age:0)<=10?'생각보다 가까워.':''} 언제 달리고 언제 버텨야 하는지, 아홉 개의 계절을 다 보여 줄게.`:`지금부터 아흔 살까지, 아홉 번의 계절이 어떻게 바뀌는지. 언제 달리고 언제 버텨야 하는지 보여 줄게.`],
+   gung:[`그 사람과 나, 진짜 궁합 💞`,`생일만 넣으면 둘이 왜 끌리고 어디서 부딪히는지 점수로 보여 줄게. 네 사주엔 '배우자 별'이 되는 사람이 따로 있거든.`]};
+  for(const it of ['ny','dw','gung']){const b=$('pm-'+it);if(!b)continue;b.querySelector('.ph b').textContent=T[it][0];b.querySelector('.ph small').textContent=T[it][1]}
+}
+function good2(A,x){let s=0;for(const e of [Math.floor(x.s/2),EB[x.b]]){if(e===A.yong)s+=2;else if(e===A.hee)s+=1;else if(e===A.gi)s-=1}return s}
+
 const SIJIN=['자','축','인','묘','진','사','오','미','신','유','술','해'];
 const FM={g:null,cal:'S',ap:0,mins:null,worry:'',chips:[]};
 function segBind(id,attr,cb){const el=$(id);el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;for(const x of el.children)x.setAttribute('aria-pressed',String(x===b));cb(b.dataset[attr])})}
@@ -1276,9 +1375,9 @@ function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gen
   const tm=tenGod(si,sj.m[0]),ty=tenGod(si,sj.y[0]);
   $('rSocial').textContent=`월간 ${SH[sj.m[0]]}(${tm}): ${TGMEAN[tm]} 직장과 사회생활에서 이 힘이 가장 자연스럽게 나와요. 뿌리가 되는 연간 ${SH[sj.y[0]]}(${ty})는 어린 시절과 집안에서 물려받은 기운이에요.`;
   $('rSpouse').textContent=`일지 ${BR[c.p.b]}(${ANI[c.p.b]})에 ${ELW[EB[c.p.b]]} 기운이 있어요. ${SPOUSE[EB[c.p.b]]}`;
-  $('dTitle').textContent=`「${c.name}」 자세한 풀이`;proRender(c);premRender();pillarRender(c,anim||window.__restored);
+  $('dTitle').textContent=`「${c.name}」 자세한 풀이`;proRender(c);storyRender(c);premRender();pillarRender(c,anim||window.__restored);
   if(anim){playTok++;if($('cRes'))$('cRes').hidden=true;markCard();const me=lsGet('meD',null);if(!me||me===c.dd){if(!me)lsSet('meD',c.dd);dexAdd(c.no)}else seenAdd(c.no)}
-  if(anim){$('detail').hidden=true;$('moreBtn').textContent='자세히 보기 ▾';$('moreBtn').setAttribute('aria-expanded','false')}
+  if(anim){$('detail').hidden=true;$('moreBtn').textContent=`${NICK[c.p.s]}${(NICK[c.p.s].charCodeAt(NICK[c.p.s].length-1)-44032)%28?'이':'가'} 들려주는 내 사주 이야기 ▾`;$('moreBtn').setAttribute('aria-expanded','false')}
   if(anim){card.classList.remove('reveal');void card.offsetWidth;card.classList.add('reveal')}
   compat()}
 
@@ -1463,7 +1562,7 @@ $('cGo').addEventListener('click',()=>{const t=sajuType(getD('cd'));$('cErr').te
   $('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;try{const o=JSON.parse(localStorage.getItem('giun')||'{}');localStorage.setItem('giun',JSON.stringify({...o,d,t,n:$('nick').value.trim(),raw:o.d===d?o.raw:d.replace(/-/g,'.'),cal:o.d===d?o.cal:'S'}))}catch(e){}
   const me=$('chMe');me.className='cslot flip';me.style.setProperty('--el',EL[cur.s.e].c);me.innerHTML=slotHTML(cur,myNick());
   chAccepted=true;compat();$('cRes').hidden=true;setTimeout(()=>{$('arena').hidden=false;$('picker').scrollIntoView({behavior:RM()?'auto':'smooth'})},1000)});
-$('moreBtn').addEventListener('click',()=>{const d=$('detail'),open=d.hidden;d.hidden=!open;$('moreBtn').textContent=open?'접기 ▴':'자세히 보기 ▾';$('moreBtn').setAttribute('aria-expanded',String(open));if(open)d.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+$('moreBtn').addEventListener('click',()=>{const d=$('detail'),open=d.hidden;d.hidden=!open;$('moreBtn').textContent=open?'이야기 접기 ▴':`${NICK[cur.p.s]}${(NICK[cur.p.s].charCodeAt(NICK[cur.p.s].length-1)-44032)%28?'이':'가'} 들려주는 내 사주 이야기 ▾`;$('moreBtn').setAttribute('aria-expanded',String(open));if(open)d.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
 $('mkImg').addEventListener('click',makeImg);
 
 /* ---------- app shell ---------- */
