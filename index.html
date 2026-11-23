@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>운빨카드 배틀 · 사주로 뽑는 나의 기운 카드</title>
-<meta name="description" content="태어난 날의 기운과 성격유형으로 찾는 160명의 캐릭터. 같은 유형, 다른 기운.">
+<meta name="description" content="생년월일로 보는 사주와 160종 기운 캐릭터 카드. 타고난 기운이 카드가 된다.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="운빨카드 배틀 · 타고난 기운이 카드가 된다">
 <meta property="og:description" content="생년월일로 사주를 보고, 160종 캐릭터 카드를 모으고, 친구와 운빨배틀까지!">
@@ -27,7 +27,7 @@
 :root{color-scheme:light dark;--bg:light-dark(#fbfaf7,#121211);--ink:light-dark(#1c1b19,#eeeae2);--sub:light-dark(#5f5c55,#a9a49a);--line:light-dark(#e4e0d7,#2c2b28);--panel:light-dark(#ffffff,#1b1a18);--seal:light-dark(#c23a2b,#e0614f);--paper:#f7f3ea}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Noto Sans KR",system-ui,sans-serif;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Noto Sans KR",system-ui,sans-serif;overflow-x:clip;word-break:keep-all;overflow-wrap:break-word;line-break:strict}
 .band{padding:clamp(22px,4vw,56px) max(5vw,16px)}
 .wrap{max-width:1180px;margin:0 auto}
 .brand{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--sub)}
@@ -133,7 +133,7 @@ input.txt{width:100%;height:46px;font:16px "Noto Sans KR",sans-serif;padding:0 1
 .mode{display:grid;grid-template-columns:46px minmax(0,1fr);grid-template-rows:auto auto;column-gap:12px;align-items:center;text-align:left;padding:14px;border-radius:14px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:0 3px 0 var(--line);transition:transform .15s,border-color .15s,box-shadow .15s;font-family:"Noto Sans KR",sans-serif}
 .mode:hover{border-color:var(--ink);transform:translateY(-2px);box-shadow:0 5px 0 var(--line)}
 .mode:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
-.mode .mi{grid-row:1/3;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--seal);color:#fff;font:700 21px/1 "Gowun Batang",serif}
+.mode .mi{grid-row:1/3;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:#f3ece0;color:var(--seal);border:1px solid #e6dccb}.mode .mi svg{width:24px;height:24px}
 .mode .mt b{display:block;font-size:16px;font-weight:700}.mode .mt span{display:block;font-size:13px;color:var(--sub);margin-top:2px}
 .mode .go{font-size:13px;color:var(--seal);font-weight:500;margin-top:6px}
 .mode[aria-pressed=true]{border-color:var(--seal);box-shadow:0 0 0 2px var(--seal)}
@@ -477,6 +477,10 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
 .home.open .gword{font-size:clamp(44px,13vw,64px)}.home .gword{transition:font-size .5s}
 @media (prefers-reduced-motion:reduce){.rays,.gword,.gword::after,.gseal,.gband,.gband::after,.gsub,.orn,.home.shake{animation:none!important}}
 .gseal{width:54px!important;height:54px!important;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;place-items:center;gap:0;padding:5px;box-sizing:border-box;font-size:17px!important;line-height:1;border-radius:7px!important;box-shadow:inset 0 0 0 2px #ffd77a,0 4px 12px rgba(0,0,0,.5)!important;border:2px solid #b0392b!important;left:-38px!important}.gseal i{font-style:normal;font-weight:700;letter-spacing:0}
+[hidden]{display:none!important}
+.pi svg{width:24px;height:24px}.tabbar i svg{width:22px;height:22px;display:block}
+details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-details-marker{display:none}details.dwt summary h4::after{content:' ▾';color:var(--sub)}details.dwt[open] summary h4::after{content:' ▴'}.dwt h4 em{font:500 12px 'Noto Sans KR',sans-serif;font-style:normal;margin-left:4px}.dwt h4 em.up{color:#2f7a3f}.dwt h4 em.dn{color:#b0392b}
+@media(max-width:380px){.home .gword{font-size:50px}.home.open .gword{font-size:44px}}
 </style>
 </head>
 <body>
@@ -501,15 +505,15 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
       <button type="button" class="hm" data-nav="train"><b>기운 수련</b><small>혼자 이겨서 카드 얻기</small></button><button type="button" class="hm" data-nav="dex"><b>카드함</b><small>도감 · 일진 · 친구 카드</small></button>
     </div>
     <div class="hfoot"><button type="button" id="aboutBtn">이용 안내</button><button type="button" id="shareSite">링크 공유</button></div>
-    <p class="about" id="about" hidden>운빨카드는 생일의 사주(일간·오행)와 성격유형 16가지를 엮은 재미용 콘텐츠예요. 의료·법률·투자 결정의 근거가 될 수 없고, 공식 MBTI® 검사와 무관합니다. 생년월일은 내 기기에만 저장돼요. <a href="terms.html">이용약관</a> · <a href="privacy.html">개인정보처리방침</a></p><p class="about" id="shareMsg" role="status"></p>
+    <p class="about" id="about" hidden>운빨카드는 생년월일의 사주(일간·오행)로 캐릭터와 성격 코드를 정하는 재미용 콘텐츠예요. 의료·법률·투자 결정의 근거가 될 수 없고, 공식 MBTI® 검사와 무관합니다. 생년월일은 내 기기에만 저장돼요. <a href="terms.html">이용약관</a> · <a href="privacy.html">개인정보처리방침</a></p><p class="about" id="shareMsg" role="status"></p>
   </nav>
 </section>
 <section class="scr" id="scr-draw" hidden>
 <div class="topbar band wrap"><button type="button" class="back" data-nav="home">← 메인</button><b>운빨카드</b><span>카드 뽑기</span></div>
 <header class="band wrap">
-  <div class="brand"><span class="stamp">運</span>운빨카드</div>
-  <h1>같은 유형, 다른 기운</h1>
-  <p class="lead">태어난 날의 일간 10가지와 성격유형 16가지가 만나 160장의 카드가 됩니다. 나는 어떤 카드를 뽑을까요?</p>
+  <div class="brand"><span class="stamp">運</span>운빨카드 배틀</div>
+  <h1>타고난 기운이 카드가 된다</h1>
+  <p class="lead">타고난 기운 10가지와 사주가 정하는 성격 코드 16가지가 만나 160장의 카드가 돼요. 나는 어떤 카드일까요?</p>
 </header>
 
 <section class="band wrap main">
@@ -624,7 +628,7 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
 <section class="band wrap">
   <h2 class="sec">더 깊이 보기 <small class="pr">각 990원</small></h2>
   <div class="prem">
-    <div class="pm" id="pm-gung"><div class="ph"><span class="pi">緣</span><div><b>궁합 보기</b><small>상대의 사주와 맞춰 보는 정밀 궁합</small></div><button type="button" class="pbtn" data-pay="gung">990원 · 열기</button></div>
+    <div class="pm" id="pm-gung"><div class="ph"><span class="pi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><div><b>궁합 보기</b><small>상대의 사주와 맞춰 보는 정밀 궁합</small></div><button type="button" class="pbtn" data-pay="gung">990원 · 열기</button></div>
       <div class="pbody" hidden><form id="gf" class="gform" novalidate>
         <input class="txt" id="gName" maxlength="10" placeholder="상대 이름 (선택)">
         <div class="seg" id="gG2"><button type="button" data-g="M" aria-pressed="false">남자</button><button type="button" data-g="F" aria-pressed="true">여자</button></div>
@@ -633,8 +637,8 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
         <div class="tin"><div class="seg" id="gAp"><button type="button" data-ap="0" aria-pressed="true">오전</button><button type="button" data-ap="12" aria-pressed="false">오후</button></div><input class="txt" id="gHH" inputmode="numeric" maxlength="2" placeholder="시"><span>시</span><input class="txt" id="gMM" inputmode="numeric" maxlength="2" placeholder="분"><span>분</span></div>
         <p class="note">시간을 모르면 비워 두세요.</p><p class="err" id="gErr"></p>
         <button class="btn" type="submit">궁합 보기</button></form><div id="gOut"></div></div></div>
-    <div class="pm" id="pm-dw"><div class="ph"><span class="pi">運</span><div><b>대운 보기</b><small>10년 단위로 바뀌는 인생의 큰 흐름</small></div><button type="button" class="pbtn" data-pay="dw">990원 · 열기</button></div><div class="pbody" hidden></div></div>
-    <div class="pm" id="pm-ny"><div class="ph"><span class="pi">丁</span><div><b>2027 신년운세</b><small>정미년 테마 · 연애·재물 · 12개월 흐름</small></div><button type="button" class="pbtn" data-pay="ny">990원 · 열기</button></div><div class="pbody" hidden><div id="nyMove"><div class="ysum">
+    <div class="pm" id="pm-dw"><div class="ph"><span class="pi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/><path d="M3 11c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/></svg></span><div><b>대운 보기</b><small>10년 단위로 바뀌는 인생의 큰 흐름</small></div><button type="button" class="pbtn" data-pay="dw">990원 · 열기</button></div><div class="pbody" hidden></div></div>
+    <div class="pm" id="pm-ny"><div class="ph"><span class="pi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M8 14h2v2H8z"/></svg></span><div><b>2027 신년운세</b><small>정미년 테마 · 연애·재물 · 12개월 흐름</small></div><button type="button" class="pbtn" data-pay="ny">990원 · 열기</button></div><div class="pbody" hidden><div id="nyMove"><div class="ysum">
     <div class="panel yr best"><p class="kick">올해의 테마</p><h3 id="rYearT"></h3><p id="rYear"></p></div>
     <div class="panel"><p class="kick">연애운</p><h3 id="yLoveT"></h3><p id="yLove"></p><p class="bm" id="yLoveBest"></p></div>
     <div class="panel"><p class="kick">재물운</p><h3 id="yMoneyT"></h3><p id="yMoney"></p><p class="bm" id="yMoneyBest"></p></div>
@@ -650,12 +654,12 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
   </div>
 </section>
 </div>
-<section class="band wrap"><div class="panel hub" id="hub"><h3>내 카드로 놀기</h3><p>사주를 봤다면 이제 카드로 놀아 보세요.</p><div class="mode-grid"><button type="button" class="mode" data-nav="battle"><span class="mi">戰</span><span class="mt"><b>카드 배틀</b><span>친구와 1:1 · 4가지 대결</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="today"><span class="mi">今</span><span class="mt"><b>오늘의 운빨</b><span>매일 바뀌는 내 카드 운세</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="plaza"><span class="mi">場</span><span class="mt"><b>카드 광장</b><span>모르는 사람과 운빨배틀</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="tour"><span class="mi">團</span><span class="mt"><b>단톡방 토너먼트</b><span>3~8명 대진표</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="train"><span class="mi">修</span><span class="mt"><b>기운 수련</b><span>혼자 이겨서 카드 얻기</span></span><span class="go">들어가기 ▶</span></button></div></div></section>
+<section class="band wrap"><div class="panel hub" id="hub"><h3>내 카드로 놀기</h3><p>사주를 봤다면 이제 카드로 놀아 보세요.</p><div class="mode-grid"><button type="button" class="mode" data-nav="battle"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/><path d="M9.5 17.5 21 6V3h-3L6.5 14.5"/><path d="m11 19-6-6"/><path d="m8 16-4 4"/><path d="m5 21-2-2"/></svg></span><span class="mt"><b>카드 배틀</b><span>친구와 1:1 · 4가지 대결</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="today"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span><span class="mt"><b>오늘의 운빨</b><span>매일 바뀌는 내 카드 운세</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="plaza"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2c3 .2 5.5 2.6 5.5 5.8"/></svg></span><span class="mt"><b>카드 광장</b><span>모르는 사람과 운빨배틀</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="tour"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/><path d="M12 14v4M8 21h8M9.5 18h5"/></svg></span><span class="mt"><b>단톡방 토너먼트</b><span>3~8명 대진표</span></span><span class="go">들어가기 ▶</span></button><button type="button" class="mode" data-nav="train"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 20 7-12 4 6 2-3 7 9z"/><path d="M9 8V4l4 2-4 2"/></svg></span><span class="mt"><b>기운 수련</b><span>혼자 이겨서 카드 얻기</span></span><span class="go">들어가기 ▶</span></button></div></div></section>
 
 </section>
 <section class="scr" id="scr-battle" hidden>
 <div class="topbar band wrap"><button type="button" class="back" data-nav="home">← 메인</button><b>운빨카드</b><span>카드 배틀</span></div>
-<div class="band wrap gate" hidden><div class="panel"><h3>먼저 내 카드를 뽑아 주세요</h3><p>카드 배틀에는 내 카드가 필요해요. 생일과 유형만 넣으면 10초면 끝나요.</p><button type="button" class="btn" data-nav="draw">카드 뽑으러 가기</button></div></div>
+<div class="band wrap gate" hidden><div class="panel"><h3>먼저 내 카드를 뽑아 주세요</h3><p>카드 배틀에는 내 카드가 필요해요. 생년월일만 넣으면 10초면 끝나요.</p><button type="button" class="btn" data-nav="draw">카드 뽑으러 가기</button></div></div>
 <section class="band wrap" id="challenge" hidden>
   <div class="panel chal">
     <p class="kick">카드 배틀 도전장</p>
@@ -675,7 +679,7 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
   <div class="compat">
   <form class="panel" id="f2" novalidate>
     <h2>상대 카드</h2>
-    <p class="note" style="margin:0 0 14px">상대의 생일과 유형을 넣고, 오른쪽에서 대결을 골라 주세요.</p>
+    <p class="note" style="margin:0 0 14px">상대의 생년월일을 넣고 대결을 골라 주세요.</p>
     <label class="l" for="n2">상대 닉네임 <span style="font-weight:400;color:var(--sub)">(선택)</span></label>
     <input class="txt" id="n2" maxlength="10" placeholder="친구" style="margin-bottom:14px">
     <span class="l">상대가 태어난 날</span>
@@ -683,7 +687,7 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
     <select id="t2" hidden></select><p class="note" style="margin:8px 0 0">성격 코드는 생년월일로 자동으로 정해져요.</p>
     <p class="err" id="err2" role="alert"></p>
   </form>
-  <div class="panel pick" id="picker"><h3>어떤 대결을 할까요?</h3><p>버튼을 누르면 바로 대결이 시작돼요.</p><p class="note" id="vsNote" style="color:var(--seal);margin:-8px 0 12px"></p><div class="mode-grid"><button type="button" class="mode" data-mode="battle" aria-pressed="false"><span class="mi">戰</span><span class="mt"><b>카드 배틀</b><span>능력치 3라운드 승부</span></span><span class="go">시작 ▶</span></button><button type="button" class="mode" data-mode="chem" aria-pressed="false"><span class="mi">合</span><span class="mt"><b>케미 대결</b><span>둘이 한 팀이면 몇 점?</span></span><span class="go">시작 ▶</span></button><button type="button" class="mode" data-mode="year" aria-pressed="false"><span class="mi">年</span><span class="mt"><b>2027 운빨</b><span>올해 누가 더 잘 풀릴까</span></span><span class="go">시작 ▶</span></button><button type="button" class="mode" data-mode="today" aria-pressed="false"><span class="mi">日</span><span class="mt"><b>오늘의 운빨</b><span>매일 바뀌는 오늘의 승부</span></span><span class="go">시작 ▶</span></button></div></div>
+  <div class="panel pick" id="picker"><h3>어떤 대결을 할까요?</h3><p>버튼을 누르면 바로 대결이 시작돼요.</p><p class="note" id="vsNote" style="color:var(--seal);margin:-8px 0 12px"></p><div class="mode-grid"><button type="button" class="mode" data-mode="battle" aria-pressed="false"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/><path d="M9.5 17.5 21 6V3h-3L6.5 14.5"/><path d="m11 19-6-6"/><path d="m8 16-4 4"/><path d="m5 21-2-2"/></svg></span><span class="mt"><b>카드 배틀</b><span>능력치 3라운드 승부</span></span><span class="go">시작 ▶</span></button><button type="button" class="mode" data-mode="chem" aria-pressed="false"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg></span><span class="mt"><b>케미 대결</b><span>둘이 한 팀이면 몇 점?</span></span><span class="go">시작 ▶</span></button><button type="button" class="mode" data-mode="year" aria-pressed="false"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M8 14h2v2H8z"/></svg></span><span class="mt"><b>2027 운빨</b><span>올해 누가 더 잘 풀릴까</span></span><span class="go">시작 ▶</span></button><button type="button" class="mode" data-mode="today" aria-pressed="false"><span class="mi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span><span class="mt"><b>오늘의 운빨</b><span>매일 바뀌는 오늘의 승부</span></span><span class="go">시작 ▶</span></button></div></div>
   </div>
   <div class="panel stagep" id="cRes" hidden>
     <div class="stg"><div class="fs" id="fsA"></div><div class="mid"><span class="vs" id="vsMark">VS</span><span class="sb" id="sbMark"></span></div><div class="fs" id="fsB"></div></div>
@@ -717,7 +721,7 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
 <div class="topbar band wrap"><button type="button" class="back" data-nav="home">← 메인</button><b>운빨카드</b><span>단톡방 토너먼트</span></div>
 <section class="band wrap" id="tour">
   <h2 class="sec">단톡방 토너먼트</h2>
-  <p class="note" style="margin:-6px 0 14px">3~8명의 생일과 유형을 넣으면 카드 배틀 대진표로 우승 카드를 가려요. 방장 한 명이 입력하면 돼요.</p>
+  <p class="note" style="margin:-6px 0 14px">3~8명의 생년월일을 넣으면 카드 배틀 대진표로 우승 카드를 가려요. 방장 한 명이 입력하면 돼요.</p>
   <div class="panel">
     <div id="tRows"></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="ghost" type="button" id="tAdd">+ 참가자 추가</button><button class="btn" type="button" id="tGo" style="width:auto;padding:0 22px;margin:0">토너먼트 시작</button></div>
@@ -787,7 +791,7 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
 
 <div class="paym" id="exModal" hidden><div class="paybox" role="dialog" aria-modal="true" aria-labelledby="exT"><button type="button" class="px" id="exX" aria-label="닫기">×</button><p class="kick">카드 교환</p><h3 id="exT"></h3><img id="exImg" class="eximg" alt=""><p id="exD"></p><button type="button" class="btn" id="exGo"></button><p class="note" id="exMsg" role="status"></p></div></div>
 <div class="paym" id="payModal" hidden><div class="paybox" role="dialog" aria-modal="true" aria-labelledby="payT"><button type="button" class="px" id="payX" aria-label="닫기">×</button><p class="kick">유료 풀이</p><h3 id="payT"></h3><p id="payD"></p><div class="price">990<span>원</span></div><button type="button" class="btn" id="payGo">결제하고 열기</button><p class="note" id="payMsg" role="status"></p><p class="note">결제 즉시 열람되는 디지털 콘텐츠라 열람 후에는 청약철회가 제한돼요. <a href="terms.html#refund" target="_blank">환불 정책</a><br>결제한 풀이는 같은 생년월일로 이 기기에서 다시 볼 수 있어요.</p></div></div>
-<nav class="tabbar" id="tabbar" aria-label="바로가기"><button type="button" data-nav="home"><i>⌂</i>홈</button><button type="button" data-nav="draw"><i>運</i>사주·카드</button><button type="button" data-nav="battle"><i>戰</i>카드배틀</button><button type="button" data-nav="today"><i>今</i>오늘의 운빨</button><button type="button" data-nav="plaza"><i>場</i>카드광장</button></nav>
+<nav class="tabbar" id="tabbar" aria-label="바로가기"><button type="button" data-nav="home"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></i>홈</button><button type="button" data-nav="draw"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M12 8l1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z"/></svg></i>사주·카드</button><button type="button" data-nav="battle"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/><path d="M9.5 17.5 21 6V3h-3L6.5 14.5"/><path d="m11 19-6-6"/><path d="m8 16-4 4"/><path d="m5 21-2-2"/></svg></i>카드배틀</button><button type="button" data-nav="today"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></i>오늘의 운빨</button><button type="button" data-nav="plaza"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2c3 .2 5.5 2.6 5.5 5.8"/></svg></i>카드광장</button></nav>
 <script>
 {
 const EL=[{n:'목',c:'#2f5d3a'},{n:'화',c:'#9e2b25'},{n:'토',c:'#8a6a1f'},{n:'금',c:'#5c6066'},{n:'수',c:'#24405f'}];
@@ -991,7 +995,7 @@ const esc=t=>String(t).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 function chip(s){return `<span class="hch" style="background:${ELC2[Math.floor(s/2)]}">${SH[s]}</span>`}
 function bchip(b){return `<span class="hch" style="background:${ELC2[EB[b]]}">${BR[b]}</span>`}
 function ohScore(A,ce){const sc=A.cnt.slice();let bonus=0;const mo=Math.max(...sc.filter((_,i)=>i!==ce));if(sc[ce]<=mo){bonus=mo+1-sc[ce]}return{sc,bonus}}
-const WORRY=[['연애',/연애|사랑|썸|이성|남친|여친|남자친구|여자친구|결혼|이별|재회|짝|소개팅|배우자|남편|아내/],['재물',/돈|재물|투자|주식|코인|부동산|빚|대출|월급|수입|사업|장사|매출|재테크/],['직장',/직장|회사|이직|취업|퇴사|승진|진로|일자리|면접|창업|커리어|상사|업무|프리랜서/],['건강',/건강|병|아프|수술|몸|피곤|스트레스|불면|다이어트/],['관계',/관계|친구|가족|부모|동료|인간관계|사람|갈등|싸움|형제|자녀|아이/],['학업',/시험|공부|합격|수능|자격증|학교|입시|성적|유학|고시/],['변화',/이사|이민|해외|변화|이동|독립|여행/]];
+const WORRY=[['연애',/연애|사랑|썸|이성|남친|여친|남자친구|여자친구|결혼|이별|재회|짝|소개팅|배우자|남편|아내/],['재물',/돈|재물|투자|주식|코인|부동산|빚|대출|월급|수입|사업|장사|매출|재테크/],['직장',/직장|회사|이직|취업|퇴사|승진|진로|일자리|면접|창업|커리어|상사|업무|프리랜서/],['건강',/건강|병|아프|수술|몸|피곤|스트레스|불면|다이어트/],['관계',/관계|친구|가족|부모|동료|인간관계|갈등|싸움|형제|자녀|아이|직장 동료|시댁|처가/],['학업',/시험|공부|합격|수능|자격증|학교|입시|성적|유학|고시/],['변화',/이사|이민|해외|변화|이동|독립|여행/]];
 function worryCats(txt,chips){const s=new Set(chips||[]);for(const [k,re] of WORRY)if(re.test(txt||''))s.add(k);return[...s]}
 function proRender(c){const sj=c.sj,A=analyze(sj,c.gender),si=c.p.s,ce=c.s.e;c.A=A;const yt=YONGT[A.yong];
   const y27s=tenGod(si,3),y27b=tenGod(si,5),dbr=sj.d[1];const y27rel=dbr===1?'충':[6].includes(dbr)?'육합':'';
@@ -1020,10 +1024,10 @@ function proRender(c){const sj=c.sj,A=analyze(sj,c.gender),si=c.p.s,ce=c.s.e;c.A
   /* 오행 */
   const {sc,bonus}=ohScore(A,ce),tot=sc.reduce((a,b)=>a+b,0)+bonus;
   $('elBars').innerHTML=`<h3>나의 오행 (${A.P.length*2}글자 + 일간 가중)</h3>`+sc.map((n,i)=>{const v=n+(i===ce?bonus:0);return `<div class="bar"><span>${ELN[i]}(${ELW[i]})</span><div><i style="width:${Math.round(n/tot*100*1.6)}%;background:${EL[i].c}"></i>${i===ce&&bonus?`<i class="bn" style="width:${Math.round(bonus/tot*100*1.6)}%;background:${EL[i].c}"></i>`:''}</div><span>${v}</span></div>`}).join('')+
-   `<p class="note" style="margin:8px 0 0">카드의 중심 기운은 일간(나)인 ${ELW[ce]}(${ELN[ce]})이에요. 일간은 사주의 주인이라 가중치${bonus?` +${bonus}`:''}를 더해 가장 높게 표시해요. 빗금 부분이 가중치예요.</p>`;
+   `<p class="note" style="margin:8px 0 0">카드의 중심 기운은 일간(나)인 ${ELW[ce]}(${ELN[ce]})이에요. 일간은 사주의 주인이라 ${bonus?`가중치(+${bonus})를`:'가중치를'} 더해 가장 높게 표시해요. 빗금 부분이 가중치예요.</p>`;
   const lows=[0,1,2,3,4].filter(i=>sc[i]===Math.min(...sc)).map(i=>ELW[i]);
   $('elT').textContent=`중심은 ${ELW[ce]} 기운, ${lows.join('·')} 기운이 ${Math.min(...sc)?'가장 적어요':'없어요'}`;
-  const rmx=sc.indexOf(Math.max(...sc));$('elTxt').textContent=`원국에서 실제로 가장 많은 글자는 ${ELW[rmx]}(${sc[rmx]}개)예요. ${ELSTRONG[rmx]} ${lows.length>2?'여러 기운이 고르게 적어 특정 기운에 치우치지 않는 편이에요.':ELWEAK[[0,1,2,3,4].find(i=>ELW[i]===lows[0])]} 운을 살리는 용신은 ${ELW[A.yong]}(${ELN[A.yong]}) 기운이에요.`;
+  const rmx=sc.indexOf(Math.max(...sc)),rmxs=[0,1,2,3,4].filter(i=>sc[i]===sc[rmx]).map(i=>ELW[i]);$('elTxt').textContent=`원국에서 실제로 가장 많은 글자는 ${rmxs.join('·')}(${rmxs.length>1?'각 ':''}${sc[rmx]}개)예요. ${ELSTRONG[rmx]} ${lows.length>2?'여러 기운이 고르게 적어 특정 기운에 치우치지 않는 편이에요.':ELWEAK[[0,1,2,3,4].find(i=>ELW[i]===lows[0])]} 운을 살리는 용신은 ${ELW[A.yong]}(${ELN[A.yong]}) 기운이에요.`;
   $('lucky').innerHTML=[['행운의 색',yt[0]],['행운의 방향',yt[1]],['행운의 숫자',yt[2]],['기운이 오르는 계절',yt[3]]].map(([a,b])=>`<div><small>${a}</small>${b}</div>`).join('');
   /* 전문 풀이 */
   const top=GRP.map((g,i)=>[g,A.gc[i],i]).sort((a,b)=>b[1]-a[1]);const none=top.filter(x=>x[1]===0);
@@ -1031,7 +1035,7 @@ function proRender(c){const sj=c.sj,A=analyze(sj,c.gender),si=c.p.s,ce=c.s.e;c.A
   const curDW=daewoon(c).find(x=>x.cur);
   const sec=(t,h)=>`<div class="panel pro"><h3>${t}</h3>${h}</div>`;
   $('proBox').innerHTML=
-   sec(`일간 · 타고난 그릇 <span class="nkb">${NICK[si]}</span>`,`<p>${DAYPRO[si]}</p><p>일지에 ${BR[dbr]}(${ANI[dbr]})가 앉아 ${unseong(si,dbr)}의 자리에 있어요. ${UNST[unseong(si,dbr)]}.</p>`)+
+   sec(`일간 · 타고난 그릇 <span class="nkb">${NICK[si]}</span>`,`<p>${DAYPRO[si]}</p><p>일지에 ${BR[dbr]}(${jo(ANI[dbr],'이','가')}) 앉아 12운성으로 ‘${unseong(si,dbr)}’의 자리에 있어요. ${UNST[unseong(si,dbr)]}.</p>`)+
    sec('신강·신약과 용신',`<div class="meter"><i style="left:${A.sc}%"></i><span>신약</span><span>중화</span><span>신강</span></div><p><b>${TIERT[A.tier][0]}</b> (나를 돕는 기운 ${A.sc}%) — ${TIERT[A.tier][1]}</p><p><b>용신 ${ELW[A.yong]}(${ELN[A.yong]})</b> · 희신 ${ELW[A.hee]} · 기신 ${ELW[A.gi]}. ${A.why}</p><p class="note">용신 기운을 살리는 법: ${yt[5]}. 어울리는 분야: ${yt[4]}.</p>`)+
    (()=>{const r=sajuTypeRaw(c.dd),t=c.t,row=(l,a1,b1,why)=>`<div class="sty"><b>${l}</b><span>${why}</span></div>`;return sec(`사주 성격 코드 <span class="nkb">${t}</span>`,`<p>카드의 네 글자는 고르는 게 아니라 사주 여섯 글자(연·월·일주)로 정해져요. 같은 생년월일이면 누가 넣어도 같은 코드가 나와요.</p>`+
      row(t[0],'E','I',`나를 돕는 기운 ${r.ei}% → ${t[0]==='E'?'기운이 밖으로 뻗는 외향(E)':'기운을 안으로 모으는 내향(I)'}`)+
@@ -1047,9 +1051,9 @@ function proRender(c){const sj=c.sj,A=analyze(sj,c.gender),si=c.p.s,ce=c.s.e;c.A
    sec('성격과 대인관계',`<p>${c.s.ess} ${c.r[2]}</p><p>${A.tier>=3?'자기 주관이 뚜렷해 리더 역할을 자연스럽게 맡지만, 상대의 속도를 기다려 주는 여유가 관계를 지켜 줍니다.':A.tier<=1?'사람의 마음을 잘 헤아리고 협력에 강하지만, 싫은 것을 싫다고 말하는 연습이 나를 지켜 줍니다.':'상황에 따라 앞에 서기도, 뒤에서 받치기도 하는 균형 감각이 있어 어느 무리에서든 잘 섞입니다.'}</p>`)+
    sec('직업과 적성',`<p>${GKT[A.gk].split('. ').slice(-1)[0]} 십신으로 보면 ${top[0][0]}이 강해 ${['독립적으로 내 이름을 거는 일, 동업·팀 경쟁이 있는 일','기술·창작·강의·콘텐츠처럼 재능을 드러내는 일','영업·사업·유통·재무처럼 돈과 사람이 움직이는 일','조직·공직·관리직처럼 책임과 직위가 있는 일','연구·교육·자격 기반 전문직처럼 깊이가 쌓이는 일'][top[0][2]]}에 적성이 있어요. 용신인 ${ELW[A.yong]} 기운의 분야(${yt[4]})를 곁들이면 운이 붙습니다.</p>`)+
    sec('재물운',`<p>${A.gc[2]===0?'원국에 재성이 드러나지 않아 큰돈을 좇기보다 전문성과 신용으로 버는 구조예요. 재성 운이 들어오는 해에 기회를 잡으세요.':A.gc[2]>=3&&A.tier<=1?'재성이 많은데 나의 힘이 약한 재다신약 구조예요. 돈이 보여도 감당할 범위를 정하고, 동업자나 전문가의 도움을 받을 때 실속이 커집니다.':A.gc[2]>=2&&A.tier>=3?'신강한 몸에 재성이 받쳐 주어 재물을 다루는 그릇이 커요. 적극적으로 기회를 잡아도 감당할 힘이 있습니다.':'재성이 적당히 자리해 성실하게 쌓으면 꾸준히 불어나는 재물운이에요.'} ${A.gc[1]>=2?'식상이 재성을 생해 재능과 아이디어가 곧 돈이 되는 흐름도 있어요.':''}${A.gc[0]>=3?' 비겁이 많아 돈이 들어와도 나눠지기 쉬우니 보증과 돈거래는 피하세요.':''}</p>`)+
-   sec('연애와 배우자',`<p>배우자 자리인 일지에 <b>${ilji}</b>(${GODT[ilji]})가 있어요. ${{비견:'친구 같은 편안한 관계를 원하고, 대등한 배우자와 인연이 깊어요.',겁재:'서로 자극을 주는 열정적인 관계에 끌리지만 주도권 다툼을 조심해야 해요.',식신:'다정하고 여유로운 사람과 잘 맞고, 함께 즐기는 데서 사랑이 자라요.',상관:'말이 잘 통하고 재치 있는 사람에게 끌리지만 상대를 바꾸려는 마음은 내려놓아야 해요.',편재:'활동적이고 사교적인 연애를 하며 이성 인연이 많은 편이에요.',정재:'성실하고 알뜰한 배우자 복이 있고, 안정된 가정을 꾸리는 힘이 있어요.',편관:'카리스마 있는 사람에게 끌리고, 관계에서 긴장과 끌림이 함께 있어요.',정관:'반듯하고 책임감 있는 배우자와 인연이 있으며 결혼 운이 안정적이에요.',편인:'정신적 교감을 중요하게 여기며 혼자만의 시간을 존중해 주는 사람이 맞아요.',정인:'나를 아껴 주고 챙겨 주는 배우자 복이 있어요.'}[ilji]} ${c.gender==='F'?'여성에게 배우자를 뜻하는 관성':'남성에게 배우자를 뜻하는 재성'}이 원국에 ${spc===0?'':spc+'개'}${spc===0?'보이지 않아 인연이 늦게 오거나 스스로 고르는 눈이 까다로운 편이에요. 운에서 배우자성이 들어오는 해에 좋은 인연이 닿습니다.':spc>=3?'로 많아 이성 인연이 많은 만큼 한 사람에게 마음을 모으는 것이 중요해요.':'로 적당해 때가 되면 자연스럽게 인연이 이어져요.'}</p>`)+
-   sec('건강',`<p>오행 중 ${lows.join('·')} 기운이 약하고 ${ELW[sc.indexOf(Math.max(...sc))]} 기운이 많은 편이에요. 약한 기운 쪽인 ${lows.slice(0,2).map(w=>HEALTHT[ELW.indexOf(w)]).join(', ')} 쪽을 평소에 챙기세요. ${A.tier>=3?'기운이 강해 무리해도 티가 덜 나니 과로를 조심하세요.':'회복에 시간이 걸리는 편이라 수면과 휴식을 우선하세요.'}</p><p class="note">건강 풀이는 재미용 참고이며 의학적 진단을 대신하지 않아요.</p>`)+
-   sec('2027 정미년(丁未年)과 나',`<p>정미년의 천간 丁은 나에게 <b>${y27s}</b>, 지지 未는 <b>${y27b}</b>예요. ${TG[y27s][7]} ${y27rel==='충'?'특히 일지 丑과 未가 충(沖)해 집·직장·관계에 변화가 생기기 쉬운 해예요.':y27rel==='육합'?'일지 午와 未가 합(合)해 좋은 인연과 협력이 붙는 해예요.':''} ${[1,2].includes(A.yong)?`올해의 불·흙 기운이 용신(${ELW[A.yong]})을 도와 전반적으로 순풍이에요.`:[1,2].includes(A.gi)?`올해의 기운에 기신(${ELW[A.gi]})이 섞여 있어 확장보다 내실을 다지는 해로 쓰세요.`:'올해는 용신과 큰 충돌 없이 무난하게 흘러가요.'}</p><p class="note">월별 흐름과 자세한 신년운세는 아래 「2027 신년운세」에서 볼 수 있어요.</p>`)+
+   sec('연애와 배우자',`<p>배우자 자리인 일지에 <b>${ilji}</b>(${GODT[ilji]})${(ilji.charCodeAt(ilji.length-1)-44032)%28?'이':'가'} 있어요. ${{비견:'친구 같은 편안한 관계를 원하고, 대등한 배우자와 인연이 깊어요.',겁재:'서로 자극을 주는 열정적인 관계에 끌리지만 주도권 다툼을 조심해야 해요.',식신:'다정하고 여유로운 사람과 잘 맞고, 함께 즐기는 데서 사랑이 자라요.',상관:'말이 잘 통하고 재치 있는 사람에게 끌리지만 상대를 바꾸려는 마음은 내려놓아야 해요.',편재:'활동적이고 사교적인 연애를 하며 이성 인연이 많은 편이에요.',정재:'성실하고 알뜰한 배우자 복이 있고, 안정된 가정을 꾸리는 힘이 있어요.',편관:'카리스마 있는 사람에게 끌리고, 관계에서 긴장과 끌림이 함께 있어요.',정관:'반듯하고 책임감 있는 배우자와 인연이 있으며 결혼 운이 안정적이에요.',편인:'정신적 교감을 중요하게 여기며 혼자만의 시간을 존중해 주는 사람이 맞아요.',정인:'나를 아껴 주고 챙겨 주는 배우자 복이 있어요.'}[ilji]} ${c.gender==='F'?'여성에게 배우자를 뜻하는 관성':'남성에게 배우자를 뜻하는 재성'}이 원국에 ${spc===0?'':spc+'개'}${spc===0?'보이지 않아 인연이 늦게 오거나 스스로 고르는 눈이 까다로운 편이에요. 운에서 배우자성이 들어오는 해에 좋은 인연이 닿습니다.':spc>=3?'로 많아 이성 인연이 많은 만큼 한 사람에게 마음을 모으는 것이 중요해요.':'로 적당해 때가 되면 자연스럽게 인연이 이어져요.'}</p>`)+
+   sec('건강',`<p>오행 중 ${lows.join('·')} 기운이 약하고 ${ELW[sc.indexOf(Math.max(...sc))]} 기운이 많은 편이에요. 평소에 ${lows.slice(0,2).map(w=>HEALTHT[ELW.indexOf(w)]).join(' / ')} 건강을 챙기세요. ${A.tier>=3?'기운이 강해 무리해도 티가 덜 나니 과로를 조심하세요.':'회복에 시간이 걸리는 편이라 수면과 휴식을 우선하세요.'}</p><p class="note">건강 풀이는 재미용 참고이며 의학적 진단을 대신하지 않아요.</p>`)+
+   sec('2027 정미년(丁未年)과 나',`<p>정미년의 천간 丁은 나에게 <b>${y27s}</b>, 지지 未는 <b>${y27b}</b>${(y27b.charCodeAt(y27b.length-1)-44032)%28?'이에요':'예요'}. ${TG[y27s][7]} ${y27rel==='충'?'특히 일지 丑과 未가 충(沖)해 집·직장·관계에 변화가 생기기 쉬운 해예요.':y27rel==='육합'?'일지 午와 未가 합(合)해 좋은 인연과 협력이 붙는 해예요.':''} ${[1,2].includes(A.yong)?`올해의 불·흙 기운이 용신(${ELW[A.yong]})을 도와 전반적으로 순풍이에요.`:[1,2].includes(A.gi)?`올해의 기운에 기신(${ELW[A.gi]})이 섞여 있어 확장보다 내실을 다지는 해로 쓰세요.`:'올해는 용신과 큰 충돌 없이 무난하게 흘러가요.'}</p><p class="note">월별 흐름과 자세한 신년운세는 아래 「2027 신년운세」에서 볼 수 있어요.</p>`)+
    (curDW?sec('지금 지나는 대운',`<p>현재 <b>${curDW.age}세부터 ${STK[curDW.s]}${BRK[curDW.b]} 대운</b>(${curDW.gs}·${curDW.gb})을 지나고 있어요. 10년 단위 흐름 전체와 해설은 「대운 보기」에서 열 수 있어요.</p>`):'')+
    sec('고민 상담',worryLong(A,wc,c));
 }
@@ -1073,10 +1077,10 @@ const DWT={비견:'나와 같은 기운이 들어와 독립과 자립의 시기�
 function dwRender(c){const L=daewoon(c);const yg=[1,2];const good=x=>{const e1=Math.floor(x.s/2),e2=EB[x.b],A=c.A;let s=0;for(const e of [e1,e2]){if(e===A.yong)s+=2;else if(e===A.hee)s+=1;else if(e===A.gi)s-=1}return s};
   return `<p>대운은 10년마다 바뀌는 인생의 큰 계절이에요. ${c.gender==='F'?'여성':'남성'}이고 연간이 ${c.sj.y[0]%2===0?'양(陽)':'음(陰)'}이라 대운이 <b>${L.fw?'순행':'역행'}</b>하며, <b>${L.start}세</b>부터 첫 대운이 시작돼요.${c.mins==null?' (출생 시간을 모르면 시작 나이가 1년 정도 차이 날 수 있어요.)':''}</p>
    <div class="dwrow">${L.map(x=>{const g=good(x);return `<div class="dw${x.cur?' cur':''}"><small>${x.age}세</small>${chip(x.s)}${bchip(x.b)}<small>${x.gs}</small><b class="${g>=2?'up':g<0?'dn':''}">${g>=2?'상승':g<0?'주의':'보통'}</b></div>`}).join('')}</div>`+
-   L.map(x=>{const g=good(x);return `<div class="dwt${x.cur?' cur':''}"><h4>${x.age}~${x.age+9}세 · ${STK[x.s]}${BRK[x.b]} 대운 <small>(${x.y}~${x.y+9}년${x.cur?' · 지금':''})</small></h4><p>천간 ${x.gs}: ${DWT[x.gs]} 지지 ${x.gb}·${x.un}: ${UNST[x.un]}. ${g>=2?`용신 기운이 들어와 인생에서 손꼽히는 상승기예요.`:g<0?`기신 기운이 섞여 무리한 확장보다 지키는 전략이 맞아요.`:'큰 기복 없이 노력한 만큼 거두는 시기예요.'}</p></div>`}).join('')}
+   L.map(x=>{const g=good(x),T=x.cur?'div':'details',H=`<h4>${x.age}~${x.age+9}세 · ${STK[x.s]}${BRK[x.b]} 대운 <small>(${x.y}~${x.y+9}년${x.cur?' · 지금':''})</small> <em class="${g>=2?'up':g<0?'dn':''}">${g>=2?'상승':g<0?'주의':''}</em></h4>`;return `<${T} class="dwt${x.cur?' cur':''}"${x.cur?'':''}>${x.cur?H:`<summary>${H}</summary>`}<p>천간 ${x.gs}: ${DWT[x.gs]} 지지 ${x.gb}·${x.un}: ${UNST[x.un]}. ${g>=2?`용신 기운이 들어와 인생에서 손꼽히는 상승기예요.`:g<0?`기신 기운이 섞여 무리한 확장보다 지키는 전략이 맞아요.`:'큰 기복 없이 노력한 만큼 거두는 시기예요.'}</p></${T}>`}).join('')+'<p class="note" style="margin-top:6px">다른 시기는 눌러서 펼쳐 볼 수 있어요.</p>'}
 /* ===== 궁합 ===== */
 function gungRender(c,o){const A=c.A,B=analyze(o.sj,o.gender),a=c.p.s,b=o.sj.d[0],ea=Math.floor(a/2),eb=Math.floor(b/2);let pts=[];
-  let s1,t1;if(Math.abs(a-b)===5){s1=25;t1=`두 사람의 일간 ${SH[a]}·${SH[b]}가 천간합(合)을 이뤄요. 처음부터 끌리고 서로를 자연스럽게 받아들이는 최상의 조합입니다.`}else if((ea+1)%5===eb||(eb+1)%5===ea){s1=19;t1=`${ELW[ea]}과(와) ${ELW[eb]}이(가) 서로 살려 주는 상생 관계예요. ${(ea+1)%5===eb?'내가 상대를 키워 주는':'상대가 나를 키워 주는'} 흐름이라 한쪽이 든든한 버팀목이 됩니다.`}else if(ea===eb){s1=14;t1='같은 오행이라 말하지 않아도 통하는 친구 같은 사이예요. 다만 둘 다 양보하지 않으면 경쟁이 될 수 있어요.'}else{s1=8;t1=`${ELW[ea]}과(와) ${ELW[eb]}이(가) 서로 부딪히는 상극 관계예요. 강하게 끌리지만 생각의 방식이 달라 조율이 필요합니다. 차이를 인정하면 서로를 단련하는 짝이 돼요.`}
+  let s1,t1;if(Math.abs(a-b)===5){s1=25;t1=`두 사람의 일간 ${SH[a]}·${SH[b]}가 천간합(合)을 이뤄요. 처음부터 끌리고 서로를 자연스럽게 받아들이는 최상의 조합입니다.`}else if((ea+1)%5===eb||(eb+1)%5===ea){s1=19;t1=`${jo(ELW[ea],'과','와')} ${jo(ELW[eb],'이','가')} 서로 살려 주는 상생 관계예요. ${(ea+1)%5===eb?'내가 상대를 키워 주는':'상대가 나를 키워 주는'} 흐름이라 한쪽이 든든한 버팀목이 됩니다.`}else if(ea===eb){s1=14;t1='같은 오행이라 말하지 않아도 통하는 친구 같은 사이예요. 다만 둘 다 양보하지 않으면 경쟁이 될 수 있어요.'}else{s1=8;t1=`${jo(ELW[ea],'과','와')} ${jo(ELW[eb],'이','가')} 서로 부딪히는 상극 관계예요. 강하게 끌리지만 생각의 방식이 달라 조율이 필요합니다. 차이를 인정하면 서로를 단련하는 짝이 돼요.`}
   pts.push(['일간의 만남',s1,25,t1]);
   const x=c.sj.d[1],y=o.sj.d[1],HAP=[[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]],WON=[[0,7],[1,6],[2,9],[3,8],[4,11],[5,10]],has=(L)=>L.some(([p,q])=>(p===x&&q===y)||(p===y&&q===x)),tri=v=>[8,0,4].includes(v)?0:[2,6,10].includes(v)?1:[5,9,1].includes(v)?2:3;
   let s2,t2;if(has(HAP)){s2=20;t2='배우자 자리(일지)끼리 육합을 이뤄 생활 속 궁합이 아주 좋아요.'}else if(x!==y&&tri(x)===tri(y)){s2=16;t2='일지끼리 삼합의 기운으로 이어져 같은 목표를 향해 함께 가는 동반자 궁합이에요.'}else if((x-y+12)%12===6){s2=5;t2='일지끼리 충(沖)이라 생활 방식과 리듬이 달라 부딪히기 쉬워요. 각자의 공간을 존중하는 것이 열쇠예요.'}else if(has(WON)){s2=7;t2='일지끼리 원진이라 사소한 서운함이 쌓이기 쉬워요. 그때그때 마음을 말로 풀어 주세요.'}else{s2=12;t2='일지끼리 큰 충돌 없이 무난하게 어울려요.'}
@@ -1086,7 +1090,7 @@ function gungRender(c,o){const A=c.A,B=analyze(o.sj,o.gender),a=c.p.s,b=o.sj.d[0
   const ya=c.sj.y[1],yb=o.sj.y[1];let s4,t4;if(HAP.some(([p,q])=>(p===ya&&q===yb)||(p===yb&&q===ya))||(ya!==yb&&tri(ya)===tri(yb))){s4=13;t4=`${ANI[ya]}띠와 ${ANI[yb]}띠는 합이 드는 띠 궁합이에요. 집안과 주변의 응원을 받기 쉬워요.`}else if((ya-yb+12)%12===6){s4=4;t4=`${ANI[ya]}띠와 ${ANI[yb]}띠는 충이 드는 띠 궁합이에요. 가족이나 주변 환경의 차이를 미리 맞춰 두세요.`}else{s4=9;t4=`${ANI[ya]}띠와 ${ANI[yb]}띠는 무난한 띠 궁합이에요.`}
   pts.push(['띠 궁합',s4,13,t4]);
   const myG=tenGod(a,b),spouse=c.gender==='F'?['정관','편관']:['정재','편재'];const s5=spouse.includes(myG)?18:['정인','식신','비견'].includes(myG)?13:9;
-  pts.push(['배우자성',s5,18,`상대의 일간은 나에게 ${myG}(${GODT[myG]})이에요. ${spouse.includes(myG)?'사주에서 배우자를 뜻하는 별이라 결혼 상대로서 인연이 깊어요.':s5===13?'편안하게 서로를 돌보는 관계로 이어지기 좋아요.':'연인보다는 자극을 주는 파트너의 성격이 강해 서로의 역할을 정해 두면 좋아요.'}`]);
+  pts.push(['배우자성',s5,18,`상대의 일간은 나에게 ${myG}(${GODT[myG]})${(myG.charCodeAt(myG.length-1)-44032)%28?'이에요':'예요'}. ${spouse.includes(myG)?'사주에서 배우자를 뜻하는 별이라 결혼 상대로서 인연이 깊어요.':s5===13?'편안하게 서로를 돌보는 관계로 이어지기 좋아요.':'연인보다는 자극을 주는 파트너의 성격이 강해 서로의 역할을 정해 두면 좋아요.'}`]);
   const tot=pts.reduce((s,p)=>s+p[1],0),max=pts.reduce((s,p)=>s+p[2],0),score=Math.round(tot/max*100);
   return `<div class="gscore"><b>${score}</b><span>점</span><p>${score>=85?'하늘이 맺어 준 천생연분':score>=72?'서로를 키워 주는 좋은 인연':score>=58?'노력할수록 깊어지는 인연':'차이를 배우며 성장하는 인연'}</p></div>`+pts.map(([n,s,m,t])=>`<div class="gp"><div><b>${n}</b><span>${s}/${m}</span></div><div class="gbar"><i style="width:${s/m*100}%"></i></div><p>${t}</p></div>`).join('')}
 /* ===== 결제 (990원) ===== */
@@ -1122,8 +1126,8 @@ function pillarRender(c,save){const L=pillarCards(c);
   $('pcInfo').innerHTML='<p class="note" style="margin:0">카드를 누르면 그 기둥의 뜻을 볼 수 있어요.</p>';
   if(!save)return;const P=lsGet('pcol',{});P[c.dd+(c.mins??'')]={d:c.dd,mins:c.mins,n:myNick(),L:L.map(o=>o.seal?null:[o.s,o.b])};lsSet('pcol',P)}
 function pillarInfo(i){const c=cur,o=pillarCards(c)[i];
-  $('pcInfo').innerHTML=o.seal?`<p><b>${o.top}</b> — ${o.role[2]}을(를) 뜻해요. 태어난 시간을 입력하면 열려요.</p>`:
-   `<p><b>${o.top} · ${SH[o.s]}${BR[o.b]} (${STK[o.s]}${BRK[o.b]})</b> — ${o.role[2]}을(를) 뜻해요. ${ST[o.s].noun}의 기운(${ST[o.s].k})이 ${ANI[o.b]}띠 자리에 앉았어요. ${i===2?'이 기둥의 천간이 바로 나, 일간이에요.':`나에게는 ${o.g}(${GODT[o.g]})의 의미라, 이 시기와 영역에서 ${GODT[o.g]}의 힘이 드러나요.`}</p>`}
+  $('pcInfo').innerHTML=o.seal?`<p><b>${o.top}</b> — ${jo(o.role[2],'을','를')} 뜻해요. 태어난 시간을 입력하면 열려요.</p>`:
+   `<p><b>${o.top} · ${SH[o.s]}${BR[o.b]} (${STK[o.s]}${BRK[o.b]})</b> — ${jo(o.role[2],'을','를')} 뜻해요. ${ST[o.s].noun}의 기운(${ST[o.s].k})이 ${ANI[o.b]}띠 자리에 앉았어요. ${i===2?'이 기둥의 천간이 바로 나, 일간이에요.':`나에게는 ${o.g}(${GODT[o.g]})의 의미라, 이 시기와 영역에서 ${GODT[o.g]}의 힘이 드러나요.`}</p>`}
 /* 일진 */
 function iljinToday(){const t=todayStr(),p=pillar(t);return{t,s:p.s,b:p.b,i:i60(p.s,p.b)}}
 function iljinGot(){return lsGet('iljin',{})}
@@ -1178,7 +1182,7 @@ async function trainFight(t){if(trBusy)return;if(!hasCard()){go('draw');return}c
   ar.scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'});
   const wait=ms=>RM()?Promise.resolve():new Promise(r=>setTimeout(r,ms));let wa=0,wb=0,ta=0,tb=0,worst=null,wd=0;
   for(const [k,i] of ord.entries()){await wait(500);const da=R()+(lucky?5:0),db=R(),va=sa[i]+da,vb=sb[i]+db;ta+=va;tb+=vb;if(va>vb)wa++;else if(vb>va)wb++;if(vb-va>wd){wd=vb-va;worst=i}
-    const row=document.createElement('div');row.className='tra-r';row.innerHTML=`<span>R${k+1} ${STATN[i]}</span><span class="${va>=vb?'w':''}">${sa[i]}<em>+🎲${da}</em> = <b>${va}</b></span><span class="${vb>va?'w':''}">${vb}</span>`;$('trRounds').appendChild(row);$('trSc').textContent=`${wa} : ${wb}`}
+    const row=document.createElement('div');row.className='tra-r';row.innerHTML=`<span>R${k+1} ${STATN[i]}</span><span class="${va>=vb?'w':''}">${sa[i]}<em> +운 ${da}</em> = <b>${va}</b></span><span class="${vb>va?'w':''}">${vb}</span>`;$('trRounds').appendChild(row);$('trSc').textContent=`${wa} : ${wb}`}
   await wait(600);const win=wa!==wb?wa>wb:ta>=tb;
   if(win){dexAdd(x.no);const P=lsGet('seen',[]).filter(n=>n!==x.no);lsSet('seen',P);
     $('trRes').innerHTML=`<div class="tra-win"><p class="kick">승리! 카드 획득</p><div class="tra-card"><img src="img/c/${String(x.no).padStart(3,'0')}n.webp" alt="${x.name}"></div><h3>${x.name}</h3><p class="note">카드함 캐릭터 도감에 들어갔어요.</p></div>`}
@@ -1204,7 +1208,7 @@ function parseBD(raw,cal){const d=raw.replace(/\D/g,'');if(d.length!==8)return{e
   const L=lunYear(y);if(cal==='LL'&&L&&L.lp!==m)return{err:L.lp?`음력 ${y}년의 윤달은 ${L.lp}월이에요.`:`음력 ${y}년에는 윤달이 없어요.`};
   const r=lun2sol(y,m,dd,cal==='LL');if(!r)return{err:'음력에 없는 날짜예요. (음력 한 달은 29일 또는 30일이에요)'};return{d:r}}
 function parseTM(apv,hh,mm){if(hh===''&&mm==='')return{none:true};const h=+hh,m=mm===''?0:+mm;if(!(h>=1&&h<=12))return{err:'시는 1~12 사이로 입력하세요.'};if(!(m>=0&&m<=59))return{err:'분은 0~59 사이로 입력하세요.'};return{mins:((h%12)+apv)*60+m}}
-function bdNoteUI(){const raw=$('bd').value,p=parseBD(raw,FM.cal);$('bdNote').textContent=raw.replace(/\D/g,'').length<8?(FM.cal==='S'?'':'음력 날짜를 넣으면 양력으로 바꿔서 보여 드려요.'):p.err?p.err:FM.cal==='S'?(()=>{const l=sol2lun(p.d);return l?`음력 ${l.y}.${String(l.m).padStart(2,'0')}.${String(l.d).padStart(2,'0')}${l.leap?' (윤달)':''}`:''})():`양력 ${p.d.replace(/-/g,'.')}로 계산해요.`}
+function bdNoteUI(){const raw=$('bd').value,p=parseBD(raw,FM.cal);$('bdNote').textContent=raw.replace(/\D/g,'').length<8?(FM.cal==='S'?'':'음력 날짜를 넣으면 양력으로 바꿔서 보여 드려요.'):p.err?p.err:FM.cal==='S'?(()=>{const l=sol2lun(p.d);return l?`음력 ${l.y}.${String(l.m).padStart(2,'0')}.${String(l.d).padStart(2,'0')}${l.leap?' (윤달)':''}`:''})():`양력 ${p.d.replace(/-/g,'.')} 기준으로 계산해요.`}
 function tNoteUI(){const u=$('tUnk').checked;$('tin').classList.toggle('off',u);if(u){$('tNote').textContent='시주(태어난 시)를 빼고 여섯 글자로 풀이해요.';return}
   const t=parseTM(FM.ap,$('tHH').value,$('tMM').value);$('tNote').textContent=t.none?'모르면 "출생시간 모름"에 체크하세요.':t.err?t.err:`${SIJIN[sijin(t.mins)]}시(${BR[sijin(t.mins)]}時)로 봐요.${t.mins>=1410?' 밤 11시 30분 이후 출생은 날짜를 그대로 두고 계산해요.':''}`}
 function pillar(str){const [y,m,d]=str.split('-').map(Number);const days=Math.round((Date.UTC(y,m-1,d)-Date.UTC(1900,0,1))/864e5);const i=((10+days)%60+60)%60;return{s:i%10,b:i%12}}
@@ -1224,7 +1228,7 @@ let cur=null;
 function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gender:FM.g||'M',worry:FM.worry,wchips:FM.chips,real:FM.real||''});const c=cur,el=EL[c.s.e];
   c.kind=rollKind(c);$('cardImg').src=cardSrc(c,c.kind);$('cardImg').alt=`${c.name} 카드`;$('flip').classList.toggle('rare',c.kind!=='n');
   {const mm=new Date().getMonth()+1,lucky=MONEY_M[c.p.s]===mm||LOVE_M[c.p.s]===mm;
-   $('rareNote').innerHTML=c.kind==='n'?`카드는 하루에 한 번 새로 뽑혀요. 레어 확률 6%${lucky?' · <b>이번 달은 내 대길 달이라 18%!</b>':` · 내 대길 달(재물 ${MONEY_M[c.p.s]}월, 연애 ${LOVE_M[c.p.s]}월)에는 18%`}`:`<b>레어 카드 등장!</b> 오늘 ${c.kind==='m'?'금전운':'연애운'} 대길 카드가 뽑혔어요.`}
+   $('rareNote').innerHTML=c.kind==='n'?`레어 카드 운은 하루에 한 번 바뀌어요. 레어 확률 6%${lucky?' · <b>이번 달은 내 대길 달이라 18%!</b>':` · 내 대길 달(재물 ${MONEY_M[c.p.s]}월, 연애 ${LOVE_M[c.p.s]}월)에는 18%`}`:`<b>레어 카드 등장!</b> 오늘 ${c.kind==='m'?'금전운':'연애운'} 대길 카드가 뽑혔어요.`}
   const card=$('card');card.style.setProperty('--el',el.c);
   $('cNo').textContent=`No. ${String(c.no).padStart(3,'0')} · ${c.s.place}`;
   $('cH').textContent=c.s.h;$('cImg').src=IMG[c.p.s];$('cImg').alt=`${c.s.k} ${c.s.noun} 정령`;$('cName').textContent=c.name;
@@ -1238,13 +1242,13 @@ function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gen
   $('rLove').textContent=`${LOVE_S[si]} ${TX[c.t][0]}`;
   $('rWork').textContent=`${WORK_S[si]} ${TX[c.t][1]}`;
   $('rMoney').textContent=`${MONEY_S[si]} ${MONEY_G[c.g]}`;
-  $('rShadow').textContent=`${SHADOW_S[si]} 성격유형으로 보면 ${TX[c.t][2]} 두 그림자가 겹치는 날엔 한 박자 쉬어 가세요.`;
+  $('rShadow').textContent=`${SHADOW_S[si]} 성격 코드로 보면 ${TX[c.t][2]} 두 그림자가 겹치는 날엔 한 박자 쉬어 가세요.`;
   $('rRest').textContent=`${REST_E[c.s.e]} 같은 것들이 기운을 채워 줘요. ${c.t[0]==='E'?'친구를 만나 수다로 털어 내면 금방 회복돼요.':'연락을 잠시 끄고 혼자 있는 시간이 꼭 필요해요.'}`;
   const bs=(si+5)%10,bt=(c.t[0]==='E'?'I':'E')+c.t[1]+c.t[2]+(c.t[3]==='J'?'P':'J');
   const ws=Math.floor(si/2),cs=((ws+3)%5)*2+(si%2),ct=c.t.split('').map((l,i)=>AX[i][0]===l?AX[i][1]:AX[i][0]).join('');
   const pr=[ST[si],ST[bs]].sort((x,y)=>ST.indexOf(x)-ST.indexOf(y));
   const tno=(s,t)=>String(s*16+TYK.indexOf(t)+1).padStart(3,'0');
-  $('match').innerHTML=[[bs,bt,'合','잘 맞는 캐릭터',`${pr[0].k[0]}${pr[1].k[0]}합으로 서로 끌리는 짝 기운`,'성격유형은 에너지와 생활 리듬이 반대라 서로의 빈 곳을 채워 줘요.','good'],[cs,ct,'沖','부딪히는 캐릭터',`${ST[cs].k}${(ST[cs].k.charCodeAt(1)-44032)%28?'은':'는'} 내 기운을 다듬는 상극`,'성격유형 네 글자가 모두 반대예요. 부딪히지만 가장 많이 배우는 사이예요.','bad']].map(([s,t,hj,k,l1,l2,cl])=>`<div class="mtile ${cl}"><img class="mt-card" src="img/t/${tno(s,t)}n.webp" alt="${nm(s,t)} 카드" loading="lazy"><div class="mt-b"><span class="mt-tag"><b>${hj}</b>${k}</span><h3>${nm(s,t)}</h3><span class="nkb">${NICK[s]}</span><p class="mt-sub">${ST[s].k} × ${t}</p><p class="mt-txt"><b>${l1}.</b> ${l2}</p></div></div>`).join('');
+  $('match').innerHTML=[[bs,bt,'合','잘 맞는 캐릭터',`${pr[0].k[0]}${pr[1].k[0]}합으로 서로 끌리는 짝 기운`,'성격 코드는 에너지와 생활 리듬이 반대라 서로의 빈 곳을 채워 줘요.','good'],[cs,ct,'沖','부딪히는 캐릭터',`${ST[cs].k}${(ST[cs].k.charCodeAt(1)-44032)%28?'은':'는'} 내 기운을 다듬는 상극`,'성격 코드 네 글자가 모두 반대예요. 부딪히지만 가장 많이 배우는 사이예요.','bad']].map(([s,t,hj,k,l1,l2,cl])=>`<div class="mtile ${cl}"><img class="mt-card" src="img/t/${tno(s,t)}n.webp" alt="${nm(s,t)} 카드" loading="lazy"><div class="mt-b"><span class="mt-tag"><b>${hj}</b>${k}</span><h3>${nm(s,t)}</h3><span class="nkb">${NICK[s]}</span><p class="mt-sub">${ST[s].k} × ${t}</p><p class="mt-txt"><b>${l1}.</b> ${l2}</p></div></div>`).join('');
   $('rYearT').textContent=c.s.yt;$('rYear').textContent=c.s.yd;
   const yg=TG[tenGod(si,3)];
   $('yLoveT').textContent=yg[4];$('yLove').textContent=yg[5];$('yMoneyT').textContent=yg[6];$('yMoney').textContent=yg[7];
@@ -1291,7 +1295,7 @@ function runVs(a,b,bn){const ea=a.s.e,eb=b.s.e,an=myNick();
   else if(CTL[ea+'-'+eb]){rel=CTL[ea+'-'+eb];sub='상극 · 성장형 관계';txt='내 기운이 친구를 다듬는 관계예요. 부딪힐 때도 있지만, 잘 맞춰 가면 서로를 작품으로 만들어 줍니다. 말의 온도만 조금 낮춰 주세요.';base=72}
   else{rel=CTL[eb+'-'+ea];sub='상극 · 성장형 관계';txt='친구의 기운이 나를 다듬는 관계예요. 가끔 따끔하지만, 그 말이 나를 한 단계 키워 줍니다.';base=72}
   const same=[0,1,2,3].filter(i=>a.t[i]===b.t[i]).length;
-  const tt=same===4?'성격유형까지 같은 쌍둥이 같은 사이예요.':same===0?'성격유형은 정반대라서, 서로의 빈 곳을 채워 줄 수 있어요.':`성격유형은 네 글자 중 ${same}개가 같아요.`;
+  const tt=same===4?'성격 코드까지 같은 쌍둥이 같은 사이예요.':same===0?'성격 코드는 정반대라서, 서로의 빈 곳을 채워 줄 수 있어요.':`성격 코드는 네 글자 중 ${same}개가 같아요.`;
   $('sc').textContent=Math.min(99,base+(same===0||same===4?4:same));
   $('rel').textContent=rel;$('relSub').textContent=`${sub} · ${a.s.k} × ${b.s.k}`;$('relTxt').textContent=txt;
   $('typeTxt').textContent=`「${b.name}」 · ${tt}`;lastC={a,b,an,bn,rel,sc:$('sc').textContent};arena(lastC);if(window.__plazaFight){(lastC.f.res>0?dexAdd:seenAdd)(b.no);window.__plazaFight=false}else seenAdd(b.no);$('copyMsg2').textContent='';return true}
@@ -1315,7 +1319,7 @@ function arena(C){const {a,b,an,bn}=C,f=fight(a,b);C.f=f;
    `<div class="cmp">${STATN.map((n,i)=>`<span>${n}</span><div class="two"><i style="width:${Math.round(f.sa[i]/1.4)}%;background:var(--seal)"></i><i style="width:${Math.round(f.sb[i]/1.4)}%;background:var(--sub)"></i></div>`).join('')}</div>
    <div class="legend"><i style="background:var(--seal)"></i>${an}<i style="background:var(--sub)"></i>${bn}</div>`+
    (loser?`<div class="consol">${loser[1]}의 「${loser[0].name}」 최고 능력치는 ${strong(loser[0])}. 이 능력이 나오는 라운드라면 판이 뒤집혀요.</div>`:`<div class="consol">완전히 비긴 승부예요. 케미 대결에서 둘의 관계를 확인해 보세요.</div>`)+
-   `<p class="note" style="margin:8px 0 0">능력치는 생일의 오행(여섯 글자)과 성격유형으로 정해지는 재미용 수치예요. 같은 두 사람은 언제 붙어도 결과가 같아요.</p>`;
+   `<p class="note" style="margin:8px 0 0">능력치는 생년월일의 오행(여섯 글자)과 성격 코드로 정해지는 재미용 수치예요. 같은 두 사람은 언제 붙어도 결과가 같아요.</p>`;
   const ya=yearScore(a),yb=yearScore(b);C.y=[ya,yb];const yr=Math.sign(ya.T-yb.T);
   $('tab-year').innerHTML=`<table class="vtab"><tr><th></th><th>${an}</th><th>${bn}</th></tr><tr><td>연애운</td><td>${ya.L}</td><td>${yb.L}</td></tr><tr><td>재물운</td><td>${ya.M}</td><td>${yb.M}</td></tr><tr><td>총점</td><td><b>${ya.T}</b></td><td><b>${yb.T}</b></td></tr><tr><td>올해 테마</td><td>${a.s.yt}</td><td>${b.s.yt}</td></tr></table>
    <div class="consol">연애운은 ${ya.L>=yb.L?an:bn}, 재물운은 ${ya.M>=yb.M?an:bn} 쪽이 앞서요. 월별 흐름은 각자 카드의 「자세히 보기」에서 확인할 수 있어요.</div>`;
@@ -1419,8 +1423,8 @@ try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&T
   type=sajuType(s.d).split('');if(s.real){FM.real=s.real;$('realT').value=s.real}window.__restored=!!s.g}}catch(e){}
 $('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map(k=>`<option value="${k}">${k} · ${TY[k][0]}</option>`).join('');fillDate('cd','1996-08-02');upDate('cd',false,'내 생년월일 예: 1996.08.02');
 {const q=new URLSearchParams(location.search),f=q.get('f'),m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);
- if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){const od=`${m[1]}-${m[2]}-${m[3]}`,on=(q.get('n')||'친구').slice(0,10),ox=build(od,m[4]);
-  friendAdd(on,f,ox);if(q.get('x')==='1'){window.__ex={on,ox};}else{setD('d2',od);$('t2').value=m[4];$('n2').value=on;$('challenge').hidden=false;$('chT').textContent=`${on}님이 카드 배틀 도전장을 보냈어요`;
+ if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){const od=`${m[1]}-${m[2]}-${m[3]}`,on=(q.get('n')||'친구').slice(0,10),ox=build(od,sajuType(od));
+  friendAdd(on,f,ox);if(q.get('x')==='1'){window.__ex={on,ox};}else{setD('d2',od);$('t2').value=ox.t;$('n2').value=on;$('challenge').hidden=false;$('chT').textContent=`${on}님이 카드 배틀 도전장을 보냈어요`;
   const o=$('chOpp');o.style.setProperty('--el',EL[ox.s.e].c);o.innerHTML=slotHTML(ox,on)}}}
 loadKakao();
 type=sajuType(getD('d')).split('');axesUI();render(getD('d'),type.join(''),false);
@@ -1491,7 +1495,7 @@ function introInit(){if(!RM()){const h=$('scr-home');h.classList.add('shake');se
   if(seen||RM())setTimeout(open,RM()?0:2900);else{setTimeout(open,4200)}
   $('tap').addEventListener('click',open);$('scr-home').addEventListener('click',e=>{if(!e.target.closest('button'))open()});
   $('aboutBtn').addEventListener('click',()=>{$('about').hidden=!$('about').hidden});
-  $('shareSite').addEventListener('click',()=>share({title:'운빨카드',desc:'생일과 성격유형으로 내 기운 카드를 뽑고, 친구와 운빨배틀 해 보자!',img:'og',btn:'카드 뽑으러 가기'},'shareMsg'));
+  $('shareSite').addEventListener('click',()=>share({title:'운빨카드',desc:'생년월일로 내 기운 카드를 뽑고, 친구와 운빨배틀 해 보자!',img:'og',btn:'카드 뽑으러 가기'},'shareMsg'));
   if(hasCard()&&cur)markCard()}
 /* today */
 let tdSel=0;
