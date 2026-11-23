@@ -441,6 +441,7 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
 .tra-done{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;align-items:center}.tra-done img{width:90px;border-radius:10px}.tra-done h3{margin:2px 0;font:700 17px "Gowun Batang",serif}.tra-done>div:only-child{grid-column:1/-1}
 .dexgrid .seen img{filter:grayscale(1);opacity:.8}.dexgrid .seen b{color:#8a6a1f}
 @media(max-width:420px){.halls{grid-template-columns:repeat(5,minmax(0,1fr))}.hall img{width:38px;height:38px}}
+.sty{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}.sty b{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--ink);color:#e8c46a;font:700 18px 'Gowun Batang',serif}.sty span{font-size:14px;line-height:1.55}
 </style>
 </head>
 <body>
@@ -491,9 +492,10 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
     <p class="note" id="tNote"></p>
 
     <div class="row">
-      <span class="l">나의 성격유형</span>
-      <div class="axes" id="axes"></div>
-      <details class="quiz" id="quiz"><summary>유형을 모르겠어요 · 4문항으로 찾기</summary><div id="qs"></div></details>
+      <label class="l" for="realT">내 MBTI를 안다면 <span style="font-weight:400;color:var(--sub)">(선택 · 비교용)</span></label>
+      <select id="realT"><option value="">모름 / 건너뛰기</option><option>ENFP</option><option>INFP</option><option>ENFJ</option><option>INFJ</option><option>ENTP</option><option>INTP</option><option>ENTJ</option><option>INTJ</option><option>ESFP</option><option>ISFP</option><option>ESFJ</option><option>ISFJ</option><option>ESTP</option><option>ISTP</option><option>ESTJ</option><option>ISTJ</option></select>
+      <p class="note" style="margin:6px 0 0">카드의 성격 코드는 사주로 정해져요. 내 MBTI를 고르면 사주가 본 나와 얼마나 같은지 비교해 드려요.</p>
+      <div id="axes" hidden></div><div id="qs" hidden></div>
     </div>
     <label class="l" for="worry" style="display:block;margin-top:16px">지금 고민이나 상황 <span style="font-weight:400;color:var(--sub)">(선택)</span></label>
     <div class="chips" id="wChips"><button type="button" data-w="연애" aria-pressed="false">연애</button><button type="button" data-w="재물" aria-pressed="false">재물</button><button type="button" data-w="직장" aria-pressed="false">직장·진로</button><button type="button" data-w="건강" aria-pressed="false">건강</button><button type="button" data-w="관계" aria-pressed="false">인간관계</button><button type="button" data-w="학업" aria-pressed="false">학업·시험</button><button type="button" data-w="변화" aria-pressed="false">이사·변화</button></div>
@@ -625,8 +627,7 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
     <input class="txt" id="cN" maxlength="10" placeholder="친구에게 보일 이름" style="margin-bottom:14px">
     <span class="l">태어난 날</span>
     <div class="dsel"><select id="cdY" aria-label="태어난 해"></select><select id="cdM" aria-label="태어난 달"></select><select id="cdD" aria-label="태어난 날"></select></div>
-    <label class="l" for="cT" style="margin-top:14px">성격유형</label>
-    <select id="cT"></select>
+    <select id="cT" hidden></select>
     <p class="err" id="cErr" role="alert"></p>
     <button class="btn" type="button" id="cGo">내 카드 뽑고 대결하기</button>
   </div>
@@ -641,8 +642,7 @@ footer .legal{margin-top:10px;font-size:13px}footer .legal a{color:inherit;displ
     <input class="txt" id="n2" maxlength="10" placeholder="친구" style="margin-bottom:14px">
     <span class="l">상대가 태어난 날</span>
     <div class="dsel"><select id="d2Y" aria-label="상대가 태어난 해"></select><select id="d2M" aria-label="상대가 태어난 달"></select><select id="d2D" aria-label="상대가 태어난 날"></select></div>
-    <label class="l" for="t2" style="margin-top:14px">상대의 성격유형</label>
-    <select id="t2"></select>
+    <select id="t2" hidden></select><p class="note" style="margin:8px 0 0">성격 코드는 생년월일로 자동으로 정해져요.</p>
     <p class="err" id="err2" role="alert"></p>
   </form>
   <div class="panel pick" id="picker"><h3>어떤 대결을 할까요?</h3><p>버튼을 누르면 바로 대결이 시작돼요.</p><p class="note" id="vsNote" style="color:var(--seal);margin:-8px 0 12px"></p><div class="mode-grid"><button type="button" class="mode" data-mode="battle" aria-pressed="false"><span class="mi">戰</span><span class="mt"><b>카드 배틀</b><span>능력치 3라운드 승부</span></span><span class="go">시작 ▶</span></button><button type="button" class="mode" data-mode="chem" aria-pressed="false"><span class="mi">合</span><span class="mt"><b>케미 대결</b><span>둘이 한 팀이면 몇 점?</span></span><span class="go">시작 ▶</span></button><button type="button" class="mode" data-mode="year" aria-pressed="false"><span class="mi">年</span><span class="mt"><b>2027 운빨</b><span>올해 누가 더 잘 풀릴까</span></span><span class="go">시작 ▶</span></button><button type="button" class="mode" data-mode="today" aria-pressed="false"><span class="mi">日</span><span class="mt"><b>오늘의 운빨</b><span>매일 바뀌는 오늘의 승부</span></span><span class="go">시작 ▶</span></button></div></div>
@@ -958,6 +958,7 @@ function proRender(c){const sj=c.sj,A=analyze(sj,c.gender),si=c.p.s,ce=c.s.e;c.A
    `<div class="nkhead"><img src="${IMG[si]}" alt=""><div><small>내 캐릭터 · ${NWHO[si]}</small><b>${NICK[si]}</b></div></div><h3>${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${ANI[sj.y[1]]}띠 · ${STK[si]}${BRK[dbr]} 일주</h3>
    <div class="mini8">${P.map(([lb,v])=>`<div><small>${lb}</small>${v?chip(v[0])+bchip(v[1]):'<span class="hch q">?</span><span class="hch q">?</span>'}</div>`).join('')}</div><ul>
    <li><b>본성</b><span>${c.s.ess.split('. ')[0]}.</span></li>
+   <li><b>성향</b><span>사주 성격 코드 <b>${c.t}</b>${c.real?` · 실제 ${c.real}와 ${[...c.t].filter((l,i)=>l===c.real[i]).length}/4 일치${c.real===c.t?' 🎯 완벽 일치!':''}`:''}</span></li>
    <li><b>힘</b><span>${TIERT[A.tier][0]} · ${A.gk}</span></li>
    <li><b>용신</b><span>${ELW[A.yong]}(${ELN[A.yong]}) 기운이 나를 살려요 · ${yt[0]}</span></li>
    <li><b>2027</b><span>${y27s}·${y27b}의 해 · ${TG[y27s][0].replace(/달$/,'해')}</span></li>
@@ -988,6 +989,12 @@ function proRender(c){const sj=c.sj,A=analyze(sj,c.gender),si=c.p.s,ce=c.s.e;c.A
   $('proBox').innerHTML=
    sec(`일간 · 타고난 그릇 <span class="nkb">${NICK[si]}</span>`,`<p>${DAYPRO[si]}</p><p>일지에 ${BR[dbr]}(${ANI[dbr]})가 앉아 ${unseong(si,dbr)}의 자리에 있어요. ${UNST[unseong(si,dbr)]}.</p>`)+
    sec('신강·신약과 용신',`<div class="meter"><i style="left:${A.sc}%"></i><span>신약</span><span>중화</span><span>신강</span></div><p><b>${TIERT[A.tier][0]}</b> (나를 돕는 기운 ${A.sc}%) — ${TIERT[A.tier][1]}</p><p><b>용신 ${ELW[A.yong]}(${ELN[A.yong]})</b> · 희신 ${ELW[A.hee]} · 기신 ${ELW[A.gi]}. ${A.why}</p><p class="note">용신 기운을 살리는 법: ${yt[5]}. 어울리는 분야: ${yt[4]}.</p>`)+
+   (()=>{const r=sajuTypeRaw(c.dd),t=c.t,row=(l,a1,b1,why)=>`<div class="sty"><b>${l}</b><span>${why}</span></div>`;return sec(`사주 성격 코드 <span class="nkb">${t}</span>`,`<p>카드의 네 글자는 고르는 게 아니라 사주 여섯 글자(연·월·일주)로 정해져요. 같은 생년월일이면 누가 넣어도 같은 코드가 나와요.</p>`+
+     row(t[0],'E','I',`나를 돕는 기운 ${r.ei}% → ${t[0]==='E'?'기운이 밖으로 뻗는 외향(E)':'기운을 안으로 모으는 내향(I)'}`)+
+     row(t[1],'S','N',`흙·쇠(현실) ${A.cnt[2]+A.cnt[3]}개 vs 물·나무(상상) ${A.cnt[4]+A.cnt[0]}개 → ${t[1]==='S'?'눈앞의 현실을 보는 감각(S)':'가능성을 그리는 직관(N)'}`)+
+     row(t[2],'T','F',`재성·관성(판단) ${A.gc[2]+A.gc[3]}개 vs 식상·인성(공감) ${A.gc[1]+A.gc[4]}개 → ${t[2]==='T'?'이치로 판단하는 사고(T)':'마음을 읽는 감정(F)'}`)+
+     row(t[3],'J','P',`정(正) 십신 vs 편(偏) 십신 차이 ${r.jp>0?'+':''}${r.jp} → ${t[3]==='J'?'규칙과 계획의 판단(J)':'흐름을 타는 인식(P)'}`)+
+     (c.real?`<p style="margin-top:8px">내가 고른 MBTI는 <b>${c.real}</b>, 사주가 본 나는 <b>${t}</b>예요. ${c.real===t?'완벽하게 같아요! 타고난 기질대로 살고 있다는 뜻이에요.':`다른 글자는 타고난 기질과 지금의 내가 달라진 부분이에요. 환경과 경험이 만든 나의 모습이죠.`}</p>`:''))})()+
    sec('격국 · 사회에서 쓰는 힘',`<p><b>${A.gk}</b> — ${GKT[A.gk]}</p>`)+
    sec('십신 분포',`<div class="gbars">${GRP.map((g,i)=>`<div><span>${g}</span><div><i style="width:${A.gc[i]/ (A.P.length*2-1)*100}%"></i></div><b>${A.gc[i]}</b></div>`).join('')}</div>
      <p>가장 두드러진 것은 <b>${top[0][0]}</b>(${GRPT[top[0][2]][0]})이에요. ${top[0][1]>=3?GRPT[top[0][2]][1]:'적당히 자리 잡아 장점으로 쓰여요.'}${none.length?` 반면 ${none.map(x=>x[0]).join('·')}이 없어요. ${GRPT[none[0][2]][2]}`:''}</p>`)+
@@ -1134,6 +1141,14 @@ async function trainFight(t){if(trBusy)return;if(!hasCard()){go('draw');return}c
   else $('trRes').innerHTML=`<div class="tra-lose"><p class="kick">아쉽게 패배</p><p>${STATN[worst??ord[0]]} 라운드에서 ${NICK[trSi]}의 기운이 더 강했어요. 운빨 주사위는 매번 달라요. ${trainLeft()?'한 번 더 도전해 보세요!':'내일 다시 도전할 수 있어요.'}</p></div>`;
   trBusy=false;trainRender(false)}
 
+
+/* 사주로 정하는 성격 코드 (6글자 기준: 시간·성별과 무관하게 누구나 같은 결과) */
+const STY={E:38,N:0,T:0,J:0};
+function sajuTypeRaw(dd){const sj=saju(dd),A=analyze(sj,'M'),c=A.cnt,gods=Object.values(A.gods);
+  const jung=gods.filter(g=>['정재','정관','정인','식신'].includes(g)).length,pyeon=gods.filter(g=>['편재','편관','편인','상관'].includes(g)).length;
+  return{ei:A.sc,sn:(c[2]+c[3])-(c[4]+c[0]),tf:(A.gc[2]+A.gc[3])-(A.gc[1]+A.gc[4]),jp:jung-pyeon,ds:sj.d[0]}}
+function sajuType(dd){const r=sajuTypeRaw(dd),h=k=>h01(dd+k)<.5;
+  return (r.ei>STY.E||(r.ei===STY.E&&h('e'))?'E':'I')+(r.sn>STY.N?'S':'N')+(r.tf>STY.T||(r.tf===STY.T&&h('t'))?'T':'F')+(r.jp>STY.J||(r.jp===STY.J&&h('j'))?'J':'P')}
 const SIJIN=['자','축','인','묘','진','사','오','미','신','유','술','해'];
 const FM={g:null,cal:'S',ap:0,mins:null,worry:'',chips:[]};
 function segBind(id,attr,cb){const el=$(id);el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;for(const x of el.children)x.setAttribute('aria-pressed',String(x===b));cb(b.dataset[attr])})}
@@ -1162,7 +1177,7 @@ function rollKind(c){const force=new URLSearchParams(location.search).get('rare'
   if(h01(c.dd+c.t+todayStr())>=p)return 'n';if(mon&&!lov)return 'm';if(lov&&!mon)return 'l';return h01(todayStr()+c.dd)<0.5?'m':'l'}
 function cardSrc(c,k){return `img/c/${String(c.no).padStart(3,'0')}${k}.webp`}
 let cur=null;
-function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gender:FM.g||'M',worry:FM.worry,wchips:FM.chips});const c=cur,el=EL[c.s.e];
+function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gender:FM.g||'M',worry:FM.worry,wchips:FM.chips,real:FM.real||''});const c=cur,el=EL[c.s.e];
   c.kind=rollKind(c);$('cardImg').src=cardSrc(c,c.kind);$('cardImg').alt=`${c.name} 카드`;$('flip').classList.toggle('rare',c.kind!=='n');
   {const mm=new Date().getMonth()+1,lucky=MONEY_M[c.p.s]===mm||LOVE_M[c.p.s]===mm;
    $('rareNote').innerHTML=c.kind==='n'?`카드는 하루에 한 번 새로 뽑혀요. 레어 확률 6%${lucky?' · <b>이번 달은 내 대길 달이라 18%!</b>':` · 내 대길 달(재물 ${MONEY_M[c.p.s]}월, 연애 ${LOVE_M[c.p.s]}월)에는 18%`}`:`<b>레어 카드 등장!</b> 오늘 ${c.kind==='m'?'금전운':'연애운'} 대길 카드가 뽑혔어요.`}
@@ -1221,7 +1236,7 @@ function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gen
 
 let lastC=null;
 function compat(){if(!cur)return false;const d2=getD('d2');if(!valid(d2)){$('err2').textContent='상대의 생년월일을 8자리로 입력하세요. (예: 1996.08.02)';return false}$('err2').textContent='';
-  const b=build(d2,$('t2').value),bn=($('n2').value.trim()||'친구');vsSource='form';return runVs(cur,b,bn)}
+  const b=build(d2,sajuType(d2)),bn=($('n2').value.trim()||'친구');vsSource='form';return runVs(cur,b,bn)}
 let vsSource='form';
 function runVs(a,b,bn){const ea=a.s.e,eb=b.s.e,an=myNick();
   let rel,sub,txt,base;const hap=Math.abs(a.p.s-b.p.s)===5;
@@ -1302,12 +1317,12 @@ async function play(m){const tok=++playTok,C=lastC;if(!C)return;const {a,b,an,bn
 function slotHTML(x,nm){return `<img src="${IMG[x.p.s]}" alt=""><b>${x.name} <span class="nkb">${NICK[x.p.s]}</span></b><small>${nm} · ${x.s.k} × ${x.t}</small>`}
 let TN=0;
 function addRow(name,date,t){const i=TN++;const d=document.createElement('div');d.className='trow';d.id='tr'+i;
-  d.innerHTML=`<input class="txt" id="tn${i}" maxlength="10" value="${name}" aria-label="참가자 이름"><div class="dsel"><select id="t${i}Y" aria-label="태어난 해"></select><select id="t${i}M" aria-label="태어난 달"></select><select id="t${i}D" aria-label="태어난 날"></select></div><select id="tt${i}" aria-label="성격유형">${TYK.map(k=>`<option${k===t?' selected':''}>${k}</option>`).join('')}</select><button type="button" class="x" aria-label="참가자 빼기" data-rm="${i}">×</button>`;
+  d.innerHTML=`<input class="txt" id="tn${i}" maxlength="10" value="${name}" aria-label="참가자 이름"><div class="dsel"><select id="t${i}Y" aria-label="태어난 해"></select><select id="t${i}M" aria-label="태어난 달"></select><select id="t${i}D" aria-label="태어난 날"></select></div><select id="tt${i}" aria-label="성격유형" hidden>${TYK.map(k=>`<option${k===t?' selected':''}>${k}</option>`).join('')}</select><button type="button" class="x" aria-label="참가자 빼기" data-rm="${i}">×</button>`;
   $('tRows').appendChild(d);fillDate('t'+i,date||'1996-08-02');upDate('t'+i,!!date,'생년월일 8자리')}
 function runTour(){const rows=[...document.querySelectorAll('.trow')];$('tErr').textContent='';
   if(rows.length<3||rows.length>8){$('tErr').textContent='참가자는 3명에서 8명 사이로 넣어 주세요.';return}
   const badR=rows.find(r=>!valid(getD('t'+r.id.slice(2))));if(badR){const i=badR.id.slice(2);$('tErr').textContent=`${$('tn'+i).value.trim()||'참가자'}의 생년월일을 8자리로 입력해 주세요. (예: 1996.08.02)`;$('t'+i+'_bd').focus();return}
-  const P=rows.map((r,k)=>{const i=r.id.slice(2);const nm=$('tn'+i).value.trim()||`참가자${k+1}`;return{nm,x:build(getD('t'+i),$('tt'+i).value)}});
+  const P=rows.map((r,k)=>{const i=r.id.slice(2);const nm=$('tn'+i).value.trim()||`참가자${k+1}`;const dd=getD('t'+i);return{nm,x:build(dd,sajuType(dd))}});
   let size=1;while(size<P.length)size*=2;const byes=size-P.length;let cur=[],k0=0;for(let i=0;i<byes;i++)cur.push(P[k0++],null);while(k0<P.length)cur.push(P[k0++]);
   const rname=n=>n===2?'결승':n===4?'4강':'8강';let html='';
   while(cur.length>1){html+=`<h3>${rname(cur.length)}</h3>`;const next=[];
@@ -1357,16 +1372,16 @@ $('t2').innerHTML=TYK.map(k=>`<option value="${k}"${k==='ENFP'?' selected':''}>$
 fillDate('d','1995-03-14');fillDate('d2','1996-08-02');upDate('d2',false,'상대 생년월일 예: 1996.08.02');
 try{const s=JSON.parse(localStorage.getItem('giun')||'null');if(s&&valid(s.d)&&TY[s.t]){setD('d',s.d);if(s.n)$('nick').value=s.n;FM.cal=s.cal||'S';$('bd').value=s.raw||s.d.replace(/-/g,'.');segSet('calSeg','c',FM.cal);
   if(s.g){FM.g=s.g;segSet('gSeg','g',s.g)}if(typeof s.mins==='number'){FM.mins=s.mins;const h=Math.floor(s.mins/60),m=s.mins%60;FM.ap=h>=12?12:0;segSet('apSeg','ap',FM.ap);$('tHH').value=String(h%12||12);$('tMM').value=String(m).padStart(2,'0')}else if(s.mins===null)$('tUnk').checked=true;
-  type=s.t.split('');window.__restored=!!s.g}}catch(e){}
+  type=sajuType(s.d).split('');if(s.real){FM.real=s.real;$('realT').value=s.real}window.__restored=!!s.g}}catch(e){}
 $('cT').innerHTML='<option value="">유형을 골라 주세요</option>'+TYK.map(k=>`<option value="${k}">${k} · ${TY[k][0]}</option>`).join('');fillDate('cd','1996-08-02');upDate('cd',false,'내 생년월일 예: 1996.08.02');
 {const q=new URLSearchParams(location.search),f=q.get('f'),m=f&&f.match(/^(\d{4})(\d{2})(\d{2})([EI][SN][TF][JP])$/);
  if(m&&valid(`${m[1]}-${m[2]}-${m[3]}`)){const od=`${m[1]}-${m[2]}-${m[3]}`,on=(q.get('n')||'친구').slice(0,10),ox=build(od,m[4]);
   friendAdd(on,f,ox);if(q.get('x')==='1'){window.__ex={on,ox};}else{setD('d2',od);$('t2').value=m[4];$('n2').value=on;$('challenge').hidden=false;$('chT').textContent=`${on}님이 카드 배틀 도전장을 보냈어요`;
   const o=$('chOpp');o.style.setProperty('--el',EL[ox.s.e].c);o.innerHTML=slotHTML(ox,on)}}}
 loadKakao();
-axesUI();render(getD('d'),type.join(''),false);
+type=sajuType(getD('d')).split('');axesUI();render(getD('d'),type.join(''),false);
 if(window.__restored){$('stageBox').hidden=false;$('flipper').classList.add('show');$('sample').textContent='오늘의 내 카드'}
-addRow(myNick(),getD('d'),type.join(''));addRow('친구1','','ENFP');addRow('친구2','','INFJ');addRow('친구3','','ESTP');
+addRow(myNick(),getD('d'),type.join(''));addRow('친구1','','');addRow('친구2','','');addRow('친구3','','');
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(!b)return;const i=+(b.dataset.i??b.dataset.q);type[i]=b.dataset.l;axesUI();if(b.dataset.q!==undefined)$('quiz').open=true});
 segBind('gSeg','g',v=>{FM.g=v});segBind('calSeg','c',v=>{FM.cal=v;bdNoteUI()});segBind('apSeg','ap',v=>{FM.ap=+v;tNoteUI()});
 $('bd').addEventListener('input',e=>{fmtBD(e.target);bdNoteUI()});for(const id of ['tHH','tMM'])$(id).addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'');tNoteUI()});
@@ -1376,8 +1391,8 @@ $('f').addEventListener('submit',e=>{e.preventDefault();const er=(m,f)=>{$('err'
   if(!FM.g)return er('성별을 골라 주세요.');const p=parseBD($('bd').value,FM.cal);if(p.err)return er(p.err,'bd');const d=p.d;if(!valid(d))return er('1900~2026년생까지 볼 수 있어요.','bd');
   let mins=null;if(!$('tUnk').checked){const tm=parseTM(FM.ap,$('tHH').value,$('tMM').value);if(tm.none)return er('태어난 시간을 입력하거나 "출생시간 모름"에 체크하세요.','tHH');if(tm.err)return er(tm.err,'tHH');mins=tm.mins}
   $('err').textContent='';FM.mins=mins;FM.worry=$('worry').value.trim();FM.chips=[...$('wChips').querySelectorAll('[aria-pressed=true]')].map(b=>b.dataset.w);setD('d',d);
-  const t=type.join('');$('flipper').classList.remove('show');render(d,t,true);$('stageBox').hidden=false;$('sample').textContent=`${$('nick').value.trim()||'나'}의 카드 「${NICK[cur.p.s]}」 · ${t}`;$('saveBox').hidden=true;
-  const im=$('cardImg'),show=()=>setTimeout(()=>$('flipper').classList.add('show'),RM()?0:350);if(im.complete&&im.naturalWidth)show();else{im.onload=show;im.onerror=show}try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim(),mins,g:FM.g,cal:FM.cal,raw:$('bd').value}))}catch(e){}
+  const t=sajuType(d);type=t.split('');FM.real=$('realT').value;$('flipper').classList.remove('show');render(d,t,true);$('stageBox').hidden=false;$('sample').textContent=`${$('nick').value.trim()||'나'}의 카드 「${NICK[cur.p.s]}」 · ${t}`;$('saveBox').hidden=true;
+  const im=$('cardImg'),show=()=>setTimeout(()=>$('flipper').classList.add('show'),RM()?0:350);if(im.complete&&im.naturalWidth)show();else{im.onload=show;im.onerror=show}try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim(),mins,g:FM.g,cal:FM.cal,raw:$('bd').value,real:FM.real}))}catch(e){}
   $('flip').scrollIntoView({behavior:RM()?'auto':'smooth',block:'center'})});
 $('f2').addEventListener('submit',e=>{e.preventDefault();startMode('battle')});
 $('picker').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(b)startMode(b.dataset.mode)});
@@ -1395,7 +1410,7 @@ $('f').addEventListener('submit',()=>{setTimeout(()=>{if(!$('err').textContent){
 $('tAdd').addEventListener('click',()=>{if(document.querySelectorAll('.trow').length>=8){$('tErr').textContent='최대 8명까지 넣을 수 있어요.';return}{const n=TN;addRow(`친구${n}`,'',TYK[(n*5+3)%16])}});
 $('tRows').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(b){$('tr'+b.dataset.rm).remove();$('tErr').textContent=''}});
 $('tGo').addEventListener('click',runTour);
-$('cGo').addEventListener('click',()=>{const t=$('cT').value;if(!t){$('cErr').textContent='성격유형을 골라 주세요. 모르면 아래 「유형을 모르겠어요」 버튼으로 찾을 수 있어요.';return}$('cErr').textContent='';
+$('cGo').addEventListener('click',()=>{const t=sajuType(getD('cd'));$('cErr').textContent='';
   const d=getD('cd');if(!valid(d)){$('cErr').textContent='내 생년월일을 8자리로 입력해 주세요. (예: 1996.08.02)';$('cd_bd').focus();return}if($('cN').value.trim())$('nick').value=$('cN').value.trim();setD('d',d);$('bd').value=d.replace(/-/g,'.');FM.cal='S';type=t.split('');axesUI();render(d,t,true);
   $('sample').textContent=`${d.replace(/-/g,'.')} · ${t}`;try{const o=JSON.parse(localStorage.getItem('giun')||'{}');localStorage.setItem('giun',JSON.stringify({...o,d,t,n:$('nick').value.trim(),raw:o.d===d?o.raw:d.replace(/-/g,'.'),cal:o.d===d?o.cal:'S'}))}catch(e){}
   const me=$('chMe');me.className='cslot flip';me.style.setProperty('--el',EL[cur.s.e].c);me.innerHTML=slotHTML(cur,myNick());
@@ -1544,7 +1559,7 @@ if(window.__ex){const {on,ox}=window.__ex;$('exT').textContent=`${on}님이 카�
 document.addEventListener('click',e=>{const h=e.target.closest('[data-hall]');if(h){trSi=+h.dataset.hall;trainRender();$('trHead').scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'});return}
   const o=e.target.closest('[data-opp]');if(o){trainFight(o.dataset.opp)}});
 
-window.__T={build,mkCard,statsOf,oppStats,TYK};
+window.__T={build,mkCard,statsOf,oppStats,TYK,sajuTypeRaw,sajuType,STY};
 }
 </script>
 </body>
