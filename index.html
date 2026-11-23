@@ -537,6 +537,8 @@ input,textarea,select{font-size:max(16px,1em)}html,body{overflow-x:clip}
 .y12{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin:4px 0 16px}.ym{display:grid;gap:4px;justify-items:center;padding:8px 0 7px;border-radius:10px;background:#f6f1e7;font-family:"Noto Sans KR",sans-serif}.ym small{font-size:11px;color:#6b645a}.ym i{width:8px;height:38px;border-radius:4px;background:linear-gradient(to top,#d9a441 calc(var(--v)*100%),#e8e0d2 0)}.ym.hot{background:#fff1cf;box-shadow:inset 0 0 0 1.5px #e8c46a}.ym.hot small::after{content:" ★";color:#c8901e}.ym.cold{background:#f3e3df}.ym.cold i{background:linear-gradient(to top,#b9675c calc(var(--v)*100%),#e8e0d2 0)}
 .ychance{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;margin:0 0 12px;padding:12px 14px;border-radius:14px;background:#fffaf0;border:1px solid #f0dfb4}.ychance>span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#e8c46a;color:#1d1a15;font:700 14px "Noto Sans KR",sans-serif}.ychance b{display:block;font-size:15.5px;margin-bottom:2px;background:none!important}.ychance p{margin:0!important;font-size:15px!important;line-height:1.7!important}
 .slock{position:relative;margin-top:8px}.slfade{max-height:330px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 35%,transparent);mask-image:linear-gradient(#000 35%,transparent);pointer-events:none}.slcard{position:relative;margin-top:-70px;padding:20px 18px;border-radius:18px;background:radial-gradient(circle at 15% 0%,#3d2f18 0%,#1d1a15 70%);color:#f7f3ea;box-shadow:inset 0 0 0 1.5px #e8c46a,0 12px 28px rgba(40,25,5,.25)}.slcard .kick{color:#e8c46a!important;margin:0 0 4px}.slcard h3{font:700 20px/1.4 "Gowun Batang",serif;margin:0 0 12px;color:#fff}.slcard ul{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:10px}.slcard li{display:grid;gap:2px}.slcard li b{color:#ffe39a;background:none!important;font-size:14.5px}.slcard li span{font-size:13.5px;line-height:1.55;color:rgba(247,243,234,.82)}.slcard .btn{width:100%;margin:0;background:#e8c46a;color:#1d1a15;font-weight:700}.slcard .note{color:rgba(247,243,234,.6)!important}
+.gscore .gchips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:12px}.gchips span{display:grid;gap:4px;font-size:11.5px;color:rgba(247,243,234,.8)}.gchips i{height:5px;border-radius:3px;background:linear-gradient(90deg,#e8c46a calc(var(--v)*100%),rgba(255,255,255,.15) 0)}
+.gstory p{font-size:16px;line-height:1.85;margin:0 0 14px;color:#2b2925}.gstory b{background:linear-gradient(transparent 62%,#ffe7a8 62%)}.gintro{padding:12px 14px;border-radius:12px;background:#f6f1e7}.gsec{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}.gsec h4{display:flex;align-items:center;gap:8px;font:700 18px/1.4 "Gowun Batang",serif;margin:0 0 10px}.gsec h4 span{font-size:18px}.gstory .sq{font-size:15.5px}.gstory .sign{text-align:right;color:var(--sub);font-size:14px;margin-top:18px}
 </style>
 </head>
 <body>
@@ -1133,20 +1135,73 @@ function dwRender(c){const L=daewoon(c);const yg=[1,2];const good=x=>{const e1=M
    <div class="dwrow">${L.map(x=>{const g=good(x);return `<div class="dw${x.cur?' cur':''}"><small>${x.age}세</small>${chip(x.s)}${bchip(x.b)}<small>${x.gs}</small><b class="${g>=2?'up':g<0?'dn':''}">${g>=2?'상승':g<0?'주의':'보통'}</b></div>`}).join('')}</div>`+
    L.map(x=>{const g=good(x),T=x.cur?'div':'details',H=`<h4>${x.age}~${x.age+9}세 · ${STK[x.s]}${BRK[x.b]} 대운 <small>(${x.y}~${x.y+9}년${x.cur?' · 지금':''})</small> <em class="${g>=2?'up':g<0?'dn':''}">${g>=2?'상승':g<0?'주의':''}</em></h4>`;return `<${T} class="dwt${x.cur?' cur':''}"${x.cur?'':''}>${x.cur?H:`<summary>${H}</summary>`}<p>천간 ${x.gs}: ${DWT[x.gs]} 지지 ${x.gb}·${x.un}: ${UNST[x.un]}. ${g>=2?`용신 기운이 들어와 인생에서 손꼽히는 상승기예요.`:g<0?`기신 기운이 섞여 무리한 확장보다 지키는 전략이 맞아요.`:'큰 기복 없이 노력한 만큼 거두는 시기예요.'}</p></${T}>`}).join('')+'<p class="note" style="margin-top:6px">다른 시기는 눌러서 펼쳐 볼 수 있어요.</p>'}
 /* ===== 궁합 ===== */
-function gungRender(c,o){const A=c.A,B=analyze(o.sj,o.gender),a=c.p.s,b=o.sj.d[0],ea=Math.floor(a/2),eb=Math.floor(b/2);let pts=[];
-  let s1,t1;if(Math.abs(a-b)===5){s1=25;t1=`두 사람의 일간 ${SH[a]}·${SH[b]}가 천간합(合)을 이뤄요. 처음부터 끌리고 서로를 자연스럽게 받아들이는 최상의 조합입니다.`}else if((ea+1)%5===eb||(eb+1)%5===ea){s1=19;t1=`${jo(ELW[ea],'과','와')} ${jo(ELW[eb],'이','가')} 서로 살려 주는 상생 관계예요. ${(ea+1)%5===eb?'내가 상대를 키워 주는':'상대가 나를 키워 주는'} 흐름이라 한쪽이 든든한 버팀목이 됩니다.`}else if(ea===eb){s1=14;t1='같은 오행이라 말하지 않아도 통하는 친구 같은 사이예요. 다만 둘 다 양보하지 않으면 경쟁이 될 수 있어요.'}else{s1=8;t1=`${jo(ELW[ea],'과','와')} ${jo(ELW[eb],'이','가')} 서로 부딪히는 상극 관계예요. 강하게 끌리지만 생각의 방식이 달라 조율이 필요합니다. 차이를 인정하면 서로를 단련하는 짝이 돼요.`}
-  pts.push(['일간의 만남',s1,25,t1]);
-  const x=c.sj.d[1],y=o.sj.d[1],HAP=[[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]],WON=[[0,7],[1,6],[2,9],[3,8],[4,11],[5,10]],has=(L)=>L.some(([p,q])=>(p===x&&q===y)||(p===y&&q===x)),tri=v=>[8,0,4].includes(v)?0:[2,6,10].includes(v)?1:[5,9,1].includes(v)?2:3;
-  let s2,t2;if(has(HAP)){s2=20;t2='배우자 자리(일지)끼리 육합을 이뤄 생활 속 궁합이 아주 좋아요.'}else if(x!==y&&tri(x)===tri(y)){s2=16;t2='일지끼리 삼합의 기운으로 이어져 같은 목표를 향해 함께 가는 동반자 궁합이에요.'}else if((x-y+12)%12===6){s2=5;t2='일지끼리 충(沖)이라 생활 방식과 리듬이 달라 부딪히기 쉬워요. 각자의 공간을 존중하는 것이 열쇠예요.'}else if(has(WON)){s2=7;t2='일지끼리 원진이라 사소한 서운함이 쌓이기 쉬워요. 그때그때 마음을 말로 풀어 주세요.'}else{s2=12;t2='일지끼리 큰 충돌 없이 무난하게 어울려요.'}
-  pts.push(['생활 궁합',s2,20,t2]);
-  const lowA=A.cnt.indexOf(Math.min(...A.cnt)),lowB=B.cnt.indexOf(Math.min(...B.cnt));const fill=(B.cnt[lowA]>=2?1:0)+(A.cnt[lowB]>=2?1:0)+(B.cnt[A.yong]>=2?1:0)+(A.cnt[B.yong]>=2?1:0);
-  pts.push(['오행 보완',8+fill*4,24,`${fill>=3?'서로에게 부족한 기운을 채워 주는 보완 궁합이에요. 함께 있으면 운이 같이 오르는 사이입니다.':fill>=1?`한쪽이 다른 쪽의 부족한 기운(${ELW[B.cnt[lowA]>=2?lowA:lowB]})을 채워 줘요.`:'부족한 기운이 비슷해 함께 있을 때 같은 약점이 커질 수 있어요. 둘이 함께 용신 기운을 생활에 들이세요.'}`]);
-  const ya=c.sj.y[1],yb=o.sj.y[1];let s4,t4;if(HAP.some(([p,q])=>(p===ya&&q===yb)||(p===yb&&q===ya))||(ya!==yb&&tri(ya)===tri(yb))){s4=13;t4=`${ANI[ya]}띠와 ${ANI[yb]}띠는 합이 드는 띠 궁합이에요. 집안과 주변의 응원을 받기 쉬워요.`}else if((ya-yb+12)%12===6){s4=4;t4=`${ANI[ya]}띠와 ${ANI[yb]}띠는 충이 드는 띠 궁합이에요. 가족이나 주변 환경의 차이를 미리 맞춰 두세요.`}else{s4=9;t4=`${ANI[ya]}띠와 ${ANI[yb]}띠는 무난한 띠 궁합이에요.`}
-  pts.push(['띠 궁합',s4,13,t4]);
-  const myG=tenGod(a,b),spouse=c.gender==='F'?['정관','편관']:['정재','편재'];const s5=spouse.includes(myG)?18:['정인','식신','비견'].includes(myG)?13:9;
-  pts.push(['배우자성',s5,18,`상대의 일간은 나에게 ${myG}(${GODT[myG]})${(myG.charCodeAt(myG.length-1)-44032)%28?'이에요':'예요'}. ${spouse.includes(myG)?'사주에서 배우자를 뜻하는 별이라 결혼 상대로서 인연이 깊어요.':s5===13?'편안하게 서로를 돌보는 관계로 이어지기 좋아요.':'연인보다는 자극을 주는 파트너의 성격이 강해 서로의 역할을 정해 두면 좋아요.'}`]);
-  const tot=pts.reduce((s,p)=>s+p[1],0),max=pts.reduce((s,p)=>s+p[2],0),score=Math.round(tot/max*100);
-  return `<div class="gscore"><b>${score}</b><span>점</span><p>${score>=85?'하늘이 맺어 준 천생연분':score>=72?'서로를 키워 주는 좋은 인연':score>=58?'노력할수록 깊어지는 인연':'차이를 배우며 성장하는 인연'}</p></div>`+pts.map(([n,s,m,t])=>`<div class="gp"><div><b>${n}</b><span>${s}/${m}</span></div><div class="gbar"><i style="width:${s/m*100}%"></i></div><p>${t}</p></div>`).join('')}
+const ROLEME={비견:'어깨를 나란히 하는 친구 같은 사람이야. 연인이어도 동료 같고, 둘이 같이 뭔가를 해낼 때 제일 빛나.',겁재:'나랑 닮았는데 묘하게 경쟁심이 드는 사람이야. 같이 있으면 지루할 틈이 없고 자극도 되는데, 돈 문제만큼은 선을 분명히 해야 해.',식신:'같이 있으면 편하고 즐거운 사람이야. 맛있는 거 먹고 수다 떠는 그 시간이 둘한테 제일 큰 행복이야. 이상하게 자꾸 챙겨 주고 싶어지지?',상관:'나를 표현하게 만드는 사람이야. 그 사람 앞에선 말이 많아지고 재밌어지지 않아? 대신 내가 그 사람을 고치려 들거나, 그 사람이 내 말에 날이 설 때가 있어.',편재:'설레고 자극적인 사람이야. 새로운 데를 같이 다니고 싶고, 놓치기 싫은 마음이 커. 대신 안정감보다 설렘이 먼저인 관계라, 편해지는 데 시간이 좀 걸려.',정재:'오래 곁에 두고 싶은 사람이야. 화려하진 않아도 믿음이 가고, 같이 미래를 그려 보고 싶어지지. 대신 너무 익숙해져서 표현을 아끼게 될 수 있어.',편관:'강하게 끌리는데 동시에 버거운 사람이야. 그 사람 말 한마디에 하루 기분이 좌우된 적 있지 않아? 나를 단련시키는 사람이라 같이 크지만, 힘들 땐 거리 두는 법도 알아야 해.',정관:'나를 바로 세워 주는 사람이야. 그 사람 앞에선 괜히 더 잘하고 싶고, 믿음직하게 느껴지지. 대신 그 사람의 조언이 가끔 잔소리처럼 들릴 수 있어.',편인:'말 안 해도 내 속을 읽는 것 같은 사람이야. 묘하게 통하는데, 가끔은 그 사람 속을 모르겠어서 답답하지. 혼자만의 시간을 서로 존중해 주면 깊어져.',정인:'나를 품어 주는 사람이야. 그 사람 옆에 있으면 마음이 놓이고 위로받는 느낌이 들지. 대신 받기만 하다 보면 그 사람이 지칠 수 있어.'};
+const ROLES={비견:'친구 같은 동료',겁재:'자극을 주는 라이벌',식신:'편하게 챙겨 주고 싶은 사람',상관:'자기를 표현하게 만드는 사람',편재:'설레게 하는 사람',정재:'오래 곁에 두고 싶은 사람',편관:'끌리면서도 조금 버거운 사람',정관:'자기를 바로 세워 주는 사람',편인:'속을 읽어 주는 사람',정인:'품어 주는 사람'};
+const ELFIGHT=['싸우면 자기 말이 맞다는 걸 끝까지 설명하려 해','싸우면 순간 확 터졌다가 금방 풀려','싸우면 말을 아끼고 속으로 삭여','싸우면 옳고 그름을 따지고 선을 그어','싸우면 말없이 거리를 두고 혼자 생각해'];
+const ELNEED=['"네 말도 일리 있어"라는 인정','"화났구나, 알아"라는 공감','"무슨 생각해?" 하고 먼저 물어봐 주는 것','"내가 잘못했어"라는 분명한 한마디','혼자 생각할 시간, 그리고 다시 다가와 주는 것'];
+const HAPH=['토(흙)','금(쇠)','수(물)','목(나무)','화(불)'];
+function gungRender(c,o){const A=c.A,B=analyze(o.sj,o.gender),a=c.p.s,b=o.sj.d[0],ea=Math.floor(a/2),eb=Math.floor(b/2),me=NICK[a];
+  const pn=o.name&&o.name!=='상대'?esc(o.name):'그 사람',pE=(x,y)=>jo(pn,x,y),EW=ELW;let S=0;const sc=[];const AB=`<b>${STK[a]}(${SH[a]})</b>${bat(STK[a])?'과':'와'} <b>${STK[b]}(${SH[b]})</b>`;
+  const sec=(e,t,h)=>`<section class="gsec"><h4><span>${e}</span>${t}</h4>${h}</section>`;
+  // 1 일간
+  let h1,s1;const st=a===b?'심지어 글자까지 똑같아.':'';
+  if(Math.abs(a-b)===5){s1=25;h1=`<p>둘의 일간, 그러니까 각자를 뜻하는 글자는 ${AB}야. 이 둘은 <b>천간합</b>이야. 사주 궁합에서 제일 먼저 보는 자리인데, 여기서 합이 드는 건 흔치 않아.</p><p>처음 봤을 때 이유 없이 편했거나, 이상하게 자꾸 신경 쓰였던 기억 있지 않아? 그게 합이야. 서로 다른 둘이 만나서 ${HAPH[Math.min(a,b)]}라는 새로운 기운을 만들어 내는 관계라, 같이 있으면 둘 다 조금씩 달라져. 좋은 쪽으로.</p>`}
+  else if(ea===eb){s1=15;h1=`<p>둘의 일간은 ${AB}, 둘 다 ${EW[ea]}${iya(EW[ea])}. ${st}</p><p>말 안 해도 통하는 순간이 많지? 웃음 포인트나 취향이 비슷해서 금방 가까워졌을 거야. 대신 물러서지 않는 지점도 같아서, 한번 부딪히면 둘 다 고집을 안 꺾어. 누가 먼저 "알겠어" 하느냐가 이 관계의 숙제야.</p>`}
+  else if((ea+1)%5===eb){s1=19;h1=`<p>둘의 일간은 ${AB}. ${EW[ea]}인 네가 ${EW[eb]}인 ${jo(pn,'을','를')} 키워 주는 <b>상생</b> 관계야.</p><p>너도 모르게 ${pE('을','를')} 챙기고 있지 않아? 그 사람이 잘되는 걸 보는 게 그냥 좋은 거야. 그게 네 사랑 방식이야. 다만 주는 쪽만 계속되면 어느 날 문득 지쳐. "나도 좀 챙겨 줘"라고 말하는 건 이기적인 게 아니야.</p>`}
+  else if((eb+1)%5===ea){s1=19;h1=`<p>둘의 일간은 ${AB}. ${EW[eb]}인 ${pE('이','가')} ${EW[ea]}인 너를 키워 주는 <b>상생</b> 관계야.</p><p>${pn} 옆에 있으면 이상하게 마음이 놓이지? 힘든 얘기를 제일 먼저 하고 싶은 사람일 거야. 기대도 되는 사람 맞아. 다만 기대기만 하면 ${pn}도 지칠 수 있으니까, 고맙다는 말은 생각날 때마다 해 줘.</p>`}
+  else if((ea+2)%5===eb){s1=13;h1=`<p>둘의 일간은 ${AB}. ${EW[ea]}인 네가 ${EW[eb]}인 ${jo(pn,'을','를')} 다스리는 <b>상극</b> 관계야.</p><p>근데 사주에서 '극'은 나쁜 게 아니라 <b>끌림</b>이야. 넌 ${jo(pn,'을','를')} 이끌어 주고 싶고, ${jo(pn,'은','는')} 네 단단함에 끌려. 대신 네가 무심코 한 말이 ${pn}한테는 생각보다 세게 꽂힐 수 있어. 할 말이 있을 땐 결론보다 마음을 먼저 말해 줘.</p>`}
+  else{s1=11;h1=`<p>둘의 일간은 ${AB}. ${EW[eb]}인 ${pE('이','가')} ${EW[ea]}인 너를 다스리는 <b>상극</b> 관계야.</p><p>${pn} 앞에선 이상하게 긴장되거나, 잘 보이고 싶어지지 않아? 사주에서 '극'은 끌림이야. ${jo(pn,'은','는')} 흔들리는 너를 바로 세워 주는 사람이지만, 가끔은 숨이 막힐 수도 있어. 답답할 땐 참지 말고 말해. 참는 게 쌓이면 이 관계는 한 번에 터져.</p>`}
+  S+=s1;sc.push(['첫 끌림',s1/25]);
+  // 2 십성·배우자성
+  const g1=tenGod(a,b),g2=tenGod(b,a),spA=(c.gender==='F'?['정관','편관']:['정재','편재']).includes(g1),spB=(o.gender==='F'?['정관','편관']:['정재','편재']).includes(g2);
+  let h2=`<p>사주에는 상대가 나한테 어떤 사람인지 보여 주는 이름표가 있어. 너한테 ${jo(pn,'은','는')} <b>'${g1}'</b>${iya(g1)}.</p>${q2(ROLEME[g1])}<p>그럼 반대로, ${pn}한테 너는 어떤 사람일까? ${pn}한테 너는 <b>'${g2}'</b>, 그러니까 <b>${ROLES[g2]}</b>${iya(ROLES[g2])}.${g1===g2?' 둘이 서로를 똑같이 느끼고 있다는 뜻이야.':' 서로가 느끼는 온도가 조금 달라. 이걸 알고 있으면 "왜 나만 이렇게 생각하지?" 싶은 순간이 덜 서운해.'}</p>`;
+  const s2=spA&&spB?18:spA||spB?14:9;S+=s2;sc.push(['인연의 별',s2/18]);
+  h2+=spA&&spB?`<p>그리고 이건 꼭 말해 주고 싶어. 사주에는 <b>배우자를 뜻하는 별</b>이 따로 있는데, 둘은 <b>서로가 서로의 배우자 별</b>이야. 궁합에서 손꼽히는 인연의 표시야. 그냥 스쳐 갈 사이는 아니라는 뜻이지.</p>`
+   :spA?`<p>사주에는 <b>배우자를 뜻하는 별</b>이 따로 있는데, ${pn}의 일간이 바로 <b>네 배우자 별</b>이야. 네 쪽에서 "이 사람이다" 싶은 마음이 드는 건 자연스러운 거야. 다만 ${pn} 쪽에선 너를 조금 다른 결로 느낄 수 있어. 그 온도 차를 알고 있으면 기다리는 게 덜 힘들어.</p>`
+   :spB?`<p>사주에는 <b>배우자를 뜻하는 별</b>이 따로 있는데, ${pn} 쪽에서 보면 <b>네가 배우자 별</b>이야. ${jo(pn,'은','는')} 너를 생각보다 훨씬 진지하게 보고 있을 가능성이 커. 그 마음, 가볍게 넘기지 마.</p>`
+   :`<p>배우자를 뜻하는 별로 보면, 둘은 서로의 배우자 별은 아니야. 그렇다고 인연이 아니라는 건 아니야. 연인이면서 친구 같은, 정해진 역할이 없는 관계라 둘이 직접 만들어 가는 부분이 커. 오히려 그래서 더 자유로울 수 있어.</p>`;
+  // 3 일지·띠
+  const x=c.sj.d[1],y=o.sj.d[1],pr=(L,p,q)=>L.some(([u,v])=>(u===p&&v===q)||(u===q&&v===p)),HAP=[[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]],WON=[[0,7],[1,6],[2,9],[3,8],[4,11],[5,10]],HYUNG=[[2,5],[5,8],[2,8],[1,10],[10,7],[1,7],[0,3]],tri=v=>[8,0,4].includes(v)?0:[2,6,10].includes(v)?1:[5,9,1].includes(v)?2:3;
+  const XY=`둘의 속마음 자리(일지)는 <b>${BR[x]}(${ANI[x]})</b>${bat(ANI[x])?'과':'와'} <b>${BR[y]}(${ANI[y]})</b>`;let h3,s3;
+  if(pr(HAP,x,y)){s3=20;h3=`<p>${XY}. 이 둘은 <b>육합</b>이야. 일지는 같이 밥 먹고, 쉬고, 한 공간에서 지낼 때의 궁합이거든. 여기서 합이 드는 건 같이 살 때 더 빛나는 조합이라는 뜻이야. 특별한 걸 안 해도 그냥 같이 있는 게 편하지 않아?</p>`}
+  else if(x!==y&&tri(x)===tri(y)){s3=17;h3=`<p>${XY}. 이 둘은 <b>삼합</b>, 같은 편이야. 같은 방향을 보고 걷는 동반자 궁합이라, 둘한테 같은 목표가 생기면 무서울 게 없어. 같이 계획 세울 때 유난히 신나지 않아?</p>`}
+  else if((x-y+12)%12===6){s3=5;h3=`<p>${XY}. 이 둘은 정면으로 부딪히는 <b>충</b>이야. 생활 리듬이나 습관이 정반대일 가능성이 커. 한 명은 아침형, 한 명은 밤형이라든지, 한 명은 계획파, 한 명은 즉흥파라든지. 처음엔 그 다름이 끌림이었을 텐데, 같이 지낼수록 그게 다툼의 씨앗이 돼. 각자의 시간과 공간을 인정해 주는 게 이 궁합의 열쇠야.</p>`}
+  else if(pr(WON,x,y)){s3=7;h3=`<p>${XY}. 이 둘은 <b>원진</b>이야. 크게 싸울 일은 없는데, 이상하게 사소한 게 서운하게 쌓이는 관계야. "그걸 왜 이제 말해?" 하는 순간, 한 번쯤 있었지? 서운한 건 그날 바로, 작게 말하는 게 이 둘의 규칙이야.</p>`}
+  else if(pr(HYUNG,x,y)||(x===y&&[4,6,9,11].includes(x))){s3=8;h3=`<p>${XY}. 이 둘은 <b>형</b>이야. 서로를 다듬어 주는 관계인데, 그 과정이 가끔 아파. 상대의 단점이 유난히 잘 보이는 사이지. 고치려 들기보다 "그래, 그게 너지" 하고 인정해 주면 오히려 누구보다 단단해져.</p>`}
+  else if(x===y){s3=12;h3=`<p>둘의 속마음 자리(일지)가 똑같이 <b>${BR[x]}(${ANI[x]})</b>${iya(ANI[x])}. 서로의 속을 거울처럼 알아봐. 편하지만, 내 단점까지 그 사람한테서 보일 때가 있어. 그럴 땐 그 사람한테 화내기 전에, 나한테도 조금 너그러워져 봐.</p>`}
+  else{s3=12;h3=`<p>${XY}. 이 둘 사이엔 특별한 충돌도, 합도 없어. 생활에서 크게 부딪힐 일은 적은 편안한 사이야. 대신 그만큼 둘이 일부러 추억을 만들어야 깊어지는 관계야. 같이 처음 해 보는 걸 자주 만들어 봐.</p>`}
+  S+=s3;sc.push(['생활 궁합',s3/20]);
+  const ya=c.sj.y[1],yb=o.sj.y[1];let s4;
+  if(pr(HAP,ya,yb)||(ya!==yb&&tri(ya)===tri(yb))){s4=13;h3+=`<p>띠로 보면 ${ANI[ya]}띠와 ${ANI[yb]}띠는 합이 드는 사이야. 가족이나 친구들 사이에서도 "둘이 잘 어울린다"는 말을 듣기 쉬워.</p>`}
+  else if((ya-yb+12)%12===6){s4=5;h3+=`<p>띠로 보면 ${ANI[ya]}띠와 ${ANI[yb]}띠는 충이 드는 사이야. 둘 사이 문제라기보다 집안 분위기나 주변 환경이 달라서 맞춰 가는 데 시간이 걸릴 수 있어. 너무 신경 쓰진 마.</p>`}
+  else if(pr(WON,ya,yb)){s4=7;h3+=`<p>띠로 보면 ${ANI[ya]}띠와 ${ANI[yb]}띠는 원진이야. 서로의 가족이나 친구를 처음 만날 때 살짝 어색할 수 있어. 시간이 해결해 줘.</p>`}
+  else{s4=9;h3+=`<p>띠로 보면 ${ANI[ya]}띠와 ${ANI[yb]}띠는 무난한 사이야. 주변에서도 자연스럽게 받아들이는 조합이야.</p>`}
+  S+=s4;
+  // 4 오행 보완·기운 세기
+  let h4='',fill=0;const za=[0,1,2,3,4].filter(e=>A.cnt[e]===0),zb=[0,1,2,3,4].filter(e=>B.cnt[e]===0),mxB=B.cnt.indexOf(Math.max(...B.cnt)),mxA=A.cnt.indexOf(Math.max(...A.cnt));
+  for(const e of za)if(B.cnt[e]>=2){fill++;h4+=`<p>넌 ${jo(EW[e],'이','가')} 하나도 없는데, ${jo(pn,'은','는')} ${B.cnt[e]}개나 갖고 있어. ${pn} 옆에 있으면 네 안에 비어 있던 자리가 채워지는 느낌이 들 거야. 그게 이유 없이 끌렸던 진짜 이유일지도 몰라.</p>`;break}
+  if(mxB===A.yong){fill++;h4+=`<p>게다가 ${jo(pn,'이','가')} 제일 많이 가진 기운이 ${EW[mxB]}인데, 그게 바로 <b>너를 살리는 기운(용신)</b>이야. ${jo(pn,'은','는')} 존재 자체가 너한테 약 같은 사람이야. 힘들 때 그 사람 목소리만 들어도 나아지지 않았어?</p>`}
+  for(const e of zb)if(A.cnt[e]>=2){fill++;h4+=`<p>반대로 ${pn}한테 없는 ${jo(EW[e],'을','를')} 넌 ${A.cnt[e]}개 갖고 있어. 너도 ${pn}한테 빈자리를 채워 주는 사람이야.</p>`;break}
+  if(mxA===B.yong){fill++;h4+=`<p>그리고 네가 제일 많이 가진 ${jo(EW[mxA],'이','가')} ${jo(pn,'을','를')} 살리는 기운이야. 넌 ${pn}한테 숨 쉴 구멍 같은 사람이야.</p>`}
+  if(!fill)h4=`<p>오행으로 보면 둘은 비슷한 곳이 비어 있어. 그래서 서로를 잘 이해하는 대신, 같은 약점이 같이 커질 수 있어. 둘 다 ${EW[A.yong]} 기운이 필요하니까, 같이 <b>${YONGT[A.yong][5].split(', ')[0]}</b> 같은 걸 해 봐. 둘한테 동시에 약이 돼.</p>`;
+  const s5=Math.min(24,8+fill*5);S+=s5;sc.push(['서로 채움',s5/24]);
+  const ta=A.tier,tb=B.tier;
+  h4+=ta>=3&&tb>=3?`<p>기운의 세기로 보면 둘 다 센 사람이야. 선장이 둘인 배라, 방향이 맞으면 누구보다 멀리 가지만 방향이 다르면 둘 다 안 물러서. 큰 결정은 "이번엔 네가, 다음엔 내가" 하고 순서를 정해 두는 게 좋아.</p>`
+   :ta<=1&&tb<=1?`<p>기운의 세기로 보면 둘 다 여린 편이야. 서로 상처 주지 않으려고 조심하는 다정한 사이지만, 큰 결정 앞에서는 둘 다 망설일 수 있어. 그럴 땐 믿을 만한 사람한테 같이 조언을 구해 봐.</p>`
+   :ta-tb>=2?`<p>기운의 세기로 보면 네 쪽이 더 세. 자연스럽게 네가 이끌고 ${jo(pn,'이','가')} 따라오는 관계야. 넌 든든한 사람이 되지만, ${pn}의 생각을 먼저 물어봐 주는 것만 잊지 마. ${jo(pn,'은','는')} 말 안 하고 맞춰 주는 걸 수도 있어.</p>`
+   :tb-ta>=2?`<p>기운의 세기로 보면 ${pn} 쪽이 더 세. ${jo(pn,'이','가')} 이끌고 네가 기대는 관계가 되기 쉬워. 편하긴 한데, 네 의견을 말하지 않고 넘어가는 게 쌓이면 나중에 "난 뭐였지?" 싶어질 수 있어. 작은 것부터 네가 정해 봐.</p>`
+   :`<p>기운의 세기로 보면 둘이 비슷해. 누가 일방적으로 끌고 가지 않는 대등한 관계야. 그래서 편하지만, 가끔은 누군가 먼저 손을 내밀어야 다음으로 넘어가.</p>`;
+  // 5 싸움
+  const h5=`<p>싸울 때 모습도 한번 볼까? 너는 ${ELFIGHT[ea]}. ${jo(pn,'은','는')} ${ELFIGHT[eb]}.${ea===eb?' 둘이 똑같아서 한번 꼬이면 오래 가.':''}</p><p>${ea===eb?`그래서 싸우고 나면 둘 다 <b>${jo(ELNEED[ea],'이','가')}</b> 필요해. 문제는 둘 다 그걸 기다리기만 한다는 거야. 먼저 건네는 쪽이 이기는 싸움이야.`:`그래서 싸우고 나면 너는 <b>${jo(ELNEED[ea],'이','가')}</b> 필요하고, ${jo(pn,'은','는')} <b>${jo(ELNEED[eb],'이','가')}</b> 필요해. 각자 자기가 받고 싶은 방식으로 상대를 달래고 있어서 엇갈리는 거야. 이것만 알아도 싸움이 절반은 짧아져.`}</p>`;
+  // 6 2027
+  const y1=tenGod(a,3),y2=tenGod(b,3),M1=y27months(a),M2=y27months(b),both=M1.filter((m,i)=>m.love>=4&&M2[i].love>=4).map(m=>m.m),best=M1.map((m,i)=>({m:m.m,v:m.love+M2[i].love})).sort((p,q)=>q.v-p.v)[0];
+  const h6=`<p>마지막으로 둘의 2027년. 너한테는 <b>'${Y27N[y1]}'</b>, ${pn}한테는 <b>'${Y27N[y2]}'</b>야.${y1===y2?' 둘이 같은 해를 보내게 돼서, 같은 고민과 같은 기쁨을 나누기 좋아.':''}</p><p>${both.length?`둘 다 연애 기운이 같이 올라오는 달은 <b>${both.slice(0,3).join(', ')}</b>. 중요한 얘기, 여행, 기념일은 이때로 잡아 봐.`:`둘의 연애 기운이 함께 제일 높아지는 달은 <b>${best.m}</b>이야. 중요한 얘기나 여행은 이때로 잡아 봐.`}</p>`;
+  const score=Math.round(52+S*0.46),tt=score>=90?'만나야 할 사람을 만났어':score>=81?'서로를 키워 주는 인연':score>=73?'맞춰 갈수록 깊어지는 인연':'다름을 배우며 크는 인연';
+  return `<div class="gscore"><b>${score}</b><span>점</span><p>${tt}</p><div class="gchips">${sc.map(([n,v])=>`<span><i style="--v:${v}"></i>${n}</span>`).join('')}</div></div>
+   <div class="gstory"><p class="gintro">${(cn=>cn==='너'?'':cn+', ')(callName(myNick()))}${jo(pn,'과','와')} 너, 둘의 사주를 나란히 펼쳐 봤어. 점수보다 중요한 건 <b>왜</b> 끌리고 <b>어디서</b> 부딪히는지야. 하나씩 같이 보자.</p>
+   ${sec('💫','처음 끌린 이유',h1)}${sec('🪞','서로에게 어떤 사람일까',h2)}${sec('🏠','같이 지낼 때',h3)}${sec('🧩','서로 채워 주는 것',h4)}${sec('⚡','싸울 때, 그리고 화해법',h5)}${sec('🔮','둘의 2027년',h6)}
+   <p class="sign">— 둘을 응원하는 ${me}${bat(me)?'이':'가'}</p></div>`}
+
 /* ===== 결제 (990원) ===== */
 const PAYITEMS={story:{t:'내 사주 이야기 전체',d:'넘어지는 이유 · 10년마다 바뀌는 계절(대운) · 2027년 열두 달과 세 번의 기회 · 정령이 남기는 말까지 한 번에'},gung:{t:'궁합 보기',d:'두 사람의 일간·일지·오행·띠·배우자성을 종합한 정밀 궁합'},dw:{t:'대운 보기',d:'10년 단위 인생 흐름 9구간과 상승기·주의기 해설'},ny:{t:'2027 신년운세',d:'정미년 월별 흐름 12개월 전체와 연애·재물 집중 시기'}};
 const PAY={price:990,live:false,
@@ -1828,7 +1883,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-pay]');if(
 const GF={g:'F',cal:'S',ap:0};segBind('gG2','g',v=>GF.g=v);segBind('gCal','c',v=>GF.cal=v);segBind('gAp','ap',v=>GF.ap=+v);
 $('gBd').addEventListener('input',e=>fmtBD(e.target));for(const id of ['gHH','gMM'])$(id).addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'')});
 $('gf').addEventListener('submit',e=>{e.preventDefault();const p=parseBD($('gBd').value,GF.cal);if(p.err){$('gErr').textContent=p.err;return}const tm=parseTM(GF.ap,$('gHH').value,$('gMM').value);if(tm.err){$('gErr').textContent=tm.err;return}$('gErr').textContent='';
-  const o={sj:saju(p.d,tm.none?null:tm.mins),gender:GF.g},nm=$('gName').value.trim()||'상대';$('gOut').innerHTML=`<h4 class="gh">${esc(myNick())} ♥ ${esc(nm)}</h4>`+gungRender(cur,o);$('gOut').scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'})});
+  const nm=$('gName').value.trim()||'상대',o={sj:saju(p.d,tm.none?null:tm.mins),gender:GF.g,name:nm};$('gOut').innerHTML=`<h4 class="gh">${esc(myNick())} ♥ ${esc(nm)}</h4>`+gungRender(cur,o);$('gOut').scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'})});
 $('payModal').addEventListener('click',e=>{if(e.target.id==='payModal')$('payModal').hidden=true});
 
 document.addEventListener('click',e=>{const t=e.target;
