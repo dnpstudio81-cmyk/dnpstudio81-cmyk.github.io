@@ -1203,7 +1203,7 @@ function gungRender(c,o){const A=c.A,B=analyze(o.sj,o.gender),a=c.p.s,b=o.sj.d[0
    <p class="sign">— 둘을 응원하는 ${me}${bat(me)?'이':'가'}</p></div>`}
 
 /* ===== 결제 (990원) ===== */
-const PAYITEMS={story:{t:'내 사주 이야기 전체',d:'넘어지는 이유 · 10년마다 바뀌는 계절(대운) · 2027년 열두 달과 세 번의 기회 · 정령이 남기는 말까지 한 번에'},gung:{t:'궁합 보기',d:'두 사람의 일간·일지·오행·띠·배우자성을 종합한 정밀 궁합'},dw:{t:'대운 보기',d:'10년 단위 인생 흐름 9구간과 상승기·주의기 해설'},ny:{t:'2027 신년운세',d:'정미년 월별 흐름 12개월 전체와 연애·재물 집중 시기'}};
+const PAYITEMS={story:{t:'내 사주 이야기 전체',d:'넘어지는 이유 · 10년마다 바뀌는 계절(대운) · 2027년 열두 달과 세 번의 기회 · 정령이 남기는 말까지 한 번에'},gung:{t:'궁합 보기',d:'처음 끌린 이유 · 서로에게 어떤 사람인지 · 같이 지낼 때 · 싸울 때 화해법 · 둘의 2027년까지, 두 사람 사주를 나란히 놓고 이야기로 풀어 드려요'},dw:{t:'대운 보기',d:'10년 단위 인생 흐름 9구간과 상승기·주의기 해설'},ny:{t:'2027 신년운세',d:'정미년 월별 흐름 12개월 전체와 연애·재물 집중 시기'}};
 const PAY={price:990,live:false,
   key(it){return 'paid_'+it+'_'+(cur?cur.dd+(cur.mins??'')+cur.gender:'')},
   has(it){try{return localStorage.getItem(PAY.key(it))==='1'}catch(e){return false}},
