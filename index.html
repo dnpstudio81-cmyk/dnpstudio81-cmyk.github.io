@@ -402,6 +402,10 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 .read>.panel{display:grid;grid-template-columns:108px minmax(0,1fr);gap:12px;align-items:baseline;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;box-shadow:none;padding:12px 0;margin:0}
 .read>.panel:last-child{border-bottom:0}.read>.panel h3{font:700 14px/1.5 "Noto Sans KR",sans-serif;color:var(--seal);margin:0}.read>.panel p{margin:0;font-size:14px;line-height:1.65;color:#3b3934;word-break:keep-all}
 @media(max-width:420px){.read>.panel{grid-template-columns:98px minmax(0,1fr);gap:10px}.read>.panel h3{font-size:13px;word-break:keep-all}}
+
+.nkb{display:inline-block;margin-left:6px;padding:1px 9px;border-radius:999px;background:#fff1d6;color:#8a5a12;border:1px solid #f0d49a;font:500 12px/1.6 "Noto Sans KR",sans-serif;vertical-align:middle;white-space:nowrap}
+.nkhead{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:8px 10px;border-radius:14px;background:linear-gradient(90deg,#fff4dc,transparent)}.nkhead img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid #e8c46a;background:#fff}.nkhead small{display:block;font-size:12px;color:var(--sub)}.nkhead b{font:700 20px "Gowun Batang",serif;color:var(--ink)}
+.mtile h3+.nkb{margin:0 0 4px}
 </style>
 </head>
 <body>
@@ -410,7 +414,7 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
   <button type="button" class="cont" id="contBtn" data-nav="draw" hidden></button>
   <div class="ttl2"><span class="s1">같은 유형, 다른 기운</span><h1 class="logo"><span class="seal">運</span><span class="lt">운빨카드</span></h1></div>
   <div class="stagec" aria-hidden="true"><div class="track" id="track"></div><div class="hero2" id="hero2"><img id="heroImg" alt=""><i class="sweep"></i></div><div class="spark" id="spark"></div></div>
-  <p class="herocap" id="heroCap">오늘의 카드 · 복주머니 품은 태양 탐험가</p>
+  <p class="herocap" id="heroCap">오늘의 카드 · 복주머니 품은 태양 탐험가 「해랑이」</p>
   <button type="button" class="tap" id="tap">화면을 누르면 시작</button>
   <nav class="hmenu" id="hmenu" aria-label="메인 메뉴">
     <button type="button" class="hm big" data-nav="draw"><span><b>카드 뽑기 · 사주 보기</b><small>생년월일·시간으로 내 카드와 사주풀이</small></span><i>▶</i></button>
@@ -894,7 +898,7 @@ function proRender(c){const sj=c.sj,A=analyze(sj,c.gender),si=c.p.s,ce=c.s.e;c.A
   const wc=worryCats(c.worry,c.wchips);
   /* 간단 풀이 */
   $('sum').innerHTML=(c.kind!=='n'?`<p class="kick" style="margin:0 0 6px">★ 레어 카드 · ${c.kind==='m'?MONEY_M[si]+'월 금전운 대길':LOVE_M[si]+'월 연애운 대길'}</p>`:'')+
-   `<h3>${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${ANI[sj.y[1]]}띠 · ${STK[si]}${BRK[dbr]} 일주</h3>
+   `<div class="nkhead"><img src="${IMG[si]}" alt=""><div><small>내 캐릭터 · ${NWHO[si]}</small><b>${NICK[si]}</b></div></div><h3>${STK[sj.y[0]]}${BRK[sj.y[1]]}년 ${ANI[sj.y[1]]}띠 · ${STK[si]}${BRK[dbr]} 일주</h3>
    <div class="mini8">${P.map(([lb,v])=>`<div><small>${lb}</small>${v?chip(v[0])+bchip(v[1]):'<span class="hch q">?</span><span class="hch q">?</span>'}</div>`).join('')}</div><ul>
    <li><b>본성</b><span>${c.s.ess.split('. ')[0]}.</span></li>
    <li><b>힘</b><span>${TIERT[A.tier][0]} · ${A.gk}</span></li>
@@ -925,7 +929,7 @@ function proRender(c){const sj=c.sj,A=analyze(sj,c.gender),si=c.p.s,ce=c.s.e;c.A
   const curDW=daewoon(c).find(x=>x.cur);
   const sec=(t,h)=>`<div class="panel pro"><h3>${t}</h3>${h}</div>`;
   $('proBox').innerHTML=
-   sec('일간 · 타고난 그릇',`<p>${DAYPRO[si]}</p><p>일지에 ${BR[dbr]}(${ANI[dbr]})가 앉아 ${unseong(si,dbr)}의 자리에 있어요. ${UNST[unseong(si,dbr)]}.</p>`)+
+   sec(`일간 · 타고난 그릇 <span class="nkb">${NICK[si]}</span>`,`<p>${DAYPRO[si]}</p><p>일지에 ${BR[dbr]}(${ANI[dbr]})가 앉아 ${unseong(si,dbr)}의 자리에 있어요. ${UNST[unseong(si,dbr)]}.</p>`)+
    sec('신강·신약과 용신',`<div class="meter"><i style="left:${A.sc}%"></i><span>신약</span><span>중화</span><span>신강</span></div><p><b>${TIERT[A.tier][0]}</b> (나를 돕는 기운 ${A.sc}%) — ${TIERT[A.tier][1]}</p><p><b>용신 ${ELW[A.yong]}(${ELN[A.yong]})</b> · 희신 ${ELW[A.hee]} · 기신 ${ELW[A.gi]}. ${A.why}</p><p class="note">용신 기운을 살리는 법: ${yt[5]}. 어울리는 분야: ${yt[4]}.</p>`)+
    sec('격국 · 사회에서 쓰는 힘',`<p><b>${A.gk}</b> — ${GKT[A.gk]}</p>`)+
    sec('십신 분포',`<div class="gbars">${GRP.map((g,i)=>`<div><span>${g}</span><div><i style="width:${A.gc[i]/ (A.P.length*2-1)*100}%"></i></div><b>${A.gc[i]}</b></div>`).join('')}</div>
@@ -1004,7 +1008,7 @@ function mcHTML(o){/* o:{s,b,top,name,sub,cls,seal} */
   const e=Math.floor(o.s/2);return `<div class="mc ${o.cls||''}" style="--ec:${EL[e].c}"><span class="mt2">${o.top}</span><img class="mimg" src="${IMG[o.s]}" alt=""><b class="mhj">${SH[o.s]}${BR[o.b]}</b><span class="mn">${o.name}</span><small>${o.sub||''}</small></div>`}
 function pillarCards(c){const sj=c.sj,si=c.p.s;return [sj.y,sj.m,sj.d,sj.h].map((v,i)=>{const R=PROLE[i];
   if(!v)return{seal:true,top:R[1],name:'봉인된 카드',sub:'태어난 시간을 넣으면 열려요',role:R};
-  const g=i===2?'일간(나)':tenGod(si,v[0]);return{s:v[0],b:v[1],top:R[1],name:`${ST[v[0]].noun}과 ${ANI[v[1]]}`,sub:`${R[0]} · ${g}`,role:R,g,cls:i===2?'me':''}})}
+  const g=i===2?'일간(나)':tenGod(si,v[0]);return{s:v[0],b:v[1],top:R[1],name:`${NICK[v[0]]}와 ${ANI[v[1]]}`,sub:`${R[0]} · ${g}`,role:R,g,cls:i===2?'me':''}})}
 function pillarRender(c,save){const L=pillarCards(c);
   $('pcards').innerHTML=L.map((o,i)=>`<button type="button" class="mcb" data-pc="${i}" style="animation-delay:${i*.12}s">${mcHTML(o)}</button>`).join('');
   $('pcInfo').innerHTML='<p class="note" style="margin:0">카드를 누르면 그 기둥의 뜻을 볼 수 있어요.</p>';
@@ -1018,14 +1022,14 @@ function iljinGot(){return lsGet('iljin',{})}
 function iljinCard(c){const j=iljinToday(),got=iljinGot(),have=!!got[j.i],g=tenGod(c.p.s,j.s),A=c.A||analyze(c.sj,c.gender),lucky=Math.floor(j.s/2)===A.yong||EB[j.b]===A.yong;
   const n=Object.keys(got).length;
   return `<div class="panel ijbox"><p class="kick">오늘의 일진 카드 · 육십갑자 ${n}/60</p>
-   <div class="ijflip${have?' show':''}" id="ijFlip"><div class="ijin"><div class="ijback"><span>日</span><small>오늘의 기운</small></div><div class="ijfront">${mcHTML({s:j.s,b:j.b,top:`${j.t.replace(/-/g,'.')} 일진`,name:`${STK[j.s]}${BRK[j.b]}일 · ${ST[j.s].noun}과 ${ANI[j.b]}`,sub:lucky?'★ 나의 길일':g,cls:'big'+(lucky?' gold':'')})}</div></div></div>
+   <div class="ijflip${have?' show':''}" id="ijFlip"><div class="ijin"><div class="ijback"><span>日</span><small>오늘의 기운</small></div><div class="ijfront">${mcHTML({s:j.s,b:j.b,top:`${j.t.replace(/-/g,'.')} 일진`,name:`${STK[j.s]}${BRK[j.b]}일 · ${NICK[j.s]}와 ${ANI[j.b]}`,sub:lucky?'★ 나의 길일':g,cls:'big'+(lucky?' gold':'')})}</div></div></div>
    ${have?`<p class="ijmsg"><b>${TG[g][0].replace(/달$/,'날')}</b> — ${TG[g][1]}${lucky?' 오늘은 내 용신 기운이 들어온 길일이에요.':''}</p>`:`<button type="button" class="btn" id="ijGet">오늘의 일진 카드 받기</button>`}
    <p class="note" style="margin:8px 0 0">하루에 한 장, 60일 동안 모두 다른 카드가 와요. 카드함에서 모은 카드를 볼 수 있어요.</p></div>`}
 function iljinTake(){const j=iljinToday(),got=iljinGot();if(!got[j.i]){got[j.i]=j.t;lsSet('iljin',got)}const f=$('fFlip');if(f)f.classList.add('show');const b=$('ijGet');if(b)b.remove();setTimeout(todayRender,RM()?0:800)}
 /* 친구 */
 function friendsGet(){return lsGet('friends',[])}
 function friendAdd(n,f,x){const L=friendsGet().filter(o=>o.f!==f);L.unshift({n,f,si:x.p.s,b:x.p.b,t:x.t,no:x.no,name:x.name,at:todayStr()});lsSet('friends',L.slice(0,100));dexAdd(x.no)}
-function exShare(){const c=cur;if(!c)return;const n=myNick();share({code:code({d:c.dd,t:c.t}),n,x:1,title:`${n==='나'?'친구':n}님이 운빨카드를 보냈어요`,desc:`「${c.name}」 카드를 받고, 내 카드도 보내 주세요! 서로의 카드가 카드함에 모여요.`,img:IMG[c.p.s].slice(4,-5),btn:'카드 받고 교환하기'},'copyMsg')}
+function exShare(){const c=cur;if(!c)return;const n=myNick();share({code:code({d:c.dd,t:c.t}),n,x:1,title:`${n==='나'?'친구':n}님이 운빨카드를 보냈어요`,desc:`「${c.name}」 ${NICK[c.p.s]} 카드를 받고, 내 카드도 보내 주세요! 서로의 카드가 카드함에 모여요.`,img:IMG[c.p.s].slice(4,-5),btn:'카드 받고 교환하기'},'copyMsg')}
 /* 카드함 */
 let colTab='dex';
 function colRender(){for(const b of $('cTabs').children)b.setAttribute('aria-pressed',String(b.dataset.ct===colTab));
@@ -1035,9 +1039,10 @@ function colRender(){for(const b of $('cTabs').children)b.setAttribute('aria-pre
   $('cTabs').querySelector('[data-ct=pil] small').textContent=`${Object.keys(P).length}세트`;
   if(colTab==='ij'){$('cx-ij').innerHTML=`<p class="note">매일 「오늘의 운빨」에서 받은 일진 카드가 모여요. 60일을 모두 모으면 육십갑자 완성!</p><div class="mgrid">${Array.from({length:60},(_,i)=>got[i]?`<div title="${got[i]}">${mcHTML({s:i%10,b:i%12,top:got[i].slice(5).replace('-','.'),name:`${STK[i%10]}${BRK[i%12]}일`})}</div>`:`<div>${mcHTML({seal:true,top:'일진',name:`${STK[i%10]}${BRK[i%12]}일`})}</div>`).join('')}</div>`}
   if(colTab==='fr'){$('cx-fr').innerHTML=`<p class="note">카드 교환 링크를 주고받거나 도전장을 받은 친구의 카드가 모여요.</p><button type="button" class="btn" id="exBtn2">카톡으로 카드 교환하기</button>`+(F.length?`<div class="mgrid">${F.map(o=>`<div>${mcHTML({s:o.si,b:o.b,top:esc(o.n),name:esc(o.name),sub:o.t})}</div>`).join('')}</div>`:'<p class="empty">아직 받은 친구 카드가 없어요. 교환 링크를 보내 보세요.</p>')}
-  if(colTab==='pil'){const S=Object.values(P);$('cx-pil').innerHTML=`<p class="note">카드를 뽑을 때마다 그 사주의 네 기둥 카드가 한 세트씩 모여요. 가족·친구의 생일로 뽑아 봐도 쌓여요.</p>`+(S.length?S.map(x=>`<h4 class="psh">${esc(x.n)} · ${x.d.replace(/-/g,'.')}</h4><div class="mgrid four">${x.L.map((v,i)=>v?mcHTML({s:v[0],b:v[1],top:PROLE[i][1],name:`${ST[v[0]].noun}과 ${ANI[v[1]]}`,cls:i===2?'me':''}):mcHTML({seal:true,top:PROLE[i][1],name:'봉인'})).join('')}</div>`).join(''):'<p class="empty">아직 모은 세트가 없어요.</p>')}
+  if(colTab==='pil'){const S=Object.values(P);$('cx-pil').innerHTML=`<p class="note">카드를 뽑을 때마다 그 사주의 네 기둥 카드가 한 세트씩 모여요. 가족·친구의 생일로 뽑아 봐도 쌓여요.</p>`+(S.length?S.map(x=>`<h4 class="psh">${esc(x.n)} · ${x.d.replace(/-/g,'.')}</h4><div class="mgrid four">${x.L.map((v,i)=>v?mcHTML({s:v[0],b:v[1],top:PROLE[i][1],name:`${NICK[v[0]]}와 ${ANI[v[1]]}`,cls:i===2?'me':''}):mcHTML({seal:true,top:PROLE[i][1],name:'봉인'})).join('')}</div>`).join(''):'<p class="empty">아직 모은 세트가 없어요.</p>')}
   if(colTab==='dex')dexRender()}
 
+const NICK=["쑥쑥이", "넝쿨이", "해랑이", "초롱이", "뫼돌이", "포근이", "단단이", "반짝이", "너울이", "방울이"],NWHO=["새싹 나무 정령", "꽃덩굴 정령", "태양 정령", "등불 정령", "바위산 정령", "정원 흙 정령", "강철 정령", "보석 정령", "바다 정령", "이슬 정령"];
 const SIJIN=['자','축','인','묘','진','사','오','미','신','유','술','해'];
 const FM={g:null,cal:'S',ap:0,mins:null,worry:'',chips:[]};
 function segBind(id,attr,cb){const el=$(id);el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;for(const x of el.children)x.setAttribute('aria-pressed',String(x===b));cb(b.dataset[attr])})}
@@ -1089,7 +1094,7 @@ function render(str,t,anim){cur=build(str,t);Object.assign(cur,{mins:FM.mins,gen
   const ws=Math.floor(si/2),cs=((ws+3)%5)*2+(si%2),ct=c.t.split('').map((l,i)=>AX[i][0]===l?AX[i][1]:AX[i][0]).join('');
   const pr=[ST[si],ST[bs]].sort((x,y)=>ST.indexOf(x)-ST.indexOf(y));
   const tno=(s,t)=>String(s*16+TYK.indexOf(t)+1).padStart(3,'0');
-  $('match').innerHTML=[[bs,bt,'合','잘 맞는 캐릭터',`${pr[0].k[0]}${pr[1].k[0]}합으로 서로 끌리는 짝 기운`,'성격유형은 에너지와 생활 리듬이 반대라 서로의 빈 곳을 채워 줘요.','good'],[cs,ct,'沖','부딪히는 캐릭터',`${ST[cs].k}${(ST[cs].k.charCodeAt(1)-44032)%28?'은':'는'} 내 기운을 다듬는 상극`,'성격유형 네 글자가 모두 반대예요. 부딪히지만 가장 많이 배우는 사이예요.','bad']].map(([s,t,hj,k,l1,l2,cl])=>`<div class="mtile ${cl}"><img class="mt-card" src="img/t/${tno(s,t)}n.webp" alt="${nm(s,t)} 카드" loading="lazy"><div class="mt-b"><span class="mt-tag"><b>${hj}</b>${k}</span><h3>${nm(s,t)}</h3><p class="mt-sub">${ST[s].k} × ${t}</p><p class="mt-txt"><b>${l1}.</b> ${l2}</p></div></div>`).join('');
+  $('match').innerHTML=[[bs,bt,'合','잘 맞는 캐릭터',`${pr[0].k[0]}${pr[1].k[0]}합으로 서로 끌리는 짝 기운`,'성격유형은 에너지와 생활 리듬이 반대라 서로의 빈 곳을 채워 줘요.','good'],[cs,ct,'沖','부딪히는 캐릭터',`${ST[cs].k}${(ST[cs].k.charCodeAt(1)-44032)%28?'은':'는'} 내 기운을 다듬는 상극`,'성격유형 네 글자가 모두 반대예요. 부딪히지만 가장 많이 배우는 사이예요.','bad']].map(([s,t,hj,k,l1,l2,cl])=>`<div class="mtile ${cl}"><img class="mt-card" src="img/t/${tno(s,t)}n.webp" alt="${nm(s,t)} 카드" loading="lazy"><div class="mt-b"><span class="mt-tag"><b>${hj}</b>${k}</span><h3>${nm(s,t)}</h3><span class="nkb">${NICK[s]}</span><p class="mt-sub">${ST[s].k} × ${t}</p><p class="mt-txt"><b>${l1}.</b> ${l2}</p></div></div>`).join('');
   $('rYearT').textContent=c.s.yt;$('rYear').textContent=c.s.yd;
   const yg=TG[tenGod(si,3)];
   $('yLoveT').textContent=yg[4];$('yLove').textContent=yg[5];$('yMoneyT').textContent=yg[6];$('yMoney').textContent=yg[7];
@@ -1203,7 +1208,7 @@ async function play(m){const tok=++playTok,C=lastC;if(!C)return;const {a,b,an,bn
   await wait(300);if(!alive())return;
   $('banner').innerHTML=`<div class="banner"><b>${title}</b><span>${sub}</span></div>`;
   await wait(500);if(!alive())return;$('tab-'+m).hidden=false;$('cAct').hidden=false}
-function slotHTML(x,nm){return `<img src="${IMG[x.p.s]}" alt=""><b>${x.name}</b><small>${nm} · ${x.s.k} × ${x.t}</small>`}
+function slotHTML(x,nm){return `<img src="${IMG[x.p.s]}" alt=""><b>${x.name} <span class="nkb">${NICK[x.p.s]}</span></b><small>${nm} · ${x.s.k} × ${x.t}</small>`}
 let TN=0;
 function addRow(name,date,t){const i=TN++;const d=document.createElement('div');d.className='trow';d.id='tr'+i;
   d.innerHTML=`<input class="txt" id="tn${i}" maxlength="10" value="${name}" aria-label="참가자 이름"><div class="dsel"><select id="t${i}Y" aria-label="태어난 해"></select><select id="t${i}M" aria-label="태어난 달"></select><select id="t${i}D" aria-label="태어난 날"></select></div><select id="tt${i}" aria-label="성격유형">${TYK.map(k=>`<option${k===t?' selected':''}>${k}</option>`).join('')}</select><button type="button" class="x" aria-label="참가자 빼기" data-rm="${i}">×</button>`;
@@ -1279,7 +1284,7 @@ $('f').addEventListener('submit',e=>{e.preventDefault();const er=(m,f)=>{$('err'
   if(!FM.g)return er('성별을 골라 주세요.');const p=parseBD($('bd').value,FM.cal);if(p.err)return er(p.err,'bd');const d=p.d;if(!valid(d))return er('1900~2026년생까지 볼 수 있어요.','bd');
   let mins=null;if(!$('tUnk').checked){const tm=parseTM(FM.ap,$('tHH').value,$('tMM').value);if(tm.none)return er('태어난 시간을 입력하거나 "출생시간 모름"에 체크하세요.','tHH');if(tm.err)return er(tm.err,'tHH');mins=tm.mins}
   $('err').textContent='';FM.mins=mins;FM.worry=$('worry').value.trim();FM.chips=[...$('wChips').querySelectorAll('[aria-pressed=true]')].map(b=>b.dataset.w);setD('d',d);
-  const t=type.join('');$('flipper').classList.remove('show');render(d,t,true);$('stageBox').hidden=false;$('sample').textContent=`${$('nick').value.trim()||'나'}의 카드 · ${d.replace(/-/g,'.')} · ${t}`;$('saveBox').hidden=true;
+  const t=type.join('');$('flipper').classList.remove('show');render(d,t,true);$('stageBox').hidden=false;$('sample').textContent=`${$('nick').value.trim()||'나'}의 카드 「${NICK[cur.p.s]}」 · ${t}`;$('saveBox').hidden=true;
   const im=$('cardImg'),show=()=>setTimeout(()=>$('flipper').classList.add('show'),RM()?0:350);if(im.complete&&im.naturalWidth)show();else{im.onload=show;im.onerror=show}try{localStorage.setItem('giun',JSON.stringify({d,t,n:$('nick').value.trim(),mins,g:FM.g,cal:FM.cal,raw:$('bd').value}))}catch(e){}
   $('flip').scrollIntoView({behavior:RM()?'auto':'smooth',block:'center'})});
 $('f2').addEventListener('submit',e=>{e.preventDefault();startMode('battle')});
@@ -1287,7 +1292,7 @@ $('picker').addEventListener('click',e=>{const b=e.target.closest('[data-mode]')
 $('replay').addEventListener('click',()=>play(curTab));
 $('toPick').addEventListener('click',()=>$('picker').scrollIntoView({behavior:RM()?'auto':'smooth'}));
 for(const id of ['n2','t2','d2Y','d2M','d2D'])$(id).addEventListener('change',()=>{playTok++;vsSource='form';$('cRes').hidden=true;$('vsNote').textContent=''});
-$('shareMe').addEventListener('click',()=>{const c=cur,n=myNick();share({code:code({d:c.dd,t:c.t}),n,title:`${n==='나'?'친구':n}님이 카드 배틀 도전장을 보냈어요`,desc:`「${c.name}」(${c.s.k} × ${c.t}) vs ? · 내 카드를 뽑아서 맞서 보세요!`,img:IMG[c.p.s].slice(4,-5),btn:'도전 받기'},'copyMsg')});
+$('shareMe').addEventListener('click',()=>{const c=cur,n=myNick();share({code:code({d:c.dd,t:c.t}),n,title:`${n==='나'?'친구':n}님이 카드 배틀 도전장을 보냈어요`,desc:`${NICK[c.p.s]} 「${c.name}」(${c.s.k} × ${c.t}) vs ? · 내 카드를 뽑아서 맞서 보세요!`,img:IMG[c.p.s].slice(4,-5),btn:'도전 받기'},'copyMsg')});
 $('shareC').addEventListener('click',()=>{if(!lastC)return;const C=lastC,{a,b,an,bn}=C,n=myNick();let title,desc;
   if(curTab==='battle'){title=`카드 배틀 ${C.f.wa}:${C.f.wb} ${RESW(C.f.res)}`;desc=`${an}의 「${a.name}」 vs ${bn}의 「${b.name}」 카드 배틀 결과는 ${C.f.wa}:${C.f.wb}! 리턴매치 받아 줄래?`}
   else if(curTab==='chem'){title=`우리 케미는 ${C.sc}점, 「${C.rel}」`;desc=`운빨카드에서 우리 케미를 봤어! ${C.sc}점 「${C.rel}」이래. 너도 네 카드 뽑고 확인해 봐.`}
@@ -1345,7 +1350,7 @@ function todayRender(){const c=cur,base=new Date(),A=c.A||analyze(c.sj,c.gender)
   const hearts=n=>'<i>'+'♥'.repeat(n)+'</i>'+'♡'.repeat(5-n),coins=n=>'<i>'+'●'.repeat(n)+'</i>'+'○'.repeat(5-n),star=Math.min(5,Math.max(1,Math.round(t.sc/2.4)));
   const front=`<div class="fc${t.lucky?' gold':''}" style="--ec:${EL[te].c}">
     <div class="fc-top"><span>${t.ds.slice(5).replace('-','.')} (${tdSel?WD[t.d.getDay()]:'오늘'})</span><b>${SH[t.tp.s]}${BR[t.tp.b]}일</b></div>
-    <div class="fc-duo"><figure><img src="${IMG[c.p.s]}" alt=""><figcaption>나 · ${c.s.noun}</figcaption></figure><span class="x">×</span><figure><img src="${IMG[t.tp.s]}" alt=""><figcaption>${STK[t.tp.s]}${BRK[t.tp.b]} · ${ANI[t.tp.b]}</figcaption></figure></div>
+    <div class="fc-duo"><figure><img src="${IMG[c.p.s]}" alt=""><figcaption>나 · ${NICK[c.p.s]}</figcaption></figure><span class="x">×</span><figure><img src="${IMG[t.tp.s]}" alt=""><figcaption>${NICK[t.tp.s]} · ${ANI[t.tp.b]}</figcaption></figure></div>
     <p class="fc-god">${t.gn}의 날${t.lucky?' · ★ 나의 길일':''}</p>
     <h3 class="fc-t">${t.g[0].replace(/달$/,'날')}</h3>
     <div class="fc-st"><span>종합</span><b class="sy">${'★'.repeat(star)}${'☆'.repeat(5-star)}</b><span>연애</span><b class="hr">${hearts(t.g[2])}</b><span>재물</span><b class="cn">${coins(t.g[3])}</b></div>
@@ -1382,8 +1387,8 @@ function dexAdd(no){if(!no)return;const d=dexGet();d.add(no);window.__dex=[...d]
 function mkCard(si,t,b){const s=ST[si],r=TY[t],g=temp(t);return{p:{s:si,b:b??0},s,t,r,g,name:nm(si,t),no:si*16+TYK.indexOf(t)+1}}
 let dexSi=-1;
 function dexRender(){if(dexSi<0)dexSi=cur&&hasCard()?cur.p.s:0;const d=dexGet(),mine=cur&&hasCard()?cur.no:0;$('dexN').textContent=`${d.size}/160`;
-  $('dexTabs').innerHTML=ST.map((x,i)=>`<button type="button" data-si="${i}" aria-pressed="${i===dexSi}" aria-label="${x.k}" style="background-image:url(${IMG[i]})"></button>`).join('');
-  $('dexGrid').innerHTML=TYK.map(t=>{const c=mkCard(dexSi,t),has=d.has(c.no);return `<button type="button" class="${has?'':'no'} ${c.no===mine?'mine':''}" data-t="${t}"><img src="${IMG[dexSi]}" alt=""><b>${has?c.name:'미발견'}</b><small>No.${String(c.no).padStart(3,'0')} · ${t}</small></button>`}).join('');$('dexView').innerHTML=''}
+  $('dexTabs').innerHTML=ST.map((x,i)=>`<button type="button" data-si="${i}" aria-pressed="${i===dexSi}" aria-label="${NICK[i]} (${x.k})" title="${NICK[i]}" style="background-image:url(${IMG[i]})"></button>`).join('');
+  $('dexGrid').innerHTML=TYK.map(t=>{const c=mkCard(dexSi,t),has=d.has(c.no);return `<button type="button" class="${has?'':'no'} ${c.no===mine?'mine':''}" data-t="${t}"><img src="${IMG[dexSi]}" alt=""><b>${has?`${NICK[dexSi]} · ${c.name}`:'미발견'}</b><small>No.${String(c.no).padStart(3,'0')} · ${t}</small></button>`}).join('');$('dexView').innerHTML=''}
 function dexView(t){const c=mkCard(dexSi,t),has=dexGet().has(c.no);const ab=abil(c);
   $('dexView').innerHTML=`<div class="panel dexv"><img src="${IMG[dexSi]}" alt="" style="${has?'':'filter:grayscale(1);opacity:.5'}"><div><p class="kick">No.${String(c.no).padStart(3,'0')} · ${c.s.k} × ${t}</p><h3>${has?c.name:'아직 만나지 못한 카드'}</h3>${has?`<p>${ab[0][2]} ${ab[1][2]}</p><p>2027 정미년 · ${c.s.yt}</p>`:`<p>이 카드를 가진 친구와 대결하거나, 카드 광장에서 만나면 열려요.</p>`}</div></div>`}
 /* plaza (community) */
@@ -1441,7 +1446,7 @@ document.addEventListener('click',e=>{const t=e.target;
   if(t.closest('#exBtn')||t.closest('#exBtn2')){if(!hasCard()){go('draw');return}exShare();return}
   const ct=t.closest('[data-ct]');if(ct){colTab=ct.dataset.ct;colRender();return}});
 $('exX').addEventListener('click',()=>{$('exModal').hidden=true});
-if(window.__ex){const {on,ox}=window.__ex;$('exT').textContent=`${on}님이 카드를 보냈어요`;$('exImg').src=cardSrc(ox,'n');$('exD').textContent=`「${ox.name}」(${ox.s.k} × ${ox.t}) 카드가 카드함 친구 칸에 들어갔어요.`;
+if(window.__ex){const {on,ox}=window.__ex;$('exT').textContent=`${on}님이 카드를 보냈어요`;$('exImg').src=cardSrc(ox,'n');$('exD').textContent=`${NICK[ox.p.s]} 「${ox.name}」(${ox.s.k} × ${ox.t}) 카드가 카드함 친구 칸에 들어갔어요.`;
   const me=hasCard();$('exGo').textContent=me?'내 카드도 보내 주기':'나도 카드 뽑고 보내 주기';$('exGo').onclick=()=>{if(me){exShare();$('exMsg').textContent='보낸 뒤 친구도 내 카드를 받게 돼요.'}else{$('exModal').hidden=true;go('draw')}};$('exModal').hidden=false}
 
 }
