@@ -372,6 +372,26 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 .psh{margin:16px 0 0;font:700 15px "Gowun Batang",serif}.empty{color:var(--sub);text-align:center;padding:24px 0}
 .eximg{width:min(60%,200px);border-radius:12px;margin:6px auto 10px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.3)}
 #cx-fr .btn{margin-top:8px}
+
+/* today card */
+.fflip{width:min(86vw,340px);margin:0 auto;perspective:1200px;cursor:pointer}.fin{position:relative;aspect-ratio:5/7.6;transition:transform .8s cubic-bezier(.3,1.3,.5,1);transform-style:preserve-3d}.fflip.show .fin{transform:rotateY(180deg)}.fflip.show{cursor:default}
+.fback,.ffront{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}.ffront{transform:rotateY(180deg)}
+.fback{border-radius:20px;background:radial-gradient(circle at 50% 40%,#3a2f1c,#15130f 70%);box-shadow:inset 0 0 0 3px #e8c46a,inset 0 0 0 9px #15130f,inset 0 0 0 10px rgba(232,196,106,.5),0 12px 30px rgba(0,0,0,.35);display:grid;place-content:center;justify-items:center;gap:8px;color:#e8c46a}
+.fback span{font:700 86px/1 "Gowun Batang",serif;text-shadow:0 0 24px rgba(232,196,106,.6)}.fback small{font-size:14px;color:#f7f3ea}.fback em{font-style:normal;font-size:12px;color:rgba(247,243,234,.6);animation:blink 1.6s infinite}
+.fback.lone{position:relative;width:min(60vw,220px);aspect-ratio:5/7.6;margin:0 auto 14px}.fback.lone span{font-size:64px}
+.tgate{text-align:center}.tgate h3{font:700 19px/1.4 "Gowun Batang",serif;margin:0 0 4px}.tgate p{color:var(--sub);margin:0 0 12px}
+.fc{height:100%;box-sizing:border-box;border-radius:20px;padding:14px 16px;display:grid;grid-template-rows:auto auto auto auto auto 1fr auto auto;gap:6px;color:#f7f3ea;text-align:center;
+ background:radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--ec) 45%,#fff) 0%,var(--ec) 55%,color-mix(in srgb,var(--ec) 60%,#000) 100%);box-shadow:inset 0 0 0 3px #e8c46a,inset 0 0 0 8px rgba(0,0,0,.18),inset 0 0 0 9px rgba(232,196,106,.6),0 12px 30px rgba(0,0,0,.3)}
+.fc.gold{box-shadow:inset 0 0 0 3px #ffe39a,inset 0 0 0 8px rgba(0,0,0,.18),inset 0 0 0 9px #ffe39a,0 0 34px rgba(255,205,90,.75)}
+.fc-top{display:flex;justify-content:space-between;align-items:center;font-size:13px}.fc-top b{font:700 20px "Gowun Batang",serif;letter-spacing:.06em}
+.fc-duo{display:flex;align-items:center;justify-content:center;gap:6px}.fc-duo figure{margin:0;display:grid;justify-items:center;gap:3px}.fc-duo img{width:min(24vw,92px);aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid #f3dc9a;background:#f7f3ea}.fc-duo figcaption{font-size:11px}.fc-duo .x{font:700 22px serif;color:#ffe39a}
+.fc-god{margin:0;font-size:12px;letter-spacing:.06em;color:#ffe39a}.fc-t{margin:0;font:700 24px/1.25 "Gowun Batang",serif}
+.fc-st{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:center;text-align:left;background:rgba(0,0,0,.22);border-radius:12px;padding:8px 12px;font-size:12px}.fc-st b{font-weight:400;letter-spacing:.1em;font-size:15px;color:rgba(255,255,255,.45)}.fc-st b i{font-style:normal;color:#ffe39a}.fc-st .hr i{color:#ffb3c8}.fc-st .sy{color:#ffe39a}
+.fc-adv{margin:0;font-size:13px;line-height:1.5;align-self:center}
+.fc-lk{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.fc-lk span{background:rgba(255,255,255,.14);border-radius:10px;padding:5px 4px;font-size:10px}.fc-lk b{display:block;font-size:12px;font-weight:500}
+.fc-ft{font:700 11px "Gowun Batang",serif;color:rgba(255,227,154,.8);letter-spacing:.1em}
+.wk7{display:grid;grid-auto-flow:column;grid-auto-columns:84px;gap:8px;overflow-x:auto;padding:4px 2px 8px}.wkc{padding:0;border:0;background:none;cursor:pointer;display:grid;gap:4px;font:12px "Noto Sans KR",sans-serif;color:var(--ink);transition:transform .15s}.wkc.on{transform:translateY(-4px)}.wkc.on .mc{box-shadow:inset 0 0 0 2px #ffe39a,0 0 0 3px var(--seal)}
+.wkc>i{height:5px;border-radius:3px;background:var(--seal);justify-self:start}.wkc .mc .mn{font-size:10px}
 </style>
 </head>
 <body>
@@ -616,7 +636,7 @@ body[data-scr=home] .tabbar{display:none}body:not([data-scr=home]){padding-botto
 </section>
 <section class="scr" id="scr-today" hidden>
 <div class="topbar band wrap"><button type="button" class="back" data-nav="home">← 메인</button><b>운빨카드</b><span>오늘의 운빨</span></div>
-<div class="band wrap gate" hidden><div class="panel"><h3>먼저 내 카드를 뽑아 주세요</h3><p>오늘의 운빨에는 내 카드가 필요해요. 생일과 유형만 넣으면 10초면 끝나요.</p><button type="button" class="btn" data-nav="draw">카드 뽑으러 가기</button></div></div>
+<div class="band wrap gate" hidden><div class="tgate"><div class="fback lone"><span>運</span><small>아직 주인이 없는 카드</small></div><h3>내 카드를 뽑으면 오늘의 운빨 카드가 열려요</h3><p>생년월일만 넣으면 10초면 끝나요.</p><button type="button" class="btn" data-nav="draw">카드 뽑으러 가기</button></div></div>
 <div class="band wrap" id="todayBox"></div>
 </section>
 <section class="scr" id="scr-newyear" hidden>
@@ -991,7 +1011,7 @@ function iljinCard(c){const j=iljinToday(),got=iljinGot(),have=!!got[j.i],g=tenG
    <div class="ijflip${have?' show':''}" id="ijFlip"><div class="ijin"><div class="ijback"><span>日</span><small>오늘의 기운</small></div><div class="ijfront">${mcHTML({s:j.s,b:j.b,top:`${j.t.replace(/-/g,'.')} 일진`,name:`${STK[j.s]}${BRK[j.b]}일 · ${ST[j.s].noun}과 ${ANI[j.b]}`,sub:lucky?'★ 나의 길일':g,cls:'big'+(lucky?' gold':'')})}</div></div></div>
    ${have?`<p class="ijmsg"><b>${TG[g][0].replace(/달$/,'날')}</b> — ${TG[g][1]}${lucky?' 오늘은 내 용신 기운이 들어온 길일이에요.':''}</p>`:`<button type="button" class="btn" id="ijGet">오늘의 일진 카드 받기</button>`}
    <p class="note" style="margin:8px 0 0">하루에 한 장, 60일 동안 모두 다른 카드가 와요. 카드함에서 모은 카드를 볼 수 있어요.</p></div>`}
-function iljinTake(){const j=iljinToday(),got=iljinGot();if(!got[j.i]){got[j.i]=j.t;lsSet('iljin',got)}const f=$('ijFlip');if(f)f.classList.add('show');setTimeout(todayRender,RM()?0:700)}
+function iljinTake(){const j=iljinToday(),got=iljinGot();if(!got[j.i]){got[j.i]=j.t;lsSet('iljin',got)}const f=$('fFlip');if(f)f.classList.add('show');const b=$('ijGet');if(b)b.remove();setTimeout(todayRender,RM()?0:800)}
 /* 친구 */
 function friendsGet(){return lsGet('friends',[])}
 function friendAdd(n,f,x){const L=friendsGet().filter(o=>o.f!==f);L.unshift({n,f,si:x.p.s,b:x.p.b,t:x.t,no:x.no,name:x.name,at:todayStr()});lsSet('friends',L.slice(0,100));dexAdd(x.no)}
@@ -1284,7 +1304,7 @@ function go(n,fromHash){if(!SCR.includes(n))n='home';for(const k of SCR)$('scr-'
   if(!fromHash&&location.hash.slice(1)!==n){history.pushState(null,'',n==='home'?location.pathname+location.search:'#'+n)}
   const gate=$('scr-'+n).querySelector('.gate'),need=['battle','today'].includes(n)&&!hasCard()&&!(n==='battle'&&chActive);if(gate)gate.hidden=!need;
   if(n==='battle'){$('challenge').hidden=!(chActive&&!chAccepted);$('arena').hidden=need||(chActive&&!chAccepted)}
-  if(n==='today'){$('todayBox').hidden=need;if(!need)todayRender()}
+  if(n==='today'){$('todayBox').hidden=need;tdSel=0;if(!need)todayRender()}
   if(n==='newyear')nyInit();if(n==='dex')colRender();if(n==='plaza')plazaRender();
   window.scrollTo(0,0)}
 window.addEventListener('popstate',()=>go(location.hash.slice(1)||'home',true));
@@ -1307,15 +1327,29 @@ function introInit(){const T=["145m", "048n", "126n", "114n", "087n", "079n", "0
   $('shareSite').addEventListener('click',()=>share({title:'운빨카드',desc:'생일과 성격유형으로 내 기운 카드를 뽑고, 친구와 운빨배틀 해 보자!',img:'og',btn:'카드 뽑으러 가기'},'shareMsg'));
   if(hasCard()&&cur)markCard()}
 /* today */
-function todayRender(){const c=cur,base=new Date();const days=[...Array(7)].map((_,k)=>{const d=new Date(base);d.setDate(d.getDate()+k);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const tp=pillar(ds),g=TG[tenGod(c.p.s,tp.s)];return{d,ds,tp,g}});
-  const t=days[0],sup=(c.s.e+4)%5,L=LUCKY[sup],WD='일월화수목금토';
-  $('todayBox').innerHTML=iljinCard(c)+`<div class="panel"><div class="tdbig"><div class="hj2" style="background:${EL[Math.floor(t.tp.s/2)].c}">${SH[t.tp.s]}${BR[t.tp.b]}</div><div><p class="kick">${t.ds.replace(/-/g,'.')} · ${SH[t.tp.s]}${BR[t.tp.b]}일 · ${c.name}</p><h3>${t.g[0].replace(/달$/,'날')}</h3><p>${t.g[1]}</p></div></div>
-   <table class="vtab" style="margin-top:14px"><tr><td>연애운</td><td>${dots(t.g[2])}</td></tr><tr><td>재물운</td><td>${dots(t.g[3])}</td></tr><tr><td>행운의 색</td><td>${L[0]}</td></tr><tr><td>행운의 숫자</td><td>${L[2]}</td></tr></table>
-   <p class="note" style="margin:6px 0 0">행운의 색과 숫자는 내 일간(${c.s.k})을 살려 주는 ${ELW[sup]} 기운에서 골랐어요.</p></div>
-   <h3 class="mh" style="margin-top:22px">이번 주 운빨 흐름</h3><div class="week">${days.map((x,k)=>`<div class="${k?'':'on'}"><b>${k?WD[x.d.getDay()]:'오늘'}</b>${x.d.getDate()}일<i style="width:${Math.round((x.g[2]+x.g[3])/10*90)}%"></i></div>`).join('')}</div>
-   <p class="note" style="margin:8px 0 0">막대는 그날의 연애운과 재물운을 합친 점수예요. 매일 자정에 새로 계산돼요.</p>
-   <button class="kakao wide" type="button" id="todayShare">${'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>'}오늘의 운빨 공유</button><p class="note" id="todayMsg" role="status"></p>`;
-  $('todayShare').addEventListener('click',()=>share({code:code({d:c.dd,t:c.t}),n:myNick(),title:`오늘 나는 「${t.g[0].replace(/달$/,'날')}」`,desc:`운빨카드 오늘의 운빨: ${t.g[1]} 너의 오늘은 어때?`,img:IMG[c.p.s].slice(4,-5),btn:'내 오늘 보기'},'todayMsg'))}
+let tdSel=0;
+function todayRender(){const c=cur,base=new Date(),A=c.A||analyze(c.sj,c.gender),yt=YONGT[A.yong],WD='일월화수목금토';
+  const days=[...Array(7)].map((_,k)=>{const d=new Date(base);d.setDate(d.getDate()+k);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const tp=pillar(ds),gn=tenGod(c.p.s,tp.s),g=TG[gn],lucky=Math.floor(tp.s/2)===A.yong||EB[tp.b]===A.yong;return{d,ds,tp,gn,g,lucky,sc:g[2]+g[3]+(lucky?2:0)}});
+  const got=iljinGot(),t=days[tdSel],j=iljinToday(),taken=!!got[j.i],open=tdSel>0||taken,te=Math.floor(t.tp.s/2);
+  const hearts=n=>'<i>'+'♥'.repeat(n)+'</i>'+'♡'.repeat(5-n),coins=n=>'<i>'+'●'.repeat(n)+'</i>'+'○'.repeat(5-n),star=Math.min(5,Math.max(1,Math.round(t.sc/2.4)));
+  const front=`<div class="fc${t.lucky?' gold':''}" style="--ec:${EL[te].c}">
+    <div class="fc-top"><span>${t.ds.slice(5).replace('-','.')} (${tdSel?WD[t.d.getDay()]:'오늘'})</span><b>${SH[t.tp.s]}${BR[t.tp.b]}일</b></div>
+    <div class="fc-duo"><figure><img src="${IMG[c.p.s]}" alt=""><figcaption>나 · ${c.s.noun}</figcaption></figure><span class="x">×</span><figure><img src="${IMG[t.tp.s]}" alt=""><figcaption>${STK[t.tp.s]}${BRK[t.tp.b]} · ${ANI[t.tp.b]}</figcaption></figure></div>
+    <p class="fc-god">${t.gn}의 날${t.lucky?' · ★ 나의 길일':''}</p>
+    <h3 class="fc-t">${t.g[0].replace(/달$/,'날')}</h3>
+    <div class="fc-st"><span>종합</span><b class="sy">${'★'.repeat(star)}${'☆'.repeat(5-star)}</b><span>연애</span><b class="hr">${hearts(t.g[2])}</b><span>재물</span><b class="cn">${coins(t.g[3])}</b></div>
+    <p class="fc-adv">${t.g[1]}</p>
+    <div class="fc-lk"><span>행운의 색<b>${yt[0].split('·')[0]}</b></span><span>숫자<b>${yt[2]}</b></span><span>방향<b>${yt[1]}</b></span></div>
+    <div class="fc-ft">운빨카드 · 오늘의 운빨</div></div>`;
+  $('todayBox').innerHTML=`<p class="kick" style="text-align:center;margin:0 0 8px">${tdSel?`${t.d.getMonth()+1}월 ${t.d.getDate()}일 미리보기`:`오늘의 운빨 카드 · 육십갑자 ${Object.keys(got).length}/60`}</p>
+   <div class="fflip${open?' show':''}" id="fFlip"><div class="fin"><div class="fback"><span>運</span><small>${c.s.noun} ${c.r[0]}의 오늘</small><em>눌러서 뒤집기</em></div><div class="ffront">${front}</div></div></div>
+   ${!open?'<button type="button" class="btn" id="ijGet">오늘의 운빨 카드 뒤집기</button>':''}
+   <h3 class="mh" style="margin-top:20px">이번 주 운빨 카드</h3>
+   <div class="wk7">${days.map((x,k)=>`<button type="button" class="wkc${k===tdSel?' on':''}" data-day="${k}"><small>${k?WD[x.d.getDay()]+' '+x.d.getDate():'오늘'}</small>${mcHTML({s:x.tp.s,b:x.tp.b,top:x.gn,name:x.g[0].replace(/달$/,'날'),cls:x.lucky?'gold':''})}<i style="width:${Math.min(100,x.sc*10)}%"></i></button>`).join('')}</div>
+   <p class="note" style="margin:8px 0 0">카드를 누르면 그날의 운빨을 미리 볼 수 있어요. 오늘 카드는 뒤집으면 카드함 「일진」에 모여요.</p>
+   <div class="actions" style="margin-top:12px"><button class="kakao" type="button" id="todayShare"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>오늘의 운빨 공유</button><button class="ghost" type="button" data-nav="dex">카드함 보기</button></div><p class="note" id="todayMsg" role="status"></p>`;
+  const d0=days[0];$('todayShare').addEventListener('click',()=>share({code:code({d:c.dd,t:c.t}),n:myNick(),title:`오늘 나는 「${d0.g[0].replace(/달$/,'날')}」`,desc:`운빨카드 오늘의 운빨: ${d0.g[1]} 너의 오늘은 어때?`,img:IMG[c.p.s].slice(4,-5),btn:'내 오늘 보기'},'todayMsg'));
+  const fl=$('fFlip');if(!open)fl.addEventListener('click',iljinTake)}
 /* newyear by tti */
 const ANIL=['눈치가 빠르고 기회를 먼저 알아봐요.','묵묵하고 한번 시작한 일은 끝까지 해내요.','용감하고 앞장서는 걸 두려워하지 않아요.','섬세하고 분위기를 부드럽게 만들어요.','스케일이 크고 존재감이 강해요.','직관이 날카롭고 속이 깊어요.','자유롭고 행동력이 넘쳐요.','온화하고 사람을 편하게 해요.','재치 있고 문제 해결이 빨라요.','꼼꼼하고 자기 관리가 철저해요.','의리 있고 정직해요.','너그럽고 복을 나눌 줄 알아요.'];
 const LIUHE=[1,0,11,10,9,8,7,6,5,4,3,2],SANHE=[[8,0,4],[11,3,7],[2,6,10],[5,9,1]];
@@ -1392,6 +1426,7 @@ $('payModal').addEventListener('click',e=>{if(e.target.id==='payModal')$('payMod
 document.addEventListener('click',e=>{const t=e.target;
   const pc=t.closest('[data-pc]');if(pc){for(const b of document.querySelectorAll('[data-pc]'))b.classList.toggle('on',b===pc);pillarInfo(+pc.dataset.pc);return}
   if(t.closest('#ijGet')){iljinTake();return}
+  const dy=t.closest('[data-day]');if(dy){tdSel=+dy.dataset.day;todayRender();return}
   if(t.closest('#exBtn')||t.closest('#exBtn2')){if(!hasCard()){go('draw');return}exShare();return}
   const ct=t.closest('[data-ct]');if(ct){colTab=ct.dataset.ct;colRender();return}});
 $('exX').addEventListener('click',()=>{$('exModal').hidden=true});
