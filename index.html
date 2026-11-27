@@ -1216,7 +1216,7 @@ const PAY={price:990,live:false,
   buy(it,done){const P=PAYITEMS[it];const m=$('payModal');$('payT').textContent=P.t;$('payD').textContent=P.d;$('payMsg').textContent='';m.hidden=false;
     const live=tossLive();$('tossBox').hidden=!live;PAY.w=null;
     if(live){$('payGo').disabled=true;$('tossPM').innerHTML='';$('tossAG').innerHTML='';$('payMsg').textContent='결제 수단을 불러오는 중이에요…';
-      tossLoad().then(async()=>{const w=TossPayments(TOSS.ck).widgets({customerKey:TossPayments.ANONYMOUS});await w.setAmount({currency:'KRW',value:PAY.price});await Promise.all([w.renderPaymentMethods({selector:'#tossPM',variantKey:'DEFAULT'}),w.renderAgreement({selector:'#tossAG',variantKey:'AGREEMENT'})]);PAY.w=w;$('payGo').disabled=false;$('payMsg').textContent=''}).catch(()=>{$('payMsg').textContent='결제창을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.'})}
+      tossLoad().then(async()=>{const tp=TossPayments(TOSS.ck);if(/_gck_/.test(TOSS.ck)){const w=tp.widgets({customerKey:TossPayments.ANONYMOUS});await w.setAmount({currency:'KRW',value:PAY.price});await Promise.all([w.renderPaymentMethods({selector:'#tossPM',variantKey:'DEFAULT'}),w.renderAgreement({selector:'#tossAG',variantKey:'AGREEMENT'})]);PAY.w=w}else{const pm=tp.payment({customerKey:TossPayments.ANONYMOUS});PAY.w={requestPayment:o=>pm.requestPayment({method:'CARD',amount:{currency:'KRW',value:PAY.price},...o})};$('tossBox').hidden=true}$('payGo').disabled=false;$('payMsg').textContent=''}).catch(()=>{$('payMsg').textContent='결제창을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.'})}
     $('payGo').onclick=async()=>{if(live){if(!PAY.w)return;const oid=it+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);try{localStorage.setItem('payPending',JSON.stringify({it,oid,key:PAY.key(it),t:Date.now()}))}catch(e){}
         try{await PAY.w.requestPayment({orderId:oid,orderName:'운빨카드 '+P.t,successUrl:location.origin+'/?toss=ok',failUrl:location.origin+'/?toss=fail'})}catch(e){$('payMsg').textContent=(e&&e.message)||'결제가 취소됐어요.'}}
       else{$('payMsg').textContent='정식 오픈 전 테스트 기간이라 실제 결제 없이 열려요.';setTimeout(()=>{PAY.grant(it);m.hidden=true;done()},900)}};
@@ -1946,7 +1946,7 @@ $('hmGung').addEventListener('click',()=>{if(!hasCard()){go('draw');return}go('d
   const pm=$('pm-gung');setTimeout(()=>{pm.scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'});if(!PAY.has('gung'))pm.classList.add('flash')},120);setTimeout(()=>pm.classList.remove('flash'),2200)});
 
 /* ===== 토스페이먼츠 결제위젯 ===== */
-const TOSS={ck:'test_gck_c19AsMZZ3lN6NlWcPNZwBN75kHsdOocOlu',fn:SUPA.url+'/functions/v1/toss-confirm',on:false};
+const TOSS={ck:'test_ck_c19B7D1H6xi1CN1FJhIHwkcaIuMI2KEiSy',fn:SUPA.url+'/functions/v1/toss-confirm',on:false};
 function tossLive(){try{return TOSS.on||localStorage.getItem('paytest')==='1'}catch(e){return TOSS.on}}
 function tossLoad(){return window.TossPayments?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://js.tosspayments.com/v2/standard';s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
 function payToast(t,ok){let d=$('payToast');if(!d){d=document.createElement('div');d.id='payToast';d.className='paytoast';document.body.appendChild(d)}d.textContent=t;d.classList.toggle('ok',!!ok);d.hidden=false;clearTimeout(payToast.t);payToast.t=setTimeout(()=>{d.hidden=true},4200)}
