@@ -1218,7 +1218,7 @@ function gungRender(c,o){const A=c.A,B=analyze(o.sj,o.gender),a=c.p.s,b=o.sj.d[0
 const PAYITEMS={story:{t:'내 사주 이야기 전체',d:'넘어지는 이유 · 10년마다 바뀌는 계절(대운) · 2027년 열두 달과 세 번의 기회 · 정령이 남기는 말까지 한 번에'},gung:{t:'궁합 보기',d:'처음 끌린 이유 · 서로에게 어떤 사람인지 · 같이 지낼 때 · 싸울 때 화해법 · 둘의 2027년까지, 두 사람 사주를 나란히 놓고 이야기로 풀어 드려요'},dw:{t:'대운 보기',d:'10년 단위 인생 흐름 9구간과 상승기·주의기 해설'},ny:{t:'2027 신년운세',d:'정미년 월별 흐름 12개월 전체와 연애·재물 집중 시기'}};
 const PAY={price:990,live:false,
   key(it){return 'paid_'+it+'_'+(cur?cur.dd+(cur.mins??'')+cur.gender:'')},
-  has(it){try{return localStorage.getItem(PAY.key(it))==='1'}catch(e){return false}},
+  has(it){try{const v=localStorage.getItem(PAY.key(it));return v==='p'||(v==='1'&&!tossLive())}catch(e){return false}},
   grant(it){try{localStorage.setItem(PAY.key(it),'1')}catch(e){}},
   buy(it,done){const P=PAYITEMS[it];const m=$('payModal');$('payT').textContent=P.t;$('payD').textContent=P.d;$('payMsg').textContent='';m.hidden=false;
     const live=tossLive();$('tossBox').hidden=!live;PAY.w=null;
@@ -1821,8 +1821,10 @@ function introInit(){if(!RM()){const h=$('scr-home');h.classList.add('shake');se
   if(hasCard()&&cur)markCard()}
 /* today */
 let tdSel=0;
+const DLC=[['초록','청록','연두'],['빨강','주황','분홍'],['노랑','베이지','갈색'],['흰색','은색','금색'],['검정','남색','파랑']],DLD=[['동쪽','동북쪽','동남쪽'],['남쪽','남동쪽','남서쪽'],['중앙','남서쪽','북동쪽'],['서쪽','북서쪽','남서쪽'],['북쪽','북동쪽','북서쪽']],DLN=[[3,8],[2,7],[5,10],[4,9],[1,6]];
+function dayLuck(y,tp){const p=DLN[y][tp.s%2];let q=(tp.s+tp.b)%9+1;if(q===p)q=q%9+1;return{c:DLC[y][tp.s%3],d:DLD[y][tp.b%3],n:p+', '+q}}
 function todayRender(){const c=cur,base=new Date(),A=c.A||analyze(c.sj,c.gender),yt=YONGT[A.yong],WD='일월화수목금토';
-  const days=[...Array(7)].map((_,k)=>{const d=new Date(base);d.setDate(d.getDate()+k);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const tp=pillar(ds),gn=tenGod(c.p.s,tp.s),g=TG[gn],lucky=Math.floor(tp.s/2)===A.yong||EB[tp.b]===A.yong;return{d,ds,tp,gn,g,lucky,sc:g[2]+g[3]+(lucky?2:0)}});
+  const days=[...Array(7)].map((_,k)=>{const d=new Date(base);d.setDate(d.getDate()+k);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const tp=pillar(ds),gn=tenGod(c.p.s,tp.s),g=TG[gn],lucky=Math.floor(tp.s/2)===A.yong||EB[tp.b]===A.yong;return{d,ds,tp,gn,g,lucky,lk:dayLuck(A.yong,tp),sc:g[2]+g[3]+(lucky?2:0)}});
   const got=iljinGot(),t=days[tdSel],j=iljinToday(),taken=!!got[j.i],open=tdSel>0||taken,te=Math.floor(t.tp.s/2);
   const hearts=n=>'<i>'+'♥'.repeat(n)+'</i>'+'♡'.repeat(5-n),coins=n=>'<i>'+'●'.repeat(n)+'</i>'+'○'.repeat(5-n),star=Math.min(5,Math.max(1,Math.round(t.sc/2.4)));
   const front=`<div class="fc${t.lucky?' gold':''}" style="--ec:${EL[te].c}">
@@ -1832,7 +1834,7 @@ function todayRender(){const c=cur,base=new Date(),A=c.A||analyze(c.sj,c.gender)
     <h3 class="fc-t">${t.g[0].replace(/달$/,'날')}</h3>
     <div class="fc-st"><span>종합</span><b class="sy">${'★'.repeat(star)}${'☆'.repeat(5-star)}</b><span>연애</span><b class="hr">${hearts(t.g[2])}</b><span>재물</span><b class="cn">${coins(t.g[3])}</b></div>
     <p class="fc-adv">${t.g[1]}</p>
-    <div class="fc-lk"><span>행운의 색<b>${yt[0].split('·')[0]}</b></span><span>숫자<b>${yt[2]}</b></span><span>방향<b>${yt[1]}</b></span></div>
+    <div class="fc-lk"><span>행운의 색<b>${t.lk.c}</b></span><span>숫자<b>${t.lk.n}</b></span><span>방향<b>${t.lk.d}</b></span></div>
     <div class="fc-ft">운빨카드 · 오늘의 운빨</div></div>`;
   $('todayBox').innerHTML=`<div class="tdhead"><b>이번 주 운빨 카드</b><span>${tdSel?`${t.d.getMonth()+1}월 ${t.d.getDate()}일 미리보기`:`일진 ${Object.keys(got).length}/60`}</span></div>
    <div class="wk7">${days.map((x,k)=>`<button type="button" class="wkc${k===tdSel?' on':''}${x.lucky?' lk':''}" data-day="${k}" aria-label="${x.d.getMonth()+1}월 ${x.d.getDate()}일"><small>${k?WD[x.d.getDay()]+' '+x.d.getDate():'오늘'}</small><span class="wkm" style="--ec:${EL[Math.floor(x.tp.s/2)].c}"><img src="${IMG[x.tp.s]}" alt=""><b>${SH[x.tp.s]}${BR[x.tp.b]}</b></span><i style="width:${Math.min(100,x.sc*10)}%"></i></button>`).join('')}</div>
@@ -2024,7 +2026,7 @@ function afterPaid(it){go('draw');const d=$('detail');if(d.hidden){d.hidden=fals
   history.replaceState(null,'',location.pathname+'#draw');
   if(st==='ok'&&p&&q.get('orderId')===p.oid){payToast('결제를 확인하는 중이에요…');
    fetch(TOSS.fn,{method:'POST',headers:{'Content-Type':'application/json',apikey:SUPA.key},body:JSON.stringify({paymentKey:q.get('paymentKey'),orderId:p.oid,amount:Number(q.get('amount')),item:p.it})})
-    .then(r=>r.json()).then(j=>{if(j&&j.ok){try{localStorage.setItem(p.key,'1');localStorage.removeItem('payPending')}catch(e){}payToast('결제 완료! 바로 열어 드릴게요.',true);track('pay_ok',{it:p.it});luckEarnPay(p.oid);if(evOn())setTimeout(()=>payToast('복주머니 3개를 받았어요! 홈에서 열어 보세요.',true),4500);afterPaid(p.it)}else payToast('결제 승인에 실패했어요. '+((j&&j.message)||'잠시 후 다시 시도해 주세요.'))})
+    .then(r=>r.json()).then(j=>{if(j&&j.ok){try{localStorage.setItem(p.key,'p');localStorage.removeItem('payPending')}catch(e){}payToast('결제 완료! 바로 열어 드릴게요.',true);track('pay_ok',{it:p.it});luckEarnPay(p.oid);if(evOn())setTimeout(()=>payToast('복주머니 3개를 받았어요! 홈에서 열어 보세요.',true),4500);afterPaid(p.it)}else payToast('결제 승인에 실패했어요. '+((j&&j.message)||'잠시 후 다시 시도해 주세요.'))})
     .catch(()=>payToast('결제 확인 중 연결이 끊겼어요. 결제가 됐다면 문의 메일로 알려 주세요.'))}
   else if(st==='fail')payToast(q.get('message')||'결제가 취소됐어요.');
  }}
