@@ -2011,7 +2011,7 @@ $('f').addEventListener('submit',()=>setTimeout(()=>{if(!$('err').textContent&&c
 {const _s2=share;share=async function(o,msg){const r=await _s2(o,msg);luckEarnFree();return r}}
 document.querySelectorAll('.evp').forEach(e=>e.innerHTML=POUCH);$('luckBag').innerHTML=POUCH;luckUI();
 /* ===== 토스페이먼츠 결제위젯 ===== */
-const TOSS={ck:'live_ck_c19B7D1IMo29bR3prMiQfGFh5TvIdRR9cs',fn:SUPA.url+'/functions/v1/toss-confirm',on:false};
+const TOSS={ck:'live_ck_c19B7D1IMo29bR3prMiQfGFh5TvIdRR9cs',fn:SUPA.url+'/functions/v1/toss-confirm',on:true};
 {const q=new URLSearchParams(location.search).get('paytest');if(q!==null){try{q==='1'?localStorage.setItem('paytest','1'):localStorage.removeItem('paytest')}catch(e){}history.replaceState(null,'',location.pathname+location.hash)}}
 function tossLive(){try{return TOSS.on||localStorage.getItem('paytest')==='1'}catch(e){return TOSS.on}}
 function tossLoad(){return window.TossPayments?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://js.tosspayments.com/v2/standard';s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
