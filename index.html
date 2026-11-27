@@ -1946,7 +1946,7 @@ $('hmGung').addEventListener('click',()=>{if(!hasCard()){go('draw');return}go('d
   const pm=$('pm-gung');setTimeout(()=>{pm.scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'});if(!PAY.has('gung'))pm.classList.add('flash')},120);setTimeout(()=>pm.classList.remove('flash'),2200)});
 
 /* ===== 토스페이먼츠 결제위젯 ===== */
-const TOSS={ck:'test_ck_c19B7D1H6xi1CN1FJhIHwkcaIuMI2KEiSy',fn:SUPA.url+'/functions/v1/toss-confirm',on:false};
+const TOSS={ck:'live_ck_c19B7D1IMo29bR3prMiQfGFh5TvIdRR9cs',fn:SUPA.url+'/functions/v1/toss-confirm',on:false};
 function tossLive(){try{return TOSS.on||localStorage.getItem('paytest')==='1'}catch(e){return TOSS.on}}
 function tossLoad(){return window.TossPayments?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://js.tosspayments.com/v2/standard';s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
 function payToast(t,ok){let d=$('payToast');if(!d){d=document.createElement('div');d.id='payToast';d.className='paytoast';document.body.appendChild(d)}d.textContent=t;d.classList.toggle('ok',!!ok);d.hidden=false;clearTimeout(payToast.t);payToast.t=setTimeout(()=>{d.hidden=true},4200)}
