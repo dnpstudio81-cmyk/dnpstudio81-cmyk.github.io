@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>운빨카드 관리자</title>
+<link rel="icon" href="img/icon-192.png">
+<style>
+:root{--bg:#15130f;--card:#211d17;--line:#3a3227;--gold:#e8c46a;--red:#c4503f;--txt:#f3ead7;--sub:#a89c86;--ok:#7fbf7a}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
+input,button,select{font:inherit;font-size:max(16px,1em)}
+.wrap{max-width:980px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:20px;margin:0;display:flex;align-items:center;gap:10px}
+h1 img{width:32px;height:32px;border-radius:8px}
+h2{font-size:16px;margin:28px 0 10px;color:var(--gold)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.top .meta{color:var(--sub);font-size:13px}
+.btn{border:0;border-radius:10px;padding:9px 14px;background:var(--gold);color:#2a2114;font-weight:700;cursor:pointer}
+.ghost{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:none;color:var(--txt);cursor:pointer}
+.btns{display:flex;gap:8px;align-items:center}
+/* login */
+#gate{min-height:90vh;display:grid;place-items:center}
+#gate form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;width:min(360px,100%);text-align:center}
+#gate h1{justify-content:center;margin-bottom:6px}
+#gate p{color:var(--sub);font-size:13px;margin:0 0 18px}
+#gate input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#14110d;color:var(--txt);text-align:center;letter-spacing:4px;margin-bottom:12px}
+#gate .btn{width:100%;padding:12px}
+#gErr{color:var(--red);font-size:13px;min-height:20px;margin-top:10px}
+/* kpi */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.kpi small{color:var(--sub);font-size:12.5px;display:block}
+.kpi b{font-size:26px;display:block;margin-top:2px;letter-spacing:-.5px}
+.kpi span{color:var(--sub);font-size:12px}
+.kpi.alert{border-color:var(--gold)}
+@media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+/* table */
+.tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14px}
+.tbl th,.tbl td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl th{color:var(--sub);font-weight:600;font-size:12.5px;background:#1b1813}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tr.today td{background:#2a2419}
+.scroll{overflow-x:auto;border-radius:14px}
+.bar{display:inline-block;height:8px;border-radius:4px;background:var(--gold);vertical-align:middle;margin-right:6px;opacity:.85}
+/* lists */
+.list{display:grid;gap:10px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.item .msg{white-space:pre-wrap;word-break:break-word}
+.item .info{color:var(--sub);font-size:12.5px;margin-top:6px;display:flex;gap:12px;flex-wrap:wrap}
+.item.new{border-color:var(--gold)}
+.item a{color:var(--gold)}
+.empty{color:var(--sub);background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:16px;text-align:center}
+.tabs{display:flex;gap:6px;margin-top:24px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:none;color:var(--sub);border-radius:99px;padding:7px 14px;cursor:pointer}
+.tabs button.on{background:var(--gold);color:#2a2114;border-color:var(--gold);font-weight:700}
+.note{color:var(--sub);font-size:12.5px;margin-top:8px}
+#dash[hidden],#gate[hidden],.pane[hidden]{display:none}
+</style>
+</head>
+<body>
+<div id="gate">
+  <form id="gForm" autocomplete="off">
+    <h1><img src="img/icon-192.png" alt="">운빨카드 관리자</h1>
+    <p>관리자 비밀번호를 입력해 주세요</p>
+    <input id="gPw" type="password" inputmode="numeric" placeholder="••••••••" aria-label="관리자 비밀번호" autofocus>
+    <button class="btn" type="submit" id="gBtn">들어가기</button>
+    <div id="gErr" role="alert"></div>
+  </form>
+</div>
+
+<div id="dash" class="wrap" hidden>
+  <div class="top">
+    <h1><img src="img/icon-192.png" alt="">운빨카드 관리자</h1>
+    <div class="btns">
+      <select id="dRange" class="ghost" aria-label="기간"><option value="7">최근 7일</option><option value="14" selected>최근 14일</option><option value="30">최근 30일</option><option value="90">최근 90일</option></select>
+      <button class="ghost" id="dRefresh" type="button">새로고침</button>
+      <button class="ghost" id="dOut" type="button">로그아웃</button>
+    </div>
+  </div>
+  <div class="meta" id="dMeta"></div>
+
+  <div class="kpis">
+    <div class="kpi"><small>오늘 방문자</small><b id="kVis">-</b><span id="kVisSub"></span></div>
+    <div class="kpi"><small>오늘 매출</small><b id="kRev">-</b><span id="kRevSub"></span></div>
+    <div class="kpi" id="kFbBox"><small>오늘 받은 의견</small><b id="kFb">-</b><span id="kFbSub"></span></div>
+    <div class="kpi" id="kRepBox"><small>카드 광장 신고</small><b id="kRep">-</b><span id="kRepSub"></span></div>
+  </div>
+
+  <h2>일별 현황</h2>
+  <div class="scroll"><table class="tbl" id="dTbl"><thead><tr><th>날짜</th><th>방문자</th><th>카드 뽑기</th><th>이야기 열기</th><th>결제</th><th>매출</th></tr></thead><tbody></tbody></table></div>
+  <p class="note">방문자는 하루 기준 중복 없는 기기 수예요. 매출은 승인 완료 기준이라, 토스에서 취소한 결제는 토스 관리자에서 따로 확인하세요.</p>
+
+  <div class="tabs" role="tablist">
+    <button type="button" class="on" data-pane="pFb" role="tab">받은 의견 <span id="tFb"></span></button>
+    <button type="button" data-pane="pRep" role="tab">신고 <span id="tRep"></span></button>
+    <button type="button" data-pane="pEv" role="tab">복주머니</button>
+  </div>
+  <div class="pane" id="pFb"><div class="list" id="lFb"></div></div>
+  <div class="pane" id="pRep" hidden><div class="list" id="lRep"></div></div>
+  <div class="pane" id="pEv" hidden><div class="list" id="lEv"></div></div>
+</div>
+
+<script>
+{
+const FN='https://jbybooahbsiihvxenkyz.supabase.co/functions/v1/admin-stats';
+const PK='sb_publishable_BASj3EaH-g28SxsMz9C4oQ_y1mwS8_1';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const won=n=>(+n||0).toLocaleString('ko-KR')+'원';
+const num=n=>(+n||0).toLocaleString('ko-KR');
+const kst=iso=>new Date(iso).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+const ss={get:k=>{try{return sessionStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{sessionStorage.setItem(k,v)}catch(e){}},del:k=>{try{sessionStorage.removeItem(k)}catch(e){}}};
+const ls={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
+let PW=ss.get('admPw');
+
+async function load(pw,days){
+  const r=await fetch(FN,{method:'POST',headers:{'Content-Type':'application/json',apikey:PK},body:JSON.stringify({pw,days})});
+  let j={};try{j=await r.json()}catch(e){}
+  if(!r.ok||!j.ok){const e=new Error(j.message||('오류 '+r.status));e.status=r.status;throw e}
+  return j;
+}
+function render(d){
+  const s=d.summary,days=d.days||[];
+  const y=days.find(x=>x.day!==d.today)||{};
+  $('dMeta').textContent='불러온 시각 '+new Date().toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit'})+' (한국 시간)';
+  $('kVis').textContent=num(s.visitors);$('kVisSub').textContent=y.day?`어제 ${num(y.visitors)}명`:'';
+  $('kRev').textContent=won(s.revenue);$('kRevSub').textContent=`결제 ${num(s.orders)}건`+(y.day?` · 어제 ${won(y.revenue)}`:'');
+  const seen=+ls.get('admFbSeen')||0;const fb=d.feedback||[];const unseen=fb.filter(f=>f.id>seen).length;
+  $('kFb').textContent=num(s.feedback_today)+'건';$('kFbSub').textContent=unseen?`안 읽은 의견 ${unseen}건`:`전체 ${num(fb.length)}건`;
+  $('kFbBox').classList.toggle('alert',unseen>0);
+  $('kRep').textContent=num(s.reports)+'건';$('kRepSub').textContent='최근 50건 기준';$('kRepBox').classList.toggle('alert',s.reports>0);
+  $('tFb').textContent=unseen?`(${unseen})`:'';$('tRep').textContent=s.reports?`(${s.reports})`:'';
+  const mx=Math.max(1,...days.map(x=>+x.visitors||0));
+  $('dTbl').tBodies[0].innerHTML=days.length?days.map(x=>`<tr class="${x.day===d.today?'today':''}"><td>${esc(x.day.slice(5).replace('-','/'))}${x.day===d.today?' (오늘)':''}</td><td><span class="bar" style="width:${Math.round(40*(+x.visitors||0)/mx)}px"></span>${num(x.visitors)}</td><td>${num(x.drew_card)}</td><td>${num(x.opened_story)}</td><td>${num(x.orders)}</td><td>${won(x.revenue)}</td></tr>`).join(''):'<tr><td colspan="6" style="text-align:center;color:var(--sub)">아직 기록이 없어요</td></tr>';
+  $('lFb').innerHTML=fb.length?fb.map(f=>{const mail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.contact||'');return `<div class="item ${f.id>seen?'new':''}"><div class="msg">${esc(f.msg)}</div><div class="info"><span>#${f.id}</span><span>${kst(f.created_at)}</span><span>화면: ${esc(f.page||'-')}</span>${f.contact?(mail?`<a href="mailto:${esc(f.contact)}?subject=${encodeURIComponent('[운빨카드] 보내주신 의견에 답변드려요')}">답장: ${esc(f.contact)}</a>`:`<span>연락처: ${esc(f.contact)}</span>`):'<span>답변 메일 없음</span>'}</div></div>`}).join(''):'<div class="empty">아직 받은 의견이 없어요</div>';
+  if(fb.length)ls.set('admFbSeenNext',String(Math.max(...fb.map(f=>f.id))));
+  const rp=d.reports||[];
+  $('lRep').innerHTML=rp.length?rp.map(r=>`<div class="item"><div class="msg">카드 #${esc(r.card_id)} 신고</div><div class="info"><span>${r.created_at?kst(r.created_at):''}</span></div></div>`).join(''):'<div class="empty">신고된 카드가 없어요</div>';
+  $('lEv').innerHTML=`<div class="item"><div class="msg">응모권 <b>${num(s.lucky_entries)}</b>장 · 참여 <b>${num(s.lucky_people)}</b>명</div><div class="info"><span>12/1~12/31 · 1월 1일 추첨 · 응모 메일은 1월 31일 파기</span></div></div>`;
+}
+function markSeen(){const n=ls.get('admFbSeenNext');if(n)ls.set('admFbSeen',n)}
+async function refresh(){
+  $('dRefresh').disabled=true;$('dRefresh').textContent='불러오는 중…';
+  try{render(await load(PW,+$('dRange').value))}
+  catch(e){if(e.status===401){logout();$('gErr').textContent='다시 로그인해 주세요.'}else alert('불러오지 못했어요: '+e.message)}
+  finally{$('dRefresh').disabled=false;$('dRefresh').textContent='새로고침'}
+}
+function show(){ $('gate').hidden=true;$('dash').hidden=false;refresh() }
+function logout(){ PW=null;ss.del('admPw');$('dash').hidden=true;$('gate').hidden=false;$('gPw').value='';$('gPw').focus() }
+$('gForm').addEventListener('submit',async e=>{
+  e.preventDefault();const pw=$('gPw').value.trim();if(!pw)return;
+  $('gBtn').disabled=true;$('gBtn').textContent='확인 중…';$('gErr').textContent='';
+  try{const d=await load(pw,+$('dRange').value);PW=pw;ss.set('admPw',pw);$('gate').hidden=true;$('dash').hidden=false;render(d)}
+  catch(err){$('gErr').textContent=err.status===401?'비밀번호가 맞지 않아요.':'접속 오류: '+err.message}
+  finally{$('gBtn').disabled=false;$('gBtn').textContent='들어가기'}
+});
+$('dRefresh').addEventListener('click',refresh);
+$('dRange').addEventListener('change',refresh);
+$('dOut').addEventListener('click',logout);
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.pane').forEach(p=>p.hidden=p.id!==b.dataset.pane);
+  if(b.dataset.pane!=='pFb')markSeen();
+}));
+addEventListener('pagehide',markSeen);
+if(PW)show();
+}
+</script>
+</body>
+</html>
