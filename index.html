@@ -500,6 +500,13 @@ details.dwt summary{list-style:none;cursor:pointer}details.dwt summary::-webkit-
 .story .sh b{background:none}
 
 /* today one-screen */
+.tdx{display:grid;gap:12px;margin-top:16px}.tdx .panel{padding:16px}.tdx h3{font:700 16px "Gowun Batang",serif;margin:0 0 10px}
+.tdo-h{display:flex;gap:12px;align-items:center;margin-bottom:8px}.tdo-h img{width:52px;height:52px;border-radius:14px;object-fit:cover}.tdo-h small{display:block;color:var(--sub);font-size:12px}.tdo-h b{font:700 19px "Gowun Batang",serif;color:var(--seal)}.tdo p{margin:0;line-height:1.7}
+.tdms{display:grid;gap:12px}.tdm-h{display:flex;justify-content:space-between;align-items:baseline;font-size:14px}.tdm-h b{color:var(--seal);font-size:15px}.tdm-bar{height:7px;border-radius:4px;background:var(--line);margin:5px 0 6px;overflow:hidden}.tdm-bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#e8c46a,var(--seal))}.tdm p{margin:0;font-size:13.5px;line-height:1.6;color:var(--sub)}
+.tdrx{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tdrx>div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center}.tdrx span{grid-row:span 2;font-size:20px}.tdrx small{color:var(--sub);font-size:11.5px}.tdrx b{font-size:14px;font-weight:600;word-break:keep-all}
+.tdw{border-left:4px solid var(--seal)}.tdw p{margin:0}.tde{text-align:center}.tde-q{font:700 17px/1.6 "Gowun Batang",serif;margin:0 0 10px}.tde-n{margin:0;color:var(--sub);font-size:13.5px;line-height:1.7}.tde .gold{color:#c9962a}
+.tdcta{border:2px solid #e8c46a;background:linear-gradient(160deg,rgba(232,196,106,.14),transparent 60%)}.tdcta small{color:var(--seal);font-weight:700;font-size:12.5px}.tdcta>b{display:block;font:700 18px/1.4 "Gowun Batang",serif;margin:2px 0 6px}.tdcta p{margin:0 0 12px;font-size:13.5px;color:var(--sub);line-height:1.6}.tdcta .actions{margin:0}
+.tdhint{text-align:center;margin:12px 0 0}
 .tdhead{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 6px}.tdhead b{font:700 16px "Gowun Batang",serif}.tdhead span{font-size:12px;color:var(--seal)}
 .wk7{grid-auto-columns:minmax(44px,1fr)!important;gap:5px!important;padding:2px 0 8px!important;overflow:visible!important}
 .wkc{gap:2px!important;font-size:11px!important;text-align:center}.wkc small{font-size:11px;color:var(--sub)}.wkc.on small{color:var(--seal);font-weight:700}
@@ -1824,27 +1831,81 @@ function introInit(){if(!RM()){const h=$('scr-home');h.classList.add('shake');se
 let tdSel=0;
 const DLC=[['초록','청록','연두'],['빨강','주황','분홍'],['노랑','베이지','갈색'],['흰색','은색','금색'],['검정','남색','파랑']],DLD=[['동쪽','동북쪽','동남쪽'],['남쪽','남동쪽','남서쪽'],['중앙','남서쪽','북동쪽'],['서쪽','북서쪽','남서쪽'],['북쪽','북동쪽','북서쪽']],DLN=[[3,8],[2,7],[5,10],[4,9],[1,6]];
 function dayLuck(y,tp){const p=DLN[y][tp.s%2];let q=(tp.s+tp.b)%9+1;if(q===p)q=q%9+1;return{c:DLC[y][tp.s%3],d:DLD[y][tp.b%3],n:p+', '+q}}
-function todayRender(){const c=cur,base=new Date(),A=c.A||analyze(c.sj,c.gender),yt=YONGT[A.yong],WD='일월화수목금토';
-  const days=[...Array(7)].map((_,k)=>{const d=new Date(base);d.setDate(d.getDate()+k);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const tp=pillar(ds),gn=tenGod(c.p.s,tp.s),g=TG[gn],lucky=Math.floor(tp.s/2)===A.yong||EB[tp.b]===A.yong;return{d,ds,tp,gn,g,lucky,lk:dayLuck(A.yong,tp),sc:g[2]+g[3]+(lucky?2:0)}});
-  const got=iljinGot(),t=days[tdSel],j=iljinToday(),taken=!!got[j.i],open=tdSel>0||taken,te=Math.floor(t.tp.s/2);
+/* 오늘의 운빨 확장: 세부 운세 · 행운 처방 · 조심할 것 · 마무리 */
+const TDOPEN={'비견':'오늘은 너랑 닮은 기운이 들어와. 혼자 다 하려던 일, 같이 할 사람이 보이지 않아? 아니었다면 오늘은 누가 진짜 네 편인지 알아보는 날이야.',
+'겁재':'오늘은 은근히 경쟁심이 올라오는 날이야. 남이 가진 게 괜히 커 보이지 않아? 그럴 땐 비교는 내려놓고 네 몫부터 챙기자.',
+'식신':'오늘은 즐기는 만큼 잘 풀리는 날이야. 하고 싶던 거 하나쯤 해도 돼. 맛있는 걸 먹는 것도 오늘은 운을 키우는 일이야.',
+'상관':'오늘은 말과 생각이 막 튀어나오는 날이야. 머릿속 아이디어가 평소보다 많지 않아? 좋은 생각은 꺼내되, 지적은 한 번 고르고 하자.',
+'편재':'오늘은 기회가 이리저리 굴러다니는 날이야. 평소라면 지나쳤을 제안이 눈에 들어오지 않아? 다 잡으려 하지 말고 하나만 골라 봐.',
+'정재':'오늘은 차곡차곡 쌓이는 날이야. 화려한 건 없어도 해 둔 만큼 그대로 돌아와. 정리하고 모으기에 딱 좋아.',
+'편관':'오늘은 시험대에 선 기분이 들 수 있어. 갑자기 맡겨지는 일이 있지 않아? 버거우면 버겁다고 말하는 것도 실력이야.',
+'정관':'오늘은 네가 한 일이 눈에 띄는 날이야. 책임을 맡으면 평가가 따라와. 약속 시간만 잘 지켜도 점수가 올라가.',
+'편인':'오늘은 혼자 있는 시간에 답이 보이는 날이야. 사람들 틈에서 괜히 지치지 않아? 그럼 잠깐 빠져나와도 괜찮아.',
+'정인':'오늘은 배우고 채우는 날이야. 누가 건네는 조언이 생각보다 쓸모 있어. 오늘은 쉬는 것도 할 일이야.'};
+const TDWARN={'비견':'친한 사이 돈 거래, 오늘은 말 꺼내지 말자.','겁재':'보증·충동 결제는 오늘 금지. 장바구니는 내일 다시 봐.','식신':'과식과 늦잠. 즐기는 건 좋은데 내일까지 남기진 말자.','상관':'윗사람 앞 말실수. 맞는 말도 말투가 반이야.','편재':'욕심내서 일 벌이기. 오늘 시작한 건 끝까지 책임져야 해.','정재':'너무 아끼다 타이밍 놓치기. 꼭 필요한 데는 써도 돼.','편관':'무리한 약속과 과로. 체력이 오늘의 재산이야.','정관':'남 눈치 보느라 내 할 말 삼키기. 한 문장은 꼭 말하자.','편인':'혼자 끙끙 앓기. 연락 하나 미루던 거 오늘 보내.','정인':'기대기만 하다 타이밍 놓치기. 결정은 네가 해.'};
+/* 일·컨디션·사람 기본값(1~5) */
+const TDBASE={'비견':[3,4,5],'겁재':[3,3,2],'식신':[4,5,4],'상관':[4,3,3],'편재':[4,3,4],'정재':[5,4,3],'편관':[3,2,3],'정관':[5,3,4],'편인':[4,3,2],'정인':[4,5,3]};
+const TDCAT=[['연애 두근',[['눈이 자주 마주치는 날이야. 먼저 건넨 한마디가 생각보다 오래 남아.','연락이 끊겼던 사람한테서 소식이 올 수도 있어. 반가우면 반갑다고 말해 줘.'],['큰 설렘보다 편안함이 좋은 날이야. 익숙한 사람의 장점이 보여.','답장이 늦어도 마음 쓰지 마. 오늘은 속도보다 온도가 중요해.'],['괜히 서운한 마음이 올라올 수 있어. 말하기 전에 한 번만 숨 고르자.','오늘은 밀고 당기기보다 나를 챙기는 게 연애운을 올려 줘.']]],
+['돈 흐름',[['돈 들어올 구멍이 보이는 날이야. 미뤄 둔 정산이나 환급을 챙겨 봐.','작은 기회가 돈이 되는 날이야. 떠오른 아이디어는 메모해 둬.'],['들어오는 만큼 나가는 날이야. 장바구니는 하루 묵혀 두자.','큰 결정보다 가계부 한 줄이 이득인 날이야.'],['충동구매 경보야. 결제 버튼 누르기 전에 10분만 기다려 봐.','돈 빌려주기, 보증 이야기는 오늘은 정중히 미루자.']]],
+['일·공부',[['집중력이 잘 붙는 날이야. 제일 어려운 일을 오전에 끝내 봐.','네가 낸 의견이 채택되기 쉬운 날이야. 아껴 둔 아이디어 꺼내도 돼.'],['새로 벌이기보다 하던 일 마무리하기 좋은 날이야.','25분 집중, 5분 쉬기로 끊어 가면 생각보다 많이 해.'],['실수 하나가 크게 보일 수 있어. 보내기 전에 한 번만 다시 읽자.','오늘은 완벽보다 완료가 목표야. 80점이면 충분해.']]],
+['컨디션',[['몸이 가벼운 날이야. 미뤄 둔 운동 시작하기 딱 좋아.','에너지가 남는 날이야. 산책 한 바퀴가 기분까지 올려 줘.'],['무난한 하루야. 물 자주 마시고 점심은 든든하게.','오후에 살짝 처질 수 있어. 스트레칭 한 번이면 다시 살아나.'],['생각이 많아 피곤한 날이야. 오늘은 일찍 자는 게 최고의 개운법이야.','무리하면 내일까지 가. 약속 하나쯤은 미뤄도 괜찮아.']]],
+['사람 운',[['사람 운이 좋은 날이야. 오랜만에 안부 하나 보내 봐.','도와 달라고 하면 도와줄 사람이 있어. 혼자 끙끙대지 마.'],['가볍게 웃고 넘기면 편한 날이야. 깊은 얘기는 다음에.','듣는 쪽에 서면 관계가 부드러워지는 날이야.'],['말 한마디에 오해가 생기기 쉬워. 단톡방에선 한 템포 늦게 답하자.','오늘은 혼자만의 시간이 필요해. 거절해도 미안해하지 마.']]]];
+const TDRX={
+food:[[['비빔밥','쌈밥 정식','샐러드 볼','나물 정식','월남쌈','봄동 겉절이 백반'],['청국장','버섯전골','채소 샤브샤브','두부조림 백반','미나리 삼겹살','부추전']],
+[['김치볶음밥','제육볶음','떡볶이','짬뽕','닭갈비','마라탕'],['양념갈비','김치찌개','불고기','토마토 파스타','닭볶음탕','쭈꾸미볶음']],
+[['된장찌개','감자탕','카레라이스','순두부찌개','호박죽','고구마 오므라이스'],['수육','감자전','닭백숙','단호박 찜닭','누룽지 백숙','된장 삼겹살']],
+[['칼국수','잔치국수','콩국수','설렁탕','우동','닭가슴살 덮밥'],['곰탕','생선구이','두부 스테이크','배추전','연근조림 백반','도라지무침 정식']],
+[['초밥','물회','미역국 정식','냉면','연어덮밥','해물 칼국수'],['해물탕','회덮밥','오징어볶음','장어구이','미역 냉국 정식','검은콩 두부조림']]],
+place:[['나무 많은 공원','식물 카페','동네 숲길','꽃집 앞','도서관 창가'],['햇살 드는 카페 창가','활기찬 시장','공연장·영화관','노을 보이는 곳','조명 예쁜 거리'],['동네 산책로','오래된 골목','도자기 공방','넓은 광장','시골 분위기 식당'],['정돈된 서점','미술관·전시장','조용한 북카페','깔끔한 쇼핑몰','높은 층 전망 좋은 곳'],['강변·바닷가','분수 있는 공원','조용한 수영장','비 오는 날 카페','호숫가 산책로']],
+person:[['새로운 걸 먼저 해 보는 사람','성장 이야기를 좋아하는 선배','식물 키우는 친구'],['리액션 좋은 밝은 사람','먼저 인사하는 동료','분위기 메이커 친구'],['말수 적어도 믿음직한 사람','밥 사 주는 선배','약속 잘 지키는 친구'],['깔끔하게 정리해 주는 사람','쓴소리 해 주는 친구','원칙 있는 선배'],['이야기를 잘 들어 주는 사람','생각이 깊은 친구','오래 알고 지낸 사람']],
+item:[['나무 볼펜','작은 화분','초록 손수건','종이 노트'],['빨간 립밤','향초','따뜻한 머플러','반짝이는 키링'],['도자기 머그컵','베이지 에코백','손때 묻은 다이어리','둥근 돌 키링'],['은색 액세서리','메탈 텀블러','손목시계','깔끔한 카드지갑'],['물병','남색 이어폰','손거울','유리 소품']],
+act:[['창문 열고 크게 숨 세 번 쉬기','기지개 쭉 펴고 목 돌리기','오늘 할 일 딱 3개만 적기'],['좋아하는 노래 한 곡 크게 듣기','거울 보고 한 번 웃어 보기','햇볕 1분 쬐기'],['책상 위 물건 3개 정리하기','따뜻한 물 한 잔 천천히 마시기','발바닥 꾹꾹 눌러 주기'],['휴대폰 알림 정리하기','지갑 속 영수증 비우기','어깨 털고 자세 바로 하기'],['물 한 잔 마시고 눈 감기','찬물로 세수하고 거울 보기','걱정 하나 적고 종이 접어 버리기']]};
+const TDEND=[['오늘은 네 편이 많은 날이야. 망설였던 거, 해 봐.','오늘의 너는 꽤 운이 좋아. 작은 행운도 놓치지 말고 챙겨.'],['무난한 날이 쌓여서 좋은 날이 돼. 오늘도 잘했어.','큰일 없는 하루도 운이야. 저녁엔 너한테 작은 선물 하나 해 줘.'],['오늘은 쉬어 가도 되는 날이야. 내일의 너한테 힘을 남겨 두자.','잘 안 풀려도 네 탓 아니야. 기운이 쉬어 가는 날일 뿐이야.']];
+function tdPick(a,k){return a[((k%a.length)+a.length)%a.length]}
+function tdLevel(v){return v>=75?0:v>=55?1:2}
+function tdDay(c,A,date){const ds=`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+  const tp=pillar(ds),gn=tenGod(c.p.s,tp.s),g=TG[gn],lucky=Math.floor(tp.s/2)===A.yong||EB[tp.b]===A.yong,bs=TDBASE[gn];
+  const raw=[g[2],g[3],bs[0],bs[1],bs[2]],sc=raw.map((v,k)=>{const j=((tp.s*7+tp.b*5+k*11+c.p.s*3)%13)-6;return Math.max(35,Math.min(98,40+v*10+j+(lucky?6:0)))});
+  const tot=Math.round(sc.reduce((a,b)=>a+b,0)/sc.length+(lucky?4:0));
+  return{d:date,ds,tp,gn,g,lucky,lk:dayLuck(A.yong,tp),sc:g[2]+g[3]+(lucky?2:0),scores:sc,tot:Math.min(99,tot)}}
+function todayRender(){const c=cur,A=c.A||analyze(c.sj,c.gender),WD='일월화수목금토',now=new Date(),t=tdDay(c,A,now),tm=new Date(now);tm.setDate(tm.getDate()+1);const n2=tdDay(c,A,tm);
+  const got=iljinGot(),j=iljinToday(),open=!!got[j.i],te=Math.floor(t.tp.s/2),nk=NICK[c.p.s],y=A.yong,seed=t.tp.s*3+t.tp.b+c.p.s;
   const hearts=n=>'<i>'+'♥'.repeat(n)+'</i>'+'♡'.repeat(5-n),coins=n=>'<i>'+'●'.repeat(n)+'</i>'+'○'.repeat(5-n),star=Math.min(5,Math.max(1,Math.round(t.sc/2.4)));
+  const dayNm=`${STK[t.tp.s]}${BRK[t.tp.b]}일`;
   const front=`<div class="fc${t.lucky?' gold':''}" style="--ec:${EL[te].c}">
-    <div class="fc-top"><span>${t.ds.slice(5).replace('-','.')} (${tdSel?WD[t.d.getDay()]:'오늘'})</span><b>${SH[t.tp.s]}${BR[t.tp.b]}일</b></div>
-    <div class="fc-duo"><figure><img src="${IMG[c.p.s]}" alt=""><figcaption>나 · ${NICK[c.p.s]}</figcaption></figure><span class="x">×</span><figure><img src="${IMG[t.tp.s]}" alt=""><figcaption>${NICK[t.tp.s]} · ${ANI[t.tp.b]}</figcaption></figure></div>
+    <div class="fc-top"><span>${t.ds.slice(5).replace('-','.')} (${WD[now.getDay()]})</span><b>${dayNm}</b></div>
+    <div class="fc-duo"><figure><img src="${IMG[c.p.s]}" alt=""><figcaption>나 · ${nk}</figcaption></figure><span class="x">×</span><figure><img src="${IMG[t.tp.s]}" alt=""><figcaption>${NICK[t.tp.s]} · ${ANI[t.tp.b]}</figcaption></figure></div>
     <p class="fc-god">${t.gn}의 날${t.lucky?' · ★ 나의 길일':''}</p>
     <h3 class="fc-t">${t.g[0].replace(/달$/,'날')}</h3>
     <div class="fc-st"><span>종합</span><b class="sy">${'★'.repeat(star)}${'☆'.repeat(5-star)}</b><span>연애</span><b class="hr">${hearts(t.g[2])}</b><span>재물</span><b class="cn">${coins(t.g[3])}</b></div>
     <p class="fc-adv">${t.g[1]}</p>
     <div class="fc-lk"><span>행운의 색<b>${t.lk.c}</b></span><span>숫자<b>${t.lk.n}</b></span><span>방향<b>${t.lk.d}</b></span></div>
     <div class="fc-ft">운빨카드 · 오늘의 운빨</div></div>`;
-  $('todayBox').innerHTML=`<div class="tdhead"><b>이번 주 운빨 카드</b><span>${tdSel?`${t.d.getMonth()+1}월 ${t.d.getDate()}일 미리보기`:`일진 ${Object.keys(got).length}/60`}</span></div>
-   <div class="wk7">${days.map((x,k)=>`<button type="button" class="wkc${k===tdSel?' on':''}${x.lucky?' lk':''}" data-day="${k}" aria-label="${x.d.getMonth()+1}월 ${x.d.getDate()}일"><small>${k?WD[x.d.getDay()]+' '+x.d.getDate():'오늘'}</small><span class="wkm" style="--ec:${EL[Math.floor(x.tp.s/2)].c}"><img src="${IMG[x.tp.s]}" alt=""><b>${SH[x.tp.s]}${BR[x.tp.b]}</b></span><i style="width:${Math.min(100,x.sc*10)}%"></i></button>`).join('')}</div>
+  const ew=ELW[y],meters=TDCAT.map(([lb,L],k)=>{const v=t.scores[k],lv=tdLevel(v);return `<div class="tdm"><div class="tdm-h"><span>${lb}</span><b>${v}</b></div><div class="tdm-bar"><i style="width:${v}%"></i></div><p>${tdPick(L[lv],seed+k)}</p></div>`}).join('');
+  const rx=[['🍚','오늘의 점심',tdPick(TDRX.food[y][0],seed)],['🍲','오늘의 저녁',tdPick(TDRX.food[y][1],seed+2)],['📍','럭키 장소',tdPick(TDRX.place[y],seed+1)],['🙌','행운을 주는 사람',tdPick(TDRX.person[y],seed+3)],['🎁','행운 아이템',tdPick(TDRX.item[y],seed+4)],['⏱️','1분 운빨 루틴',tdPick(TDRX.act[y],seed+5)]];
+  const paid=PAY.has('story')||PAY.has('dw')||PAY.has('ny'),gPaid=PAY.has('gung');
+  const detail=open?`<div class="tdx">
+    <div class="panel tdo"><div class="tdo-h"><img src="${IMG[c.p.s]}" alt=""><div><small>${jo(nk,'이','가')} 본 오늘</small><b>오늘의 운빨 ${t.tot}점</b></div></div>
+      <p>${TDOPEN[t.gn]}${t.lucky?` 그리고 오늘은 너한테 필요한 <b>${ew} 기운</b>이 들어오는 길일이야. 미뤄 둔 일이 있으면 오늘 시작해.`:''}</p></div>
+    <div class="panel"><h3>오늘의 세부 운세</h3><div class="tdms">${meters}</div></div>
+    <div class="panel"><h3>오늘의 행운 처방</h3><p class="note" style="margin:-4px 0 10px">너한테 부족한 <b>${ew} 기운</b>을 채워 주는 것들이야.</p>
+      <div class="tdrx">${rx.map(([ic,k,v])=>`<div><span aria-hidden="true">${ic}</span><small>${k}</small><b>${v}</b></div>`).join('')}
+      <div><span aria-hidden="true">🎨</span><small>행운의 색 · 숫자</small><b>${t.lk.c} · ${t.lk.n}</b></div><div><span aria-hidden="true">🧭</span><small>행운의 방향</small><b>${t.lk.d}</b></div></div></div>
+    <div class="panel tdw"><h3>오늘 조심할 것</h3><p>${TDWARN[t.gn]}</p></div>
+    <div class="panel tde"><p class="tde-q">“${tdPick(TDEND[tdLevel(t.tot)],seed)}”</p><p class="tde-n">내일은 <b>「${n2.g[0].replace(/달$/,'날')}」</b>${n2.lucky?' · <b class="gold">★ 너의 길일</b>':''}이야.<br>내일 운빨 카드도 뽑아 둘게. 또 보러 와!</p></div>
+    <div class="panel tdcta"><small>2027 정미년 신년운세</small><b>${paid?`${jo(nk,'이','가')} 들려준 2027년, 다시 볼까?`:`${jo(nk,'이','가')} 들려주는 2027년 열두 달`}</b>
+      <p>${paid?'월별 흐름과 세 번의 기회, 10년 대운까지 다시 확인할 수 있어요.':'2027년 월별 흐름 · 세 번의 기회 · 10년 대운 · 연애와 일까지 한 번에. 앞부분은 무료로 읽을 수 있어요.'}</p>
+      <div class="actions"><button type="button" class="btn" id="tdStory">${paid?'내 이야기 다시 보기':'내 신년운세 듣기 · 990원'}</button><button type="button" class="ghost" id="tdGung">${gPaid?'궁합 다시 보기 💞':'그 사람과 궁합 보기 💞'}</button></div></div>
+   </div>`:`<p class="note tdhint">카드를 뒤집으면 오늘의 세부 운세와 행운 처방이 열려요</p>`;
+  $('todayBox').innerHTML=`<div class="tdhead"><b>오늘의 운빨 카드</b><span>${now.getMonth()+1}월 ${now.getDate()}일 ${WD[now.getDay()]}요일 · 일진 ${Object.keys(got).length}/60</span></div>
    <div class="fflip${open?' show':''}" id="fFlip"><div class="fin"><div class="fback"><span>運</span><small>${c.s.noun} ${c.r[0]}의 오늘</small><em>눌러서 오늘의 카드 뒤집기</em></div><div class="ffront">${front}</div></div></div>
-   
-   <p class="note" style="margin:10px 0 0;text-align:center">위의 요일을 누르면 그날 카드로 바뀌어요. 오늘 카드는 뒤집으면 카드함 「일진」에 모여요.</p>
-   <div class="actions" style="margin-top:12px"><button class="kakao" type="button" id="todayShare"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>오늘의 운빨 공유</button><button class="ghost" type="button" data-nav="dex">카드함 보기</button></div><p class="note" id="todayMsg" role="status"></p>`;
-  const d0=days[0];$('todayShare').addEventListener('click',()=>share({code:code({d:c.dd,t:c.t}),n:myNick(),title:`오늘 나는 「${d0.g[0].replace(/달$/,'날')}」`,desc:`운빨카드 오늘의 운빨: ${d0.g[1]} 너의 오늘은 어때?`,img:IMG[c.p.s].slice(4,-5),btn:'내 오늘 보기'},'todayMsg'));
-  const fl=$('fFlip');if(!open)fl.addEventListener('click',iljinTake)}
+   ${detail}
+   <div class="actions" style="margin-top:14px"><button class="kakao" type="button" id="todayShare"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#191919" d="M12 3C6.48 3 2 6.5 2 10.8c0 2.78 1.86 5.22 4.66 6.6l-.95 3.48c-.08.3.26.54.52.37l4.13-2.74c.54.06 1.08.09 1.64.09 5.52 0 10-3.5 10-7.8S17.52 3 12 3z"/></svg>오늘의 운빨 공유</button><button class="ghost" type="button" data-nav="dex">카드함 보기</button></div><p class="note" id="todayMsg" role="status"></p>`;
+  $('todayShare').addEventListener('click',()=>share({code:code({d:c.dd,t:c.t}),n:myNick(),title:`오늘 나는 「${t.g[0].replace(/달$/,'날')}」 ${t.tot}점`,desc:`운빨카드 오늘의 운빨: ${t.g[1]} 너의 오늘은 어때?`,img:IMG[c.p.s].slice(4,-5),btn:'내 오늘 보기'},'todayMsg'));
+  const fl=$('fFlip');if(!open)fl.addEventListener('click',iljinTake);
+  if(open){track('today_view',{tot:t.tot});
+    $('tdStory').addEventListener('click',()=>{track('today_cta',{to:'story'});go('draw');const d=$('detail');if(d.hidden){d.hidden=false;moreLabel(true);$('moreBtn').setAttribute('aria-expanded','true')}const s=$('story')||d;setTimeout(()=>s.scrollIntoView({behavior:RM()?'auto':'smooth',block:'start'}),120)});
+    $('tdGung').addEventListener('click',()=>{track('today_cta',{to:'gung'});$('hmGung').click()})}}
 /* newyear by tti */
 const ANIL=['눈치가 빠르고 기회를 먼저 알아봐요.','묵묵하고 한번 시작한 일은 끝까지 해내요.','용감하고 앞장서는 걸 두려워하지 않아요.','섬세하고 분위기를 부드럽게 만들어요.','스케일이 크고 존재감이 강해요.','직관이 날카롭고 속이 깊어요.','자유롭고 행동력이 넘쳐요.','온화하고 사람을 편하게 해요.','재치 있고 문제 해결이 빨라요.','꼼꼼하고 자기 관리가 철저해요.','의리 있고 정직해요.','너그럽고 복을 나눌 줄 알아요.'];
 const LIUHE=[1,0,11,10,9,8,7,6,5,4,3,2],SANHE=[[8,0,4],[11,3,7],[2,6,10],[5,9,1]];
